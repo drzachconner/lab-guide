@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* LabPilot Medical Design System - Professional Health Tech Aesthetic */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Medical Primary - Deep Clinical Blue */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
 
+    /* Card System - Clean Medical Interface */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Medical Brand Colors */
+    --primary: 215 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 215 85% 30%;
+    --primary-glow: 215 85% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Health Success Green */
+    --secondary: 150 60% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 150 60% 40%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Clinical Neutrals */
+    --muted: 215 15% 95%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 200 15% 92%;
+    --accent-foreground: 215 25% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Medical Alert Colors */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --warning: 45 90% 55%;
+    --warning-foreground: 45 90% 15%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Interface Elements */
+    --border: 215 15% 88%;
+    --input: 215 15% 96%;
+    --ring: 215 85% 35%;
 
-    --radius: 0.5rem;
+    
+    /* Medical Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--secondary)), hsl(150 60% 35%));
+    --gradient-clinical: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    
+    /* Medical Shadows */
+    --shadow-medical: 0 4px 24px -4px hsl(var(--primary) / 0.12);
+    --shadow-card: 0 2px 16px -2px hsl(215 15% 45% / 0.08);
+    --shadow-glow: 0 0 32px hsl(var(--primary-glow) / 0.2);
+    
+    /* Animation Variables */
+    --transition-medical: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,43 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-medium;
+  }
+  
+  /* Medical UI Utilities */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-clinical {
+    background: var(--gradient-clinical);
+  }
+  
+  .shadow-medical {
+    box-shadow: var(--shadow-medical);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .transition-medical {
+    transition: var(--transition-medical);
+  }
+}
+
+@layer components {
+  /* Medical Button Variants */
+  .btn-medical {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-medical transition-medical;
+  }
+  
+  .btn-success {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-card transition-medical;
+  }
+  
+  /* Medical Cards */
+  .card-medical {
+    @apply bg-card shadow-card border-border/60 transition-medical hover:shadow-medical;
   }
 }
