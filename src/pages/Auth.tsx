@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/useAuth';
-import { Loader2, Github } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ const Auth = () => {
     password: ''
   });
 
-  const { signUp, signIn, signInWithGoogle, signInWithGitHub, signInWithFacebook, user } = useAuth();
+  const { signUp, signIn, signInWithGoogle, signInWithFacebook, user } = useAuth();
   const navigate = useNavigate();
 
   // Redirect authenticated users
@@ -57,16 +57,13 @@ const Auth = () => {
     setIsLoading(false);
   };
 
-  const handleSocialLogin = async (provider: 'google' | 'github' | 'facebook') => {
+  const handleSocialLogin = async (provider: 'google' | 'facebook') => {
     setIsLoading(true);
     
     try {
       switch (provider) {
         case 'google':
           await signInWithGoogle();
-          break;
-        case 'github':
-          await signInWithGitHub();
           break;
         case 'facebook':
           await signInWithFacebook();
@@ -80,7 +77,7 @@ const Auth = () => {
   };
 
   const SocialLoginButton = ({ provider, icon, children }: { 
-    provider: 'google' | 'github' | 'facebook', 
+    provider: 'google' | 'facebook', 
     icon: React.ReactNode, 
     children: React.ReactNode 
   }) => (
@@ -131,10 +128,6 @@ const Auth = () => {
                     </svg>
                   }>
                     Continue with Google
-                  </SocialLoginButton>
-                  
-                  <SocialLoginButton provider="github" icon={<Github className="mr-2 h-4 w-4" />}>
-                    Continue with GitHub
                   </SocialLoginButton>
                   
                   <SocialLoginButton provider="facebook" icon={
@@ -213,10 +206,6 @@ const Auth = () => {
                     </svg>
                   }>
                     Sign up with Google
-                  </SocialLoginButton>
-                  
-                  <SocialLoginButton provider="github" icon={<Github className="mr-2 h-4 w-4" />}>
-                    Sign up with GitHub
                   </SocialLoginButton>
                   
                   <SocialLoginButton provider="facebook" icon={

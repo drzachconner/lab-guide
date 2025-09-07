@@ -10,7 +10,6 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName?: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signInWithGoogle: () => Promise<{ error: any }>;
-  signInWithGitHub: () => Promise<{ error: any }>;
   signInWithFacebook: () => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -109,25 +108,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error };
   };
 
-  const signInWithGitHub = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`
-      }
-    });
-
-    if (error) {
-      toast({
-        title: "GitHub Sign In Error",
-        description: error.message,
-        variant: "destructive"
-      });
-    }
-
-    return { error };
-  };
-
   const signInWithFacebook = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'facebook',
@@ -166,7 +146,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       signUp,
       signIn,
       signInWithGoogle,
-      signInWithGitHub,
       signInWithFacebook,
       signOut
     }}>
