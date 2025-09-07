@@ -80,7 +80,7 @@ const LandingPage = () => {
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button variant="outline" size="lg" className="transition-medical hover:shadow-card">
-                  View Sample Report
+                  See How It Works
                 </Button>
               </div>
 
