@@ -97,7 +97,12 @@ const Auth = () => {
     <div className="min-h-screen bg-gradient-clinical flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primary">LabPilot</h1>
+          <h1 
+            className="text-3xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors"
+            onClick={() => navigate('/')}
+          >
+            LabPilot
+          </h1>
           <p className="text-muted-foreground mt-2">Access your health insights</p>
         </div>
 
