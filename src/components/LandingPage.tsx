@@ -1,12 +1,57 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-medical-lab.jpg";
 
 const LandingPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/auth');
+    }
+  };
+
+  const handleSignIn = () => {
+    navigate('/auth');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-clinical">
+      {/* Navigation */}
+      <nav className="relative z-10 bg-background/80 backdrop-blur-sm border-b border-border/60">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <div className="text-2xl font-bold text-primary">LabPilot</div>
+            <div className="flex items-center gap-4">
+              {user ? (
+                <Button 
+                  onClick={() => navigate('/dashboard')} 
+                  className="btn-medical"
+                >
+                  Dashboard
+                </Button>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  onClick={handleSignIn}
+                  className="transition-medical hover:shadow-card"
+                >
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Sign In
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/5" />
@@ -30,8 +75,8 @@ const LandingPage = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="btn-medical group">
-                  Get Started Today
+                <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
+                  {user ? 'Go to Dashboard' : 'Get Started Today'}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button variant="outline" size="lg" className="transition-medical hover:shadow-card">

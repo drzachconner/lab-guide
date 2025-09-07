@@ -12,11 +12,39 @@ import {
   CreditCard,
   Download,
   Plus,
-  Clock
+  Clock,
+  LogOut
 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
 
 const Dashboard = () => {
+  const { user, signOut } = useAuth();
+  const [profile, setProfile] = useState<{ full_name?: string } | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      // Fetch user profile
+      const fetchProfile = async () => {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle();
+        
+        setProfile(data);
+      };
+      
+      fetchProfile();
+    }
+  }, [user]);
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-clinical">
       {/* Header */}
@@ -39,8 +67,26 @@ const Dashboard = () => {
                 <CreditCard className="h-4 w-4 mr-2" />
                 Add Credits
               </Button>
-              <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
-                <User className="h-4 w-4" />
+              <div className="flex items-center gap-2">
+                <div className="text-right">
+                  <div className="text-sm font-medium">
+                    {profile?.full_name || user?.email}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Welcome back
+                  </div>
+                </div>
+                <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                  <User className="h-4 w-4" />
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handleSignOut}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
               </div>
             </div>
           </div>
