@@ -17,7 +17,23 @@ import FileUpload from "@/components/FileUpload";
 import ReportsTable from "@/components/ReportsTable";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
 
-const Dashboard = () => {
+interface Clinic {
+  id: string;
+  name: string;
+  slug: string;
+  logo_url?: string;
+  primary_color: string;
+  secondary_color: string;
+  website_url?: string;
+  fullscripts_dispensary_url?: string;
+  subscription_status: string;
+}
+
+interface DashboardProps {
+  clinicContext?: Clinic;
+}
+
+const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState<{ full_name?: string } | null>(null);
 
@@ -51,7 +67,9 @@ const Dashboard = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-primary rounded-lg" />
-                <h1 className="text-xl font-bold">LabPilot</h1>
+                <h1 className="text-xl font-bold">
+                  {clinicContext ? clinicContext.name : "LabPilot"}
+                </h1>
               </div>
               <Badge variant="secondary">Dashboard</Badge>
             </div>

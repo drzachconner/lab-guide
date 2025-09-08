@@ -14,9 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinic_users: {
+        Row: {
+          clinic_id: string
+          created_at: string
+          id: string
+          role: string | null
+          user_id: string
+        }
+        Insert: {
+          clinic_id: string
+          created_at?: string
+          id?: string
+          role?: string | null
+          user_id: string
+        }
+        Update: {
+          clinic_id?: string
+          created_at?: string
+          id?: string
+          role?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinic_users_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinics: {
+        Row: {
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          fullscripts_dispensary_url: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          primary_color: string | null
+          secondary_color: string | null
+          slug: string
+          subscription_end_date: string | null
+          subscription_status: string | null
+          subscription_tier: string | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          fullscripts_dispensary_url?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          primary_color?: string | null
+          secondary_color?: string | null
+          slug: string
+          subscription_end_date?: string | null
+          subscription_status?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          fullscripts_dispensary_url?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          primary_color?: string | null
+          secondary_color?: string | null
+          slug?: string
+          subscription_end_date?: string | null
+          subscription_status?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       lab_reports: {
         Row: {
           ai_analysis: Json | null
+          clinic_id: string | null
           created_at: string
           description: string | null
           file_name: string | null
@@ -33,6 +120,7 @@ export type Database = {
         }
         Insert: {
           ai_analysis?: Json | null
+          clinic_id?: string | null
           created_at?: string
           description?: string | null
           file_name?: string | null
@@ -49,6 +137,7 @@ export type Database = {
         }
         Update: {
           ai_analysis?: Json | null
+          clinic_id?: string | null
           created_at?: string
           description?: string | null
           file_name?: string | null
@@ -63,35 +152,57 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "lab_reports_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
+          clinic_id: string | null
           created_at: string
           full_name: string | null
           id: string
           updated_at: string
         }
         Insert: {
+          clinic_id?: string | null
           created_at?: string
           full_name?: string | null
           id: string
           updated_at?: string
         }
         Update: {
+          clinic_id?: string | null
           created_at?: string
           full_name?: string | null
           id?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_clinic: {
+        Args: { user_uuid?: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

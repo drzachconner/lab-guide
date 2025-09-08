@@ -6,7 +6,23 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-medical-lab.jpg";
 
-const LandingPage = () => {
+interface Clinic {
+  id: string;
+  name: string;
+  slug: string;
+  logo_url?: string;
+  primary_color: string;
+  secondary_color: string;
+  website_url?: string;
+  fullscripts_dispensary_url?: string;
+  subscription_status: string;
+}
+
+interface LandingPageProps {
+  clinicContext?: Clinic;
+}
+
+const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -28,7 +44,9 @@ const LandingPage = () => {
       <nav className="relative z-10 bg-background/80 backdrop-blur-sm border-b border-border/60">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-primary">LabPilot</div>
+            <div className="text-2xl font-bold text-primary">
+              {clinicContext ? clinicContext.name : "LabPilot"}
+            </div>
             <div className="flex items-center gap-4">
               {user ? (
                 <Button 
