@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import LandingPage from "@/components/LandingPage";
 import Dashboard from "@/components/Dashboard";
 import { useAuth } from "@/hooks/useAuth";
+import { getSubdomain } from "@/utils/subdomain";
 
 interface Clinic {
   id: string;
@@ -18,15 +19,15 @@ interface Clinic {
 }
 
 const TenantPortal = () => {
-  const { slug } = useParams<{ slug: string }>();
   const { user } = useAuth();
   const [clinic, setClinic] = useState<Clinic | null>(null);
   const [loading, setLoading] = useState(true);
   const [userClinicId, setUserClinicId] = useState<string | null>(null);
+  const [subdomain] = useState(() => getSubdomain());
 
   useEffect(() => {
     fetchClinicData();
-  }, [slug]);
+  }, [subdomain]);
 
   useEffect(() => {
     if (user && clinic) {
@@ -35,13 +36,13 @@ const TenantPortal = () => {
   }, [user, clinic]);
 
   const fetchClinicData = async () => {
-    if (!slug) return;
+    if (!subdomain) return;
 
     try {
       const { data: clinicData, error } = await supabase
         .from('clinics')
         .select('*')
-        .eq('slug', slug)
+        .eq('slug', subdomain)
         .eq('subscription_status', 'active') // Only show active clinics
         .single();
 
@@ -148,7 +149,7 @@ const TenantPortal = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin h-8 w-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p>Loading {slug}...</p>
+          <p>Loading {subdomain}...</p>
         </div>
       </div>
     );
