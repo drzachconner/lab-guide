@@ -31,11 +31,28 @@ export default function PricingPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Clinic-branded lab interpretation portal with AI-powered analysis, 
-            Fullscript integration, and comprehensive patient management.
+          <Badge variant="secondary" className="px-6 py-3 text-base mb-6">
+            💰 Why Clinics Save Their Patients Money
+          </Badge>
+          <h1 className="text-4xl font-bold mb-4">Clinic Partnership Program</h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Join LabPilot and offer your patients comprehensive lab analysis for just $29 instead of $89. 
+            Earn supplement commissions while providing exceptional value.
           </p>
+          
+          {/* Consumer vs Clinic Comparison */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12 p-6 bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl border">
+            <div className="text-center">
+              <div className="text-2xl mb-2">🏥 Direct Consumer</div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">$89</div>
+              <div className="text-sm text-muted-foreground">per analysis</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-2">👩‍⚕️ Through Your Clinic</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">$29</div>
+              <div className="text-sm text-green-600">per analysis • 67% savings!</div>
+            </div>
+          </div>
           
           {/* Billing Cycle Toggle */}
           <div className="flex items-center justify-center space-x-4 mb-8">
@@ -137,15 +154,24 @@ export default function PricingPage() {
         </div>
 
         {/* Enterprise Section */}
-        <div className="text-center bg-muted rounded-lg p-8">
-          <h3 className="text-2xl font-bold mb-4">Need a Custom Solution?</h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            For enterprise-level implementations, custom integrations, or white-label solutions, 
-            we offer tailored packages to meet your specific needs.
+        <div className="text-center bg-gradient-to-br from-primary/10 to-secondary/5 rounded-lg p-8 border border-primary/20">
+          <h3 className="text-2xl font-bold mb-4">Start Saving Your Patients Money Today</h3>
+          <p className="text-muted-foreground mb-6 max-w-3xl mx-auto">
+            Your patients are already seeking lab interpretation. Offer them professional analysis 
+            at $29 instead of forcing them to pay $89 elsewhere. Generate revenue through supplement 
+            commissions while providing exceptional patient value.
           </p>
-          <Button size="lg" variant="outline">
-            Contact Sales
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-primary">
+              Start 14-Day Free Trial
+            </Button>
+            <Button size="lg" variant="outline">
+              Schedule Demo Call
+            </Button>
+          </div>
+          <p className="text-sm text-muted-foreground mt-4">
+            No setup fees • Cancel anytime • Full support included
+          </p>
         </div>
       </div>
     </div>

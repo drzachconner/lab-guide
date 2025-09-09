@@ -95,7 +95,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                     Start analyzing your labs immediately
                   </CardDescription>
                 </div>
-                <Badge variant="outline">$29/report</Badge>
+                <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">$89/report</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -118,13 +118,18 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                   </div>
                 </div>
               ))}
-              <Button 
-                className="w-full mt-6 btn-medical group" 
-                onClick={onGetStarted}
-              >
-                Start Analysis
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="space-y-3 mt-6">
+                <Button 
+                  className="w-full btn-medical group" 
+                  onClick={onGetStarted}
+                >
+                  Pay $89 - Start Now
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <p className="text-sm text-center text-muted-foreground">
+                  or <span className="font-medium text-primary">save $60</span> through your clinic
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -141,7 +146,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                     Full platform access through your provider
                   </CardDescription>
                 </div>
-                <Badge variant="secondary">Included</Badge>
+                <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">$29/report</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -162,26 +167,51 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                   </div>
                 </div>
               ))}
-              <Button 
-                variant="outline" 
-                className="w-full mt-6 transition-medical hover:shadow-card"
-              >
-                Find A Provider
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="space-y-3 mt-6">
+                <Button 
+                  variant="outline" 
+                  className="w-full transition-medical hover:shadow-card border-green-200 hover:bg-green-50"
+                >
+                  Access Through Your Clinic
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <div className="text-center">
+                  <p className="text-sm text-green-700 font-medium">Save $60 per report!</p>
+                  <p className="text-xs text-muted-foreground">Ask your healthcare provider about LabPilot</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        <div className="text-center mt-12 p-6 bg-muted/30 rounded-lg max-w-3xl mx-auto">
-          <h3 className="font-semibold mb-2">Healthcare Providers</h3>
-          <p className="text-muted-foreground">
-            Offer your patients comprehensive lab analysis with your branding and supplement commissions. 
-            Plans start at $149/month with full white-label features.
-          </p>
-          <Button variant="link" className="mt-2">
-            Learn About Clinic Plans →
-          </Button>
+        <div className="text-center mt-12 p-8 bg-gradient-to-br from-primary/10 to-secondary/5 rounded-2xl max-w-4xl mx-auto border border-primary/20">
+          <div className="space-y-4">
+            <Badge className="bg-primary/10 text-primary border-primary/20">
+              💡 Smart Savings Strategy
+            </Badge>
+            <h3 className="text-2xl font-bold">Ask Your Healthcare Provider About LabPilot</h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Your clinic can offer you the same analysis for <span className="font-semibold text-green-600">$29 instead of $89</span> - 
+              plus you'll get professional-grade protocols and practitioner support.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+              <Button className="btn-medical">
+                Find Participating Clinics Near You
+              </Button>
+              <Button variant="outline">
+                Share This With Your Doctor
+              </Button>
+            </div>
+            <div className="pt-4 border-t border-border/40 mt-6">
+              <p className="text-muted-foreground text-sm">
+                <strong>Healthcare Providers:</strong> Join LabPilot starting at $149/month. 
+                Offer patients 67% savings while earning supplement commissions and building loyalty.
+              </p>
+              <Button variant="link" className="mt-2 text-primary">
+                Clinic Partnership Program →
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

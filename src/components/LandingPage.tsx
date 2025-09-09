@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-medical-lab.jpg";
 import FeatureComparison from "./FeatureComparison";
+import SavingsCallout from "./SavingsCallout";
 
 interface Clinic {
   id: string;
@@ -82,25 +83,43 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   AI-Powered Lab Analysis
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                  Transform Your Lab Results into 
-                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    {" "}Actionable Health Insights
-                  </span>
+                  {clinicContext ? (
+                    <>
+                      Get Professional Lab Analysis for 
+                      <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
+                        {" "}Just $29
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Transform Your Lab Results into 
+                      <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        {" "}Actionable Health Insights
+                      </span>
+                    </>
+                  )}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  LabPilot uses advanced AI to interpret your lab results through a functional medicine lens, 
-                  providing personalized biohacking strategies and supplement recommendations.
+                  {clinicContext ? (
+                    `${clinicContext.name} offers you comprehensive AI-powered lab analysis with professional protocols - at a fraction of the direct cost.`
+                  ) : (
+                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens. Get immediate access or save 67% through your healthcare provider."
+                  )}
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
-                  {user ? 'Go to Dashboard' : 'Get Started Today'}
+                  {user ? 'Go to Dashboard' : (
+                    clinicContext ? 'Start Your $29 Analysis' : 'Start Analysis - $89'
+                  )}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" size="lg" className="transition-medical hover:shadow-card">
-                  See How It Works
-                </Button>
+                {!clinicContext && (
+                  <Button variant="outline" size="lg" className="transition-medical hover:shadow-card border-green-200 text-green-700 hover:bg-green-50">
+                    💡 Save $60 - Find Clinic Partner
+                  </Button>
+                )}
               </div>
 
               <div className="flex items-center gap-8 pt-4">
@@ -237,6 +256,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           </div>
         </div>
       </section>
+
+      {/* Savings Callout - Only show on public site */}
+      <SavingsCallout clinicContext={clinicContext} />
 
       {/* Feature Comparison - Only show on public site */}
       <FeatureComparison 
