@@ -302,6 +302,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_clinic_current_usage: {
+        Args: { clinic_uuid: string }
+        Returns: {
+          overage_reports: number
+          plan_name: string
+          plan_tier: string
+          reports_limit: number
+          reports_used: number
+        }[]
+      }
       get_user_clinic: {
         Args: { user_uuid?: string }
         Returns: string
