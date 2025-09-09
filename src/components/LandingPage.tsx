@@ -99,9 +99,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   {clinicContext ? (
-                    `${clinicContext.name} offers you comprehensive AI-powered lab analysis with professional protocols - at a fraction of the direct cost.`
+                    `${clinicContext.name} offers you comprehensive AI-powered lab analysis with professional protocols plus exclusive 15% discount access to professional-grade supplements.`
                   ) : (
-                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens, providing personalized insights and actionable recommendations."
+                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens, providing personalized insights and lifetime access to 15% discounts on professional-grade supplements."
                   )}
                 </p>
               </div>
@@ -109,7 +109,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
                   {user ? 'Go to Dashboard' : (
-                    clinicContext ? 'Start Your $29 Analysis' : 'Start Your Analysis'
+                    clinicContext ? 'Start $29 Analysis + Get 15% Supplement Discount' : 'Start Analysis + Get 15% Supplement Discount'
                   )}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import FileUpload from "@/components/FileUpload";
 import ReportsTable from "@/components/ReportsTable";
+import { DispensaryAccess } from "@/components/DispensaryAccess";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
 
 interface Clinic {
@@ -119,6 +120,15 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            
+            {/* Dispensary Access */}
+            <DispensaryAccess 
+              clinicContext={clinicContext}
+              onPurchaseAnalysis={() => {
+                // This would trigger payment flow - integrate with your payment system
+                window.location.href = '/payment';
+              }}
+            />
             
             {/* Quick Stats */}
             <Card className="card-medical">

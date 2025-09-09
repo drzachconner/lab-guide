@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { generateSupplementLink, getFeatureAccess } from '@/utils/supplementLinks';
+import { usePaymentStatus } from '@/hooks/usePaymentStatus';
 
 interface SupplementRecommendation {
   name: string;
@@ -27,6 +28,7 @@ export const useSupplementRecommendations = ({
   const [loading, setLoading] = useState(false);
 
   const features = getFeatureAccess(clinicContext);
+  const { hasDispensaryAccess } = usePaymentStatus();
 
   const generateRecommendations = (analysis: any): SupplementRecommendation[] => {
     if (!analysis) return [];
@@ -84,15 +86,22 @@ export const useSupplementRecommendations = ({
   }, [labAnalysis, clinicContext]);
 
   const openSupplementLink = (url: string) => {
+    if (!hasDispensaryAccess) {
+      // Redirect to purchase analysis if no dispensary access
+      return;
+    }
     // Always open supplement links in new tab to preserve user's place
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const getSupplementNote = () => {
-    if (clinicContext?.fullscripts_dispensary_url) {
-      return `Supplements purchased through ${clinicContext.name}'s dispensary support your healthcare provider.`;
+    if (!hasDispensaryAccess) {
+      return "Purchase a lab analysis to unlock 15% discount access to professional-grade supplements through our Fullscript dispensary.";
     }
-    return "These supplement recommendations are for informational purposes. Consult your healthcare provider before starting any new supplements.";
+    if (clinicContext?.fullscripts_dispensary_url) {
+      return `Supplements purchased through ${clinicContext.name}'s dispensary support your healthcare provider and include your 15% discount.`;
+    }
+    return "You have active dispensary access with 15% storewide discount on professional-grade supplements.";
   };
 
   return {
@@ -102,6 +111,7 @@ export const useSupplementRecommendations = ({
     refreshRecommendations,
     openSupplementLink,
     supplementNote: getSupplementNote(),
-    hasClinicDispensary: !!clinicContext?.fullscripts_dispensary_url
+    hasClinicDispensary: !!clinicContext?.fullscripts_dispensary_url,
+    hasDispensaryAccess
   };
 };

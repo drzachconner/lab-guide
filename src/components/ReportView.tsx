@@ -17,16 +17,25 @@ import {
   FileText,
   ExternalLink,
   ChevronDown,
-  Info
+  Info,
+  Lock
 } from "lucide-react";
 import { useSupplementRecommendations } from "@/hooks/useSupplementRecommendations";
+import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 
 const ReportView = ({ clinicContext }: { clinicContext?: any } = {}) => {
   const { openSupplementLink, supplementNote } = useSupplementRecommendations({ 
     clinicContext 
   });
+  const { hasDispensaryAccess } = usePaymentStatus();
 
   const handleSupplementClick = (supplementName: string) => {
+    if (!hasDispensaryAccess) {
+      // Show alert or redirect to purchase
+      alert('Please purchase a lab analysis to unlock dispensary access with 15% discount');
+      return;
+    }
+    
     const mockUrl = clinicContext?.fullscripts_dispensary_url 
       ? `${clinicContext.fullscripts_dispensary_url}?product=${encodeURIComponent(supplementName)}&ref=clinic`
       : `https://supplements.labpilot.com/products/${encodeURIComponent(supplementName)}?ref=platform`;
@@ -238,9 +247,24 @@ const ReportView = ({ clinicContext }: { clinicContext?: any } = {}) => {
                                 <div className="font-medium text-sm">{supp.name}</div>
                                 <div className="text-xs text-muted-foreground">{supp.dose} - {supp.timing}</div>
                               </div>
-                              <Button variant="outline" size="sm" className="text-xs">
-                                Add to Cart
-                                <ExternalLink className="h-3 w-3 ml-1" />
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className={`text-xs ${!hasDispensaryAccess ? 'opacity-50' : ''}`}
+                                onClick={() => handleSupplementClick(supp.name)}
+                                disabled={!hasDispensaryAccess}
+                              >
+                                {hasDispensaryAccess ? (
+                                  <>
+                                    Add to Cart
+                                    <ExternalLink className="h-3 w-3 ml-1" />
+                                  </>
+                                ) : (
+                                  <>
+                                    <Lock className="h-3 w-3 mr-1" />
+                                    Locked
+                                  </>
+                                )}
                               </Button>
                             </div>
                           ))}
@@ -285,9 +309,24 @@ const ReportView = ({ clinicContext }: { clinicContext?: any } = {}) => {
                                 <div className="font-medium text-sm">{supp.name}</div>
                                 <div className="text-xs text-muted-foreground">{supp.dose} - {supp.timing}</div>
                               </div>
-                              <Button variant="outline" size="sm" className="text-xs">
-                                Add to Cart
-                                <ExternalLink className="h-3 w-3 ml-1" />
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className={`text-xs ${!hasDispensaryAccess ? 'opacity-50' : ''}`}
+                                onClick={() => handleSupplementClick(supp.name)}
+                                disabled={!hasDispensaryAccess}
+                              >
+                                {hasDispensaryAccess ? (
+                                  <>
+                                    Add to Cart
+                                    <ExternalLink className="h-3 w-3 ml-1" />
+                                  </>
+                                ) : (
+                                  <>
+                                    <Lock className="h-3 w-3 mr-1" />
+                                    Locked
+                                  </>
+                                )}
                               </Button>
                             </div>
                           ))}
