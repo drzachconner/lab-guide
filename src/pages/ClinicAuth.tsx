@@ -55,7 +55,7 @@ const ClinicAuth = () => {
 
       if (authData.user) {
         // Create clinic record
-        const { error: clinicError } = await supabase
+        const { data: clinicData, error: clinicError } = await supabase
           .from('clinics')
           .insert({
             name: signUpData.clinicName,
@@ -63,9 +63,24 @@ const ClinicAuth = () => {
             website_url: signUpData.website,
             contact_phone: signUpData.phone,
             contact_email: signUpData.email
-          });
+          })
+          .select('id')
+          .single();
 
         if (clinicError) throw clinicError;
+
+        // Add user as clinic admin
+        if (clinicData) {
+          const { error: clinicUserError } = await supabase
+            .from('clinic_users')
+            .insert({
+              clinic_id: clinicData.id,
+              user_id: authData.user.id,
+              role: 'admin'
+            });
+
+          if (clinicUserError) throw clinicUserError;
+        }
 
         toast({
           title: "Success!",
@@ -235,7 +250,7 @@ const ClinicAuth = () => {
                       onChange={(e) => setSignUpData({...signUpData, slug: e.target.value})}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Your patients will access: yoursite.com/{signUpData.slug || 'clinic-name'}
+                      Your patients will access: {signUpData.slug || 'clinic-name'}.labpilot.com
                     </p>
                   </div>
 
