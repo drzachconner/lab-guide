@@ -5,8 +5,6 @@ import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn } from "
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-medical-lab.jpg";
-import FeatureComparison from "./FeatureComparison";
-import SavingsCallout from "./SavingsCallout";
 
 interface Clinic {
   id: string;
@@ -103,7 +101,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   {clinicContext ? (
                     `${clinicContext.name} offers you comprehensive AI-powered lab analysis with professional protocols - at a fraction of the direct cost.`
                   ) : (
-                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens. Get immediate access or save 67% through your healthcare provider."
+                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens, providing personalized insights and actionable recommendations."
                   )}
                 </p>
               </div>
@@ -111,15 +109,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
                   {user ? 'Go to Dashboard' : (
-                    clinicContext ? 'Start Your $29 Analysis' : 'Start Analysis - $89'
+                    clinicContext ? 'Start Your $29 Analysis' : 'Start Your Analysis'
                   )}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                {!clinicContext && (
-                  <Button variant="outline" size="lg" className="transition-medical hover:shadow-card border-green-200 text-green-700 hover:bg-green-50">
-                    💡 Save $60 - Find Clinic Partner
-                  </Button>
-                )}
               </div>
 
               <div className="flex items-center gap-8 pt-4">
@@ -257,14 +250,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </section>
 
-      {/* Savings Callout - Only show on public site */}
-      <SavingsCallout clinicContext={clinicContext} />
-
-      {/* Feature Comparison - Only show on public site */}
-      <FeatureComparison 
-        clinicContext={clinicContext} 
-        onGetStarted={handleGetStarted}
-      />
 
       {/* Trust Section */}
       <section className="py-24 bg-muted/30">
@@ -303,14 +288,28 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               {clinicContext ? 'Access Your Portal' : 'Start Your Analysis'}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            {!clinicContext && (
-              <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
-                View Pricing
-              </Button>
-            )}
           </div>
         </div>
       </section>
+
+      {/* Subtle Footer for Healthcare Providers */}
+      {!clinicContext && (
+        <footer className="py-8 bg-muted/30 border-t border-border/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center text-sm text-muted-foreground">
+              <p>
+                Healthcare Provider? 
+                <a 
+                  href="/clinic" 
+                  className="ml-1 text-primary hover:underline transition-colors"
+                >
+                  Learn about LabPilot for Clinics
+                </a>
+              </p>
+            </div>
+          </div>
+        </footer>
+      )}
     </div>
   );
 };
