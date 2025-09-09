@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinic_usage: {
+        Row: {
+          clinic_id: string
+          created_at: string
+          id: string
+          month_year: string
+          overage_reports: number
+          reports_limit: number
+          reports_used: number
+          updated_at: string
+        }
+        Insert: {
+          clinic_id: string
+          created_at?: string
+          id?: string
+          month_year: string
+          overage_reports?: number
+          reports_limit?: number
+          reports_used?: number
+          updated_at?: string
+        }
+        Update: {
+          clinic_id?: string
+          created_at?: string
+          id?: string
+          month_year?: string
+          overage_reports?: number
+          reports_limit?: number
+          reports_used?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinic_usage_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clinic_users: {
         Row: {
           clinic_id: string
@@ -48,9 +89,12 @@ export type Database = {
       }
       clinics: {
         Row: {
+          billing_cycle: string | null
+          billing_email: string | null
           contact_email: string | null
           contact_phone: string | null
           created_at: string
+          current_plan_id: string | null
           fullscripts_dispensary_url: string | null
           id: string
           logo_url: string | null
@@ -58,6 +102,7 @@ export type Database = {
           primary_color: string | null
           secondary_color: string | null
           slug: string
+          stripe_customer_id: string | null
           subscription_end_date: string | null
           subscription_status: string | null
           subscription_tier: string | null
@@ -65,9 +110,12 @@ export type Database = {
           website_url: string | null
         }
         Insert: {
+          billing_cycle?: string | null
+          billing_email?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
+          current_plan_id?: string | null
           fullscripts_dispensary_url?: string | null
           id?: string
           logo_url?: string | null
@@ -75,6 +123,7 @@ export type Database = {
           primary_color?: string | null
           secondary_color?: string | null
           slug: string
+          stripe_customer_id?: string | null
           subscription_end_date?: string | null
           subscription_status?: string | null
           subscription_tier?: string | null
@@ -82,9 +131,12 @@ export type Database = {
           website_url?: string | null
         }
         Update: {
+          billing_cycle?: string | null
+          billing_email?: string | null
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
+          current_plan_id?: string | null
           fullscripts_dispensary_url?: string | null
           id?: string
           logo_url?: string | null
@@ -92,13 +144,22 @@ export type Database = {
           primary_color?: string | null
           secondary_color?: string | null
           slug?: string
+          stripe_customer_id?: string | null
           subscription_end_date?: string | null
           subscription_status?: string | null
           subscription_tier?: string | null
           updated_at?: string
           website_url?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "clinics_current_plan_id_fkey"
+            columns: ["current_plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lab_reports: {
         Row: {
@@ -193,6 +254,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      subscription_plans: {
+        Row: {
+          annual_price: number
+          created_at: string
+          features: Json
+          id: string
+          is_active: boolean
+          monthly_price: number
+          monthly_reports: number
+          name: string
+          overage_price: number
+          staff_seats: number | null
+          tier: string
+        }
+        Insert: {
+          annual_price: number
+          created_at?: string
+          features?: Json
+          id?: string
+          is_active?: boolean
+          monthly_price: number
+          monthly_reports: number
+          name: string
+          overage_price: number
+          staff_seats?: number | null
+          tier: string
+        }
+        Update: {
+          annual_price?: number
+          created_at?: string
+          features?: Json
+          id?: string
+          is_active?: boolean
+          monthly_price?: number
+          monthly_reports?: number
+          name?: string
+          overage_price?: number
+          staff_seats?: number | null
+          tier?: string
+        }
+        Relationships: []
       }
     }
     Views: {
