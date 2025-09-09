@@ -316,6 +316,10 @@ export type Database = {
         Args: { user_uuid?: string }
         Returns: string
       }
+      is_clinic_admin: {
+        Args: { clinic_id_param: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
