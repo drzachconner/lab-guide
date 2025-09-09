@@ -16,8 +16,13 @@ import {
   ExternalLink, 
   Copy,
   Palette,
-  LogOut
+  LogOut,
+  BarChart3,
+  UserCheck
 } from "lucide-react";
+import PatientManagement from "@/components/PatientManagement";
+import ClinicAnalytics from "@/components/ClinicAnalytics";
+import StaffManagement from "@/components/StaffManagement";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -240,6 +245,9 @@ const ClinicDashboard = () => {
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="patients">Patients</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="staff">Staff</TabsTrigger>
             <TabsTrigger value="branding">Branding</TabsTrigger>
             <TabsTrigger value="integration">Integration</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -275,21 +283,37 @@ const ClinicDashboard = () => {
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
               </CardHeader>
-              <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <CardContent className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <Button variant="outline" className="h-20 flex-col">
                   <Users className="h-6 w-6 mb-2" />
                   Manage Patients
                 </Button>
                 <Button variant="outline" className="h-20 flex-col">
-                  <TrendingUp className="h-6 w-6 mb-2" />
+                  <BarChart3 className="h-6 w-6 mb-2" />
                   View Analytics
                 </Button>
                 <Button variant="outline" className="h-20 flex-col">
+                  <UserCheck className="h-6 w-6 mb-2" />
+                  Manage Staff
+                </Button>
+                <Button variant="outline" className="h-20 flex-col">
                   <Settings className="h-6 w-6 mb-2" />
-                  Billing Settings
+                  Clinic Settings
                 </Button>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="patients" className="space-y-6">
+            <PatientManagement clinicId={clinic.id} />
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-6">
+            <ClinicAnalytics clinicId={clinic.id} />
+          </TabsContent>
+
+          <TabsContent value="staff" className="space-y-6">
+            <StaffManagement clinicId={clinic.id} />
           </TabsContent>
 
           <TabsContent value="branding" className="space-y-6">
