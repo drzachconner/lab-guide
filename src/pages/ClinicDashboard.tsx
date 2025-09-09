@@ -18,11 +18,13 @@ import {
   Palette,
   LogOut,
   BarChart3,
-  UserCheck
+  UserCheck,
+  CreditCard
 } from "lucide-react";
 import PatientManagement from "@/components/PatientManagement";
 import ClinicAnalytics from "@/components/ClinicAnalytics";
 import StaffManagement from "@/components/StaffManagement";
+import { SubscriptionStatus } from '@/components/SubscriptionStatus';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -248,12 +250,23 @@ const ClinicDashboard = () => {
             <TabsTrigger value="patients">Patients</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="staff">Staff</TabsTrigger>
+            <TabsTrigger value="billing">Billing</TabsTrigger>
             <TabsTrigger value="branding">Branding</TabsTrigger>
             <TabsTrigger value="integration">Integration</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
+            {/* Subscription Status */}
+            <SubscriptionStatus 
+              clinicId={clinic.id} 
+              onUpgrade={() => {
+                // Scroll to billing tab or switch to it programmatically
+                const billingTab = document.querySelector('[data-value="billing"]') as HTMLElement;
+                billingTab?.click();
+              }}
+            />
+            
             <Card>
               <CardHeader>
                 <CardTitle>Patient Portal Access</CardTitle>
@@ -314,6 +327,57 @@ const ClinicDashboard = () => {
 
           <TabsContent value="staff" className="space-y-6">
             <StaffManagement clinicId={clinic.id} />
+          </TabsContent>
+          
+          <TabsContent value="billing" className="space-y-6">
+            <div className="space-y-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-2xl font-bold">Billing & Subscription</h3>
+                  <p className="text-muted-foreground">Manage your subscription and view usage</p>
+                </div>
+              </div>
+              
+              <SubscriptionStatus 
+                clinicId={clinic.id} 
+                onUpgrade={() => {
+                  // This would integrate with Stripe when ready
+                  console.log('Redirect to pricing/upgrade page');
+                }}
+              />
+              
+              <div className="grid gap-4 md:grid-cols-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Payment Method</CardTitle>
+                    <CardDescription>Manage your billing information</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      No payment method on file
+                    </p>
+                    <Button variant="outline" size="sm">
+                      Add Payment Method
+                    </Button>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Billing History</CardTitle>
+                    <CardDescription>View past invoices and payments</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      No billing history available
+                    </p>
+                    <Button variant="outline" size="sm">
+                      View Invoices
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="branding" className="space-y-6">

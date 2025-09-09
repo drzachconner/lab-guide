@@ -4,6 +4,7 @@ import Auth from "./Auth";
 import ClinicLanding from "./ClinicLanding";
 import ClinicAuth from "./ClinicAuth";
 import ClinicDashboard from "./ClinicDashboard";
+import PricingPage from "./PricingPage";
 import Dashboard from "../components/Dashboard";
 import ReportView from "../components/ReportView";
 import NotFound from "./NotFound";
@@ -19,6 +20,7 @@ const MainSite = () => {
       <Route path="/" element={<Index />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/clinic" element={<ClinicLanding />} />
+      <Route path="/pricing" element={<PricingPage />} />
       <Route path="/clinic-signup" element={<ClinicAuth />} />
       <Route path="/clinic-login" element={<ClinicAuth />} />
       <Route path="/clinic-dashboard" element={

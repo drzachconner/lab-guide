@@ -137,8 +137,8 @@ const ClinicLanding = () => {
               Start 14-Day Free Trial
               <TrendingUp className="ml-2 h-5 w-5" />
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-3 text-lg">
-              Watch Demo
+            <Button variant="outline" size="lg" className="px-8 py-3 text-lg" onClick={() => navigate("/pricing")}>
+              View Pricing
             </Button>
           </div>
         </div>
