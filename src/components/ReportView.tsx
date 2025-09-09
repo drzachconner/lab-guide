@@ -19,8 +19,20 @@ import {
   ChevronDown,
   Info
 } from "lucide-react";
+import { useSupplementRecommendations } from "@/hooks/useSupplementRecommendations";
 
-const ReportView = () => {
+const ReportView = ({ clinicContext }: { clinicContext?: any } = {}) => {
+  const { openSupplementLink, supplementNote } = useSupplementRecommendations({ 
+    clinicContext 
+  });
+
+  const handleSupplementClick = (supplementName: string) => {
+    const mockUrl = clinicContext?.fullscripts_dispensary_url 
+      ? `${clinicContext.fullscripts_dispensary_url}?product=${encodeURIComponent(supplementName)}&ref=clinic`
+      : `https://supplements.labpilot.com/products/${encodeURIComponent(supplementName)}?ref=platform`;
+    
+    openSupplementLink(mockUrl);
+  };
   return (
     <div className="min-h-screen bg-gradient-clinical">
       {/* Header */}

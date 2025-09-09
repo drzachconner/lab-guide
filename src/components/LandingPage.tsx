@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn } from "
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-medical-lab.jpg";
+import FeatureComparison from "./FeatureComparison";
 
 interface Clinic {
   id: string;
@@ -135,10 +136,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold">
-              Advanced Functional Medicine Analysis
+              {clinicContext ? 'Your Complete Lab Analysis Platform' : 'Advanced Functional Medicine Analysis'}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Go beyond reference ranges with AI-powered functional interpretation and personalized optimization strategies.
+              {clinicContext 
+                ? 'Access the full suite of professional-grade analysis tools and protocols'
+                : 'Go beyond reference ranges with AI-powered functional interpretation and personalized optimization strategies.'
+              }
             </p>
           </div>
 
@@ -163,7 +167,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Trend monitoring</span>
+                    <span className="text-sm">
+                      {clinicContext ? 'Advanced biomarker tracking' : 'Basic trend monitoring'}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -189,7 +195,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Risk stratification</span>
+                    <span className="text-sm">
+                      {clinicContext ? 'Clinical risk stratification' : 'Basic risk assessment'}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -207,15 +215,21 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Phased protocols</span>
+                    <span className="text-sm">
+                      {clinicContext ? 'Professional phased protocols' : 'Basic protocol suggestions'}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Supplement links</span>
+                    <span className="text-sm">
+                      {clinicContext ? 'Professional-grade supplements' : 'Basic supplement suggestions'}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Progress tracking</span>
+                    <span className="text-sm">
+                      {clinicContext ? 'Comprehensive progress tracking' : 'Basic progress tracking'}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -223,6 +237,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           </div>
         </div>
       </section>
+
+      {/* Feature Comparison - Only show on public site */}
+      <FeatureComparison 
+        clinicContext={clinicContext} 
+        onGetStarted={handleGetStarted}
+      />
 
       {/* Trust Section */}
       <section className="py-24 bg-muted/30">
@@ -257,13 +277,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             for actionable lab insights.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="btn-success group">
-              Start Your Analysis
+            <Button size="lg" variant="secondary" className="btn-success group" onClick={handleGetStarted}>
+              {clinicContext ? 'Access Your Portal' : 'Start Your Analysis'}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
-              View Pricing
-            </Button>
+            {!clinicContext && (
+              <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
+                View Pricing
+              </Button>
+            )}
           </div>
         </div>
       </section>
