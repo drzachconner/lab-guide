@@ -106,7 +106,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 onClick={handleGetStarted}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
               >
-                Start Lab Analysis – $19
+                Get Started – Order Labs
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button 
@@ -115,7 +115,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 onClick={handleGetStarted}
                 className="px-6 py-4 text-base sm:text-lg rounded-lg border-gray-300 w-full sm:w-auto"
               >
-                Get Started – Order Labs
+                Start Lab Analysis – $19
               </Button>
             </div>
             
