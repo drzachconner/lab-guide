@@ -78,9 +78,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             {/* Main headline first */}
             <div className="space-y-8">
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
-                <div className="mb-4">Biohacking Lab Interpretation</div>
+                <div className="mb-4">Biohack Your Lab Interpretation</div>
                 <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
-                  for Functional Levels
+                  with Functional Levels
                 </div>
               </h1>
               
