@@ -127,7 +127,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <p className="text-sm text-center text-muted-foreground">
-                  or <span className="font-medium text-primary">save $60</span> through your clinic
+                  or <span className="font-medium text-primary">save $70</span> through your clinic
                 </p>
               </div>
             </CardContent>
@@ -146,7 +146,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                     Full platform access through your provider
                   </CardDescription>
                 </div>
-                <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">$29/report</Badge>
+                <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">$19/report</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -176,7 +176,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <div className="text-center">
-                  <p className="text-sm text-green-700 font-medium">Save $60 per report!</p>
+                  <p className="text-sm text-green-700 font-medium">Save $70 per report!</p>
                   <p className="text-xs text-muted-foreground">Ask your healthcare provider about LabPilot</p>
                 </div>
               </div>
@@ -191,7 +191,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
             </Badge>
             <h3 className="text-2xl font-bold">Ask Your Healthcare Provider About LabPilot</h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Your clinic can offer you premium biohacking-level analysis for <span className="font-semibold text-green-600">$29 instead of $89</span> - 
+              Your clinic can offer you premium biohacking-level analysis for <span className="font-semibold text-green-600">$19 instead of $89</span> - 
               plus you'll get up to 25% off premium supplements and cutting-edge protocols.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
@@ -205,7 +205,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
             <div className="pt-4 border-t border-border/40 mt-6">
               <p className="text-muted-foreground text-sm">
                 <strong>Healthcare Providers:</strong> Join LabPilot starting at $149/month. 
-                Offer patients 67% savings while earning supplement commissions and building loyalty.
+                Offer patients 79% savings while earning supplement commissions and building loyalty.
               </p>
               <Button variant="link" className="mt-2 text-primary">
                 Clinic Partnership Program →

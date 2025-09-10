@@ -85,7 +85,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <>
                       Bleeding-Edge Lab Interpretation for 
                       <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
-                        {" "}Just $29
+                        {" "}Just $19
                       </span>
                     </>
                   ) : (
@@ -109,7 +109,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
                   {user ? 'Go to Dashboard' : (
-                    clinicContext ? 'Start $29 Analysis + Get 25% Supplement Access' : 'Start Analysis + Get 25% Supplement Access'
+                    clinicContext ? 'Start $19 Analysis + Get 25% Supplement Access' : 'Start Analysis + Get 25% Supplement Access'
                   )}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
