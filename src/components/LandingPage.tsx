@@ -408,54 +408,56 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* Dispensary Only Section */}
-      <section className="py-20 bg-green-50">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
+      <section className="py-12 sm:py-16 md:py-20 bg-green-50">
+        <div className="container mx-auto max-w-4xl px-4">
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
             <div className="flex justify-center mb-6">
               <ShoppingCart className="h-12 w-12 text-green-600" />
             </div>
             
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center">
               Just Want Premium Supplements?
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 text-center px-2">
               Skip the lab analysis and get direct access to our Fullscript dispensary at 30% off retail prices.
             </p>
             
-            <div className="bg-green-50 rounded-xl p-6 mb-8">
-              <div className="text-sm font-medium text-green-900 mb-2">DISPENSARY ACCESS INCLUDES</div>
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-green-800">
-                <div className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                  13,000+ provider-grade products
+            <div className="bg-green-50 rounded-xl p-4 md:p-6 mb-6 md:mb-8">
+              <div className="text-sm font-medium text-green-900 mb-2 text-center">DISPENSARY ACCESS INCLUDES</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm text-green-800">
+                <div className="flex items-center justify-start">
+                  <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
+                  <span>13,000+ provider-grade products</span>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                  30% off retail prices (25% in Canada)
+                <div className="flex items-center justify-start">
+                  <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
+                  <span>30% off retail prices (25% in Canada)</span>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                  Direct from manufacturers
+                <div className="flex items-center justify-start">
+                  <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
+                  <span>Direct from manufacturers</span>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                  Fast shipping & returns
+                <div className="flex items-center justify-start">
+                  <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
+                  <span>Fast shipping & returns</span>
                 </div>
               </div>
             </div>
             
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/auth?type=dispensary')}
-              className="bg-green-600 hover:bg-green-700 text-white px-12 py-6 text-lg rounded-lg"
-            >
-              <ShoppingCart className="mr-2 h-5 w-5" />
-              Access Dispensary - Free Signup
-            </Button>
-            
-            <p className="text-sm text-gray-500 mt-4">
-              No lab analysis required • Instant access • Cancel anytime
-            </p>
+            <div className="text-center">
+              <Button 
+                size="lg" 
+                onClick={() => navigate('/auth?type=dispensary')}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 md:px-12 py-4 md:py-6 text-base md:text-lg rounded-lg w-full sm:w-auto"
+              >
+                <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5" />
+                Access Dispensary - Free Signup
+              </Button>
+              
+              <p className="text-sm text-gray-500 mt-4">
+                No lab analysis required • Instant access • Cancel anytime
+              </p>
+            </div>
           </div>
         </div>
       </section>
