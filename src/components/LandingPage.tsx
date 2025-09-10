@@ -52,14 +52,14 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-12 px-4">
+      <section className="py-8 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
               AI-Powered Lab Analysis + Supplement Connection
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Biohack with Precision
               <br />
               <span className="text-blue-600">Functional Lab Analysis</span>
