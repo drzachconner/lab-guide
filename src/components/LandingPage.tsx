@@ -85,7 +85,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-12">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-              Cheapest path to the right labs, the best interpretations, and tailored premium supplements at the maximum discount
+              The Most Advanced Biohacking AI — Only $19
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
@@ -96,14 +96,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
-              The cheapest labs, the most advanced biohacking AI interpretation for just <strong>$19</strong>, and maximum discounts on premium supplements. Complete hands-off experience with network clinician authorization.
+              Get functional medicine analysis trained on cutting-edge protocols and optimal ranges.
+              Plus, access premium supplements at up to 30% off retail.
             </p>
-
-            <div className="mb-6">
-              <div className="bg-green-50 text-green-700 border border-green-200 text-sm sm:text-base md:text-lg px-4 py-2 rounded-full inline-block">
-                🏆 Complete Lab-to-Supplement Service
-              </div>
-            </div>
             
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 px-4">
               <Button 
@@ -111,7 +106,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 onClick={handleGetStarted}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
               >
-                Order Labs Through Us
+                Start Lab Analysis – $19
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button 
@@ -120,26 +115,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 onClick={handleGetStarted}
                 className="px-6 py-4 text-base sm:text-lg rounded-lg border-gray-300 w-full sm:w-auto"
               >
-                Already Have Labs? - $19
+                Get Started – Order Labs
               </Button>
             </div>
             
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base text-gray-600 mb-4 px-4">
-              <div className="flex items-center justify-center sm:justify-start">
-                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span>Complete end-to-end service</span>
-              </div>
-              <div className="flex items-center justify-center sm:justify-start">
-                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span>Network clinician authorization</span>
-              </div>
-              <div className="flex items-center justify-center sm:justify-start">
-                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span className="text-center sm:text-left">AI analysis + wholesale supplements</span>
-              </div>
-            </div>
-            <p className="text-xs sm:text-sm text-gray-500 animate-fade-in px-4">
-              Or upload existing labs for $19 analysis. Fullscript catalogue access at 30% off (25% in Canada).
+            <p className="text-sm text-gray-500 px-4">
+              Already have labs? Upload them for $19.
             </p>
           </div>
         </div>
@@ -148,76 +129,56 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       {/* Value Proposition */}
       <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              Labs. Analysis. Supplements. Done Right.
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+              The lowest-cost labs, the smartest AI interpretations, and the biggest discounts on premium supplements—all in one place.
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="px-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
-                The most advanced biohacking AI <span className="text-blue-600 block sm:inline">for the lowest price</span> — just $19
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8">
-                Our AI delivers the most sophisticated biohacking and functional medicine analysis available, trained on cutting-edge protocols and optimal lab ranges — all for just $19. Plus get maximum discounts on premium supplements at just above wholesale pricing.
-              </p>
               
-              <div className="space-y-8">
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Cheapest Premium Analysis</h3>
-                    <p className="text-gray-600 text-base leading-relaxed">Most advanced biohacking AI interpretation for just $19 — unmatched value for sophisticated functional medicine analysis</p>
-                  </div>
+              <div className="space-y-6">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Order labs with network clinician authorization</span>
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Direct Fullscript Integration</h3>
-                    <p className="text-gray-600 text-base leading-relaxed">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
-                  </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">AI analysis of results focused on functional ranges</span>
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Maximum Supplement Discounts</h3>
-                    <p className="text-gray-600 text-base leading-relaxed">30% off retail on 13,000+ premium supplements — the highest quality at maximum discounts</p>
-                  </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Personalized supplement protocols with exact dosing</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">30% off 13,000+ practitioner-grade supplements (25% in Canada)</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Hands-off, HIPAA-compliant process</span>
                 </div>
               </div>
             </div>
             
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-2">Complete Service</div>
-                <div className="text-lg font-medium text-gray-900 mb-6">Order Labs Through Us</div>
-                
-                <div className="bg-blue-50 rounded-xl p-4 md:p-6 mb-6">
-                  <div className="text-sm font-medium text-blue-900 mb-2">FULL SERVICE INCLUDES</div>
-                  <ul className="space-y-2 text-sm text-blue-800 text-left">
-                    <li>✓ Lab ordering & authorization</li>
-                    <li>✓ Network clinician coordination</li>
-                    <li>✓ AI analysis of results</li>
-                    <li>✓ Personalized supplement protocols</li>
-                    <li>✓ Exact dosing & timing instructions</li>
-                    <li>✓ Just above wholesale pricing access</li>
-                    <li>✓ Complete hands-off experience</li>
-                  </ul>
-                </div>
+                <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-2">Full Lab-to-Supplement Support</div>
                 
                 <Button 
                   className="w-full bg-blue-600 hover:bg-blue-700 mb-4" 
                   size="lg"
                   onClick={handleGetStarted}
                 >
-                  Get Started - Order Labs
+                  Get Started – Order Labs
                 </Button>
                 
                 <div className="text-sm text-gray-500 pt-2 border-t">
-                  <strong>Already have labs?</strong> Upload for $19 — cheapest premium analysis
+                  Already have labs? Upload them for $19.
                 </div>
               </div>
             </div>
@@ -230,11 +191,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              From lab results to supplements in minutes
+              How It Works
             </h2>
-            <p className="text-xl text-gray-600">
-              Simple, fast, and scientifically-backed recommendations
-            </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -247,7 +205,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Securely upload any number of recent lab reports. Works with all major providers—Quest, LabCorp, or your local clinic.
+                  Works with Quest, LabCorp, and most clinics.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -261,7 +219,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Our extensively trained AI analyzes your results using the best of the best leading-edge biohacking and functional medicine protocols, focusing on optimal functional levels rather than standard reference ranges.
+                  Advanced biohacking AI trained on functional medicine protocols.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -275,7 +233,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Receive personalized protocols with direct links to specific supplements at just above wholesale pricing—delivered to your door.
+                  Personalized protocols with direct links to premium products at wholesale pricing.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -287,7 +245,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-12">
-            Trusted by health optimizers worldwide
+            Testimonials
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -298,7 +256,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "Finally found a platform that actually connects my lab work to specific supplements. No more guessing what to buy."
+                "Finally, a platform that connects my lab work to the exact supplements I need. No more guessing."
               </p>
               <div className="font-medium text-gray-900">Sarah M.</div>
             </div>
@@ -310,7 +268,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "The wholesale pricing pays for itself immediately. Plus the AI actually understands functional medicine."
+                "Wholesale pricing pays for itself immediately. The AI actually understands functional medicine."
               </p>
               <div className="font-medium text-gray-900">Dr. James K.</div>
             </div>
@@ -322,7 +280,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "Saved me hours of research and hundreds on supplements. The exact dosing recommendations are game-changing."
+                "Saved me hours of research and hundreds on supplements."
               </p>
               <div className="font-medium text-gray-900">Mike R.</div>
             </div>
@@ -356,11 +314,22 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </div>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Clinical Grade Security & Privacy
+              Clinical-Grade Privacy
             </h2>
-            <p className="text-xl text-gray-600">
-              HIPAA-compliant platform with end-to-end encryption. Your health data is protected with enterprise-grade security standards used by leading healthcare institutions.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-2xl mx-auto">
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                <span className="text-gray-700">HIPAA compliant</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                <span className="text-gray-700">End-to-end encrypted</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                <span className="text-gray-700">Secure cloud storage</span>
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
