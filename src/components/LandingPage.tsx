@@ -266,7 +266,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary text-white">
+      <section className="py-24 bg-gradient-to-r from-primary to-primary-glow text-white">
         <div className="container mx-auto px-4 text-center space-y-8">
           <h2 className="text-3xl lg:text-4xl font-bold">
             Ready to Break Free from Conventional Analysis?
