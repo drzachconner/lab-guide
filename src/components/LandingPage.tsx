@@ -45,7 +45,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto px-6 py-6">
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold text-foreground">
-              {clinicContext ? clinicContext.name : "LabPilot"}
+              {clinicContext ? clinicContext.name : "BiohackLabs.ai"}
             </div>
             <div className="flex items-center gap-4">
               {user ? (
@@ -214,15 +214,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <footer className="py-12 bg-card/10 backdrop-blur-sm border-t border-border/20">
           <div className="container mx-auto px-6">
             <div className="text-center text-muted-foreground">
-              <p className="text-lg">
-                Healthcare Provider? 
-                <a 
-                  href="/clinic" 
-                  className="ml-2 text-secondary hover:text-secondary-hover transition-colors font-medium"
-                >
-                  Learn about LabPilot for Clinics
-                </a>
-              </p>
+                <p className="text-lg">
+                  Healthcare Provider? 
+                  <a 
+                    href="/clinic" 
+                    className="ml-2 text-secondary hover:text-secondary-hover transition-colors font-medium"
+                  >
+                    Learn about BiohackLabs.ai for Clinics
+                  </a>
+                </p>
             </div>
           </div>
         </footer>
