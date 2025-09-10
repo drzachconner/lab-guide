@@ -101,7 +101,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   {clinicContext ? (
                     `${clinicContext.name} offers premium functional analysis rooted in cutting-edge biohacking research, plus lifetime access to up to 25% off practitioner-grade supplements.`
                   ) : (
-                    "Next-gen functional analysis meets holistic wellness. Get bleeding-edge interpretation beyond standard AI + lifetime access to up to 25% off premium, practitioner-only supplements."
+                    "Next-gen functional analysis meets holistic wellness. Get bleeding-edge interpretation beyond standard AI + lifetime access to up to 25% off practitioner-grade supplements."
                   )}
                 </p>
               </div>
@@ -234,7 +234,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Practitioner-only formulations' : 'Premium supplement access'}
+                      {clinicContext ? 'Professional-grade formulations' : 'Premium supplement access'}
                     </span>
                   </li>
                   <li className="flex items-center gap-2">

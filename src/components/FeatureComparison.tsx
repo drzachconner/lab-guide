@@ -38,7 +38,7 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
       description: "Deep analysis of specialized tests"
     },
     {
-      feature: "Practitioner-Only Formulations",
+      feature: "Professional-Grade Formulations",
       public: false,
       clinic: true,
       description: "Access to professional supplement lines"
