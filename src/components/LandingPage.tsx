@@ -85,7 +85,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-12">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-              AI-Powered Lab Analysis + Supplement Connection
+              Biohacking Lab Analysis, Premium Supplements, Maximum Discounts
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
@@ -160,34 +160,34 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 Our AI model has been extensively trained on cutting-edge biohacking research, functional medicine protocols, and optimal lab value ranges. It analyzes your specific results focusing on functional levels—not just standard reference ranges—to provide precise supplement recommendations at wholesale pricing.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-8">
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 text-blue-600" />
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Extensive Biohacking AI Training</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Extensive Biohacking AI Training</h3>
+                    <p className="text-gray-600 text-base leading-relaxed">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 text-blue-600" />
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Direct Fullscript Integration</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Direct Fullscript Integration</h3>
+                    <p className="text-gray-600 text-base leading-relaxed">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 text-blue-600" />
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Wholesale Pricing Access</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">30% off retail on 13,000+ supplements—direct from manufacturers</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Wholesale Pricing Access</h3>
+                    <p className="text-gray-600 text-base leading-relaxed">30% off retail on 13,000+ supplements—direct from manufacturers</p>
                   </div>
                 </div>
               </div>
