@@ -588,7 +588,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       )}
     </div>
   );
-  );
 };
 
 export default LandingPage;
