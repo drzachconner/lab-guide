@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import heroImage from "@/assets/hero-medical-lab.jpg";
+import heroImage from "@/assets/hero-health-analysis.jpg";
 
 interface Clinic {
   id: string;
@@ -77,6 +77,18 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
+                {/* Prominent pricing callout */}
+                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl text-center shadow-lg mb-6">
+                  <div className="text-4xl font-bold mb-2">
+                    {clinicContext ? "Only $19" : "Starting at $19"}
+                  </div>
+                  <div className="text-lg opacity-95">
+                    {clinicContext 
+                      ? "Premium Lab Analysis + 25% Supplement Discounts"
+                      : "Premium Lab Analysis + Up to 25% Off Supplements"
+                    }
+                  </div>
+                </div>
                 <Badge variant="secondary" className="px-4 py-2">
                   Next-Gen Functional Analysis
                 </Badge>
@@ -135,7 +147,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
               <img 
                 src={heroImage} 
-                alt="Advanced medical laboratory with AI analysis"
+                alt="Modern health analysis platform showing personalized lab results"
                 className="relative w-full h-auto rounded-3xl shadow-medical"
               />
             </div>
