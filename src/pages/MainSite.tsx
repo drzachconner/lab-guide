@@ -6,6 +6,7 @@ import ClinicAuth from "./ClinicAuth";
 import ClinicDashboard from "./ClinicDashboard";
 import PricingPage from "./PricingPage";
 import Dashboard from "./Dashboard";
+import LabMarketplace from "./LabMarketplace";
 import ReportView from "../components/ReportView";
 import NotFound from "./NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -19,6 +20,7 @@ const MainSite = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/auth" element={<Auth />} />
+      <Route path="/labs" element={<LabMarketplace />} />
       <Route path="/clinic" element={<ClinicLanding />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/clinic-signup" element={<ClinicAuth />} />

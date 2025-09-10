@@ -29,11 +29,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const navigate = useNavigate();
 
   const handleOrderLabs = () => {
-    if (user) {
-      navigate('/dashboard'); // TODO: Navigate to order labs page
-    } else {
-      navigate('/auth?type=order-labs');
-    }
+    navigate('/labs');
   };
 
   const handleUploadLabs = () => {
