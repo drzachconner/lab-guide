@@ -382,15 +382,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               
               <FeatureCard
                 icon={Zap}
-                title="Lifelong Supplement Access"
-                description="Get lifelong 25% off professional-grade Fullscript supplements tailored to your lab results. Automated retest reminders and suggested follow-up labs keep you optimizing long-term."
+                title="Direct Supplement Access"
+                description="Every interpretation comes with direct links to 13,000+ top-shelf supplements, complete with personalized dosing recommendations and duration protocols tailored specifically to your lab results. Get 25% off professional-grade Fullscript supplements with automated retest reminders and suggested follow-up labs to keep you optimizing long-term."
                 delay={0.2}
               />
               
               <FeatureCard
                 icon={Users}
-                title="Optimization-Focused"
-                description="Beyond basic 'disease detection'—get biohacking protocols for energy, cognition, longevity. We guide you to affordable lab providers like Jason Health so you focus on optimization, not ordering."
+                title="Optimization-Focused Protocols"
+                description="Beyond basic 'disease detection'—get comprehensive biohacking protocols for energy optimization, cognitive enhancement, and longevity. We provide detailed guidance to affordable lab providers like Jason Health, complete with ordering recommendations and optimal testing schedules, so you can focus on implementation and results rather than research and logistics."
                 delay={0.4}
               />
             </div>
