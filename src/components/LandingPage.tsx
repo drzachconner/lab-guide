@@ -99,16 +99,16 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above <strong>wholesale pricing</strong>. The cheapest possible prices on 13,000+ professional-grade products.
+              Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above <strong>wholesale pricing</strong>. The cheapest possible prices on 13,000+ provider-grade supplements and wellness products from our Fullscript dispensary.
             </p>
 
             <div className="mb-8">
-              <Badge className="bg-green-50 text-green-700 border-green-200 text-lg px-6 py-2">
+              <div className="bg-green-50 text-green-700 border border-green-200 text-lg px-6 py-2 rounded-full inline-block">
                 🏆 Lowest Cost Premium Supplements
-              </Badge>
+              </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button 
                 size="lg" 
                 onClick={handleGetStarted}
@@ -120,13 +120,14 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <Button 
                 size="lg" 
                 variant="outline"
+                onClick={() => navigate('/auth?type=dispensary')}
                 className="px-8 py-6 text-lg rounded-lg border-gray-300"
               >
-                See How It Works
+                Shop Supplements
               </Button>
             </div>
             
-            <div className="flex flex-wrap justify-start md:justify-center gap-8 text-base text-gray-600 ml-8 md:ml-0">
+            <div className="flex flex-wrap justify-start md:justify-center gap-8 text-base text-gray-600 ml-8 md:ml-0 mb-4">
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
                 One-time payment
@@ -137,7 +138,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
-                Just above wholesale pricing
+                Extensive AI training on biohacking protocols
               </div>
             </div>
             <p className="mt-4 text-sm text-gray-500 animate-fade-in">
@@ -153,10 +154,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                The only platform that bridges lab analysis with supplement ordering at just above <span className="text-blue-600">wholesale pricing</span>
+                Advanced AI trained on leading-edge <span className="text-blue-600">biohacking & functional medicine</span> protocols
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Other AI tools give you generic advice. Other supplement platforms make you search thousands of products. We do both—analyzing your specific lab work and connecting you directly to the exact supplements at just above wholesale pricing—the cheapest possible prices online.
+                Our AI model has been extensively trained on cutting-edge biohacking research, functional medicine protocols, and optimal lab value ranges. It analyzes your specific results focusing on functional levels—not just standard reference ranges—to provide precise supplement recommendations at wholesale pricing.
               </p>
               
               <div className="space-y-4">
@@ -165,8 +166,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Specialized AI Analysis</h3>
-                    <p className="text-gray-600">Trained on biohacking and functional medicine protocols, not generic health advice</p>
+                    <h3 className="font-semibold text-gray-900">Extensive Biohacking AI Training</h3>
+                    <p className="text-gray-600">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
                   </div>
                 </div>
                 
@@ -175,8 +176,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Direct Supplement Connection</h3>
-                    <p className="text-gray-600">Every recommendation links to specific products with exact dosing and timing</p>
+                    <h3 className="font-semibold text-gray-900">Direct Fullscript Integration</h3>
+                    <p className="text-gray-600">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
                   </div>
                 </div>
                 
@@ -185,8 +186,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Just Above Wholesale Pricing</h3>
-                    <p className="text-gray-600">Cheapest possible prices on 13,000+ supplements—direct from manufacturers</p>
+                    <h3 className="font-semibold text-gray-900">Wholesale Pricing Access</h3>
+                    <p className="text-gray-600">30% off retail on 13,000+ supplements—direct from manufacturers</p>
                   </div>
                 </div>
               </div>
@@ -258,7 +259,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Our specialized AI analyzes your results using cutting-edge biohacking and functional medicine protocols.
+                  Our extensively trained AI analyzes your results using the best of the best leading-edge biohacking and functional medicine protocols, focusing on optimal functional levels rather than standard reference ranges.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -388,7 +389,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Stop guessing. Start optimizing.
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Get the exact supplements your lab work recommends at just above wholesale pricing—the cheapest possible prices online.
+            Get the exact supplements your lab work recommends with direct Fullscript dispensary access at wholesale pricing.
           </p>
           
           <Button 
@@ -401,7 +402,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           </Button>
           
           <p className="text-sm text-gray-500 mt-4">
-            One payment • <strong>Wholesale pricing</strong> access • No subscription required
+            One payment • Fullscript dispensary access • No subscription required
           </p>
         </div>
       </section>
@@ -426,7 +427,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="grid md:grid-cols-2 gap-4 text-sm text-green-800">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                  13,000+ professional-grade products
+                  13,000+ provider-grade products
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
