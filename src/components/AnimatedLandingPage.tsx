@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn, Star, H
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface Clinic {
   id: string;
@@ -32,12 +32,12 @@ const FloatingParticles = () => {
           key={i}
           className="absolute w-2 h-2 bg-primary/20 rounded-full"
           initial={{ 
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-            y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
           }}
           animate={{
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-            y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
           }}
           transition={{
             duration: Math.random() * 20 + 10,
@@ -77,12 +77,7 @@ const SplitText = ({ children, className = "", delay = 0 }: { children: string, 
 };
 
 // Animated feature card
-const FeatureCard = ({ icon: Icon, title, description, delay = 0 }: { 
-  icon: any, 
-  title: string, 
-  description: string, 
-  delay?: number 
-}) => {
+const FeatureCard = ({ icon: Icon, title, description, delay = 0 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -137,7 +132,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }: {
   );
 };
 
-const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
+const AnimatedLandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -310,20 +305,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </Badge>
             </motion.div>
 
-            {/* Description */}
-            <motion.p 
-              className="text-lg lg:text-xl text-white/85 leading-relaxed max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.6 }}
-            >
-              {clinicContext ? (
-                `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
-              ) : (
-                "Beyond basic lab interpretation. Comprehensive functional analysis of multiple labs per session, personalized supplement protocols with lifelong 25% Fullscript discount, plus automated retest reminders and lab ordering guidance."
-              )}
-            </motion.p>
-            
             {/* Main CTA */}
             <motion.div 
               className="pt-6"
@@ -340,7 +321,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   className="btn-secondary text-xl px-12 py-6 h-auto group relative overflow-hidden" 
                   onClick={handleGetStarted}
                 >
-                  <motion.span className="relative z-10 flex items-center">
+                  <motion.span
+                    className="relative z-10 flex items-center"
+                  >
                     {user ? 'Access Dashboard' : 'Get Lab Analysis'}
                     <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </motion.span>
@@ -588,7 +571,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       )}
     </div>
   );
-  );
 };
 
-export default LandingPage;
+export default AnimatedLandingPage;
