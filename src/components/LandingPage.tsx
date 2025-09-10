@@ -81,7 +81,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 Only $19
               </div>
               <div className="text-sm font-medium opacity-90">
-                Unlimited Lab Analysis + 25% Off Premium Supplements
+                Unlimited Lab Interpretation + Lifelong 25% Fullscript Discount
               </div>
             </div>
 
@@ -93,15 +93,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
                 <div className="mb-4">Optimize Your Biology with</div>
                 <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
-                  {clinicContext ? "Precision Lab Analysis" : "Advanced Lab Intelligence"}
+                  {clinicContext ? "Expert Lab Interpretation" : "Advanced Lab Interpretation"}
                 </div>
               </h1>
               
               <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
                 {clinicContext ? (
-                  `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab analysis, targeted supplement protocols, and ongoing optimization support for peak performance.`
+                  `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
                 ) : (
-                  "Beyond basic lab interpretation. Get unlimited functional analysis, personalized supplement protocols at 25% off, automated retest reminders, and access to affordable labs through partners like Jason Health."
+                  "Beyond basic lab interpretation. Get unlimited functional analysis of your existing labs, personalized supplement protocols with lifelong 25% Fullscript discount, plus automated retest reminders and lab ordering guidance through partners like Jason Health."
                 )}
               </p>
             </div>
@@ -126,9 +126,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <TrendingUp className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Unlimited Analysis</h3>
+              <h3 className="text-2xl font-bold text-foreground">Unlimited Interpretation</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Upload unlimited lab reports for $19 total. Get functional medicine insights, personalized supplement protocols, and automated follow-up recommendations—not per-test pricing like competitors.
+                Upload unlimited lab reports for $19 total. Get expert functional medicine interpretation, personalized protocols, and targeted recommendations—not per-test pricing like competitors charge.
               </p>
             </div>
 
@@ -137,9 +137,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Zap className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Smart Supplement Access</h3>
+              <h3 className="text-2xl font-bold text-foreground">Lifelong Supplement Access</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Get 25% off professional-grade supplements tailored to your labs. Automated retest reminders and suggested additional testing keep you optimizing long-term, not just analyzing once.
+                Get lifelong 25% off professional-grade Fullscript supplements tailored to your lab results. Automated retest reminders and suggested follow-up labs keep you optimizing long-term.
               </p>
             </div>
 
@@ -148,9 +148,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Users className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Biohacker-Focused</h3>
+              <h3 className="text-2xl font-bold text-foreground">Optimization-Focused</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Beyond basic "disease detection"—get optimization protocols for energy, cognition, longevity. We partner with affordable lab providers like Jason Health so you focus on results, not ordering.
+                Beyond basic "disease detection"—get biohacking protocols for energy, cognition, longevity. We guide you to affordable lab providers like Jason Health so you focus on optimization, not ordering.
               </p>
             </div>
           </div>
@@ -187,11 +187,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-primary-light/20" />
         <div className="container mx-auto px-6 text-center space-y-8 relative">
           <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Stop Paying Per Test. Start Optimizing.
+            Stop Paying Per Interpretation. Start Optimizing.
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Unlike competitors charging $4-8 per analysis, get unlimited functional medicine insights, 
-            targeted supplement protocols, and ongoing optimization support for one low price.
+            Unlike competitors charging $4-8 per lab interpretation, get unlimited expert analysis, 
+            targeted protocols, and lifelong 25% Fullscript discount for one low price.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
             <Button size="lg" className="btn-accent text-lg px-8 py-4 h-auto group" onClick={handleGetStarted}>
