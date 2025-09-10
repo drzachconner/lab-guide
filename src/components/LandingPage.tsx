@@ -122,30 +122,49 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-7xl font-bold leading-tight tracking-tight">
                 <div className="mb-4 drop-shadow-lg">
-                  Biohack Your Lab Interpretation
+                  Beyond Generic AI Lab Analysis.
                 </div>
                 <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent text-3xl lg:text-5xl drop-shadow-sm">
-                  with Functional Levels
+                  Get Cutting-Edge Biohacker Insights
                 </div>
               </h1>
               
-              <div className="text-xl lg:text-3xl font-medium text-foreground/90 leading-relaxed max-w-4xl mx-auto drop-shadow-lg">
-                AI trained on the bleeding edge of biohacking research and Functional Medicine analysis
+              <div className="text-xl lg:text-2xl font-medium text-white/90 leading-relaxed max-w-4xl mx-auto drop-shadow-lg">
+                Elite biohacking & functional medicine methodologies for comprehensive lab analysis
               </div>
             </div>
 
-            {/* Enhanced pricing callout with better visibility */}
-            <div className="bg-gradient-accent text-secondary-foreground px-8 py-5 rounded-2xl shadow-glow mx-auto max-w-lg border border-secondary/30 hover:shadow-orbital transition-all duration-300 backdrop-blur-sm">
-              <div className="text-3xl font-bold mb-2">Only $19</div>
-              <div className="text-base font-medium opacity-90">
-                Multiple Labs + Lifelong 25% Fullscript Discount
+            {/* Enhanced pricing display with gradient card */}
+            <div className="relative">
+              <div className="bg-gradient-to-br from-card/40 via-card/60 to-card/40 backdrop-blur-xl text-foreground px-10 py-8 rounded-3xl shadow-orbital mx-auto max-w-md border border-secondary/20 relative overflow-hidden">
+                {/* Subtle background pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-secondary/10 rounded-3xl" />
+                
+                <div className="relative z-10 text-center space-y-3">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
+                    $19
+                  </div>
+                  <div className="text-lg font-semibold text-foreground/90">
+                    Complete Lab Analysis Session
+                  </div>
+                </div>
+              </div>
+              
+              {/* Lifelong discount callout */}
+              <div className="mt-4 bg-gradient-to-r from-secondary/20 via-secondary/10 to-secondary/20 backdrop-blur-md text-foreground px-6 py-4 rounded-xl shadow-card mx-auto max-w-lg border border-secondary/30">
+                <div className="text-center">
+                  <div className="text-sm font-medium text-secondary mb-1">BONUS INCLUDED</div>
+                  <div className="text-base font-semibold">
+                    Lifelong 25% Discount on 13,000+ Quality Supplements
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="space-y-8">
               <Badge 
                 variant="secondary" 
-                className="px-6 py-3 text-base font-medium bg-card/30 text-secondary border-secondary/40 backdrop-blur-md"
+                className="px-6 py-3 text-base font-medium bg-card/50 text-foreground border-secondary/40 backdrop-blur-md hover:bg-card/70 hover:text-foreground transition-all duration-300"
               >
                 No Subscription • Multiple Labs Per Session • Biohacking Protocols
               </Badge>
@@ -274,11 +293,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         
         <div className="container mx-auto px-8 text-center space-y-10 relative z-10">
           <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-            Beyond Generic AI Lab Analysis.<br />
-            <span className="text-secondary">Get Cutting-Edge Biohacker Insights.</span>
+            Stop Guessing.<br />
+            <span className="text-secondary">Start Biohacking with Precision.</span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 67,000+ professional-grade supplements from Fullscript's premium catalog.
+            One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 13,000+ quality supplement and wellness products.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button 
