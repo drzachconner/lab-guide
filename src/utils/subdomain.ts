@@ -5,12 +5,13 @@
 export const getSubdomain = (): string | null => {
   const hostname = window.location.hostname;
   
-  // Skip localhost, direct IPs, and Lovable sandbox hosts (treat as main domain)
+  // Skip localhost, direct IPs, and all Lovable hosts (treat as main domain)
   if (
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
     /^\d+\.\d+\.\d+\.\d+$/.test(hostname) ||
-    hostname.endsWith('.sandbox.lovable.dev')
+    hostname.includes('lovable.dev') ||
+    hostname.includes('lovable.app')
   ) {
     return null;
   }
