@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn, Heart, Brain } from "lucide-react";
+import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn, Heart, Brain, Pill, Sparkles, Target } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
@@ -23,15 +23,15 @@ interface LandingPageProps {
   clinicContext?: Clinic;
 }
 
-// Simple connected lines animation for hero and footer sections
+// Simple connected lines animation for hero and footer sections  
 const ConnectedLinesAnimation = ({ variant = "hero" }: { variant?: "hero" | "footer" }) => {
-  const strokeColor = variant === "hero" ? "rgba(255,255,255,0.2)" : "rgba(33, 150, 243, 0.2)";
+  const strokeColor = variant === "hero" ? "rgba(180, 83, 9, 0.3)" : "rgba(180, 83, 9, 0.2)";
   
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <svg width="100%" height="100%" className="absolute inset-0">
         {/* Network of connected lines */}
-        {Array.from({ length: 15 }).map((_, i) => {
+        {Array.from({ length: 12 }).map((_, i) => {
           const x1 = Math.random() * 100;
           const y1 = Math.random() * 100;
           const x2 = Math.random() * 100;
@@ -48,24 +48,24 @@ const ConnectedLinesAnimation = ({ variant = "hero" }: { variant?: "hero" | "foo
               strokeWidth="1"
               opacity={0}
               animate={{
-                opacity: [0, 0.8, 0],
-                x1: [`${x1}%`, `${x1 + (Math.random() * 20 - 10)}%`, `${x1}%`],
-                y1: [`${y1}%`, `${y1 + (Math.random() * 20 - 10)}%`, `${y1}%`],
-                x2: [`${x2}%`, `${x2 + (Math.random() * 20 - 10)}%`, `${x2}%`],
-                y2: [`${y2}%`, `${y2 + (Math.random() * 20 - 10)}%`, `${y2}%`],
+                opacity: [0, 0.7, 0],
+                x1: [`${x1}%`, `${x1 + (Math.random() * 15 - 7.5)}%`, `${x1}%`],
+                y1: [`${y1}%`, `${y1 + (Math.random() * 15 - 7.5)}%`, `${y1}%`],
+                x2: [`${x2}%`, `${x2 + (Math.random() * 15 - 7.5)}%`, `${x2}%`],
+                y2: [`${y2}%`, `${y2 + (Math.random() * 15 - 7.5)}%`, `${y2}%`],
               }}
               transition={{
-                duration: Math.random() * 8 + 6,
+                duration: Math.random() * 10 + 8,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.4,
+                delay: i * 0.5,
               }}
             />
           );
         })}
 
         {/* Animated connection nodes */}
-        {Array.from({ length: 8 }).map((_, i) => {
+        {Array.from({ length: 6 }).map((_, i) => {
           const cx = Math.random() * 100;
           const cy = Math.random() * 100;
           
@@ -79,46 +79,21 @@ const ConnectedLinesAnimation = ({ variant = "hero" }: { variant?: "hero" | "foo
               opacity={0}
               animate={{
                 opacity: [0, 1, 0],
-                r: [1, 4, 1],
-                cx: [`${cx}%`, `${cx + (Math.random() * 15 - 7.5)}%`, `${cx}%`],
-                cy: [`${cy}%`, `${cy + (Math.random() * 15 - 7.5)}%`, `${cy}%`],
+                r: [1, 3, 1],
+                cx: [`${cx}%`, `${cx + (Math.random() * 12 - 6)}%`, `${cx}%`],
+                cy: [`${cy}%`, `${cy + (Math.random() * 12 - 6)}%`, `${cy}%`],
               }}
               transition={{
-                duration: Math.random() * 10 + 8,
+                duration: Math.random() * 12 + 10,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.6,
+                delay: i * 0.7,
               }}
             />
           );
         })}
       </svg>
     </div>
-  );
-};
-
-// Split text animation component
-const SplitText = ({ children, className = "", delay = 0 }: { children: string, className?: string, delay?: number }) => {
-  const letters = children.split('');
-  
-  return (
-    <motion.div className={className}>
-      {letters.map((letter, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.5, 
-            delay: delay + i * 0.03,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}
-          style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
-        >
-          {letter === ' ' ? '\u00A0' : letter}
-        </motion.span>
-      ))}
-    </motion.div>
   );
 };
 
@@ -135,8 +110,8 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }: {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 100, scale: 0.8 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ 
         duration: 0.8, 
         delay,
@@ -147,34 +122,26 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }: {
         transition: { duration: 0.3, ease: "easeOut" }
       }}
     >
-      <Card className="card-feature group relative overflow-hidden">
-        {/* Animated background gradient */}
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0"
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        <CardContent className="p-0 relative z-10">
+      <Card className="bg-white rounded-xl shadow-sm border border-gray-100 h-full p-8 group hover:shadow-lg transition-all duration-300">
+        <CardContent className="p-0">
           <motion.div 
-            className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-primary flex items-center justify-center"
+            className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-orange-100 flex items-center justify-center"
             whileHover={{ 
               scale: 1.1, 
               rotate: 5,
-              boxShadow: "0 10px 30px rgba(33, 150, 243, 0.3)"
             }}
             transition={{ duration: 0.3 }}
           >
-            <Icon className="h-8 w-8 text-white" />
+            <Icon className="h-8 w-8 text-orange-600" />
           </motion.div>
           
           <CardHeader className="p-0 mb-4">
-            <CardTitle className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+            <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
               {title}
             </CardTitle>
           </CardHeader>
           
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-gray-700 leading-relaxed">
             {description}
           </p>
         </CardContent>
@@ -209,19 +176,19 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-white relative overflow-hidden">
       
-      {/* Animated Navigation */}
+      {/* Navigation */}
       <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-background/95 backdrop-blur-sm border-b border-border relative z-50"
+        className="bg-white/95 backdrop-blur-sm border-b border-gray-200 relative z-50"
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.div 
-              className="text-2xl font-bold text-foreground"
+              className="text-2xl font-bold text-gray-900"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
@@ -233,7 +200,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button 
                     onClick={() => navigate('/dashboard')} 
-                    className="btn-primary"
+                    className="bg-orange-600 hover:bg-orange-700 text-white"
                   >
                     Dashboard
                   </Button>
@@ -243,7 +210,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   <Button 
                     variant="ghost" 
                     onClick={handleSignIn}
-                    className="btn-ghost"
+                    className="text-gray-700 hover:text-orange-600"
                   >
                     <LogIn className="mr-2 h-4 w-4" />
                     Sign In
@@ -256,124 +223,79 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </motion.nav>
 
       {/* Hero Section with Connected Lines Animation */}
-      <section className="gradient-hero py-20 lg:py-32 relative">
+      <section className="bg-amber-50 py-20 lg:py-32 relative overflow-hidden">
         <ConnectedLinesAnimation variant="hero" />
-        <motion.div 
-          className="absolute inset-0 z-0 bg-gradient-to-b from-primary/10 to-primary/5"
-          style={{ y: backgroundY }}
-        />
         
         <motion.div 
           className="container mx-auto px-6 text-center relative z-10"
           style={{ y: textY }}
         >
-          <div className="max-w-4xl mx-auto space-y-8">
-            {/* Animated Headlines */}
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <SplitText 
-                  className="text-5xl lg:text-7xl font-bold text-foreground leading-tight"
-                  delay={0.2}
-                >
-                  Beyond Generic AI
-                </SplitText>
-                <br />
-                <SplitText 
-                  className="text-5xl lg:text-7xl font-bold bg-gradient-primary bg-clip-text text-transparent leading-tight"
-                  delay={0.5}
-                >
-                  Lab Analysis.
-                </SplitText>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="text-3xl lg:text-5xl font-bold text-muted-foreground"
-              >
-                Get Cutting-Edge Biohacker Insights
-              </motion.div>
-
-              <motion.p 
-                className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.6 }}
-              >
-                Elite biohacking & functional medicine methodologies for comprehensive lab analysis
-              </motion.p>
-            </div>
-
-            {/* Animated Pricing Card */}
+          <div className="max-w-5xl mx-auto space-y-8">
+            {/* Main Headline */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2 }}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-              }}
-              className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 max-w-md mx-auto shadow-xl border border-white/20"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-4"
             >
-              <motion.div 
-                className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                $19
-              </motion.div>
-              <div className="text-xl font-semibold text-foreground mb-4">
-                Complete Lab Analysis Session
-              </div>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Get direct access to{" "}
+                <span className="text-amber-700">provider-quality supplements</span>{" "}
+                tailored to your lab work at{" "}
+                <span className="text-orange-600">25% discount</span>
+              </h1>
               
-              <motion.div 
-                className="bg-gradient-subtle rounded-2xl p-4"
-                whileHover={{ backgroundColor: "rgba(33, 150, 243, 0.1)" }}
-                transition={{ duration: 0.3 }}
+              <motion.p 
+                className="text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <div className="text-sm font-medium text-secondary-dark mb-1">BONUS INCLUDED</div>
-                <div className="text-base font-semibold text-foreground">
-                  Lifelong 25% Discount on 13,000+ Quality Supplements
-                </div>
-              </motion.div>
+                Choose from <strong>13,000+</strong> premium supplements and wellness products with AI-powered lab interpretation that connects you directly to the exact dosing and duration protocols you need.
+              </motion.p>
             </motion.div>
 
-            {/* Animated Badge */}
+            {/* Problem Statement */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.4 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-amber-200"
             >
-              <Badge className="px-8 py-3 text-base font-medium bg-white/20 text-white border-white/30 rounded-2xl hover:bg-white/30 transition-all duration-300">
-                No Subscription • Multiple Labs Per Session • Biohacking Protocols
-              </Badge>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                There are plenty of AI lab interpretations and supplement tracking tools out there. But they either don't link you directly to the supplements you need with exact dosing and duration protocols tailored to your lab work based on the leading edge of biohacking and functional medicine training, or they do and the prices are so far out of reach you could spend thousands for a protocol.
+              </p>
             </motion.div>
 
-            {/* Description */}
-            <motion.p 
-              className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.6 }}
+            {/* Solution */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="bg-gradient-to-r from-orange-500 to-amber-600 rounded-2xl p-8 text-white"
             >
-              {clinicContext ? (
-                `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
-              ) : (
-                "Beyond basic lab interpretation. Comprehensive functional analysis of multiple labs per session, personalized supplement protocols with lifelong 25% Fullscript discount, plus automated retest reminders and lab ordering guidance."
-              )}
-            </motion.p>
-            
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4">
+                This biohacking functional medicine lab interpretation connects you directly to the exact premium supplements you need at the best prices available online.
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4 mt-6">
+                <Badge className="px-4 py-2 bg-white/20 border-white/30 text-white">
+                  25% Lifelong Discount
+                </Badge>
+                <Badge className="px-4 py-2 bg-white/20 border-white/30 text-white">
+                  13,000+ Products
+                </Badge>
+                <Badge className="px-4 py-2 bg-white/20 border-white/30 text-white">
+                  Exact Dosing Protocols
+                </Badge>
+              </div>
+            </motion.div>
+
             {/* Main CTA */}
             <motion.div 
-              className="pt-6"
+              className="pt-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.8 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -381,24 +303,26 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               >
                 <Button 
                   size="lg" 
-                  className="btn-secondary text-xl px-12 py-6 h-auto group relative overflow-hidden" 
+                  className="bg-orange-600 hover:bg-orange-700 text-white text-xl px-12 py-6 h-auto rounded-2xl font-semibold group" 
                   onClick={handleGetStarted}
                 >
-                  <motion.span className="relative z-10 flex items-center">
-                    {user ? 'Access Dashboard' : 'Get Lab Analysis'}
+                  <span className="flex items-center">
+                    Start Lab Analysis - $19
                     <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-                  </motion.span>
+                  </span>
                 </Button>
               </motion.div>
+              
+              <p className="text-sm text-gray-600 mt-4">
+                One-time payment • Multiple labs per session • Lifelong supplement discount
+              </p>
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* Features Section with Smooth Transition */}
-      <section className="py-20 lg:py-32 bg-gradient-to-b from-background via-muted/10 to-background relative">
-        {/* Smooth transition overlay */}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/10 via-muted/5 to-transparent"></div>
+      {/* How It Works Section */}
+      <section className="py-20 lg:py-32 bg-white relative">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             <motion.div 
@@ -408,35 +332,34 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                All your lab insights,
-                <br />
-                <span className="text-primary">in one analysis.</span>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                Lab analysis that actually connects to{" "}
+                <span className="text-orange-600">supplements you need</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Join 1M+ happy users today.
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                The only platform that bridges advanced lab interpretation with direct access to professional-grade supplements at unbeatable prices.
               </p>
             </motion.div>
 
             <div className="grid lg:grid-cols-3 gap-8">
               <FeatureCard
-                icon={TrendingUp}
-                title="Comprehensive Analysis"
-                description="Upload multiple lab reports in one $19 session and get insights that generic AI tools miss. Our specialized training in cutting-edge biohacking research, functional medicine protocols, and advanced pattern recognition uncovers hidden correlations in your data—complete with visual breakdowns and actionable protocols tailored to optimization, not just 'normal' ranges."
+                icon={Brain}
+                title="AI-Powered Lab Analysis"
+                description="Upload multiple lab reports in one $19 session. Our AI specializes in biohacking and functional medicine, uncovering patterns generic tools miss. Get optimization-focused insights beyond basic 'normal' ranges with detailed visual breakdowns and actionable protocols."
                 delay={0}
               />
               
               <FeatureCard
-                icon={Zap}
-                title="Direct Supplement Access"
-                description="Every interpretation comes with direct links to 13,000+ top-shelf supplements, complete with personalized dosing recommendations and duration protocols tailored specifically to your lab results. Get 25% off professional-grade Fullscript supplements with automated retest reminders and suggested follow-up labs to keep you optimizing long-term."
+                icon={Pill}
+                title="Direct Supplement Connection"
+                description="Every insight connects directly to specific supplements from our 13,000+ product catalog. Get exact dosing recommendations, duration protocols, and timing instructions tailored to your lab results. No more guesswork or hours of research."
                 delay={0.2}
               />
               
               <FeatureCard
-                icon={Users}
-                title="Optimization-Focused Protocols"
-                description="Beyond basic 'disease detection'—get comprehensive biohacking protocols for energy optimization, cognitive enhancement, and longevity. We provide detailed guidance to affordable lab providers like Jason Health, complete with ordering recommendations and optimal testing schedules, so you can focus on implementation and results rather than research and logistics."
+                icon={Sparkles}
+                title="25% Lifelong Discount"
+                description="Unlock permanent access to professional-grade supplements at 25% off retail prices—the best prices available online. One analysis gives you lifelong savings on everything from basic vitamins to cutting-edge nootropics and longevity compounds."
                 delay={0.4}
               />
             </div>
@@ -444,204 +367,139 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </section>
 
-      {/* Process Steps with Animation */}
-      <section className="py-20 lg:py-32 relative">
+      {/* Process Steps with Clean Design */}
+      <section className="py-20 lg:py-32 bg-gray-50 relative">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="mb-16"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                Simple, fast & safe
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                How it works
               </h2>
-              <p className="text-xl text-muted-foreground mb-16">
-                Get your comprehensive analysis in 5 simple steps
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                From lab upload to supplement delivery—streamlined for optimal results.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-8">
+            {/* Process Steps */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { number: "01", title: "Upload Labs", description: "Upload multiple lab reports", icon: TrendingUp },
-                { number: "02", title: "AI Analysis", description: "Advanced biohacking analysis", icon: Brain },
-                { number: "03", title: "Review Results", description: "Comprehensive insights", icon: CheckCircle },
-                { number: "04", title: "Get Protocols", description: "Personalized optimization", icon: Zap },
-                { number: "05", title: "Thrive", description: "Implement & monitor", icon: Heart }
+                {
+                  step: "1",
+                  title: "Upload Your Labs",
+                  description: "Securely upload multiple lab reports in one session. Works with any provider—Quest, LabCorp, Jason Health, or your local clinic.",
+                  icon: TrendingUp
+                },
+                {
+                  step: "2", 
+                  title: "AI Analysis & Supplement Matching",
+                  description: "Our biohacking-trained AI analyzes your results and instantly matches you to specific supplements with exact dosing protocols.",
+                  icon: Brain
+                },
+                {
+                  step: "3",
+                  title: "Get Your Protocol & Discount Access",
+                  description: "Receive detailed recommendations with direct links to supplements at 25% off. One analysis unlocks lifelong discount access to 13,000+ products.",
+                  icon: Pill
+                },
+                {
+                  step: "4",
+                  title: "Order & Track",
+                  description: "Order directly through our platform with your permanent discount. Track progress with automated retest reminders.",
+                  icon: Target
+                },
+                {
+                  step: "5",
+                  title: "Optimize & Repeat",
+                  description: "Upload new labs anytime for protocol updates. Your discount access never expires, and you can refine protocols as you progress.",
+                  icon: Sparkles
+                },
+                {
+                  step: "6",
+                  title: "Maintain Long-term", 
+                  description: "One-click reordering, automatic refills, and ongoing access to new supplement recommendations as our catalog grows.",
+                  icon: CheckCircle
+                }
               ].map((step, index) => (
                 <motion.div
-                  key={index}
-                  className="text-center group"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.1,
-                    ease: "easeOut"
-                  }}
-                  whileHover={{ 
-                    y: -10,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <motion.div 
-                    className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-primary flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: 5
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <step.icon className="h-10 w-10 text-white" />
-                  </motion.div>
-                  
-                  <div className="space-y-2">
-                    <div className="text-sm font-bold text-primary tracking-wider">{step.number}</div>
-                    <div className="text-xl font-bold text-foreground">{step.title}</div>
-                    <div className="text-sm text-muted-foreground">{step.description}</div>
-                  </div>
-                  
-                  {/* Connecting line to next step */}
-                  {index < 4 && (
-                    <div className="hidden md:block absolute top-10 left-full w-full h-px bg-gradient-to-r from-primary/50 to-transparent transform translate-y-0 group-hover:from-primary group-hover:to-primary/30 transition-all duration-300" />
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Security Section */}
-      <section className="py-20 lg:py-32 bg-gradient-subtle relative">        
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div 
-            className="text-center max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <motion.div 
-                className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center"
-                whileHover={{ 
-                  scale: 1.1, 
-                  rotate: 5,
-                  boxShadow: "0 10px 30px rgba(33, 150, 243, 0.3)"
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <Shield className="h-8 w-8 text-white" />
-              </motion.div>
-              <h3 className="text-4xl lg:text-5xl font-bold text-foreground">Clinical Grade Security & Privacy</h3>
-            </div>
-            
-            <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              HIPAA-compliant platform with end-to-end encryption. Your health data is protected with 
-              enterprise-grade security standards used by leading healthcare institutions.
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { icon: Shield, label: "HIPAA Compliant" },
-                { icon: CheckCircle, label: "SOC 2 Certified" },
-                { icon: Zap, label: "256-bit Encryption" },
-                { icon: TrendingUp, label: "FDA Guidelines" }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-card rounded-2xl p-6 shadow-md border border-border cursor-pointer"
+                  key={step.step}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-                    y: -5
-                  }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <item.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                  </motion.div>
-                  <div className="font-semibold text-foreground">{item.label}</div>
+                  <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 text-xl font-bold mx-auto mb-4">
+                    {step.step}
+                  </div>
+                  <step.icon className="w-8 h-8 text-orange-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{step.title}</h3>
+                  <p className="text-gray-700 leading-relaxed text-sm">{step.description}</p>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="gradient-hero py-20 lg:py-32 relative">
+      {/* Footer with Connected Lines Animation */}
+      <footer className="bg-orange-600 py-16 relative overflow-hidden">
         <ConnectedLinesAnimation variant="footer" />
-        <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div 
-            className="max-w-4xl mx-auto space-y-8"
-            initial={{ opacity: 0, y: 50 }}
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-              Stop Guessing.<br />
-              <span className="text-primary-foreground/90">Start Biohacking with Precision.</span>
-            </h2>
-            
-            <p className="text-xl text-white/90 leading-relaxed">
-              One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 13,000+ quality supplement and wellness products.
-            </p>
-            
-            <motion.div 
-              className="pt-6"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button 
-                size="lg" 
-                className="btn-secondary text-xl px-12 py-6 h-auto group" 
-                onClick={handleGetStarted}
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+                Get the supplements your labs actually recommend
+              </h2>
+              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Stop guessing. Get personalized supplement protocols with exact dosing at the best prices available online.
+              </p>
+              
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {clinicContext ? 'Access Your Portal' : 'Start Analysis Now'}
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
+                <Button 
+                  size="lg" 
+                  className="bg-white text-orange-600 hover:bg-gray-100 text-xl px-12 py-6 h-auto rounded-2xl font-semibold group" 
+                  onClick={handleGetStarted}
+                >
+                  <span className="flex items-center">
+                    {user ? 'Go to Dashboard' : 'Start Analysis - $19'}
+                    <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Button>
+              </motion.div>
+              
+              <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-white/90">
+                <span className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  13,000+ Premium Products
+                </span>
+                <span className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  25% Lifelong Discount
+                </span>
+                <span className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  Best Prices Available Online
+                </span>
+              </div>
+            </div>
           </motion.div>
         </div>
-      </section>
-
-      {/* Footer */}
-      {!clinicContext && (
-        <motion.footer 
-          className="py-12 bg-muted/50 border-t border-border"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="container mx-auto px-6">
-            <div className="text-center text-muted-foreground">
-                <p className="text-lg">
-                  Healthcare Provider? 
-                  <motion.a 
-                    href="/clinic" 
-                    className="ml-2 text-primary hover:text-primary-hover transition-colors font-medium"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Learn about BiohackLabs.ai for Clinics
-                  </motion.a>
-                </p>
-            </div>
-          </div>
-        </motion.footer>
-      )}
+      </footer>
     </div>
   );
 };
