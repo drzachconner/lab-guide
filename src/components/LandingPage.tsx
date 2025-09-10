@@ -66,7 +66,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing and 25% lifelong discount on 13,000+ professional-grade products.
+              Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above wholesale pricing. The cheapest possible prices on 13,000+ professional-grade products.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -98,7 +98,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
-                25% lifelong discount
+                Just above wholesale pricing
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 The only platform that bridges lab analysis with supplement ordering
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Other AI tools give you generic advice. Other supplement platforms make you search thousands of products. We do both—analyzing your specific lab work and connecting you directly to the exact supplements at the best prices.
+                Other AI tools give you generic advice. Other supplement platforms make you search thousands of products. We do both—analyzing your specific lab work and connecting you directly to the exact supplements at just above wholesale pricing—the cheapest possible prices online.
               </p>
               
               <div className="space-y-4">
@@ -143,8 +143,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Professional-Grade Pricing</h3>
-                    <p className="text-gray-600">25% off 13,000+ supplements—the best prices available online</p>
+                    <h3 className="font-semibold text-gray-900">Just Above Wholesale Pricing</h3>
+                    <p className="text-gray-600">Cheapest possible prices on 13,000+ supplements—direct from manufacturers</p>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <li>✓ Multiple lab upload & analysis</li>
                     <li>✓ Personalized supplement protocols</li>
                     <li>✓ Exact dosing & timing instructions</li>
-                    <li>✓ 25% lifelong supplement discount</li>
+                    <li>✓ Just above wholesale pricing access</li>
                     <li>✓ Direct product links & ordering</li>
                   </ul>
                 </div>
@@ -229,7 +229,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Receive personalized protocols with direct links to specific supplements at 25% off—delivered to your door.
+                  Receive personalized protocols with direct links to specific supplements at just above wholesale pricing—delivered to your door.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -264,7 +264,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "The 25% discount pays for itself immediately. Plus the AI actually understands functional medicine."
+                "The wholesale pricing pays for itself immediately. Plus the AI actually understands functional medicine."
               </p>
               <div className="font-medium text-gray-900">Dr. James K.</div>
             </div>
@@ -288,8 +288,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="text-gray-600">Premium Products</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">25%</div>
-              <div className="text-gray-600">Lifelong Discount</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">30%</div>
+              <div className="text-gray-600">Above Wholesale</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
@@ -306,7 +306,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Stop guessing. Start optimizing.
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Get the exact supplements your lab work recommends at the best prices available online.
+            Get the exact supplements your lab work recommends at just above wholesale pricing—the cheapest possible prices online.
           </p>
           
           <Button 
@@ -319,7 +319,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           </Button>
           
           <p className="text-sm text-gray-500 mt-4">
-            One payment • Lifelong supplement access • No subscription required
+            One payment • Wholesale pricing access • No subscription required
           </p>
         </div>
       </section>

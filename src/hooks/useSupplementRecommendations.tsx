@@ -96,12 +96,12 @@ export const useSupplementRecommendations = ({
 
   const getSupplementNote = () => {
     if (!hasDispensaryAccess) {
-      return "Purchase a lab analysis to unlock 15% discount access to professional-grade supplements through our Fullscript dispensary.";
+      return "Purchase a lab analysis to unlock access to professional-grade supplements at just above wholesale pricing through our Fullscript dispensary.";
     }
     if (clinicContext?.fullscripts_dispensary_url) {
-      return `Supplements purchased through ${clinicContext.name}'s dispensary support your healthcare provider and include your 15% discount.`;
+      return `Supplements purchased through ${clinicContext.name}'s dispensary support your healthcare provider and include wholesale pricing access.`;
     }
-    return "You have active dispensary access with 15% storewide discount on professional-grade supplements.";
+    return "You have active dispensary access to professional-grade supplements at just above wholesale pricing.";
   };
 
   return {
