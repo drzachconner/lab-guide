@@ -75,7 +75,17 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/10" />
         <div className="container relative mx-auto px-6">
           <div className="text-center space-y-12 max-w-5xl mx-auto">
-            {/* Prominent pricing callout */}
+            {/* Main headline first */}
+            <div className="space-y-8">
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
+                <div className="mb-4">Optimize Your Biology with</div>
+                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
+                  {clinicContext ? "Expert Lab Interpretation" : "Advanced Lab Interpretation"}
+                </div>
+              </h1>
+            </div>
+
+            {/* Pricing callout */}
             <div className="bg-gradient-accent text-secondary-foreground px-8 py-4 rounded-full text-center shadow-glow mx-auto max-w-md">
               <div className="text-3xl font-bold mb-1">
                 Only $19
@@ -89,13 +99,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <Badge variant="secondary" className="px-6 py-3 text-sm font-medium bg-secondary/10 text-secondary border-secondary/20">
                 No Subscription • Multiple Labs Per Session • Biohacking Protocols
               </Badge>
-              
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
-                <div className="mb-4">Optimize Your Biology with</div>
-                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
-                  {clinicContext ? "Expert Lab Interpretation" : "Advanced Lab Interpretation"}
-                </div>
-              </h1>
               
               <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
                 {clinicContext ? (
