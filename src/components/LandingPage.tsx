@@ -81,13 +81,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 Only $19
               </div>
               <div className="text-sm font-medium opacity-90">
-                Unlimited Lab Interpretation + Lifelong 25% Fullscript Discount
+                Multiple Labs Per Interpretation + Lifelong 25% Fullscript Discount
               </div>
             </div>
 
             <div className="space-y-8">
               <Badge variant="secondary" className="px-6 py-3 text-sm font-medium bg-secondary/10 text-secondary border-secondary/20">
-                No Subscription • Unlimited Analysis • Biohacking Protocols
+                No Subscription • Multiple Labs Per Session • Biohacking Protocols
               </Badge>
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
@@ -101,7 +101,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 {clinicContext ? (
                   `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
                 ) : (
-                  "Beyond basic lab interpretation. Get unlimited functional analysis of your existing labs, personalized supplement protocols with lifelong 25% Fullscript discount, plus automated retest reminders and lab ordering guidance through partners like Jason Health."
+                  "Beyond basic lab interpretation. Get comprehensive functional analysis of multiple labs per session, personalized supplement protocols with lifelong 25% Fullscript discount, plus automated retest reminders and lab ordering guidance through partners like Jason Health."
                 )}
               </p>
             </div>
@@ -121,14 +121,14 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         <div className="container mx-auto px-6 relative">
           <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Unlimited Analysis */}
+            {/* Multiple Labs Per Session */}
             <div className="text-center space-y-6">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <TrendingUp className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Unlimited Interpretation</h3>
+              <h3 className="text-2xl font-bold text-foreground">Comprehensive Analysis</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Upload unlimited lab reports for $19 total. Get expert functional medicine interpretation, personalized protocols, and targeted recommendations—not per-test pricing like competitors charge.
+                Upload multiple lab reports in one $19 session for holistic interpretation. Get expert functional medicine insights and personalized protocols—not per-test pricing like competitors charge.
               </p>
             </div>
 
@@ -190,8 +190,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Stop Paying Per Interpretation. Start Optimizing.
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Unlike competitors charging $50-300+ per lab interpretation, get unlimited expert analysis, 
-            targeted protocols, and lifelong 25% Fullscript discount for one low price.
+            Unlike competitors charging $50-300+ per lab, get comprehensive interpretation of multiple labs 
+            in one session, targeted protocols, and lifelong 25% Fullscript discount for just $19.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
             <Button size="lg" className="btn-accent text-lg px-8 py-4 h-auto group" onClick={handleGetStarted}>
