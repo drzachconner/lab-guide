@@ -110,7 +110,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 <div className="mb-4">
                   Biohack Your Lab Interpretation
                 </div>
-                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
+                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent text-3xl lg:text-5xl">
                   with Functional Levels
                 </div>
               </h1>
