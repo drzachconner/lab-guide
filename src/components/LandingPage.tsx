@@ -93,7 +93,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <br />
               <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Functional Lab Analysis</span>
               <br />
-              <span className="text-gray-500 text-lg sm:text-xl md:text-3xl">+</span>
               <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Tailored Supplements</span>
             </h1>
             
