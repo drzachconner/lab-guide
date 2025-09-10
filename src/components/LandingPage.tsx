@@ -127,20 +127,6 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </Button>
               </div>
 
-              <div className="flex items-center gap-8 pt-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">10K+</div>
-                  <div className="text-sm text-muted-foreground">Labs Analyzed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-secondary">98%</div>
-                  <div className="text-sm text-muted-foreground">Accuracy Rate</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">24/7</div>
-                  <div className="text-sm text-muted-foreground">AI Analysis</div>
-                </div>
-              </div>
             </div>
 
             <div className="relative">
