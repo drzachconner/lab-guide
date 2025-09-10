@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle, Upload, Brain, ShoppingCart, Star, TrendingUp,
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import HeroBackground from "./HeroBackground";
+import AnimatedBackground from "./AnimatedBackground";
 
 interface Clinic {
   id: string;
@@ -55,6 +56,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       {/* Hero Section */}
       <section className="pt-2 pb-8 px-4 relative">
         <HeroBackground />
+        <AnimatedBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
@@ -107,6 +109,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 Just above wholesale pricing
               </div>
             </div>
+            <p className="mt-4 text-sm text-gray-500 animate-fade-in">
+              Fullscript catalogue access at 30% off (25% in Canada).
+            </p>
           </div>
         </div>
       </section>
@@ -168,6 +173,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <li>✓ Personalized supplement protocols</li>
                     <li>✓ Exact dosing & timing instructions</li>
                     <li>✓ Just above wholesale pricing access</li>
+                    <li>✓ Fullscript catalogue: 30% off (25% in Canada)</li>
                     <li>✓ Direct product links & ordering</li>
                   </ul>
                 </div>
