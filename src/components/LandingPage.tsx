@@ -101,7 +101,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 {clinicContext ? (
                   `Maximize your health span with ${clinicContext.name}'s high-touch medical experience—where advanced testing, data-driven insights, and dedicated support come together for a healthier, longer life.`
                 ) : (
-                  "No subscriptions. No allopathic bias. Advanced testing, data-driven insights, and holistic protocols for optimal health span and longevity."
+                  "No subscriptions. No allopathic bias. Advanced testing, data-driven insights, holistic protocols, and access to premium supplements tailored to your lab work for optimal health span and longevity."
                 )}
               </p>
             </div>
@@ -128,7 +128,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </div>
               <h3 className="text-2xl font-bold text-foreground">Personalized</h3>
               <p className="text-muted-foreground leading-relaxed">
-                From in-depth diagnostics and nutrition guidance to mental well-being and performance optimization, our holistic approach covers every aspect of your health.
+                From in-depth diagnostics and nutrition guidance to mental well-being and performance optimization, plus access to premium supplements at 25% off tailored specifically to your lab results.
               </p>
             </div>
 
