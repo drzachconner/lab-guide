@@ -62,13 +62,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Biohack with Precision
+              <span className="text-blue-600">Biohack with Precision</span>
               <br />
-              <span className="text-blue-600">Functional Lab Analysis</span>
+              <span className="text-gray-500">Functional Lab Analysis</span>
               <br />
-              <span className="text-blue-600">+</span>
+              <span className="text-gray-500">+</span>
               <br />
-              <span className="text-blue-600">Tailored Supplements</span>
+              <span className="text-gray-500">Tailored Supplements</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -329,15 +329,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </div>
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <CheckCircle className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">SOC 2 Certified</div>
+              <div className="font-semibold text-gray-900">End-to-End Encrypted</div>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <Shield className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">256-bit Encryption</div>
+              <div className="font-semibold text-gray-900">Secure Cloud Storage</div>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">FDA Guidelines</div>
+              <div className="font-semibold text-gray-900">Data Privacy Protection</div>
             </div>
           </div>
         </div>
