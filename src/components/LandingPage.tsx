@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn, Star, Heart, Brain } from "lucide-react";
+import { ArrowRight, CheckCircle, TrendingUp, Users, Shield, Zap, LogIn, Heart, Brain } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
