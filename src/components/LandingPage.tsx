@@ -39,7 +39,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="text-xl font-semibold text-gray-900">
-            {clinicContext ? clinicContext.name : "LabSupplements"}
+            {clinicContext ? clinicContext.name : "BiohackLabs.ai"}
           </div>
           
           {!user && (
@@ -60,15 +60,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Biohacking Lab Results
+              Your Lab Analysis.
               <br />
-              to find the exact
+              <span className="text-blue-600">Your Exact Supplements.</span>
               <br />
-              <span className="text-blue-600">Biohacking Supplements</span>
-              <br />
-              to
-              <br />
-              <span className="text-blue-600">Biohack Your Life</span>
+              <span className="text-blue-600">Your Optimized Life.</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -335,7 +331,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center text-gray-600">
             <div className="text-lg font-semibold text-gray-900 mb-4">
-              {clinicContext ? clinicContext.name : "LabSupplements"}
+              {clinicContext ? clinicContext.name : "BiohackLabs.ai"}
             </div>
             <p>
               Professional lab analysis meets premium supplement access.

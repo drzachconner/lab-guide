@@ -101,7 +101,7 @@ const Auth = () => {
             className="text-3xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors"
             onClick={() => navigate('/')}
           >
-            LabPilot
+            BiohackLabs.ai
           </h1>
           <p className="text-muted-foreground mt-2">Access your health insights</p>
         </div>
