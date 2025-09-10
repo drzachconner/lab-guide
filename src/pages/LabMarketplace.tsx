@@ -1,108 +1,275 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X } from "lucide-react";
+import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X, Clock, Beaker, TestTube } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-interface LabPanel {
+interface Biomarker {
   id: string;
   name: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  featured?: boolean;
-  popular?: boolean;
   category: string;
+  notes?: string;
+}
+
+interface Panel {
+  id: string;
+  name: string;
+  tagline: string;
   biomarkers: string[];
-  sampleType: string;
-  turnaroundTime: string;
+  prep: string;
+  addOns?: string[];
+  categories: string[];
+  priceMin: number;
+  priceMax: number;
+  popular?: boolean;
+  featured?: boolean;
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const topBiohackerPanels: LabPanel[] = [
+const BIOMARKERS: Biomarker[] = [
+  // Complete Blood Count
+  { id: "cbc", name: "CBC w/ Differential", category: "blood" },
+  { id: "cmp", name: "Comprehensive Metabolic Panel", category: "metabolism" },
+  
+  // Cardiovascular
+  { id: "lipid", name: "Lipid Panel", category: "cardiovascular" },
+  { id: "apoB", name: "Apolipoprotein B (ApoB)", category: "cardiovascular" },
+  { id: "lp-a", name: "Lipoprotein(a)", category: "cardiovascular" },
+  { id: "lp-pla2", name: "Lp-PLA2", category: "cardiovascular" },
+  { id: "oxidized-ldl", name: "Oxidized LDL", category: "cardiovascular" },
+  
+  // Metabolism & Diabetes
+  { id: "hba1c", name: "HbA1c", category: "metabolism" },
+  { id: "fasting-glucose", name: "Fasting Glucose", category: "metabolism" },
+  { id: "fasting-insulin", name: "Fasting Insulin", category: "metabolism" },
+  { id: "igf-1", name: "IGF-1", category: "metabolism" },
+  
+  // Inflammation
+  { id: "hs-crp", name: "hs-CRP", category: "inflammation" },
+  { id: "esr", name: "ESR", category: "inflammation" },
+  { id: "fibrinogen", name: "Fibrinogen", category: "inflammation" },
+  
+  // Iron & Minerals
+  { id: "ferritin", name: "Ferritin", category: "nutrients" },
+  { id: "iron-tibc-sat", name: "Iron/TIBC/% Saturation", category: "nutrients" },
+  { id: "rbc-magnesium", name: "RBC Magnesium", category: "nutrients" },
+  { id: "zinc", name: "Zinc", category: "nutrients" },
+  { id: "copper", name: "Copper", category: "nutrients" },
+  { id: "ceruloplasmin", name: "Ceruloplasmin", category: "nutrients" },
+  
+  // B-Vitamins & Methylation
+  { id: "homocysteine", name: "Homocysteine", category: "methylation" },
+  { id: "b12", name: "Vitamin B12", category: "nutrients" },
+  { id: "mma", name: "MMA (Methylmalonic Acid)", category: "methylation" },
+  { id: "folate", name: "Folate", category: "nutrients" },
+  { id: "rbc-folate", name: "RBC Folate", category: "nutrients" },
+  { id: "b6-plp", name: "Vitamin B6 (PLP)", category: "nutrients" },
+  { id: "b2", name: "Vitamin B2", category: "nutrients" },
+  
+  // Vitamins
+  { id: "vitamin-d-25oh", name: "25-OH Vitamin D", category: "nutrients" },
+  { id: "omega-3-index", name: "Omega-3 Index", category: "nutrients" },
+  
+  // Liver Function
+  { id: "ggt", name: "GGT", category: "liver" },
+  { id: "alt", name: "ALT", category: "liver" },
+  { id: "ast", name: "AST", category: "liver" },
+  { id: "bilirubin", name: "Total Bilirubin", category: "liver" },
+  
+  // Kidney
+  { id: "uric-acid", name: "Uric Acid", category: "kidney" },
+  { id: "microalbumin-creatinine", name: "Microalbumin/Creatinine", category: "kidney" },
+  
+  // Thyroid
+  { id: "tsh", name: "TSH", category: "thyroid" },
+  { id: "free-t4", name: "Free T4", category: "thyroid" },
+  { id: "free-t3", name: "Free T3", category: "thyroid" },
+  { id: "reverse-t3", name: "Reverse T3", category: "thyroid" },
+  { id: "tpo-ab", name: "TPO Antibodies", category: "thyroid" },
+  { id: "tg-ab", name: "Thyroglobulin Antibodies", category: "thyroid" },
+  
+  // Male Hormones
+  { id: "total-testosterone", name: "Total Testosterone", category: "hormones" },
+  { id: "free-testosterone", name: "Free Testosterone", category: "hormones" },
+  { id: "shbg", name: "SHBG", category: "hormones" },
+  { id: "sensitive-estradiol", name: "Sensitive Estradiol (E2)", category: "hormones" },
+  { id: "dhea-s", name: "DHEA-S", category: "hormones" },
+  { id: "lh", name: "LH", category: "hormones" },
+  { id: "fsh", name: "FSH", category: "hormones" },
+  { id: "prolactin", name: "Prolactin", category: "hormones" },
+  { id: "psa", name: "PSA", category: "hormones" },
+  
+  // Female Hormones
+  { id: "estradiol", name: "Estradiol", category: "hormones" },
+  { id: "progesterone", name: "Progesterone", category: "hormones" },
+  { id: "amh", name: "AMH", category: "hormones" },
+  
+  // Stress/Adrenals
+  { id: "cortisol-am", name: "Cortisol AM", category: "hormones" },
+  { id: "cortisol-pm", name: "Cortisol PM", category: "hormones" },
+  
+  // Gut & Advanced
+  { id: "comprehensive-stool", name: "Comprehensive Stool Analysis", category: "gut" },
+  { id: "calprotectin", name: "Calprotectin", category: "gut" },
+  { id: "h-pylori", name: "H. pylori Antigen", category: "gut" },
+  { id: "organic-acids", name: "Organic Acids Test (OAT)", category: "gut" },
+  
+  // Immune
+  { id: "ana", name: "ANA Screen", category: "immune" }
+];
+
+const PANELS: Panel[] = [
   {
-    id: "biomarker-optimization",
-    name: "Full Biomarker Optimization Panel",
-    description: "Complete metabolic, hormonal, and inflammatory assessment for peak performance optimization",
-    price: 299,
-    originalPrice: 450,
-    featured: true,
+    id: "core-optimization",
+    name: "Core Optimization Baseline (Fasting)",
+    tagline: "The universal starting point for biohackers",
+    biomarkers: [
+      "cbc", "cmp", "lipid", "apoB", "lp-a", "hba1c", "fasting-glucose",
+      "fasting-insulin", "hs-crp", "ferritin", "iron-tibc-sat", "homocysteine",
+      "vitamin-d-25oh", "ggt", "uric-acid", "tsh"
+    ],
+    prep: "10–12h fast; morning draw",
+    addOns: ["omega-3-index", "microalbumin-creatinine"],
+    categories: ["featured", "metabolism", "cardiovascular"],
+    priceMin: 179,
+    priceMax: 229,
     popular: true,
-    category: "Complete Panels",
-    biomarkers: ["CBC", "CMP", "Lipids", "HbA1c", "Vitamin D", "Homocysteine", "hs-CRP", "TSH", "Free T3/T4", "Testosterone", "DHEA-S", "Estradiol", "Cortisol", "Insulin"],
-    sampleType: "Blood",
-    turnaroundTime: "3-5 days",
+    featured: true,
     icon: TrendingUp
   },
   {
-    id: "methylation-longevity",
-    name: "Methylation & Longevity Panel",
-    description: "Essential markers for cellular health, DNA repair, and longevity optimization",
-    price: 179,
-    originalPrice: 275,
+    id: "metabolic-longevity",
+    name: "Metabolic & Longevity Panel", 
+    tagline: "Insulin sensitivity + cardio-metabolic risk + liver detox capacity",
+    biomarkers: [
+      "apoB", "lp-a", "fasting-insulin", "hba1c", "hs-crp", "ggt", "alt", "ast",
+      "bilirubin", "uric-acid", "igf-1", "microalbumin-creatinine", "cmp", "lipid"
+    ],
+    prep: "10–12h fast",
+    addOns: ["lp-pla2", "oxidized-ldl"],
+    categories: ["featured", "metabolism", "longevity"],
+    priceMin: 219,
+    priceMax: 299,
     featured: true,
-    category: "Longevity",
-    biomarkers: ["Homocysteine", "B12", "Folate", "Omega-3 Index", "Vitamin D", "NAD+"],
-    sampleType: "Blood",
-    turnaroundTime: "5-7 days",
+    icon: Heart
+  },
+  {
+    id: "thyroid-energy",
+    name: "Thyroid & Energy Panel",
+    tagline: "Fatigue, weight, hair/skin, and temperature regulation",
+    biomarkers: ["tsh", "free-t4", "free-t3", "reverse-t3", "tpo-ab", "tg-ab", "ferritin", "vitamin-d-25oh", "b12"],
+    prep: "Morning draw; avoid biotin 48–72 hours",
+    addOns: ["zinc", "copper", "ceruloplasmin"],
+    categories: ["featured", "thyroid", "energy"],
+    priceMin: 129,
+    priceMax: 179,
+    featured: true,
+    icon: Zap
+  },
+  {
+    id: "male-hormone-optimization",
+    name: "Male Hormone Optimization (18+)",
+    tagline: "Strength, libido, mood, recovery",
+    biomarkers: [
+      "total-testosterone", "free-testosterone", "shbg", "sensitive-estradiol", 
+      "dhea-s", "lh", "fsh", "prolactin", "cmp", "cbc", "lipid"
+    ],
+    prep: "Morning draw; no heavy training 24h prior",
+    addOns: ["psa", "cortisol-am"],
+    categories: ["featured", "hormones", "male"],
+    priceMin: 149,
+    priceMax: 219,
+    featured: true,
+    icon: Shield
+  },
+  {
+    id: "female-hormone-cycle",
+    name: "Female Hormone & Cycle Panel",
+    tagline: "Cycle health, mood, fertility awareness",
+    biomarkers: [
+      "estradiol", "progesterone", "lh", "fsh", "shbg", "dhea-s", "prolactin",
+      "tsh", "free-t4", "free-t3", "ferritin", "vitamin-d-25oh"
+    ],
+    prep: "Day 3 for baseline (FSH/LH/E2), day 19–21 for progesterone (28-day cycle)",
+    addOns: ["amh", "tpo-ab"],
+    categories: ["featured", "hormones", "female"],
+    priceMin: 149,
+    priceMax: 219,
+    featured: true,
+    icon: Users
+  },
+  {
+    id: "methylation-b-vitamins",
+    name: "Methylation & B-Vitamin Panel",
+    tagline: "Detox & cognitive energy via methylation status",
+    biomarkers: ["homocysteine", "b12", "mma", "folate", "b6-plp"],
+    prep: "Morning preferred; no supplements on test morning",
+    addOns: ["omega-3-index", "b2"],
+    categories: ["featured", "methylation", "nutrients"],
+    priceMin: 119,
+    priceMax: 169,
+    featured: true,
     icon: Brain
   },
   {
     id: "inflammation-immune",
-    name: "Inflammation & Immune Panel",
-    description: "Comprehensive inflammatory and immune system assessment for optimal resilience",
-    price: 149,
-    originalPrice: 230,
-    category: "Immune Health",
-    biomarkers: ["hs-CRP", "Ferritin", "ESR", "ANA", "IgG", "IgA", "IgM", "White Blood Cell Differential"],
-    sampleType: "Blood",
-    turnaroundTime: "3-5 days",
+    name: "Inflammation & Immune Check",
+    tagline: "Silent inflammation & iron handling clarity",
+    biomarkers: ["hs-crp", "esr", "ferritin", "fibrinogen", "cbc", "vitamin-d-25oh"],
+    prep: "Morning preferred",
+    addOns: ["lp-pla2", "ana"],
+    categories: ["featured", "inflammation", "immune"],
+    priceMin: 99,
+    priceMax: 149,
+    featured: true,
     icon: Shield
   },
   {
-    id: "hormone-optimization",
-    name: "Advanced Hormone Optimization",
-    description: "Complete hormonal profile for energy, recovery, and performance enhancement",
-    price: 199,
-    originalPrice: 320,
-    popular: true,
-    category: "Hormones",
-    biomarkers: ["Total Testosterone", "Free Testosterone", "Estradiol", "Progesterone", "DHEA-S", "Cortisol AM/PM", "SHBG", "IGF-1"],
-    sampleType: "Blood + Saliva",
-    turnaroundTime: "5-7 days",
-    icon: Zap
-  },
-  {
-    id: "metabolic-performance",
-    name: "Metabolic Performance Panel", 
-    description: "Optimize energy production, fat burning, and metabolic efficiency",
-    price: 169,
-    originalPrice: 260,
-    category: "Metabolism",
-    biomarkers: ["Insulin", "Glucose", "HbA1c", "Thyroid Panel", "Leptin", "Adiponectin", "Lactate"],
-    sampleType: "Blood",
-    turnaroundTime: "3-5 days",
-    icon: Heart
+    id: "nutrient-status",
+    name: "Nutrient Status Panel",
+    tagline: "The fundamentals for recovery, sleep, and cognition",
+    biomarkers: [
+      "vitamin-d-25oh", "b12", "mma", "folate", "ferritin", "iron-tibc-sat", 
+      "rbc-magnesium", "zinc", "copper", "ceruloplasmin", "omega-3-index"
+    ],
+    prep: "Morning preferred; no supplements on test morning",
+    categories: ["featured", "nutrients"],
+    priceMin: 149,
+    priceMax: 199,
+    featured: true,
+    icon: TestTube
   },
   {
     id: "gut-microbiome",
-    name: "Gut & Microbiome Health",
-    description: "Comprehensive digestive and microbiome analysis for optimal gut health",
-    price: 249,
-    originalPrice: 380,
-    category: "Gut Health",
-    biomarkers: ["Comprehensive Stool Analysis", "SIBO Breath Test", "Zonulin", "Calprotectin", "Microbiome Diversity"],
-    sampleType: "Stool + Breath",
-    turnaroundTime: "7-10 days",
-    icon: Users
+    name: "Gut & Microbiome (Advanced)",
+    tagline: "GI symptoms, skin, brain-gut axis, immune load",
+    biomarkers: ["comprehensive-stool", "calprotectin", "h-pylori"],
+    prep: "Specialty send-out; fulfillment times vary",
+    addOns: ["organic-acids"],
+    categories: ["advanced", "gut", "microbiome"],
+    priceMin: 299,
+    priceMax: 449,
+    featured: false,
+    icon: Beaker
   }
+];
+
+const CATEGORIES = [
+  { id: "hormones", name: "Hormones", icon: Shield, description: "Male/Female, Thyroid, Cortisol" },
+  { id: "metabolism", name: "Metabolism & Longevity", icon: Heart, description: "Insulin, HbA1c, ApoB, IGF-1" },
+  { id: "inflammation", name: "Inflammation & Immune", icon: Shield, description: "hs-CRP, ESR, Ferritin" },
+  { id: "nutrients", name: "Nutrients", icon: TestTube, description: "Vitamin D, B12, Minerals, Omega-3" },
+  { id: "cardiovascular", name: "Cardiovascular", icon: Heart, description: "Lipids, ApoB, Lp(a)" },
+  { id: "thyroid", name: "Thyroid & Energy", icon: Zap, description: "TSH, T3, T4, Antibodies" },
+  { id: "gut", name: "Gut Health", icon: Beaker, description: "Stool Analysis, Microbiome" },
+  { id: "liver", name: "Liver/Kidney", icon: TestTube, description: "Detox, Function, Filtration" }
 ];
 
 const LabMarketplace = () => {
   const navigate = useNavigate();
 
-  const handlePanelSelect = (panel: LabPanel) => {
+  const handlePanelSelect = (panel: Panel) => {
     // For now, redirect to auth with panel info
     navigate(`/auth?type=order-labs&panel=${panel.id}`);
   };
@@ -110,6 +277,12 @@ const LabMarketplace = () => {
   const handleBackToHome = () => {
     navigate('/');
   };
+
+  const getBiomarkersByIds = (ids: string[]) => {
+    return ids.map(id => BIOMARKERS.find(b => b.id === id)?.name).filter(Boolean);
+  };
+
+  const featuredPanels = PANELS.filter(panel => panel.featured);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -147,83 +320,155 @@ const LabMarketplace = () => {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200">
-              Professional-Grade Lab Testing
+              Order Labs for Optimization — Not Just Diagnostics
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Order Labs. <span className="text-blue-600">Unlock Your Biology.</span>
+              Curated Biohacker Panels. <span className="text-blue-600">$19 AI Interpretation.</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Curated lab panels from leading functional medicine practitioners and performance experts. 
-              Get actionable insights with AI analysis + practitioner-grade supplements.
+              Order the right labs for optimization with curated biohacker panels, plus $19 AI interpretation 
+              that turns numbers into actionable plans with practitioner-direct supplements.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <Button 
+                size="lg" 
+                onClick={() => document.getElementById('featured-panels')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4"
+              >
+                Browse Panels
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => navigate('/auth?type=upload-labs')}
+                size="lg"
+                className="border-blue-200 text-blue-700 hover:bg-blue-50 px-8 py-4"
+              >
+                Upload Labs ($19)
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Featured Panels */}
-      <section className="py-8 px-4">
+      <section id="featured-panels" className="py-8 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Top Biohacker Panels</h2>
-            <p className="text-gray-600">Panels optimized for biohackers, longevity seekers, and peak performance</p>
+            <p className="text-gray-600">Curated from leading functional medicine and performance practices</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topBiohackerPanels.map((panel, index) => {
-                  const IconComponent = panel.icon;
-                  return (
-                    <motion.div
-                      key={panel.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <Card className="h-full hover:shadow-lg transition-all duration-200 hover:-translate-y-1 group cursor-pointer" onClick={() => handlePanelSelect(panel)}>
-                        <CardHeader className="pb-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <IconComponent className="h-8 w-8 text-blue-600" />
-                            <div className="flex gap-2">
-                              {panel.featured && <Badge className="bg-amber-100 text-amber-700 border-amber-200">Featured</Badge>}
-                              {panel.popular && <Badge className="bg-green-100 text-green-700 border-green-200">Popular</Badge>}
-                            </div>
-                          </div>
-                          <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                            {panel.name}
-                          </CardTitle>
-                          <CardDescription className="text-gray-600">
-                            {panel.description}
-                          </CardDescription>
-                        </CardHeader>
+            {featuredPanels.map((panel, index) => {
+              const IconComponent = panel.icon;
+              const keyBiomarkers = getBiomarkersByIds(panel.biomarkers.slice(0, 5));
+              const isAdvanced = panel.categories.includes('advanced');
+              
+              return (
+                <motion.div
+                  key={panel.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="h-full hover:shadow-lg transition-all duration-200 hover:-translate-y-1 group cursor-pointer" onClick={() => handlePanelSelect(panel)}>
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between mb-2">
+                        <IconComponent className="h-8 w-8 text-blue-600" />
+                        <div className="flex gap-2 flex-wrap">
+                          {panel.popular && <Badge className="bg-green-100 text-green-700 border-green-200">Popular</Badge>}
+                          {isAdvanced && <Badge className="bg-purple-100 text-purple-700 border-purple-200">Advanced</Badge>}
+                        </div>
+                      </div>
+                      <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {panel.name}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600">
+                        {panel.tagline}
+                      </CardDescription>
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-4">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl font-bold text-gray-900">${panel.priceMin}</span>
+                        {panel.priceMin !== panel.priceMax && (
+                          <span className="text-lg text-gray-500">- ${panel.priceMax}</span>
+                        )}
+                        <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          +$19 AI Analysis
+                        </Badge>
+                      </div>
+
+                      {/* Prep Requirements */}
+                      <div className="flex flex-wrap gap-1">
+                        {panel.prep.toLowerCase().includes('fast') && (
+                          <Badge variant="outline" className="text-xs bg-orange-50 text-orange-700 border-orange-200">
+                            <Clock className="h-3 w-3 mr-1" />
+                            Fasting
+                          </Badge>
+                        )}
+                        {panel.prep.toLowerCase().includes('morning') && (
+                          <Badge variant="outline" className="text-xs bg-yellow-50 text-yellow-700 border-yellow-200">
+                            Morning Draw
+                          </Badge>
+                        )}
+                        {panel.prep.toLowerCase().includes('timing') && (
+                          <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">
+                            Timing Required
+                          </Badge>
+                        )}
+                      </div>
+
+                      {/* Key Biomarkers */}
+                      <div className="space-y-2">
+                        <div className="text-sm font-medium text-gray-700">Key Biomarkers ({panel.biomarkers.length} total):</div>
+                        <div className="text-sm text-gray-600">
+                          {keyBiomarkers.slice(0, 3).join(', ')}
+                          {keyBiomarkers.length > 3 && ` +${panel.biomarkers.length - 3} more`}
+                        </div>
                         
-                        <CardContent className="space-y-4">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-gray-900">${panel.price}</span>
-                            {panel.originalPrice && (
-                              <span className="text-lg text-gray-500 line-through">${panel.originalPrice}</span>
-                            )}
-                            {panel.originalPrice && (
-                              <Badge variant="secondary" className="bg-green-100 text-green-700">
-                                Save ${panel.originalPrice - panel.price}
-                              </Badge>
-                            )}
+                        {panel.addOns && panel.addOns.length > 0 && (
+                          <div className="text-xs text-gray-500">
+                            Add-ons: {getBiomarkersByIds(panel.addOns).slice(0, 2).join(', ')}
                           </div>
+                        )}
+                      </div>
 
-                          <div className="space-y-2 text-sm text-gray-600">
-                            <div><strong>Sample:</strong> {panel.sampleType}</div>
-                            <div><strong>Results:</strong> {panel.turnaroundTime}</div>
-                            <div><strong>Biomarkers:</strong> {panel.biomarkers.length} included</div>
-                          </div>
+                      <div className="text-xs text-gray-500 border-t pt-2">
+                        <div><strong>Prep:</strong> {panel.prep}</div>
+                        <div className="mt-1">Includes draw at national labs. Final availability varies by location.</div>
+                      </div>
 
-                          <div className="pt-2">
-                            <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                              Order Now + Get AI Analysis
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  );
+                      <div className="pt-2">
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                          Order Panel + AI Analysis
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
             })}
+          </div>
+          
+          {/* Categories Grid */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Shop by Category</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {CATEGORIES.map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <Card key={category.id} className="p-4 hover:shadow-md transition-shadow cursor-pointer group">
+                    <div className="text-center">
+                      <IconComponent className="h-8 w-8 text-blue-600 mx-auto mb-2 group-hover:text-blue-700 transition-colors" />
+                      <div className="font-medium text-gray-900 mb-1">{category.name}</div>
+                      <div className="text-xs text-gray-600">{category.description}</div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
