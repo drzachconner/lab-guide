@@ -13,11 +13,7 @@ const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
-  const started = useRef(false); // StrictMode guard
-
   useEffect(() => {
-    if (started.current) return;
-    started.current = true;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -119,7 +115,7 @@ const AnimatedBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-40 md:opacity-65"
+      className="absolute inset-0 pointer-events-none opacity-50 md:opacity-60"
       style={{ mixBlendMode: "screen" }} // helps dots glow over darker areas
     />
   );
