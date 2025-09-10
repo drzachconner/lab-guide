@@ -52,7 +52,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-24 px-4">
+      <section className="py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
@@ -60,11 +60,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Your Lab Analysis.
+              Biohack with Precision
               <br />
-              <span className="text-blue-600">Your Exact Supplements.</span>
+              <span className="text-blue-600">Your Functional Lab Analysis</span>
               <br />
-              <span className="text-blue-600">Your Optimized Life.</span>
+              <span className="text-blue-600">Your Exact Supplements</span>
+              <br />
+              <span className="text-blue-600">Your Optimized Life</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -89,17 +91,17 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </Button>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-wrap justify-center gap-8 text-base text-gray-600">
               <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
+                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
                 One-time payment
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
+                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
                 Multiple labs per session
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
+                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
                 Just above wholesale pricing
               </div>
             </div>
@@ -113,7 +115,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                The only platform that bridges lab analysis with supplement ordering
+                The only platform that bridges lab analysis with supplement ordering at just above wholesale pricing
               </h2>
               <p className="text-lg text-gray-600 mb-8">
                 Other AI tools give you generic advice. Other supplement platforms make you search thousands of products. We do both—analyzing your specific lab work and connecting you directly to the exact supplements at just above wholesale pricing—the cheapest possible prices online.
