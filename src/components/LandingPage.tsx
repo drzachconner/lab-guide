@@ -90,30 +90,30 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   </div>
                 </div>
                 <Badge variant="secondary" className="px-4 py-2">
-                  Next-Gen Functional Analysis
+                  No Subscription • Holistic • Biohacking-Level Analysis
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                   {clinicContext ? (
                     <>
-                      Bleeding-Edge Lab Interpretation for 
+                      Holistic Lab Analysis 
                       <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
-                        {" "}Just $19
+                        {" "}Beyond Standard Medicine
                       </span>
                     </>
                   ) : (
                     <>
-                      Your Labs, Decoded with 
+                      No Allopathic Lean.{" "}
                       <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        {" "}Biohacker-Level Precision
+                        Pure Biohacking Analysis.
                       </span>
                     </>
                   )}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   {clinicContext ? (
-                    `${clinicContext.name} offers premium functional analysis rooted in cutting-edge biohacking research, plus lifetime access to up to 25% off practitioner-grade supplements.`
+                    `${clinicContext.name} delivers holistic, biohacking-level interpretation with zero allopathic bias. Get cutting-edge functional analysis plus lifetime access to 25% off premium supplements.`
                   ) : (
-                    "Next-gen functional analysis meets holistic wellness. Get bleeding-edge interpretation beyond standard AI + lifetime access to up to 25% off practitioner-grade supplements."
+                    "No subscriptions. No conventional medicine bias. Just pure holistic and biohacking interpretation with lifetime access to 25% off premium supplements."
                   )}
                 </p>
               </div>
@@ -160,13 +160,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold">
-              {clinicContext ? 'Premium Biohacking-Level Analysis' : 'Next-Gen Functional Analysis'}
+              Beyond Conventional Medicine
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {clinicContext 
-                ? 'Cutting-edge interpretation combining functional medicine, biohacking research, and holistic wellness protocols'
-                : 'Beyond standard AI interpretation. Bleeding-edge functional analysis rooted in the latest biohacking and holistic wellness research.'
-              }
+              Pure holistic and biohacking interpretation without allopathic bias. 
+              Get the cutting-edge analysis your body deserves.
             </p>
           </div>
 
@@ -174,26 +172,24 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <Card className="card-medical">
               <CardHeader>
                 <TrendingUp className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Biohacker-Level Ranges</CardTitle>
+                <CardTitle>No Subscription Model</CardTitle>
                 <CardDescription>
-                  Cutting-edge optimal ranges based on latest biohacking research and functional medicine principles.
+                  Pay per analysis. No monthly fees, no contracts. Get what you need, when you need it.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Bleeding-edge target ranges</span>
+                    <span className="text-sm">One-time payment per report</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Deep root cause analysis</span>
+                    <span className="text-sm">No recurring charges</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">
-                      {clinicContext ? 'Advanced biomarker correlations' : 'Pattern recognition'}
-                    </span>
+                    <span className="text-sm">Complete ownership of results</span>
                   </li>
                 </ul>
               </CardContent>
@@ -202,26 +198,24 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <Card className="card-medical">
               <CardHeader>
                 <Zap className="h-12 w-12 text-secondary mb-4" />
-                <CardTitle>Premium Interpretation</CardTitle>
+                <CardTitle>Holistic Biohacking Analysis</CardTitle>
                 <CardDescription>
-                  Next-gen analysis combining cutting-edge research, biohacking protocols, and holistic wellness.
+                  Zero allopathic bias. Pure holistic and biohacking protocols based on cutting-edge research.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Latest research integration</span>
+                    <span className="text-sm">No conventional medicine bias</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Biohacking protocols</span>
+                    <span className="text-sm">Pure biohacking protocols</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">
-                      {clinicContext ? 'Holistic wellness integration' : 'Comprehensive analysis'}
-                    </span>
+                    <span className="text-sm">Holistic root cause focus</span>
                   </li>
                 </ul>
               </CardContent>
@@ -289,11 +283,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <section className="py-24 bg-gradient-primary text-white">
         <div className="container mx-auto px-4 text-center space-y-8">
           <h2 className="text-3xl lg:text-4xl font-bold">
-            Ready to Optimize Your Health?
+            Ready to Break Free from Conventional Analysis?
           </h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Join thousands of biohackers and wellness enthusiasts who trust LabPilot 
-            for premium functional analysis and exclusive supplement access.
+            Join thousands who've ditched allopathic bias for pure holistic and 
+            biohacking-level lab interpretation with premium supplement access.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="btn-success group" onClick={handleGetStarted}>
