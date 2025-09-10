@@ -89,11 +89,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
-              <span className="text-blue-600">Order Labs Through Us</span>
-              <br />
-              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Complete End-to-End Service</span>
-              <br />
-              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">AI Analysis + Supplements</span>
+              <span className="text-blue-600">Right Labs.</span>
+              <span className="text-gray-500"> Right Analysis.</span>
+              <span className="text-gray-500"> Right Supplements</span>
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
