@@ -78,7 +78,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             {/* Prominent pricing callout */}
             <div className="bg-gradient-accent text-secondary-foreground px-8 py-4 rounded-full text-center shadow-glow mx-auto max-w-md">
               <div className="text-3xl font-bold mb-1">
-                {clinicContext ? "Only $19" : "Starting at $19"}
+                Only $19
               </div>
               <div className="text-sm font-medium opacity-90">
                 Premium Lab Analysis + 25% Off Supplements
@@ -91,7 +91,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </Badge>
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
-                <div className="mb-4">Concierge Precision Medicine to</div>
+                <div className="mb-4">Advanced Lab Analysis to</div>
                 <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
                   {clinicContext ? "Maximize Health Span" : "Extend Longevity"}
                 </div>
