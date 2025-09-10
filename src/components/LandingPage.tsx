@@ -116,7 +116,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </h1>
               
               <div className="text-xl lg:text-3xl font-medium text-muted-foreground/90 leading-relaxed max-w-4xl mx-auto">
-                Next-level optimization with advanced functional lab interpretations
+                AI trained on the bleeding edge of biohacking research and Functional Medicine analysis
               </div>
             </div>
 
