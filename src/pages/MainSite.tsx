@@ -5,7 +5,7 @@ import ClinicLanding from "./ClinicLanding";
 import ClinicAuth from "./ClinicAuth";
 import ClinicDashboard from "./ClinicDashboard";
 import PricingPage from "./PricingPage";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "./Dashboard";
 import ReportView from "../components/ReportView";
 import NotFound from "./NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
