@@ -305,6 +305,44 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </section>
 
+      {/* Security & Compliance */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto max-w-6xl px-4 text-center">
+          <div className="max-w-3xl mx-auto mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
+                <Shield className="h-8 w-8 text-blue-600" />
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Clinical Grade Security & Privacy
+            </h2>
+            <p className="text-xl text-gray-600">
+              HIPAA-compliant platform with end-to-end encryption. Your health data is protected with enterprise-grade security standards used by leading healthcare institutions.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <Shield className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+              <div className="font-semibold text-gray-900">HIPAA Compliant</div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <CheckCircle className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+              <div className="font-semibold text-gray-900">SOC 2 Certified</div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <Shield className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+              <div className="font-semibold text-gray-900">256-bit Encryption</div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+              <div className="font-semibold text-gray-900">FDA Guidelines</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-20">
         <div className="container mx-auto max-w-4xl px-4 text-center">
