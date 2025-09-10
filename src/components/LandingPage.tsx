@@ -83,6 +83,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   {clinicContext ? "Expert Lab Interpretation" : "Advanced Lab Interpretation"}
                 </div>
               </h1>
+              
+              <div className="text-2xl lg:text-3xl font-semibold text-muted-foreground/90 leading-relaxed">
+                Biohacking Lab Interpretation for Functional Levels
+              </div>
             </div>
 
             {/* Pricing callout */}
