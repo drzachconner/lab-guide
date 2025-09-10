@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, CheckCircle, Upload, Brain, ShoppingCart, Star, TrendingUp, Users, Shield, LogIn } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import HeroBackground from "./HeroBackground";
 
 interface Clinic {
   id: string;
@@ -52,8 +53,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-8 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <section className="py-8 px-4 relative">
+        <HeroBackground />
+        <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
               AI-Powered Lab Analysis + Supplement Connection
