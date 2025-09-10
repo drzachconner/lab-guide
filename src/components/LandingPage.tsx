@@ -135,7 +135,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </div>
               <h3 className="text-2xl font-bold text-foreground">Comprehensive Analysis</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Upload multiple lab reports in one $19 session for holistic interpretation. Get expert functional medicine insights and personalized protocols—not per-test pricing like competitors charge.
+                Upload multiple lab reports in one $19 session and get insights that generic AI tools miss. Our specialized training in cutting-edge biohacking research, functional medicine protocols, and advanced pattern recognition uncovers hidden correlations in your data—complete with visual breakdowns and actionable protocols tailored to optimization, not just "normal" ranges.
               </p>
             </div>
 
