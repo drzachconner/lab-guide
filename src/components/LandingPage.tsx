@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import heroImage from "@/assets/hero-health-analysis.jpg";
+import heroBiohackImage from "@/assets/hero-biohack-lab.jpg";
 import AnimatedBackground from "./AnimatedBackground";
 
 interface Clinic {
@@ -100,28 +101,41 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </nav>
 
-      {/* Hero Section - Simplified */}
-      <section ref={heroRef} className="relative py-32 lg:py-40">
+      {/* Hero Section - With Background Image */}
+      <section 
+        ref={heroRef} 
+        className="relative py-32 lg:py-40 min-h-[90vh] flex items-center"
+        style={{
+          backgroundImage: `url(${heroBiohackImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-background/50" />
+        
         <div className="container relative mx-auto px-8 z-10">
           <div className="text-center space-y-10 max-w-6xl mx-auto">
             {/* Clean headline */}
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-7xl font-bold leading-tight tracking-tight">
-                <div className="mb-4">
+                <div className="mb-4 drop-shadow-lg">
                   Biohack Your Lab Interpretation
                 </div>
-                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent text-3xl lg:text-5xl">
+                <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent text-3xl lg:text-5xl drop-shadow-sm">
                   with Functional Levels
                 </div>
               </h1>
               
-              <div className="text-xl lg:text-3xl font-medium text-muted-foreground/90 leading-relaxed max-w-4xl mx-auto">
+              <div className="text-xl lg:text-3xl font-medium text-muted-foreground/95 leading-relaxed max-w-4xl mx-auto drop-shadow-sm">
                 AI trained on the bleeding edge of biohacking research and Functional Medicine analysis
               </div>
             </div>
 
-            {/* Clean pricing callout */}
-            <div className="bg-gradient-accent text-secondary-foreground px-8 py-5 rounded-2xl shadow-glow mx-auto max-w-lg border border-secondary/20 hover:shadow-orbital transition-all duration-300">
+            {/* Enhanced pricing callout with better visibility */}
+            <div className="bg-gradient-accent text-secondary-foreground px-8 py-5 rounded-2xl shadow-glow mx-auto max-w-lg border border-secondary/30 hover:shadow-orbital transition-all duration-300 backdrop-blur-sm">
               <div className="text-3xl font-bold mb-2">Only $19</div>
               <div className="text-base font-medium opacity-90">
                 Multiple Labs + Lifelong 25% Fullscript Discount
@@ -131,12 +145,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <div className="space-y-8">
               <Badge 
                 variant="secondary" 
-                className="px-6 py-3 text-base font-medium bg-card/15 text-secondary border-secondary/25 backdrop-blur-sm"
+                className="px-6 py-3 text-base font-medium bg-card/30 text-secondary border-secondary/40 backdrop-blur-md"
               >
                 No Subscription • Multiple Labs Per Session • Biohacking Protocols
               </Badge>
               
-              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+              <p className="text-lg lg:text-xl text-muted-foreground/95 leading-relaxed max-w-4xl mx-auto drop-shadow-sm">
                 {clinicContext ? (
                   `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
                 ) : (
@@ -148,7 +162,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-6">
               <Button 
                 size="lg" 
-                className="btn-accent text-lg px-10 py-5 h-auto shadow-card hover:shadow-glow transition-all duration-300 group" 
+                className="btn-accent text-lg px-10 py-5 h-auto shadow-glow hover:shadow-orbital transition-all duration-300 group backdrop-blur-sm" 
                 onClick={handleGetStarted}
               >
                 {user ? 'Access Dashboard' : 'Inquire About Access'}
