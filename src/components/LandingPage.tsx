@@ -28,11 +28,19 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
+  const handleOrderLabs = () => {
     if (user) {
-      navigate('/dashboard');
+      navigate('/dashboard'); // TODO: Navigate to order labs page
     } else {
-      navigate('/auth');
+      navigate('/auth?type=order-labs');
+    }
+  };
+
+  const handleUploadLabs = () => {
+    if (user) {
+      navigate('/dashboard'); // TODO: Navigate to upload labs page  
+    } else {
+      navigate('/auth?type=upload-labs');
     }
   };
 
@@ -100,27 +108,19 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               Plus, access premium provider-quality supplements at 30% off retail (via Fullscript).
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 px-4">
+            <div className="flex justify-center mb-6 px-4">
               <Button 
                 size="lg" 
-                onClick={handleGetStarted}
+                onClick={handleOrderLabs}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
               >
                 Get Started – Order Labs
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={handleGetStarted}
-                className="px-6 py-4 text-base sm:text-lg rounded-lg border-gray-300 w-full sm:w-auto"
-              >
-                Start Lab Analysis – $19
-              </Button>
             </div>
             
             <p className="text-sm text-gray-500 px-4">
-              Already have labs? Upload them for $19.
+              Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer">Upload them for $19</button>.
             </p>
           </div>
         </div>
@@ -172,13 +172,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 <Button 
                   className="w-full bg-blue-600 hover:bg-blue-700 mb-4" 
                   size="lg"
-                  onClick={handleGetStarted}
+                  onClick={handleOrderLabs}
                 >
                   Get Started – Order Labs
                 </Button>
                 
                 <div className="text-sm text-gray-500 pt-2 border-t">
-                  Already have labs? Upload them for $19.
+                  Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer">Upload them for $19</button>.
                 </div>
               </div>
             </div>
@@ -365,10 +365,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           
           <Button 
             size="lg" 
-            onClick={handleGetStarted}
+            onClick={handleUploadLabs}
             className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-lg rounded-lg"
           >
-            Start Lab Analysis - $19
+            Upload Labs for Analysis - $19
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
