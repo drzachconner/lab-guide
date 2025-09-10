@@ -16,14 +16,14 @@ const HeroBackground = () => {
   useEffect(() => {
     const generateParticles = () => {
       const newParticles: Particle[] = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 45; i++) {
         newParticles.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 4 + 2,
-          opacity: Math.random() * 0.3 + 0.1,
-          duration: Math.random() * 10 + 10,
+          size: Math.random() * 4 + 3,
+          opacity: Math.random() * 0.3 + 0.2,
+          duration: Math.random() * 10 + 12,
         });
       }
       setParticles(newParticles);
@@ -35,9 +35,9 @@ const HeroBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/50">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white to-indigo-100/70">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-tr from-blue-100/20 via-transparent to-purple-100/20"
+          className="absolute inset-0 bg-gradient-to-tr from-blue-200/30 via-transparent to-purple-200/30"
           animate={{
             backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
           }}
@@ -48,6 +48,10 @@ const HeroBackground = () => {
           }}
         />
       </div>
+
+      {/* Glowing bio blobs */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-blue-400/30 blur-3xl" />
+      <div className="absolute -bottom-10 -right-10 w-96 h-96 rounded-full bg-purple-400/30 blur-3xl" />
 
       {/* Floating particles */}
       {particles.map((particle) => (
@@ -75,7 +79,7 @@ const HeroBackground = () => {
       ))}
 
       {/* DNA-like connecting lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-10">
+      <svg className="absolute inset-0 w-full h-full opacity-20">
         <motion.path
           d="M 50 100 Q 150 50 250 100 T 450 100"
           stroke="url(#gradient)"

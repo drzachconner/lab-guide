@@ -53,7 +53,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-8 px-4 relative">
+      <section className="pt-2 pb-8 px-4 relative">
         <HeroBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-16">
