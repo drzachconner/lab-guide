@@ -21,8 +21,11 @@ const AnimatedBackground = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.clientWidth;
+        canvas.height = parent.clientHeight;
+      }
     };
 
     const initParticles = () => {
@@ -87,7 +90,7 @@ const AnimatedBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-30 md:opacity-60"
+      className="absolute inset-0 pointer-events-none opacity-30 md:opacity-60"
     />
   );
 };

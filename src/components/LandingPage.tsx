@@ -70,7 +70,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/auth?type=dispensary')} className="cursor-pointer">
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  Shop Dispensary (30% Off)
+                  Shop Dispensary (25% Off)
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/auth?type=signin')} className="cursor-pointer">
                   <LogIn className="mr-2 h-4 w-4" />
@@ -88,10 +88,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-4 pb-12 px-4 relative">
-        <HeroBackground />
-        <AnimatedBackground />
-        <div className="container mx-auto max-w-6xl relative z-10">
+      <section className="relative overflow-hidden min-h-[70vh] pt-12 pb-16">
+        {/* Backgrounds behind content */}
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <HeroBackground />
+          <AnimatedBackground />
+        </div>
+
+        {/* Foreground content */}
+        <div className="container mx-auto max-w-6xl px-4 relative z-10">
           <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -289,7 +294,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Personalized protocols with 25% off practitioner-grade supplements.
+                  Personalized protocols with direct links to premium products with practitioner-direct pricing (25% off).
                 </CardDescription>
               </CardContent>
             </Card>
@@ -361,7 +366,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "Practitioner-direct pricing saves me money every month. The AI actually understands functional medicine."
+                "Practitioner-direct pricing pays for itself immediately. The AI actually understands functional medicine."
               </p>
               <div className="font-medium text-gray-900">Dr. James K.</div>
             </div>
@@ -386,8 +391,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">25%</div>
-              <div className="text-gray-600">Off Retail Prices</div>
-              <div className="text-xs text-green-600 font-medium">Practitioner-Direct</div>
+              <div className="text-gray-600">Practitioner-Direct Savings</div>
+              <div className="text-xs text-green-600 font-medium">Best Available</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
@@ -404,7 +409,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Stop guessing. Start optimizing.
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Get the exact supplements your lab work recommends with direct Fullscript dispensary access at wholesale pricing.
+            Get the exact supplements your lab work recommends with direct Fullscript dispensary access at 25% off retail.
           </p>
           
           <Button 
