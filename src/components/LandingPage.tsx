@@ -90,7 +90,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[70vh] pt-12 pb-16">
         {/* Backgrounds behind content */}
-        <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <HeroBackground />
           <AnimatedBackground />
         </div>
