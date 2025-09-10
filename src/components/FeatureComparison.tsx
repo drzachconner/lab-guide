@@ -14,22 +14,22 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
   
   const comparisonData = [
     {
-      feature: "Basic Lab Analysis",
+      feature: "Next-Gen Functional Analysis",
       public: true,
       clinic: true,
-      description: "AI-powered interpretation of common biomarkers"
+      description: "Premium biohacking-level interpretation"
     },
     {
-      feature: "Functional Medicine Ranges",
-      public: true,
-      clinic: true,
-      description: "Optimal health ranges vs. lab normals"
+      feature: "Bleeding-Edge Research Integration",
+      public: "Basic",
+      clinic: "Advanced",
+      description: "Latest biohacking and holistic wellness protocols"
     },
     {
-      feature: "Supplement Recommendations",
-      public: "Basic suggestions",
-      clinic: "Professional protocols",
-      description: "Personalized supplement strategies"
+      feature: "Premium Supplement Access",
+      public: "Up to 15% off",
+      clinic: "Up to 25% off",
+      description: "Practitioner-grade supplement discounts for life"
     },
     {
       feature: "Advanced Biomarkers",
@@ -38,28 +38,28 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
       description: "Deep analysis of specialized tests"
     },
     {
-      feature: "Practitioner-Grade Supplements",
+      feature: "Practitioner-Only Formulations",
       public: false,
       clinic: true,
       description: "Access to professional supplement lines"
     },
     {
-      feature: "Detailed Dosage Protocols",
+      feature: "Precise Biohacking Protocols",
       public: false,
       clinic: true,
-      description: "Precise timing and dosage recommendations"
+      description: "Cutting-edge timing and dosage recommendations"
     },
     {
-      feature: "Progress Tracking & Retesting",
-      public: "Limited",
-      clinic: "Full tracking",
-      description: "Monitor your optimization journey"
+      feature: "Additional Lab Recommendations",
+      public: "Basic",
+      clinic: "Comprehensive + Affordable Options",
+      description: "Suggested follow-up testing with cost-effective options"
     },
     {
-      feature: "Practitioner Support",
+      feature: "Holistic Wellness Support",
       public: false,
       clinic: true,
-      description: "Access to healthcare provider guidance"
+      description: "Comprehensive lifestyle and diet protocols"
     }
   ];
 
@@ -191,8 +191,8 @@ const FeatureComparison = ({ clinicContext, onGetStarted }: FeatureComparisonPro
             </Badge>
             <h3 className="text-2xl font-bold">Ask Your Healthcare Provider About LabPilot</h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Your clinic can offer you the same analysis for <span className="font-semibold text-green-600">$29 instead of $89</span> - 
-              plus you'll get professional-grade protocols and practitioner support.
+              Your clinic can offer you premium biohacking-level analysis for <span className="font-semibold text-green-600">$29 instead of $89</span> - 
+              plus you'll get up to 25% off premium supplements and cutting-edge protocols.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
               <Button className="btn-medical">

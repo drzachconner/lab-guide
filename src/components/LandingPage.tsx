@@ -78,30 +78,30 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge variant="secondary" className="px-4 py-2">
-                  AI-Powered Lab Analysis
+                  Next-Gen Functional Analysis
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                   {clinicContext ? (
                     <>
-                      Get Professional Lab Analysis for 
+                      Bleeding-Edge Lab Interpretation for 
                       <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
                         {" "}Just $29
                       </span>
                     </>
                   ) : (
                     <>
-                      Transform Your Lab Results into 
+                      Your Labs, Decoded with 
                       <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        {" "}Actionable Health Insights
+                        {" "}Biohacker-Level Precision
                       </span>
                     </>
                   )}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   {clinicContext ? (
-                    `${clinicContext.name} offers you comprehensive AI-powered lab analysis with professional protocols plus exclusive 15% discount access to professional-grade supplements.`
+                    `${clinicContext.name} offers premium functional analysis rooted in cutting-edge biohacking research, plus lifetime access to up to 25% off practitioner-grade supplements.`
                   ) : (
-                    "LabPilot uses advanced AI to interpret your lab results through a functional medicine lens, providing personalized insights and lifetime access to 15% discounts on professional-grade supplements."
+                    "Next-gen functional analysis meets holistic wellness. Get bleeding-edge interpretation beyond standard AI + lifetime access to up to 25% off premium, practitioner-only supplements."
                   )}
                 </p>
               </div>
@@ -109,7 +109,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="btn-medical group" onClick={handleGetStarted}>
                   {user ? 'Go to Dashboard' : (
-                    clinicContext ? 'Start $29 Analysis + Get 15% Supplement Discount' : 'Start Analysis + Get 15% Supplement Discount'
+                    clinicContext ? 'Start $29 Analysis + Get 25% Supplement Access' : 'Start Analysis + Get 25% Supplement Access'
                   )}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -148,12 +148,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold">
-              {clinicContext ? 'Your Complete Lab Analysis Platform' : 'Advanced Functional Medicine Analysis'}
+              {clinicContext ? 'Premium Biohacking-Level Analysis' : 'Next-Gen Functional Analysis'}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {clinicContext 
-                ? 'Access the full suite of professional-grade analysis tools and protocols'
-                : 'Go beyond reference ranges with AI-powered functional interpretation and personalized optimization strategies.'
+                ? 'Cutting-edge interpretation combining functional medicine, biohacking research, and holistic wellness protocols'
+                : 'Beyond standard AI interpretation. Bleeding-edge functional analysis rooted in the latest biohacking and holistic wellness research.'
               }
             </p>
           </div>
@@ -162,25 +162,25 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <Card className="card-medical">
               <CardHeader>
                 <TrendingUp className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Functional Ranges</CardTitle>
+                <CardTitle>Biohacker-Level Ranges</CardTitle>
                 <CardDescription>
-                  Optimal health ranges based on functional medicine principles, not just laboratory normals.
+                  Cutting-edge optimal ranges based on latest biohacking research and functional medicine principles.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Personalized target ranges</span>
+                    <span className="text-sm">Bleeding-edge target ranges</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Root cause analysis</span>
+                    <span className="text-sm">Deep root cause analysis</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Advanced biomarker tracking' : 'Basic trend monitoring'}
+                      {clinicContext ? 'Advanced biomarker correlations' : 'Pattern recognition'}
                     </span>
                   </li>
                 </ul>
@@ -190,25 +190,25 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <Card className="card-medical">
               <CardHeader>
                 <Zap className="h-12 w-12 text-secondary mb-4" />
-                <CardTitle>AI Interpretation</CardTitle>
+                <CardTitle>Premium Interpretation</CardTitle>
                 <CardDescription>
-                  Advanced machine learning analyzes patterns and correlations across all biomarkers.
+                  Next-gen analysis combining cutting-edge research, biohacking protocols, and holistic wellness.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Pattern recognition</span>
+                    <span className="text-sm">Latest research integration</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
-                    <span className="text-sm">Correlation analysis</span>
+                    <span className="text-sm">Biohacking protocols</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Clinical risk stratification' : 'Basic risk assessment'}
+                      {clinicContext ? 'Holistic wellness integration' : 'Comprehensive analysis'}
                     </span>
                   </li>
                 </ul>
@@ -218,9 +218,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <Card className="card-medical">
               <CardHeader>
                 <Users className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Personalized Plans</CardTitle>
+                <CardTitle>Premium Supplement Access</CardTitle>
                 <CardDescription>
-                  Customized supplement protocols and lifestyle interventions based on your unique profile.
+                  Up to 25% off practitioner-grade supplements for life, plus comprehensive protocols.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -228,19 +228,19 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Professional phased protocols' : 'Basic protocol suggestions'}
+                      {clinicContext ? 'Up to 25% off premium supplements' : 'Up to 25% supplement discounts'}
                     </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Professional-grade supplements' : 'Basic supplement suggestions'}
+                      {clinicContext ? 'Practitioner-only formulations' : 'Premium supplement access'}
                     </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary" />
                     <span className="text-sm">
-                      {clinicContext ? 'Comprehensive progress tracking' : 'Basic progress tracking'}
+                      {clinicContext ? 'Comprehensive lifestyle protocols' : 'Holistic wellness plans'}
                     </span>
                   </li>
                 </ul>
@@ -280,8 +280,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Ready to Optimize Your Health?
           </h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Join thousands of biohackers and health optimizers who trust LabPilot 
-            for actionable lab insights.
+            Join thousands of biohackers and wellness enthusiasts who trust LabPilot 
+            for premium functional analysis and exclusive supplement access.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="btn-success group" onClick={handleGetStarted}>
