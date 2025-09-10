@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users } from "lucide-react";
+import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -224,6 +224,71 @@ const LabMarketplace = () => {
                     </motion.div>
                   );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Competitive Comparison */}
+      <section className="py-16 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Why BiohackLabs.ai Leads the Pack
+            </h3>
+            <p className="text-gray-600 text-lg">
+              Compare features with other lab analysis platforms
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+              <thead className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <tr>
+                  <th className="px-6 py-4 text-left font-semibold">Features</th>
+                  <th className="px-6 py-4 text-center font-semibold">InsideTracker</th>
+                  <th className="px-6 py-4 text-center font-semibold">Jason Health</th>
+                  <th className="px-6 py-4 text-center font-semibold">Docus AI</th>
+                  <th className="px-6 py-4 text-center font-semibold bg-blue-800">BiohackLabs.ai</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <tr className="hover:bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">AI Interpretation</td>
+                  <td className="px-6 py-4 text-center text-gray-600">$199-$599</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center text-gray-600">$40-$99</td>
+                  <td className="px-6 py-4 text-center bg-blue-50 font-semibold text-blue-700">$19</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">Supplement Integration</td>
+                  <td className="px-6 py-4 text-center text-orange-600">Limited</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">13,000+ Premium Supplements</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">Advanced Biohacking / Functional Medicine AI</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-center mt-8">
+            <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg">
+              Get Started with BiohackLabs.ai
+            </Button>
+            <p className="text-gray-500 mt-2 text-sm">25% off supplements + $19 AI analysis</p>
           </div>
         </div>
       </section>
