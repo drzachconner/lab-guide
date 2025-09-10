@@ -85,7 +85,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </h1>
               
               <div className="text-2xl lg:text-3xl font-semibold text-muted-foreground/90 leading-relaxed">
-                Optimize Your Biology with Advanced Functional Lab Interpretation
+                Optimize Your Biology with Advanced Functional Lab Interpretations
               </div>
             </div>
 
