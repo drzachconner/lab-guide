@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Star, Users, TrendingUp, Shield, Brain, Heart, Zap } from "lucide-react";
+import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -101,23 +99,8 @@ const topBiohackerPanels: LabPanel[] = [
   }
 ];
 
-const categories = [
-  { id: "all", name: "All Panels", icon: TrendingUp },
-  { id: "Complete Panels", name: "Complete Panels", icon: Star },
-  { id: "Hormones", name: "Hormones", icon: Zap },
-  { id: "Metabolism", name: "Metabolism", icon: Heart },
-  { id: "Immune Health", name: "Immune Health", icon: Shield },
-  { id: "Longevity", name: "Longevity", icon: Brain },
-  { id: "Gut Health", name: "Gut Health", icon: Users }
-];
-
 const LabMarketplace = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const filteredPanels = selectedCategory === "all" 
-    ? topBiohackerPanels 
-    : topBiohackerPanels.filter(panel => panel.category === selectedCategory);
 
   const handlePanelSelect = (panel: LabPanel) => {
     // For now, redirect to auth with panel info
@@ -186,27 +169,8 @@ const LabMarketplace = () => {
             <p className="text-gray-600">Panels optimized for biohackers, longevity seekers, and peak performance</p>
           </div>
 
-          {/* Category Tabs */}
-          <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7 mb-8">
-              {categories.map((category) => {
-                const IconComponent = category.icon;
-                return (
-                  <TabsTrigger 
-                    key={category.id} 
-                    value={category.id}
-                    className="flex items-center gap-2 text-xs lg:text-sm"
-                  >
-                    <IconComponent className="h-4 w-4" />
-                    <span className="hidden sm:inline">{category.name}</span>
-                  </TabsTrigger>
-                );
-              })}
-            </TabsList>
-
-            <TabsContent value={selectedCategory} className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredPanels.map((panel, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {topBiohackerPanels.map((panel, index) => {
                   const IconComponent = panel.icon;
                   return (
                     <motion.div
@@ -260,10 +224,8 @@ const LabMarketplace = () => {
                       </Card>
                     </motion.div>
                   );
-                })}
-              </div>
-            </TabsContent>
-          </Tabs>
+            })}
+          </div>
         </div>
       </section>
 
