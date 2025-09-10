@@ -23,171 +23,76 @@ interface LandingPageProps {
   clinicContext?: Clinic;
 }
 
-// Enhanced geometric animations for hero and footer sections
-const HeroGeometricShapes = () => {
+// Simple connected lines animation for hero and footer sections
+const ConnectedLinesAnimation = ({ variant = "hero" }: { variant?: "hero" | "footer" }) => {
+  const strokeColor = variant === "hero" ? "rgba(255,255,255,0.2)" : "rgba(33, 150, 243, 0.2)";
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Large rotating geometric shapes */}
-      {Array.from({ length: 6 }).map((_, i) => (
-        <motion.div
-          key={`large-${i}`}
-          className="absolute border border-white/20"
-          style={{
-            width: Math.random() * 300 + 100,
-            height: Math.random() * 300 + 100,
-            left: `${Math.random() * 120 - 10}%`,
-            top: `${Math.random() * 120 - 10}%`,
-            borderRadius: Math.random() > 0.5 ? '50%' : '20px',
-            borderWidth: '2px',
-          }}
-          animate={{
-            rotate: [0, 360],
-            scale: [0.8, 1.2, 0.8],
-            x: [0, Math.random() * 150 - 75, 0],
-            y: [0, Math.random() * 150 - 75, 0],
-          }}
-          transition={{
-            duration: Math.random() * 25 + 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      ))}
-      
-      {/* Medium floating elements */}
-      {Array.from({ length: 12 }).map((_, i) => (
-        <motion.div
-          key={`medium-${i}`}
-          className="absolute bg-white/10 backdrop-blur-sm"
-          style={{
-            width: Math.random() * 60 + 20,
-            height: Math.random() * 60 + 20,
-            left: `${Math.random() * 110 - 5}%`,
-            top: `${Math.random() * 110 - 5}%`,
-            borderRadius: Math.random() > 0.3 ? '50%' : '8px',
-          }}
-          animate={{
-            y: [0, Math.random() * 100 - 50, 0],
-            x: [0, Math.random() * 100 - 50, 0],
-            rotate: [0, Math.random() * 180, 360],
-            scale: [1, Math.random() * 0.5 + 0.8, 1],
-          }}
-          transition={{
-            duration: Math.random() * 15 + 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.8
-          }}
-        />
-      ))}
-
-      {/* Animated connecting lines */}
       <svg width="100%" height="100%" className="absolute inset-0">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <motion.line
-            key={`line-${i}`}
-            x1={`${Math.random() * 100}%`}
-            y1={`${Math.random() * 100}%`}
-            x2={`${Math.random() * 100}%`}
-            y2={`${Math.random() * 100}%`}
-            stroke="rgba(255,255,255,0.15)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1, 0], opacity: [0, 0.8, 0] }}
-            transition={{
-              duration: Math.random() * 6 + 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 1.2
-            }}
-          />
-        ))}
+        {/* Network of connected lines */}
+        {Array.from({ length: 15 }).map((_, i) => {
+          const x1 = Math.random() * 100;
+          const y1 = Math.random() * 100;
+          const x2 = Math.random() * 100;
+          const y2 = Math.random() * 100;
+          
+          return (
+            <motion.line
+              key={`connection-${i}`}
+              x1={`${x1}%`}
+              y1={`${y1}%`}
+              x2={`${x2}%`}
+              y2={`${y2}%`}
+              stroke={strokeColor}
+              strokeWidth="1"
+              opacity={0}
+              animate={{
+                opacity: [0, 0.8, 0],
+                x1: [`${x1}%`, `${x1 + (Math.random() * 20 - 10)}%`, `${x1}%`],
+                y1: [`${y1}%`, `${y1 + (Math.random() * 20 - 10)}%`, `${y1}%`],
+                x2: [`${x2}%`, `${x2 + (Math.random() * 20 - 10)}%`, `${x2}%`],
+                y2: [`${y2}%`, `${y2 + (Math.random() * 20 - 10)}%`, `${y2}%`],
+              }}
+              transition={{
+                duration: Math.random() * 8 + 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.4,
+              }}
+            />
+          );
+        })}
+
+        {/* Animated connection nodes */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const cx = Math.random() * 100;
+          const cy = Math.random() * 100;
+          
+          return (
+            <motion.circle
+              key={`node-${i}`}
+              cx={`${cx}%`}
+              cy={`${cy}%`}
+              r="2"
+              fill={strokeColor}
+              opacity={0}
+              animate={{
+                opacity: [0, 1, 0],
+                r: [1, 4, 1],
+                cx: [`${cx}%`, `${cx + (Math.random() * 15 - 7.5)}%`, `${cx}%`],
+                cy: [`${cy}%`, `${cy + (Math.random() * 15 - 7.5)}%`, `${cy}%`],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.6,
+              }}
+            />
+          );
+        })}
       </svg>
-
-      {/* Glowing orbs */}
-      {Array.from({ length: 15 }).map((_, i) => (
-        <motion.div
-          key={`orb-${i}`}
-          className="absolute w-1 h-1 bg-white rounded-full shadow-lg"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            boxShadow: `0 0 ${Math.random() * 20 + 10}px rgba(255,255,255,0.6)`,
-          }}
-          animate={{
-            x: [0, Math.random() * 200 - 100, 0],
-            y: [0, Math.random() * 200 - 100, 0],
-            scale: [0, 1, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: Math.random() * 8 + 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.5
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-const FooterGeometricShapes = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Footer geometric elements with primary colors */}
-      {Array.from({ length: 4 }).map((_, i) => (
-        <motion.div
-          key={`footer-large-${i}`}
-          className="absolute border border-primary/30"
-          style={{
-            width: Math.random() * 200 + 80,
-            height: Math.random() * 200 + 80,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            borderRadius: Math.random() > 0.4 ? '50%' : '15px',
-            borderWidth: '2px',
-          }}
-          animate={{
-            rotate: [360, 0],
-            scale: [0.9, 1.1, 0.9],
-            x: [0, Math.random() * 100 - 50, 0],
-            y: [0, Math.random() * 100 - 50, 0],
-          }}
-          transition={{
-            duration: Math.random() * 20 + 15,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      ))}
-      
-      {/* Floating elements */}
-      {Array.from({ length: 8 }).map((_, i) => (
-        <motion.div
-          key={`footer-float-${i}`}
-          className="absolute bg-primary/15 backdrop-blur-sm"
-          style={{
-            width: Math.random() * 40 + 15,
-            height: Math.random() * 40 + 15,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            borderRadius: Math.random() > 0.2 ? '50%' : '6px',
-          }}
-          animate={{
-            y: [0, Math.random() * 80 - 40, 0],
-            x: [0, Math.random() * 80 - 40, 0],
-            rotate: [0, Math.random() * 360, 0],
-            scale: [1, Math.random() * 0.4 + 0.8, 1],
-          }}
-          transition={{
-            duration: Math.random() * 12 + 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 1
-          }}
-        />
-      ))}
     </div>
   );
 };
@@ -350,15 +255,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </motion.nav>
 
-      {/* Hero Section with Enhanced Animations */}
+      {/* Hero Section with Connected Lines Animation */}
       <section className="gradient-hero py-20 lg:py-32 relative">
-        <HeroGeometricShapes />
+        <ConnectedLinesAnimation variant="hero" />
         <motion.div 
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 bg-gradient-to-b from-primary/10 to-primary/5"
           style={{ y: backgroundY }}
-        >
-          <div className="gradient-hero w-full h-[120%]" />
-        </motion.div>
+        />
         
         <motion.div 
           className="container mx-auto px-6 text-center relative z-10"
@@ -373,14 +276,14 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 <SplitText 
-                  className="text-5xl lg:text-7xl font-bold text-white leading-tight"
+                  className="text-5xl lg:text-7xl font-bold text-foreground leading-tight"
                   delay={0.2}
                 >
                   Beyond Generic AI
                 </SplitText>
                 <br />
                 <SplitText 
-                  className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent leading-tight"
+                  className="text-5xl lg:text-7xl font-bold bg-gradient-primary bg-clip-text text-transparent leading-tight"
                   delay={0.5}
                 >
                   Lab Analysis.
@@ -391,13 +294,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
-                className="text-3xl lg:text-5xl font-bold bg-gradient-to-r from-blue-100 via-white to-blue-50 bg-clip-text text-transparent"
+                className="text-3xl lg:text-5xl font-bold text-muted-foreground"
               >
                 Get Cutting-Edge Biohacker Insights
               </motion.div>
 
               <motion.p 
-                className="text-xl lg:text-2xl text-blue-50/90 max-w-3xl mx-auto"
+                className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.6 }}
@@ -453,7 +356,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
             {/* Description */}
             <motion.p 
-              className="text-lg lg:text-xl text-white/85 leading-relaxed max-w-4xl mx-auto"
+              className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.6 }}
@@ -492,10 +395,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </motion.div>
       </section>
 
-      {/* Features Section with Gradient Transition */}
-      <section className="py-20 lg:py-32 bg-gradient-to-b from-primary/5 via-background to-muted/20 relative">
-        {/* Smoother transition overlay */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-primary/20 to-transparent"></div>
+      {/* Features Section with Smooth Transition */}
+      <section className="py-20 lg:py-32 bg-gradient-to-b from-background via-muted/10 to-background relative">
+        {/* Smooth transition overlay */}
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/10 via-muted/5 to-transparent"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             <motion.div 
@@ -559,17 +462,17 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-8">
               {[
-                { number: "01", title: "Upload", icon: TrendingUp },
-                { number: "02", title: "Analyze", icon: Brain },
-                { number: "03", title: "Review", icon: CheckCircle },
-                { number: "04", title: "Optimize", icon: Zap },
-                { number: "05", title: "Thrive", icon: Heart }
+                { number: "01", title: "Upload Labs", description: "Upload multiple lab reports", icon: TrendingUp },
+                { number: "02", title: "AI Analysis", description: "Advanced biohacking analysis", icon: Brain },
+                { number: "03", title: "Review Results", description: "Comprehensive insights", icon: CheckCircle },
+                { number: "04", title: "Get Protocols", description: "Personalized optimization", icon: Zap },
+                { number: "05", title: "Thrive", description: "Implement & monitor", icon: Heart }
               ].map((step, index) => (
                 <motion.div
                   key={index}
-                  className="text-center"
+                  className="text-center group"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -584,17 +487,26 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   }}
                 >
                   <motion.div 
-                    className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-subtle flex items-center justify-center border border-border"
+                    className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-primary flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300"
                     whileHover={{ 
                       scale: 1.1,
-                      backgroundColor: "rgba(33, 150, 243, 0.1)"
+                      rotate: 5
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    <step.icon className="h-8 w-8 text-primary" />
+                    <step.icon className="h-10 w-10 text-white" />
                   </motion.div>
-                  <div className="text-sm font-medium text-muted-foreground mb-2">{step.number}</div>
-                  <div className="text-lg font-semibold text-foreground">{step.title}</div>
+                  
+                  <div className="space-y-2">
+                    <div className="text-sm font-bold text-primary tracking-wider">{step.number}</div>
+                    <div className="text-xl font-bold text-foreground">{step.title}</div>
+                    <div className="text-sm text-muted-foreground">{step.description}</div>
+                  </div>
+                  
+                  {/* Connecting line to next step */}
+                  {index < 4 && (
+                    <div className="hidden md:block absolute top-10 left-full w-full h-px bg-gradient-to-r from-primary/50 to-transparent transform translate-y-0 group-hover:from-primary group-hover:to-primary/30 transition-all duration-300" />
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -668,7 +580,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Final CTA Section */}
       <section className="gradient-hero py-20 lg:py-32 relative">
-        <FooterGeometricShapes />
+        <ConnectedLinesAnimation variant="footer" />
         <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div 
             className="max-w-4xl mx-auto space-y-8"
@@ -679,10 +591,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           >
             <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
               Stop Guessing.<br />
-              <span className="text-white/80">Start Biohacking with Precision.</span>
+              <span className="text-primary-foreground/90">Start Biohacking with Precision.</span>
             </h2>
             
-            <p className="text-xl text-white/85 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 13,000+ quality supplement and wellness products.
             </p>
             
