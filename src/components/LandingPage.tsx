@@ -81,27 +81,27 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 Only $19
               </div>
               <div className="text-sm font-medium opacity-90">
-                Premium Lab Analysis + 25% Off Supplements
+                Unlimited Lab Analysis + 25% Off Premium Supplements
               </div>
             </div>
 
             <div className="space-y-8">
               <Badge variant="secondary" className="px-6 py-3 text-sm font-medium bg-secondary/10 text-secondary border-secondary/20">
-                No Subscription • Holistic • Biohacking-Level Analysis
+                No Subscription • Unlimited Analysis • Biohacking Protocols
               </Badge>
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-center">
-                <div className="mb-4">Advanced Lab Analysis to</div>
+                <div className="mb-4">Optimize Your Biology with</div>
                 <div className="bg-gradient-to-r from-secondary via-secondary-hover to-secondary-dark bg-clip-text text-transparent">
-                  {clinicContext ? "Maximize Health Span" : "Extend Longevity"}
+                  {clinicContext ? "Precision Lab Analysis" : "Advanced Lab Intelligence"}
                 </div>
               </h1>
               
               <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
                 {clinicContext ? (
-                  `Maximize your health span with ${clinicContext.name}'s high-touch medical experience—where advanced testing, data-driven insights, and dedicated support come together for a healthier, longer life.`
+                  `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab analysis, targeted supplement protocols, and ongoing optimization support for peak performance.`
                 ) : (
-                  "No subscriptions. No allopathic bias. Advanced testing, data-driven insights, holistic protocols, and access to premium supplements tailored to your lab work for optimal health span and longevity."
+                  "Beyond basic lab interpretation. Get unlimited functional analysis, personalized supplement protocols at 25% off, automated retest reminders, and access to affordable labs through partners like Jason Health."
                 )}
               </p>
             </div>
@@ -121,36 +121,36 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         <div className="container mx-auto px-6 relative">
           <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Personalized */}
+            {/* Unlimited Analysis */}
             <div className="text-center space-y-6">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <TrendingUp className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Personalized</h3>
+              <h3 className="text-2xl font-bold text-foreground">Unlimited Analysis</h3>
               <p className="text-muted-foreground leading-relaxed">
-                From in-depth diagnostics and nutrition guidance to mental well-being and performance optimization, plus access to premium supplements at 25% off tailored specifically to your lab results.
+                Upload unlimited lab reports for $19 total. Get functional medicine insights, personalized supplement protocols, and automated follow-up recommendations—not per-test pricing like competitors.
               </p>
             </div>
 
-            {/* Proven */}
+            {/* Premium Supplements */}
             <div className="text-center space-y-6 lg:border-x border-border/20 lg:px-12">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Zap className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Proven</h3>
+              <h3 className="text-2xl font-bold text-foreground">Smart Supplement Access</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Our patients see real, measurable results—from increased energy to the reversal of chronic conditions—all backed by clinical research and a commitment to ongoing innovation.
+                Get 25% off professional-grade supplements tailored to your labs. Automated retest reminders and suggested additional testing keep you optimizing long-term, not just analyzing once.
               </p>
             </div>
 
-            {/* Premium */}
+            {/* Biohacker-Focused */}
             <div className="text-center space-y-6">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Users className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">Premium</h3>
+              <h3 className="text-2xl font-bold text-foreground">Biohacker-Focused</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Enjoy a concierge experience with direct physician access, priority scheduling, and personalized support at every step. Receive the care, guidance, and attention you deserve—anytime you need it.
+                Beyond basic "disease detection"—get optimization protocols for energy, cognition, longevity. We partner with affordable lab providers like Jason Health so you focus on results, not ordering.
               </p>
             </div>
           </div>
@@ -187,11 +187,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-primary-light/20" />
         <div className="container mx-auto px-6 text-center space-y-8 relative">
           <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Ready to Maximize Your Health Span?
+            Stop Paying Per Test. Start Optimizing.
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Join thousands who've experienced precision medicine with advanced testing, 
-            data-driven insights, and holistic protocols for optimal longevity.
+            Unlike competitors charging $4-8 per analysis, get unlimited functional medicine insights, 
+            targeted supplement protocols, and ongoing optimization support for one low price.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
             <Button size="lg" className="btn-accent text-lg px-8 py-4 h-auto group" onClick={handleGetStarted}>
