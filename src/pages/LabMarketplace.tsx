@@ -125,9 +125,9 @@ const LabMarketplace = () => {
             Back to Home
           </Button>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <span className="text-xl font-bold text-gray-900">BiohackLabs</span>
-            <Badge variant="secondary" className="bg-blue-100 text-blue-700">AI</Badge>
+            <Badge variant="secondary" className="bg-blue-100 text-blue-700 ml-1">AI</Badge>
           </div>
 
           <Button 
