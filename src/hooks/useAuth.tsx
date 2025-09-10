@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signUp = async (email: string, password: string, fullName?: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -63,6 +63,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         variant: "destructive"
       });
     } else {
+      // Create Fullscript account after successful signup
+      if (data.user) {
+        try {
+          const accountType = new URLSearchParams(window.location.search).get('type') || 'analysis';
+          
+          const { error: functionError } = await supabase.functions.invoke('create-fullscript-account', {
+            body: {
+              userId: data.user.id,
+              email: data.user.email,
+              fullName: fullName || '',
+              accountType
+            }
+          });
+
+          if (functionError) {
+            console.error('Fullscript account creation failed:', functionError);
+            // Don't fail the signup if Fullscript creation fails
+          }
+        } catch (err) {
+          console.error('Error calling Fullscript function:', err);
+        }
+      }
+
       toast({
         title: "Check your email",
         description: "We sent you a confirmation link to complete your registration."

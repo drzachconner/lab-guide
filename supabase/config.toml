@@ -1,1 +1,7 @@
 project_id = "zhdjvfylxgtiphldjtqf"
+
+[functions.analyze-lab-report]
+verify_jwt = true
+
+[functions.create-fullscript-account]
+verify_jwt = true
