@@ -38,8 +38,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       {/* Navigation */}
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="text-xl font-semibold text-gray-900">
-            {clinicContext ? clinicContext.name : "BiohackLabs.ai"}
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            Biohack<span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
           
           {!user && (
@@ -332,8 +332,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <footer className="border-t bg-white py-12">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center text-gray-600">
-            <div className="text-lg font-semibold text-gray-900 mb-4">
-              {clinicContext ? clinicContext.name : "BiohackLabs.ai"}
+            <div className="text-xl font-bold text-gray-900 mb-4">
+              Biohack<span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
             </div>
             <p>
               Professional lab analysis meets premium supplement access.
