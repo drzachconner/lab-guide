@@ -79,69 +79,69 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-2 pb-8 px-4 relative">
+      <section className="pt-4 pb-12 px-4 relative">
         <HeroBackground />
         <AnimatedBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
               AI-Powered Lab Analysis + Supplement Connection
             </Badge>
             
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
               <span className="text-blue-600">Biohack with Precision</span>
               <br />
-              <span className="text-gray-500">Functional Lab Analysis</span>
+              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Functional Lab Analysis</span>
               <br />
-              <span className="text-gray-500">+</span>
+              <span className="text-gray-500 text-lg sm:text-xl md:text-3xl">+</span>
               <br />
-              <span className="text-gray-500">Tailored Supplements</span>
+              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Tailored Supplements</span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
               Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above <strong>wholesale pricing</strong>. The cheapest possible prices on 13,000+ provider-grade supplements and wellness products from our Fullscript dispensary.
             </p>
 
-            <div className="mb-8">
-              <div className="bg-green-50 text-green-700 border border-green-200 text-lg px-6 py-2 rounded-full inline-block">
+            <div className="mb-6">
+              <div className="bg-green-50 text-green-700 border border-green-200 text-sm sm:text-base md:text-lg px-4 py-2 rounded-full inline-block">
                 🏆 Lowest Cost Premium Supplements
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 px-4">
               <Button 
                 size="lg" 
                 onClick={handleGetStarted}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
               >
                 Start Lab Analysis - $19
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
                 onClick={() => navigate('/auth?type=dispensary')}
-                className="px-8 py-6 text-lg rounded-lg border-gray-300"
+                className="px-6 py-4 text-base sm:text-lg rounded-lg border-gray-300 w-full sm:w-auto"
               >
                 Shop Supplements
               </Button>
             </div>
             
-            <div className="flex flex-wrap justify-start md:justify-center gap-8 text-base text-gray-600 ml-8 md:ml-0 mb-4">
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
-                One-time payment
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base text-gray-600 mb-4 px-4">
+              <div className="flex items-center justify-center sm:justify-start">
+                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
+                <span>One-time payment</span>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
-                Multiple labs per session
+              <div className="flex items-center justify-center sm:justify-start">
+                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
+                <span>Multiple labs per session</span>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
-                Extensive AI training on biohacking protocols
+              <div className="flex items-center justify-center sm:justify-start">
+                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
+                <span className="text-center sm:text-left">Extensive AI training on biohacking protocols</span>
               </div>
             </div>
-            <p className="mt-4 text-sm text-gray-500 animate-fade-in">
+            <p className="text-xs sm:text-sm text-gray-500 animate-fade-in px-4">
               Fullscript catalogue access at 30% off (25% in Canada).
             </p>
           </div>
@@ -149,58 +149,58 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* Value Proposition */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Advanced AI trained on leading-edge <span className="text-blue-600">biohacking & functional medicine</span> protocols
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="px-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+                Advanced AI trained on leading-edge <span className="text-blue-600 block sm:inline">biohacking & functional medicine</span> protocols
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8">
                 Our AI model has been extensively trained on cutting-edge biohacking research, functional medicine protocols, and optimal lab value ranges. It analyzes your specific results focusing on functional levels—not just standard reference ranges—to provide precise supplement recommendations at wholesale pricing.
               </p>
               
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Extensive Biohacking AI Training</h3>
-                    <p className="text-gray-600">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Extensive Biohacking AI Training</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Direct Fullscript Integration</h3>
-                    <p className="text-gray-600">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Direct Fullscript Integration</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">Every recommendation links to specific provider-grade products with exact dosing and timing</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
                     <CheckCircle className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Wholesale Pricing Access</h3>
-                    <p className="text-gray-600">30% off retail on 13,000+ supplements—direct from manufacturers</p>
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Wholesale Pricing Access</h3>
+                    <p className="text-gray-600 text-sm sm:text-base">30% off retail on 13,000+ supplements—direct from manufacturers</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
               <div className="text-center">
-                <div className="text-5xl font-bold text-blue-600 mb-2">$19</div>
+                <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">$19</div>
                 <div className="text-lg font-medium text-gray-900 mb-6">Complete Lab Analysis</div>
                 
-                <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                <div className="bg-blue-50 rounded-xl p-4 md:p-6 mb-6">
                   <div className="text-sm font-medium text-blue-900 mb-2">INCLUDED</div>
-                  <ul className="space-y-2 text-sm text-blue-800">
+                  <ul className="space-y-2 text-sm text-blue-800 text-left">
                     <li>✓ Multiple lab upload & analysis</li>
                     <li>✓ Personalized supplement protocols</li>
                     <li>✓ Exact dosing & timing instructions</li>
