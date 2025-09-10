@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import HeroBackground from "./HeroBackground";
 import AnimatedBackground from "./AnimatedBackground";
+import { motion } from "framer-motion";
 
 interface Clinic {
   id: string;
@@ -92,36 +93,72 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <AnimatedBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-12">
-            <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-              The Most Advanced Biohacking AI — Only $19
-            </Badge>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
+                The Most Advanced Biohacking AI — Only $19
+              </Badge>
+            </motion.div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
-              <span className="text-gray-900">Labs.</span>
-              <span className="text-gray-900"> Analysis.</span>
-              <span className="text-gray-900"> Supplements.</span>
-              <span className="text-blue-600"> Done Right</span>
-            </h1>
+            <motion.h1 
+              className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <span className="text-gray-900">Labs. Analysis. Supplements.</span>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <span className="text-blue-600">Done Right.</span>
+              </motion.div>
+            </motion.h1>
             
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
               Get functional medicine analysis trained on cutting-edge biohacking protocols and optimal functional ranges.
               Plus, access premium provider-quality supplements at 30% off retail (via Fullscript).
-            </p>
+            </motion.p>
             
-            <div className="flex justify-center mb-6 px-4">
+            <motion.div 
+              className="flex justify-center mb-6 px-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+            >
               <Button 
                 size="lg" 
                 onClick={handleOrderLabs}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto transition-all duration-200 hover:scale-105"
               >
                 Get Started – Order Labs
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
-            </div>
+            </motion.div>
             
-            <p className="text-sm text-gray-500 px-4">
-              Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer">Upload them for $19</button>.
-            </p>
+            <motion.p 
+              className="text-sm text-gray-500 px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer transition-colors duration-200">Upload them for $19</button>.
+            </motion.p>
           </div>
         </div>
       </section>
