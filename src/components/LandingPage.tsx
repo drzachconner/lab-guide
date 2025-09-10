@@ -42,7 +42,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
-            <span className="text-blue-600">Biohack</span><span className="text-gray-500">Labs</span><span className="text-blue-600">.ai</span>
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
           
           {!user ? (
@@ -96,8 +96,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
-              Get functional medicine analysis trained on cutting-edge protocols and optimal ranges.
-              Plus, access premium supplements at up to 30% off retail.
+              Get functional medicine analysis trained on cutting-edge biohacking protocols and optimal functional ranges.
+              Plus, access premium provider-quality supplements at 30% off retail (via Fullscript).
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 px-4">
