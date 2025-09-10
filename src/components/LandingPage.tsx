@@ -23,14 +23,16 @@ interface LandingPageProps {
   clinicContext?: Clinic;
 }
 
-// Dynamic background components
-const FloatingParticles = () => {
+// Dynamic background components with better visibility
+const FloatingParticles = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
+  const particleClass = variant === "light" ? "bg-primary/40" : "bg-white/40";
+  
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {Array.from({ length: 20 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-white/30 rounded-full"
+          className={`absolute w-2 h-2 ${particleClass} rounded-full`}
           initial={{ 
             x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
@@ -51,19 +53,22 @@ const FloatingParticles = () => {
   );
 };
 
-const GeometricShapes = () => {
+const GeometricShapes = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
+  const borderClass = variant === "light" ? "border-primary/30" : "border-white/20";
+  
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {Array.from({ length: 8 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute border border-primary/20"
+          className={`absolute ${borderClass}`}
           style={{
             width: Math.random() * 200 + 50,
             height: Math.random() * 200 + 50,
             left: Math.random() * 100 + '%',
             top: Math.random() * 100 + '%',
             borderRadius: Math.random() > 0.5 ? '50%' : '10px',
+            borderWidth: '1px',
           }}
           animate={{
             rotate: [0, 360],
@@ -82,26 +87,28 @@ const GeometricShapes = () => {
   );
 };
 
-const AnimatedLines = () => {
+const AnimatedLines = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
+  const strokeClass = variant === "light" ? "text-primary/20" : "text-white/20";
+  
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <svg width="100%" height="100%" className="absolute inset-0">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <motion.path
             key={i}
             d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
             stroke="currentColor"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
-            className="text-primary/10"
+            className={strokeClass}
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.3 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 4 + 3,
               repeat: Infinity,
               repeatType: "reverse",
               ease: "easeInOut",
-              delay: i * 0.5
+              delay: i * 0.8
             }}
           />
         ))}
@@ -110,30 +117,34 @@ const AnimatedLines = () => {
   );
 };
 
-const MorphingBlobs = () => {
+const MorphingBlobs = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
+  const gradientClass = variant === "light" 
+    ? "bg-gradient-to-r from-primary/15 to-secondary/15" 
+    : "bg-gradient-to-r from-white/10 to-primary/20";
+  
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 3 }).map((_, i) => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {Array.from({ length: 4 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-3xl"
+          className={`absolute ${gradientClass} rounded-full blur-3xl`}
           style={{
-            width: Math.random() * 300 + 200,
-            height: Math.random() * 300 + 200,
-            left: Math.random() * 80 + '%',
-            top: Math.random() * 80 + '%',
+            width: Math.random() * 400 + 200,
+            height: Math.random() * 400 + 200,
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
           }}
           animate={{
-            scale: [1, 1.5, 1],
+            scale: [1, 1.3, 1],
             rotate: [0, 180, 360],
             x: [0, Math.random() * 200 - 100, 0],
             y: [0, Math.random() * 200 - 100, 0],
           }}
           transition={{
-            duration: Math.random() * 15 + 10,
+            duration: Math.random() * 20 + 15,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: i * 2
+            delay: i * 3
           }}
         />
       ))}
@@ -302,10 +313,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Hero Section with Parallax */}
       <section className="gradient-hero py-20 lg:py-32 relative">
-        <FloatingParticles />
-        <MorphingBlobs />
+        <FloatingParticles variant="dark" />
+        <MorphingBlobs variant="dark" />
         <motion.div 
-          className="absolute inset-0"
+          className="absolute inset-0 z-0"
           style={{ y: backgroundY }}
         >
           <div className="gradient-hero w-full h-[120%]" />
@@ -445,9 +456,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Features Section with Staggered Animation */}
       <section className="py-20 lg:py-32 bg-muted/30 relative">
-        <GeometricShapes />
-        <AnimatedLines />
-        <div className="container mx-auto px-6">
+        <GeometricShapes variant="light" />
+        <AnimatedLines variant="light" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               className="text-center mb-16"
@@ -494,8 +505,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Process Steps with Animation */}
       <section className="py-20 lg:py-32 relative">
-        <FloatingParticles />
-        <div className="container mx-auto px-6">
+        <FloatingParticles variant="light" />
+        <MorphingBlobs variant="light" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -556,9 +568,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Security Section */}
       <section className="py-20 lg:py-32 bg-gradient-subtle relative">
-        <MorphingBlobs />
-        <GeometricShapes />        
-        <div className="container mx-auto px-6">
+        <MorphingBlobs variant="light" />
+        <GeometricShapes variant="light" />        
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div 
             className="text-center max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
@@ -622,9 +634,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Final CTA Section */}
       <section className="gradient-hero py-20 lg:py-32 relative">
-        <AnimatedLines />
-        <FloatingParticles />
-        <div className="container mx-auto px-6 text-center">
+        <AnimatedLines variant="dark" />
+        <FloatingParticles variant="dark" />
+        <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div 
             className="max-w-4xl mx-auto space-y-8"
             initial={{ opacity: 0, y: 50 }}
