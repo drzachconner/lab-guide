@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface Particle {
   x: number;
@@ -6,91 +6,121 @@ interface Particle {
   vx: number;
   vy: number;
   opacity: number;
+  r: number;
 }
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
+  const started = useRef(false); // StrictMode guard
 
   useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
 
     const resizeCanvas = () => {
       const parent = canvas.parentElement;
-      if (parent) {
-        canvas.width = parent.clientWidth;
-        canvas.height = parent.clientHeight;
-      }
+      if (!parent) return;
+
+      const w = parent.clientWidth;
+      const h = parent.clientHeight;
+
+      // Set internal pixel buffer size for crisp rendering
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+
+      // Match CSS size to parent
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const initParticles = () => {
       particles.current = [];
-      // Reduced particle count for better performance
-      const particleCount = Math.floor((canvas.width * canvas.height) / 25000);
-      
-      for (let i = 0; i < particleCount; i++) {
+      const parent = canvas.parentElement;
+      const w = parent?.clientWidth ?? 0;
+      const h = parent?.clientHeight ?? 0;
+
+      // Slightly more particles, but still light; scale by area
+      const count = Math.max(30, Math.floor((w * h) / 18000));
+
+      for (let i = 0; i < count; i++) {
         particles.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          opacity: Math.random() * 0.3 + 0.1,
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35, // a touch more lively
+          vy: (Math.random() - 0.5) * 0.35,
+          opacity: Math.random() * 0.35 + 0.25, // 0.25–0.60
+          r: Math.random() * 2 + 1.8, // 1.8–3.8 px (visible but subtle)
         });
       }
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const parent = canvas.parentElement;
+      const w = parent?.clientWidth ?? canvas.width / dpr;
+      const h = parent?.clientHeight ?? canvas.height / dpr;
 
-      // Animate particles - smaller and more subtle
-      particles.current.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
-        
-        // Draw subtle particle
+      ctx.clearRect(0, 0, w, h);
+
+      // Soft "light" compositing to pop over gradients
+      ctx.globalCompositeOperation = "lighter";
+
+      for (const p of particles.current) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap edges
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+
+        // Draw particle with a tiny glow
+        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
+        grd.addColorStop(0, `rgba(59,130,246,${0.55 * p.opacity})`); // blue-500
+        grd.addColorStop(1, `rgba(59,130,246,0)`);
+
+        ctx.fillStyle = grd;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(180, 65%, 70%, ${particle.opacity})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
-      });
-      
+      }
+
       animationRef.current = requestAnimationFrame(animate);
     };
-
-    resizeCanvas();
-    initParticles();
-    animate();
 
     const handleResize = () => {
       resizeCanvas();
       initParticles();
     };
 
-    window.addEventListener('resize', handleResize);
+    resizeCanvas();
+    initParticles();
+    animate();
 
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      window.removeEventListener("resize", handleResize);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-30 md:opacity-60"
+      className="absolute inset-0 pointer-events-none opacity-40 md:opacity-65"
+      style={{ mixBlendMode: "screen" }} // helps dots glow over darker areas
     />
   );
 };
