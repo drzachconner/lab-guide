@@ -11,7 +11,8 @@ export const getSubdomain = (): string | null => {
     hostname === '127.0.0.1' ||
     /^\d+\.\d+\.\d+\.\d+$/.test(hostname) ||
     hostname.includes('lovable.dev') ||
-    hostname.includes('lovable.app')
+    hostname.includes('lovable.app') ||
+    hostname.includes('lovableproject.com')
   ) {
     return null;
   }
