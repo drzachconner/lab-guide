@@ -42,7 +42,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
-            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
+            <span className="text-blue-600">Biohack</span><span className="text-gray-500">Labs</span><span className="text-blue-600">.ai</span>
           </div>
           
           {!user ? (
@@ -89,9 +89,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
-              <span className="text-blue-600">Right Labs.</span>
-              <span className="text-gray-500"> Right Analysis.</span>
-              <span className="text-gray-500"> Right Supplements</span>
+              <span className="text-gray-900">Labs.</span>
+              <span className="text-gray-900"> Analysis.</span>
+              <span className="text-gray-900"> Supplements.</span>
+              <span className="text-blue-600"> Done Right</span>
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
