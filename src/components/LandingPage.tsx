@@ -190,7 +190,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             Stop Paying Per Interpretation. Start Optimizing.
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Unlike competitors charging $4-8 per lab interpretation, get unlimited expert analysis, 
+            Unlike competitors charging $50-300+ per lab interpretation, get unlimited expert analysis, 
             targeted protocols, and lifelong 25% Fullscript discount for one low price.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
