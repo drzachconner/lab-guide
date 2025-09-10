@@ -93,7 +93,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               </Button>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-8 text-base text-gray-600">
+            <div className="flex flex-wrap justify-start md:justify-center gap-8 text-base text-gray-600">
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
                 One-time payment
