@@ -129,7 +129,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </div>
               </h1>
               
-              <div className="text-xl lg:text-3xl font-medium text-muted-foreground/95 leading-relaxed max-w-4xl mx-auto drop-shadow-sm">
+              <div className="text-xl lg:text-3xl font-medium text-foreground/90 leading-relaxed max-w-4xl mx-auto drop-shadow-lg">
                 AI trained on the bleeding edge of biohacking research and Functional Medicine analysis
               </div>
             </div>
@@ -150,7 +150,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 No Subscription • Multiple Labs Per Session • Biohacking Protocols
               </Badge>
               
-              <p className="text-lg lg:text-xl text-muted-foreground/95 leading-relaxed max-w-4xl mx-auto drop-shadow-sm">
+              <p className="text-lg lg:text-xl text-foreground/85 leading-relaxed max-w-4xl mx-auto drop-shadow-lg">
                 {clinicContext ? (
                   `Transform your health with ${clinicContext.name}'s functional medicine approach—unlimited lab interpretation, targeted supplement protocols, and lifelong 25% Fullscript discount for ongoing optimization.`
                 ) : (
@@ -165,7 +165,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 className="btn-accent text-lg px-10 py-5 h-auto shadow-glow hover:shadow-orbital transition-all duration-300 group backdrop-blur-sm" 
                 onClick={handleGetStarted}
               >
-                {user ? 'Access Dashboard' : 'Inquire About Access'}
+                {user ? 'Access Dashboard' : 'Get Lab Analysis'}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
             </div>
@@ -247,16 +247,20 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               enterprise-grade security standards used by leading healthcare institutions.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
-              <Badge variant="outline" className="px-4 py-3 bg-card/15 border-secondary/20 text-foreground backdrop-blur-sm hover:bg-card/25 transition-colors">
+              <Badge variant="outline" className="px-4 py-3 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30 text-foreground backdrop-blur-sm hover:shadow-card transition-all duration-300 hover:scale-105">
+                <Shield className="w-4 h-4 mr-2 text-secondary" />
                 HIPAA Compliant
               </Badge>
-              <Badge variant="outline" className="px-4 py-3 bg-card/15 border-secondary/20 text-foreground backdrop-blur-sm hover:bg-card/25 transition-colors">
+              <Badge variant="outline" className="px-4 py-3 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30 text-foreground backdrop-blur-sm hover:shadow-card transition-all duration-300 hover:scale-105">
+                <CheckCircle className="w-4 h-4 mr-2 text-secondary" />
                 SOC 2 Certified
               </Badge>
-              <Badge variant="outline" className="px-4 py-3 bg-card/15 border-secondary/20 text-foreground backdrop-blur-sm hover:bg-card/25 transition-colors">
+              <Badge variant="outline" className="px-4 py-3 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30 text-foreground backdrop-blur-sm hover:shadow-card transition-all duration-300 hover:scale-105">
+                <Zap className="w-4 h-4 mr-2 text-secondary" />
                 256-bit Encryption
               </Badge>
-              <Badge variant="outline" className="px-4 py-3 bg-card/15 border-secondary/20 text-foreground backdrop-blur-sm hover:bg-card/25 transition-colors">
+              <Badge variant="outline" className="px-4 py-3 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30 text-foreground backdrop-blur-sm hover:shadow-card transition-all duration-300 hover:scale-105">
+                <TrendingUp className="w-4 h-4 mr-2 text-secondary" />
                 FDA Guidelines
               </Badge>
             </div>
@@ -270,12 +274,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         
         <div className="container mx-auto px-8 text-center space-y-10 relative z-10">
           <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-            Stop Paying Per Interpretation.<br />
-            <span className="text-secondary">Start Optimizing.</span>
+            Stop Overpaying for Lab Analysis.<br />
+            <span className="text-secondary">Start Optimizing for Life.</span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Unlike competitors charging $50-300+ per lab, get comprehensive interpretation of multiple labs 
-            in one session, targeted protocols, and lifelong 25% Fullscript discount for just $19.
+            One $19 session = unlimited labs analyzed + personalized protocols + lifelong 25% discount on professional supplements. 
+            Why pay $50-300+ per lab when you can optimize everything at once?
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button 
@@ -283,7 +287,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               className="btn-accent text-lg px-10 py-5 h-auto group shadow-card hover:shadow-glow transition-all duration-300" 
               onClick={handleGetStarted}
             >
-              {clinicContext ? 'Access Your Portal' : 'Inquire About Membership'}
+              {clinicContext ? 'Access Your Portal' : 'Start Analysis Now'}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </div>
