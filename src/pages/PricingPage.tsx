@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Crown } from 'lucide-react';
+import { Check, Crown, ArrowLeft } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { cn } from '@/lib/utils';
 
@@ -27,7 +27,33 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-16 px-4">
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+        <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.location.href = '/'}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Button>
+          
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
+          </div>
+
+          <Button 
+            onClick={() => window.location.href = '/auth'}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            Sign In
+          </Button>
+        </div>
+      </nav>
+
+      <div className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -174,6 +200,7 @@ export default function PricingPage() {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

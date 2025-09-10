@@ -76,37 +76,32 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="text-xl font-bold text-gray-900">
-                <span className="text-gray-500">Biohack</span>
-                <span className="text-blue-600">Labs</span>
-                <span className="text-gray-500">.ai</span>
-              </div>
-              <Badge className="ml-4 bg-blue-50 text-blue-700 border-blue-200">
-                Dashboard
-              </Badge>
+      {/* Navigation */}
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+        <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+          <Badge className="bg-blue-50 text-blue-700 border-blue-200">
+            Dashboard
+          </Badge>
+          
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <div className="text-sm text-gray-600">
+              {profile?.full_name || user.email}
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-600">
-                Welcome, {profile?.full_name || user.email}
-              </div>
-              <Button
-                variant="ghost"
-                onClick={handleSignOut}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              onClick={handleSignOut}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </div>
-      </header>
+      </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">

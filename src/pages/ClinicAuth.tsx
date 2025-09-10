@@ -139,27 +139,40 @@ const ClinicAuth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Header */}
-        <div className="text-center mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
+      {/* Navigation */}
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+        <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
           <Button 
             variant="ghost" 
-            className="absolute top-4 left-4"
             onClick={() => navigate("/clinic")}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <Stethoscope className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-              LabPilot Pro
-            </span>
+          
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
+
+          <div className="w-24"></div> {/* Spacer to center logo */}
         </div>
+      </nav>
+
+      <div className="flex items-center justify-center p-4 pt-8">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
+                <Stethoscope className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                LabPilot Pro
+              </span>
+            </div>
+          </div>
 
         <Card className="shadow-elegant">
           <CardHeader className="text-center">
@@ -296,6 +309,7 @@ const ClinicAuth = () => {
             </Tabs>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );

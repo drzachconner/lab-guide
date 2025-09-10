@@ -170,31 +170,34 @@ const ClinicDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <Stethoscope className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <span className="text-lg font-bold">LabPilot Pro</span>
-                <span className="text-sm text-muted-foreground ml-2">Admin Dashboard</span>
-              </div>
+      {/* Navigation */}
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+        <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+              <Stethoscope className="h-5 w-5 text-white" />
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant={clinic.subscription_status === 'active' ? 'default' : 'secondary'}>
-                {clinic.subscription_tier} Plan
-              </Badge>
-              <Button variant="ghost" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
+            <div>
+              <span className="text-lg font-bold">LabPilot Pro</span>
+              <span className="text-sm text-muted-foreground ml-2">Admin Dashboard</span>
             </div>
           </div>
+          
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <Badge variant={clinic.subscription_status === 'active' ? 'default' : 'secondary'}>
+              {clinic.subscription_tier} Plan
+            </Badge>
+            <Button variant="ghost" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
-      </header>
+      </nav>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}

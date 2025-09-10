@@ -118,24 +118,29 @@ const Auth = () => {
   const content = getAuthContent();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <Button
-            variant="ghost"
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation */}
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+        <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
             onClick={() => navigate('/')}
-            className="mb-4 text-gray-600 hover:text-gray-900"
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Button>
           
-          <div className="text-2xl font-bold text-gray-900 mb-2">
-            <span className="text-gray-500">Biohack</span>
-            <span className="text-blue-600">Labs</span>
-            <span className="text-gray-500">.ai</span>
+          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+            <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
+
+          <div className="w-24"></div> {/* Spacer to center logo */}
         </div>
+      </nav>
+
+      <div className="flex items-center justify-center p-4 pt-8">
+        <div className="max-w-md w-full">
 
         <Card className="w-full">
           <CardHeader className="text-center">
@@ -262,6 +267,7 @@ const Auth = () => {
             </Button>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
