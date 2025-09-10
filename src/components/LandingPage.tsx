@@ -274,12 +274,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         
         <div className="container mx-auto px-8 text-center space-y-10 relative z-10">
           <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-            Stop Overpaying for Lab Analysis.<br />
-            <span className="text-secondary">Start Optimizing for Life.</span>
+            Beyond Generic AI Lab Analysis.<br />
+            <span className="text-secondary">Get Cutting-Edge Biohacker Insights.</span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            One $19 session = unlimited labs analyzed + personalized protocols + lifelong 25% discount on professional supplements. 
-            Why pay $50-300+ per lab when you can optimize everything at once?
+            One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 67,000+ professional-grade supplements from Fullscript's premium catalog.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button 
