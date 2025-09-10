@@ -74,6 +74,7 @@ export default {
         'gradient-surface': 'var(--gradient-surface)',
         'gradient-geometric': 'var(--gradient-geometric)',
         'gradient-orbital': 'var(--gradient-orbital)',
+        'gradient-animated': 'var(--gradient-animated)',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -105,12 +106,23 @@ export default {
           "0%": { transform: "rotate(0deg) translateX(50px) rotate(0deg)" },
           "100%": { transform: "rotate(360deg) translateX(50px) rotate(-360deg)" },
         },
+        "gradient-x": {
+          "0%, 100%": { "background-size": "200% 200%", "background-position": "left center" },
+          "50%": { "background-size": "200% 200%", "background-position": "right center" },
+        },
+        "particle-float": {
+          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
+          "33%": { transform: "translate3d(30px, -30px, 0)" },
+          "66%": { transform: "translate3d(-20px, 20px, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 6s ease-in-out infinite",
         "orbit": "orbit 20s linear infinite",
+        "gradient-x": "gradient-x 15s ease infinite",
+        "particle-float": "particle-float 8s ease-in-out infinite",
       },
     },
   },

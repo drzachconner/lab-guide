@@ -57,6 +57,7 @@
     --gradient-surface: linear-gradient(180deg, hsl(var(--card)), hsl(220 25% 10%));
     --gradient-geometric: conic-gradient(from 45deg, hsl(var(--secondary) / 0.1), transparent, hsl(var(--primary) / 0.1));
     --gradient-orbital: radial-gradient(circle at 30% 70%, hsl(var(--secondary) / 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.15) 0%, transparent 50%);
+    --gradient-animated: linear-gradient(-45deg, hsl(220 30% 8%), hsl(220 35% 12%), hsl(220 40% 15%), hsl(220 35% 12%));
     
     /* Spaceship-Inspired Shadows */
     --shadow-luxury: 0 8px 32px -8px hsl(220 30% 5% / 0.4);
@@ -161,6 +162,41 @@
   
   .gradient-orbital {
     background: var(--gradient-orbital);
+  }
+  
+  .gradient-animated {
+    background: var(--gradient-animated);
+    background-size: 400% 400%;
+    animation: gradient-x 15s ease infinite;
+  }
+  
+  /* Scroll Effects */
+  .parallax-bg {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.1s linear;
+  }
+  
+  /* Particle System */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--secondary) / 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
+  .particle-lg {
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--secondary) / 0.4);
+  }
+  
+  /* Enhanced Glass Effects */
+  .glass-intense {
+    backdrop-filter: blur(20px);
+    background: hsl(var(--card) / 0.1);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
   
   .shadow-luxury {
