@@ -89,20 +89,20 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
-              <span className="text-blue-600">Biohack with Precision</span>
+              <span className="text-blue-600">Order Labs Through Us</span>
               <br />
-              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Functional Lab Analysis</span>
+              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Complete End-to-End Service</span>
               <br />
-              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">Tailored Supplements</span>
+              <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl">AI Analysis + Supplements</span>
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
-              Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above <strong>wholesale pricing</strong>. The cheapest possible prices on 13,000+ provider-grade supplements and wellness products from our Fullscript dispensary.
+              Sign up → Order labs → Get results → AI analysis → Tailored supplements at <strong>wholesale pricing</strong>. Complete hands-off experience with network clinician authorization and AI-powered functional medicine analysis.
             </p>
 
             <div className="mb-6">
               <div className="bg-green-50 text-green-700 border border-green-200 text-sm sm:text-base md:text-lg px-4 py-2 rounded-full inline-block">
-                🏆 Lowest Cost Premium Supplements
+                🏆 Complete Lab-to-Supplement Service
               </div>
             </div>
             
@@ -112,35 +112,35 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 onClick={handleGetStarted}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-base sm:text-lg rounded-lg w-full sm:w-auto"
               >
-                Start Lab Analysis - $19
+                Order Labs Through Us
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                onClick={() => navigate('/auth?type=dispensary')}
+                onClick={handleGetStarted}
                 className="px-6 py-4 text-base sm:text-lg rounded-lg border-gray-300 w-full sm:w-auto"
               >
-                Shop Supplements
+                Already Have Labs? - $19
               </Button>
             </div>
             
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base text-gray-600 mb-4 px-4">
               <div className="flex items-center justify-center sm:justify-start">
                 <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span>One-time payment</span>
+                <span>Complete end-to-end service</span>
               </div>
               <div className="flex items-center justify-center sm:justify-start">
                 <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span>Multiple labs per session</span>
+                <span>Network clinician authorization</span>
               </div>
               <div className="flex items-center justify-center sm:justify-start">
                 <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-500 flex-shrink-0" />
-                <span className="text-center sm:text-left">Extensive AI training on biohacking protocols</span>
+                <span className="text-center sm:text-left">AI analysis + wholesale supplements</span>
               </div>
             </div>
             <p className="text-xs sm:text-sm text-gray-500 animate-fade-in px-4">
-              Fullscript catalogue access at 30% off (25% in Canada).
+              Or upload existing labs for $19 analysis. Fullscript catalogue access at 30% off (25% in Canada).
             </p>
           </div>
         </div>
@@ -193,28 +193,33 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">$19</div>
-                <div className="text-lg font-medium text-gray-900 mb-6">Complete Lab Analysis</div>
+                <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-2">Complete Service</div>
+                <div className="text-lg font-medium text-gray-900 mb-6">Order Labs Through Us</div>
                 
                 <div className="bg-blue-50 rounded-xl p-4 md:p-6 mb-6">
-                  <div className="text-sm font-medium text-blue-900 mb-2">INCLUDED</div>
+                  <div className="text-sm font-medium text-blue-900 mb-2">FULL SERVICE INCLUDES</div>
                   <ul className="space-y-2 text-sm text-blue-800 text-left">
-                    <li>✓ Multiple lab upload & analysis</li>
+                    <li>✓ Lab ordering & authorization</li>
+                    <li>✓ Network clinician coordination</li>
+                    <li>✓ AI analysis of results</li>
                     <li>✓ Personalized supplement protocols</li>
                     <li>✓ Exact dosing & timing instructions</li>
                     <li>✓ Just above wholesale pricing access</li>
-                    <li>✓ Fullscript catalogue: 30% off (25% in Canada)</li>
-                    <li>✓ Direct product links & ordering</li>
+                    <li>✓ Complete hands-off experience</li>
                   </ul>
                 </div>
                 
                 <Button 
-                  className="w-full bg-blue-600 hover:bg-blue-700" 
+                  className="w-full bg-blue-600 hover:bg-blue-700 mb-4" 
                   size="lg"
                   onClick={handleGetStarted}
                 >
-                  Get Started Now
+                  Get Started - Order Labs
                 </Button>
+                
+                <div className="text-sm text-gray-500 pt-2 border-t">
+                  <strong>Already have labs?</strong> Upload for $19 analysis only
+                </div>
               </div>
             </div>
           </div>
