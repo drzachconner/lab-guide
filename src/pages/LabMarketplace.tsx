@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X, Clock, Beaker, TestTube } from "lucide-react";
+import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X, Clock, Beaker, TestTube, Dna, Droplets, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ParticipantDetailsDialog, type ParticipantData } from "@/components/ParticipantDetailsDialog";
 import { ReceivingAddressDialog, type AddressData } from "@/components/ReceivingAddressDialog";
+import { getStateRestrictions, getStateMessage } from "@/utils/stateGating";
+import { calculateLabFees, AI_INTERPRETATION_FEE } from "@/utils/labFees";
 
 interface Biomarker {
   id: string;
@@ -28,6 +30,10 @@ interface Panel {
   popular?: boolean;
   featured?: boolean;
   icon: React.ComponentType<{ className?: string }>;
+  testType?: 'blood' | 'kit' | 'combo';
+  requiresAuthorization?: boolean;
+  isSpecialtyKit?: boolean;
+  restrictions?: string[];
 }
 
 const BIOMARKERS: Biomarker[] = [
@@ -63,6 +69,13 @@ const BIOMARKERS: Biomarker[] = [
   
   // B-Vitamins & Methylation
   { id: "homocysteine", name: "Homocysteine", category: "methylation" },
+  
+  // Methylation Genetics
+  { id: "mthfr", name: "MTHFR (C677T, A1298C)", category: "genetics" },
+  { id: "mtr", name: "MTR (A2756G)", category: "genetics" },
+  { id: "mtrr", name: "MTRR (A66G)", category: "genetics" },
+  { id: "comt", name: "COMT (V158M)", category: "genetics" },
+  { id: "ahcy", name: "AHCY (rs819147)", category: "genetics" },
   { id: "b12", name: "Vitamin B12", category: "nutrients" },
   { id: "mma", name: "MMA (Methylmalonic Acid)", category: "methylation" },
   { id: "folate", name: "Folate", category: "nutrients" },
@@ -123,6 +136,59 @@ const BIOMARKERS: Biomarker[] = [
 ];
 
 const PANELS: Panel[] = [
+  // 10X-Equivalent Methylation Panels (Featured)
+  {
+    id: "genetic-methylation-swab",
+    name: "Genetic Methylation SNP Panel",
+    tagline: "Cheek-swab DNA test for core methylation genes (MTHFR, MTR, MTRR, COMT, AHCY). Ships to you.",
+    biomarkers: ["mthfr", "mtr", "mtrr", "comt", "ahcy"],
+    prep: "Simple cheek swab. No fasting required.",
+    addOns: ["methylation-blood-pack"],
+    categories: ["featured", "genetics", "methylation"],
+    priceMin: 249,
+    priceMax: 299,
+    popular: true,
+    featured: true,
+    icon: Dna,
+    testType: 'kit',
+    requiresAuthorization: true,
+    isSpecialtyKit: true,
+    restrictions: ["Specialty kit shipping not available in NY, NJ, RI, HI"]
+  },
+  {
+    id: "methylation-combo",
+    name: "Complete Methylation Analysis",
+    tagline: "Genetics + blood status for comprehensive methylation optimization.",
+    biomarkers: ["mthfr", "mtr", "mtrr", "comt", "ahcy", "homocysteine", "vitamin-b12", "mma", "rbc-folate", "vitamin-d-25oh", "omega-3-index"],
+    prep: "DNA swab (no prep) + blood draw (10-12h fast).",
+    addOns: [],
+    categories: ["featured", "genetics", "methylation", "nutrients"],
+    priceMin: 399,
+    priceMax: 499,
+    popular: true,
+    featured: true,
+    icon: Dna,
+    testType: 'combo',
+    requiresAuthorization: true,
+    isSpecialtyKit: true,
+    restrictions: ["Blood labs not available in NY, NJ, RI", "Kit shipping not available in NY, NJ, RI, HI"]
+  },
+  {
+    id: "methylation-blood-pack",
+    name: "Methylation Status Blood Pack",
+    tagline: "Blood markers that show real-time methylation status.",
+    biomarkers: ["homocysteine", "vitamin-b12", "mma", "rbc-folate", "vitamin-d-25oh", "omega-3-index"],
+    prep: "10–12h fast; morning draw.",
+    addOns: [],
+    categories: ["featured", "methylation", "nutrients"],
+    priceMin: 149,
+    priceMax: 199,
+    featured: true,
+    icon: Droplets,
+    testType: 'blood',
+    requiresAuthorization: true,
+    restrictions: ["Blood labs not available in NY, NJ, RI"]
+  },
   {
     id: "core-optimization",
     name: "Core Optimization Baseline (Fasting)",
@@ -259,6 +325,8 @@ const PANELS: Panel[] = [
 ];
 
 const CATEGORIES = [
+  { id: "genetics", name: "Genetics & Methylation", icon: Dna, description: "MTHFR, COMT, MTR, MTRR, AHCY" },
+  { id: "methylation", name: "Methylation Status", icon: Droplets, description: "Homocysteine, B12, Folate, MMA" },
   { id: "hormones", name: "Hormones", icon: Shield, description: "Male/Female, Thyroid, Cortisol" },
   { id: "metabolism", name: "Metabolism & Longevity", icon: Heart, description: "Insulin, HbA1c, ApoB, IGF-1" },
   { id: "inflammation", name: "Inflammation & Immune", icon: Shield, description: "hs-CRP, ESR, Ferritin" },
@@ -275,8 +343,29 @@ const LabMarketplace = () => {
   const [addressDialogOpen, setAddressDialogOpen] = useState(false);  
   const [selectedPanel, setSelectedPanel] = useState<Panel | null>(null);
   const [participantData, setParticipantData] = useState<ParticipantData | null>(null);
+  const [userState, setUserState] = useState<string>('CA'); // Default to CA, should be set by user input
 
   const handleOrderPanel = (panel: Panel) => {
+    // Check state restrictions
+    const stateRestrictions = getStateRestrictions(userState);
+    
+    if (panel.testType === 'blood' && !stateRestrictions.canOrderBloodLabs) {
+      alert('Blood labs are not available in your state (NY, NJ, RI)');
+      return;
+    }
+    
+    if ((panel.testType === 'kit' || panel.isSpecialtyKit) && !stateRestrictions.canOrderSpecialtyKits) {
+      alert('Specialty kit shipping is not available in your state (NY, NJ, RI, HI)');
+      return;
+    }
+    
+    if (panel.testType === 'combo') {
+      if (!stateRestrictions.canOrderBloodLabs || !stateRestrictions.canOrderSpecialtyKits) {
+        alert('This combination test is not available in your state due to restrictions on blood labs or specialty kit shipping');
+        return;
+      }
+    }
+
     setSelectedPanel(panel);
     setParticipantDialogOpen(true);
   };
@@ -293,8 +382,25 @@ const LabMarketplace = () => {
   };
 
   const handleAddToCart = (addressData: AddressData) => {
-    // Handle cart logic here
-    console.log("Adding to cart:", { panel: selectedPanel, participant: participantData, address: addressData });
+    // Calculate fees for this order
+    if (selectedPanel) {
+      const fees = calculateLabFees({
+        panelPrice: selectedPanel.priceMin,
+        requiresAuthorization: selectedPanel.requiresAuthorization || false,
+        includesBloodDraw: selectedPanel.testType === 'blood' || selectedPanel.testType === 'combo',
+        isSpecialtyKit: selectedPanel.isSpecialtyKit || false,
+        includeAiInterpretation: true // Default to include AI interpretation
+      });
+      
+      console.log("Adding to cart:", { 
+        panel: selectedPanel, 
+        participant: participantData, 
+        address: addressData,
+        fees: fees,
+        totalCost: selectedPanel.priceMin + fees.total
+      });
+    }
+    
     setAddressDialogOpen(false);
     // Reset state
     setSelectedPanel(null);
@@ -355,12 +461,17 @@ const LabMarketplace = () => {
               Order Labs for Optimization — Not Just Diagnostics
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Curated Biohacker Panels. <span className="text-blue-600">$19 AI Interpretation.</span>
+              Precision Labs for Biohackers. <span className="text-blue-600">$19 AI Interpretation.</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Order the right labs for optimization with curated biohacker panels, plus $19 AI interpretation 
-              that turns numbers into actionable plans with practitioner-direct supplements.
+              Order the right labs for optimization — not just diagnostics. Curated biohacker panels, plus $19 AI interpretation that turns numbers into a plan.
             </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-4xl mx-auto">
+              <p className="text-sm text-blue-800">
+                <strong>🧬 NEW:</strong> Genetic Methylation Testing — DNA swab analysis for MTHFR, COMT, MTR, MTRR, and AHCY genes. 
+                Pair with blood markers for complete methylation optimization.
+              </p>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Button 
@@ -452,6 +563,43 @@ const LabMarketplace = () => {
                         )}
                       </div>
 
+                      {/* Test Type and Authorization Badges */}
+                      <div className="flex flex-wrap gap-1">
+                        {panel.testType === 'kit' && (
+                          <Badge variant="outline" className="text-xs">
+                            <Dna className="h-3 w-3 mr-1" />
+                            DNA Swab
+                          </Badge>
+                        )}
+                        {panel.testType === 'blood' && (
+                          <Badge variant="outline" className="text-xs">
+                            <Droplets className="h-3 w-3 mr-1" />
+                            Blood Draw
+                          </Badge>
+                        )}
+                        {panel.testType === 'combo' && (
+                          <Badge variant="outline" className="text-xs">
+                            <Dna className="h-3 w-3 mr-1" />
+                            DNA + Blood
+                          </Badge>
+                        )}
+                        {panel.requiresAuthorization && (
+                          <Badge variant="secondary" className="text-xs">
+                            +$12.50 Authorization
+                          </Badge>
+                        )}
+                      </div>
+
+                      {/* State Restrictions Warning */}
+                      {panel.restrictions && panel.restrictions.length > 0 && (
+                        <div className="flex items-start gap-1 p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                          <AlertTriangle className="h-3 w-3 text-yellow-600 mt-0.5 flex-shrink-0" />
+                          <div className="text-yellow-800">
+                            {panel.restrictions.join('. ')}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Key Biomarkers */}
                       <div className="space-y-2">
                         <div className="text-sm font-medium text-gray-700">Key Biomarkers ({panel.biomarkers.length} total):</div>
@@ -469,7 +617,11 @@ const LabMarketplace = () => {
 
                       <div className="text-xs text-gray-500 border-t pt-2">
                         <div><strong>Prep:</strong> {panel.prep}</div>
-                        <div className="mt-1">Includes draw at national labs. Final availability varies by location.</div>
+                        <div className="mt-1">
+                          {panel.testType === 'kit' && 'Ships to you. '}
+                          {(panel.testType === 'blood' || panel.testType === 'combo') && 'Quest/Labcorp draw ($10 fee). '}
+                          Network clinician authorization may apply.
+                        </div>
                       </div>
 
                       <div className="pt-2">
@@ -477,7 +629,7 @@ const LabMarketplace = () => {
                           className="w-full bg-blue-600 hover:bg-blue-700"
                           onClick={() => handleOrderPanel(panel)}
                         >
-                          Order Panel + AI Analysis
+                          Order Panel + AI Analysis (${AI_INTERPRETATION_FEE})
                         </Button>
                       </div>
                     </CardContent>
