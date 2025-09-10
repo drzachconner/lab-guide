@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Wild Health Inspired Design System - Premium Precision Medicine Aesthetic */
+/* Spaceship-Inspired Design System - Next-Level Biohacking Aesthetic */
 
 @layer base {
   :root {
@@ -50,16 +50,20 @@
     --ring: 180 65% 70%;
 
     
-    /* Premium Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220 30% 8%) 0%, hsl(220 35% 15%) 50%, hsl(220 30% 20%) 100%);
+    /* Spaceship-Inspired Gradients */
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(220 40% 25% / 0.3) 0%, transparent 50%), linear-gradient(135deg, hsl(220 30% 8%) 0%, hsl(220 35% 12%) 50%, hsl(220 30% 18%) 100%);
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-accent: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-dark)));
     --gradient-surface: linear-gradient(180deg, hsl(var(--card)), hsl(220 25% 10%));
+    --gradient-geometric: conic-gradient(from 45deg, hsl(var(--secondary) / 0.1), transparent, hsl(var(--primary) / 0.1));
+    --gradient-orbital: radial-gradient(circle at 30% 70%, hsl(var(--secondary) / 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.15) 0%, transparent 50%);
     
-    /* Premium Shadows */
+    /* Spaceship-Inspired Shadows */
     --shadow-luxury: 0 8px 32px -8px hsl(220 30% 5% / 0.4);
     --shadow-card: 0 4px 24px -4px hsl(220 30% 5% / 0.3);
     --shadow-glow: 0 0 40px hsl(var(--secondary) / 0.15);
+    --shadow-orbital: 0 0 80px hsl(var(--secondary) / 0.08);
+    --shadow-geometric: inset 0 1px 0 hsl(var(--foreground) / 0.05);
     
     /* Smooth Transitions */
     --transition-premium: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -151,6 +155,14 @@
     background: var(--gradient-surface);
   }
   
+  .gradient-geometric {
+    background: var(--gradient-geometric);
+  }
+  
+  .gradient-orbital {
+    background: var(--gradient-orbital);
+  }
+  
   .shadow-luxury {
     box-shadow: var(--shadow-luxury);
   }
@@ -161,6 +173,14 @@
   
   .shadow-glow {
     box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-orbital {
+    box-shadow: var(--shadow-orbital);
+  }
+  
+  .shadow-geometric {
+    box-shadow: var(--shadow-geometric);
   }
   
   .transition-premium {
