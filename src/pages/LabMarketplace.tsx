@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Star, TrendingUp, Shield, Brain, Heart, Zap, Users, CheckCircle, X, Clock, Beaker, TestTube } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ParticipantDetailsDialog, type ParticipantData } from "@/components/ParticipantDetailsDialog";
+import { ReceivingAddressDialog, type AddressData } from "@/components/ReceivingAddressDialog";
 
 interface Biomarker {
   id: string;
@@ -268,6 +271,35 @@ const CATEGORIES = [
 
 const LabMarketplace = () => {
   const navigate = useNavigate();
+  const [participantDialogOpen, setParticipantDialogOpen] = useState(false);
+  const [addressDialogOpen, setAddressDialogOpen] = useState(false);  
+  const [selectedPanel, setSelectedPanel] = useState<Panel | null>(null);
+  const [participantData, setParticipantData] = useState<ParticipantData | null>(null);
+
+  const handleOrderPanel = (panel: Panel) => {
+    setSelectedPanel(panel);
+    setParticipantDialogOpen(true);
+  };
+
+  const handleParticipantNext = (data: ParticipantData) => {
+    setParticipantData(data);
+    setParticipantDialogOpen(false);
+    setAddressDialogOpen(true);
+  };
+
+  const handleAddressBack = () => {
+    setAddressDialogOpen(false);
+    setParticipantDialogOpen(true);
+  };
+
+  const handleAddToCart = (addressData: AddressData) => {
+    // Handle cart logic here
+    console.log("Adding to cart:", { panel: selectedPanel, participant: participantData, address: addressData });
+    setAddressDialogOpen(false);
+    // Reset state
+    setSelectedPanel(null);
+    setParticipantData(null);
+  };
 
   const handlePanelSelect = (panel: Panel) => {
     // For now, redirect to auth with panel info
@@ -441,7 +473,10 @@ const LabMarketplace = () => {
                       </div>
 
                       <div className="pt-2">
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        <Button 
+                          className="w-full bg-blue-600 hover:bg-blue-700"
+                          onClick={() => handleOrderPanel(panel)}
+                        >
                           Order Panel + AI Analysis
                         </Button>
                       </div>
@@ -558,6 +593,20 @@ const LabMarketplace = () => {
           </div>
         </div>
       </section>
+
+      {/* Dialogs */}
+      <ParticipantDetailsDialog
+        open={participantDialogOpen}
+        onOpenChange={setParticipantDialogOpen}
+        onNext={handleParticipantNext}
+      />
+      
+      <ReceivingAddressDialog
+        open={addressDialogOpen}
+        onOpenChange={setAddressDialogOpen}
+        onBack={handleAddressBack}
+        onAddToCart={handleAddToCart}
+      />
     </div>
   );
 };
