@@ -331,7 +331,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">30%</div>
-              <div className="text-gray-600">Above Wholesale</div>
+              <div className="text-gray-600">Off Just Above Wholesale</div>
               <div className="text-xs text-green-600 font-medium">Lowest Cost</div>
             </div>
             <div>
@@ -468,7 +468,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
             </div>
             <p>
-              Professional lab analysis meets premium supplement access.
+              Biohacking Lab Analysis, Premium Supplements, Maximum Discounts
             </p>
           </div>
         </div>
