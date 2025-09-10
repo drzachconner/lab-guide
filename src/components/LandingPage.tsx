@@ -114,14 +114,14 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <span className="text-gray-900">Labs. Analysis. Supplements.</span>
+                <span className="text-gray-900">AI Functional Analysis +</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <span className="text-blue-600">Done Right.</span>
+                <span className="text-blue-600">Practitioner-Direct Supplements</span>
               </motion.div>
             </motion.h1>
             
@@ -132,7 +132,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               Get functional medicine analysis trained on cutting-edge biohacking protocols and optimal functional ranges.
-              Plus, access premium provider-quality supplements at 30% off retail (via Fullscript).
+              Plus, access premium practitioner-grade supplements at 25% off retail (via Fullscript).
             </motion.p>
             
             <motion.div 
@@ -157,7 +157,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer transition-colors duration-200">Upload them for $19</button>.
+              Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer transition-colors duration-200">Upload them for $19 flat — no hidden fees</button>.
             </motion.p>
           </div>
         </div>
@@ -167,12 +167,28 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-              Labs. Analysis. Supplements. Done Right.
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              AI Functional Analysis + Practitioner-Direct Supplements
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto mb-8">
               The lowest-cost labs, the smartest AI interpretations, and the biggest discounts on premium supplements—all in one place.
             </p>
+            
+            {/* Trust badges */}
+            <div className="flex justify-center items-center gap-6 mb-8 text-sm text-gray-600">
+              <div className="flex items-center">
+                <Shield className="h-4 w-4 mr-2 text-blue-600" />
+                HIPAA-Compliant
+              </div>
+              <div className="flex items-center">
+                <Shield className="h-4 w-4 mr-2 text-blue-600" />
+                End-to-End Encrypted
+              </div>
+              <div className="flex items-center">
+                <Shield className="h-4 w-4 mr-2 text-blue-600" />
+                Secure Cloud Storage
+              </div>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -181,7 +197,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="space-y-6">
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Order labs with network clinician authorization</span>
+                  <span className="text-gray-700">Order labs directly, reviewed by our clinical network</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
@@ -193,7 +209,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">30% off 13,000+ practitioner-grade supplements (25% in Canada)</span>
+                  <span className="text-gray-700">25% off retail on 13,000+ practitioner-grade supplements</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
@@ -215,7 +231,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </Button>
                 
                 <div className="text-sm text-gray-500 pt-2 border-t">
-                  Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer">Upload them for $19</button>.
+                  Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer">Upload them for $19 flat — no hidden fees</button>.
                 </div>
               </div>
             </div>
@@ -235,10 +251,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center border-0 shadow-lg">
               <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4 relative">
                   <Upload className="h-8 w-8 text-blue-600" />
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
                 </div>
-                <CardTitle className="text-xl">1. Upload Your Labs</CardTitle>
+                <CardTitle className="text-xl">Upload Labs</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
@@ -249,10 +266,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             
             <Card className="text-center border-0 shadow-lg">
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4 relative">
                   <Brain className="h-8 w-8 text-green-600" />
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
                 </div>
-                <CardTitle className="text-xl">2. AI Analysis</CardTitle>
+                <CardTitle className="text-xl">AI Analysis</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
@@ -263,17 +281,55 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             
             <Card className="text-center border-0 shadow-lg">
               <CardHeader>
-                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 relative">
                   <ShoppingCart className="h-8 w-8 text-purple-600" />
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
                 </div>
-                <CardTitle className="text-xl">3. Get Supplements</CardTitle>
+                <CardTitle className="text-xl">Get Supplements</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Personalized protocols with direct links to premium products at wholesale pricing.
+                  Personalized protocols with 25% off practitioner-grade supplements.
                 </CardDescription>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Competitor Comparison */}
+      <section className="py-12 bg-blue-50">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Why Choose LabPilot?
+            </h2>
+            <p className="text-lg text-gray-600">
+              Compare us to other lab analysis platforms
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="font-semibold text-gray-900 mb-2">InsideTracker</div>
+              <div className="text-sm text-gray-600 mb-4">$199–$599</div>
+              <div className="text-xs text-gray-500">Limited supplement options</div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="font-semibold text-gray-900 mb-2">Jason Health</div>
+              <div className="text-sm text-gray-600 mb-4">Cheap labs</div>
+              <div className="text-xs text-gray-500">No AI, no supplements</div>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="font-semibold text-gray-900 mb-2">Docus AI</div>
+              <div className="text-sm text-gray-600 mb-4">$40–$99</div>
+              <div className="text-xs text-gray-500">No supplement integration</div>
+            </div>
+            <div className="bg-blue-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="font-semibold mb-2">LabPilot</div>
+              <div className="text-sm mb-4">$19 interpretation</div>
+              <div className="text-xs">+ 25% off supplements</div>
+            </div>
           </div>
         </div>
       </section>
@@ -305,7 +361,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "Wholesale pricing pays for itself immediately. The AI actually understands functional medicine."
+                "Practitioner-direct pricing saves me money every month. The AI actually understands functional medicine."
               </p>
               <div className="font-medium text-gray-900">Dr. James K.</div>
             </div>
@@ -329,62 +385,13 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="text-gray-600">Premium Products</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">30%</div>
-              <div className="text-gray-600">Off Maximum Discount</div>
-              <div className="text-xs text-green-600 font-medium">Cheapest Access</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">25%</div>
+              <div className="text-gray-600">Off Retail Prices</div>
+              <div className="text-xs text-green-600 font-medium">Practitioner-Direct</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
               <div className="text-gray-600">Labs Analyzed</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Security & Compliance */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto max-w-6xl px-4 text-center">
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
-                <Shield className="h-8 w-8 text-blue-600" />
-              </div>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Clinical-Grade Privacy
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-2xl mx-auto">
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                <span className="text-gray-700">HIPAA compliant</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                <span className="text-gray-700">End-to-end encrypted</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                <span className="text-gray-700">Secure cloud storage</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <Shield className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">HIPAA Compliant</div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <CheckCircle className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">End-to-End Encrypted</div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <Shield className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">Secure Cloud Storage</div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-              <div className="font-semibold text-gray-900">Data Privacy Protection</div>
             </div>
           </div>
         </div>
@@ -405,7 +412,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             onClick={handleUploadLabs}
             className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-lg rounded-lg"
           >
-            Upload Labs for Analysis - $19
+            Upload Labs for Analysis - $19 Flat — No Hidden Fees
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
@@ -424,10 +431,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </div>
             
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center">
-              Just Want Premium Supplements?
+              Practitioner-Grade Supplements at 25% Off
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8 text-center px-2">
-              Skip the lab analysis and get direct access to our Fullscript dispensary at 30% off retail prices.
+              Powered by Fullscript — 13,000+ premium products, direct from manufacturers.
             </p>
             
             <div className="bg-green-50 rounded-xl p-4 md:p-6 mb-6 md:mb-8">
@@ -439,7 +446,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </div>
                 <div className="flex items-center justify-start">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
-                  <span>30% off retail prices (25% in Canada)</span>
+                  <span>25% off retail prices</span>
                 </div>
                 <div className="flex items-center justify-start">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-600 flex-shrink-0" />
