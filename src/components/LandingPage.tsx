@@ -60,9 +60,15 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Your Lab Results.
+              Biohacking Lab Results
               <br />
-              <span className="text-blue-600">Your Exact Supplements.</span>
+              to find the exact
+              <br />
+              <span className="text-blue-600">Biohacking Supplements</span>
+              <br />
+              to
+              <br />
+              <span className="text-blue-600">Biohack Your Life</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
