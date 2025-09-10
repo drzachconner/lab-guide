@@ -85,7 +85,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-12">
             <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-              Biohacking Lab Analysis, Premium Supplements, Maximum Discounts
+              Cheapest path to the right labs, the best interpretations, and tailored premium supplements at the maximum discount
             </Badge>
             
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight px-2">
@@ -97,7 +97,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed px-4">
-              Sign up → Order labs → Get results → AI analysis → Tailored supplements at <strong>wholesale pricing</strong>. Complete hands-off experience with network clinician authorization and AI-powered functional medicine analysis.
+              The cheapest labs, the most advanced biohacking AI interpretation for just <strong>$19</strong>, and maximum discounts on premium supplements. Complete hands-off experience with network clinician authorization.
             </p>
 
             <div className="mb-6">
@@ -152,10 +152,10 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="px-2">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
-                Advanced AI trained on leading-edge <span className="text-blue-600 block sm:inline">biohacking & functional medicine</span> protocols
+                The most advanced biohacking AI <span className="text-blue-600 block sm:inline">for the lowest price</span> — just $19
               </h2>
               <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-8">
-                Our AI model has been extensively trained on cutting-edge biohacking research, functional medicine protocols, and optimal lab value ranges. It analyzes your specific results focusing on functional levels—not just standard reference ranges—to provide precise supplement recommendations at wholesale pricing.
+                Our AI delivers the most sophisticated biohacking and functional medicine analysis available, trained on cutting-edge protocols and optimal lab ranges — all for just $19. Plus get maximum discounts on premium supplements at just above wholesale pricing.
               </p>
               
               <div className="space-y-8">
@@ -164,8 +164,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Extensive Biohacking AI Training</h3>
-                    <p className="text-gray-600 text-base leading-relaxed">Trained on the best of the best leading-edge biohacking and functional medicine analysis, focusing on optimal functional levels</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Cheapest Premium Analysis</h3>
+                    <p className="text-gray-600 text-base leading-relaxed">Most advanced biohacking AI interpretation for just $19 — unmatched value for sophisticated functional medicine analysis</p>
                   </div>
                 </div>
                 
@@ -184,8 +184,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                     <CheckCircle className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Wholesale Pricing Access</h3>
-                    <p className="text-gray-600 text-base leading-relaxed">30% off retail on 13,000+ supplements—direct from manufacturers</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Maximum Supplement Discounts</h3>
+                    <p className="text-gray-600 text-base leading-relaxed">30% off retail on 13,000+ premium supplements — the highest quality at maximum discounts</p>
                   </div>
                 </div>
               </div>
@@ -218,7 +218,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </Button>
                 
                 <div className="text-sm text-gray-500 pt-2 border-t">
-                  <strong>Already have labs?</strong> Upload for $19 analysis only
+                  <strong>Already have labs?</strong> Upload for $19 — cheapest premium analysis
                 </div>
               </div>
             </div>
@@ -336,8 +336,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">30%</div>
-              <div className="text-gray-600">Off Just Above Wholesale</div>
-              <div className="text-xs text-green-600 font-medium">Lowest Cost</div>
+              <div className="text-gray-600">Off Maximum Discount</div>
+              <div className="text-xs text-green-600 font-medium">Cheapest Access</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
