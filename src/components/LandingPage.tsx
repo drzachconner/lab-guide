@@ -23,14 +23,14 @@ interface LandingPageProps {
   clinicContext?: Clinic;
 }
 
-// Floating particles component
+// Dynamic background components
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 15 }).map((_, i) => (
+      {Array.from({ length: 20 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-primary/20 rounded-full"
+          className="absolute w-2 h-2 bg-white/30 rounded-full"
           initial={{ 
             x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
@@ -40,10 +40,100 @@ const FloatingParticles = () => {
             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
           }}
           transition={{
-            duration: Math.random() * 20 + 10,
+            duration: Math.random() * 30 + 15,
             repeat: Infinity,
             repeatType: "reverse",
             ease: "linear"
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const GeometricShapes = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute border border-primary/20"
+          style={{
+            width: Math.random() * 200 + 50,
+            height: Math.random() * 200 + 50,
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+            borderRadius: Math.random() > 0.5 ? '50%' : '10px',
+          }}
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+            x: [0, Math.random() * 100 - 50, 0],
+            y: [0, Math.random() * 100 - 50, 0],
+          }}
+          transition={{
+            duration: Math.random() * 20 + 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const AnimatedLines = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <svg width="100%" height="100%" className="absolute inset-0">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <motion.path
+            key={i}
+            d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
+            stroke="currentColor"
+            strokeWidth="1"
+            fill="none"
+            className="text-primary/10"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: i * 0.5
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+};
+
+const MorphingBlobs = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-3xl"
+          style={{
+            width: Math.random() * 300 + 200,
+            height: Math.random() * 300 + 200,
+            left: Math.random() * 80 + '%',
+            top: Math.random() * 80 + '%',
+          }}
+          animate={{
+            scale: [1, 1.5, 1],
+            rotate: [0, 180, 360],
+            x: [0, Math.random() * 200 - 100, 0],
+            y: [0, Math.random() * 200 - 100, 0],
+          }}
+          transition={{
+            duration: Math.random() * 15 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 2
           }}
         />
       ))}
@@ -212,6 +302,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Hero Section with Parallax */}
       <section className="gradient-hero py-20 lg:py-32 relative">
+        <FloatingParticles />
+        <MorphingBlobs />
         <motion.div 
           className="absolute inset-0"
           style={{ y: backgroundY }}
@@ -353,6 +445,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Features Section with Staggered Animation */}
       <section className="py-20 lg:py-32 bg-muted/30 relative">
+        <GeometricShapes />
+        <AnimatedLines />
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div 
@@ -399,7 +493,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* Process Steps with Animation */}
-      <section className="py-20 lg:py-32">
+      <section className="py-20 lg:py-32 relative">
+        <FloatingParticles />
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -460,7 +555,9 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* Security Section */}
-      <section className="py-20 lg:py-32 bg-gradient-subtle relative">        
+      <section className="py-20 lg:py-32 bg-gradient-subtle relative">
+        <MorphingBlobs />
+        <GeometricShapes />        
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center max-w-5xl mx-auto"
@@ -525,6 +622,8 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
       {/* Final CTA Section */}
       <section className="gradient-hero py-20 lg:py-32 relative">
+        <AnimatedLines />
+        <FloatingParticles />
         <div className="container mx-auto px-6 text-center">
           <motion.div 
             className="max-w-4xl mx-auto space-y-8"
