@@ -117,7 +117,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                The only platform that bridges lab analysis with supplement ordering at just above wholesale pricing
+                The only platform that bridges lab analysis with supplement ordering <span className="text-blue-600">at just above wholesale pricing</span>
               </h2>
               <p className="text-lg text-gray-600 mb-8">
                 Other AI tools give you generic advice. Other supplement platforms make you search thousands of products. We do both—analyzing your specific lab work and connecting you directly to the exact supplements at just above wholesale pricing—the cheapest possible prices online.
