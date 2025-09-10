@@ -101,6 +101,12 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Upload your lab work and get AI-powered analysis that connects you directly to the specific supplements you need—with exact dosing at just above <strong>wholesale pricing</strong>. The cheapest possible prices on 13,000+ professional-grade products.
             </p>
+
+            <div className="mb-8">
+              <Badge className="bg-green-50 text-green-700 border-green-200 text-lg px-6 py-2">
+                🏆 Lowest Cost Premium Supplements
+              </Badge>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button 
@@ -327,6 +333,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">30%</div>
               <div className="text-gray-600">Above Wholesale</div>
+              <div className="text-xs text-green-600 font-medium">Lowest Cost</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
