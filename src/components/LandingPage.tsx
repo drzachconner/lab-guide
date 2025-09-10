@@ -62,11 +62,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Biohack with Precision
               <br />
-              <span className="text-blue-600">Your Functional Lab Analysis</span>
+              <span className="text-blue-600">Functional Lab Analysis</span>
               <br />
-              <span className="text-blue-600">Your Exact Supplements</span>
+              <span className="text-blue-600">+</span>
               <br />
-              <span className="text-blue-600">Your Optimized Life</span>
+              <span className="text-blue-600">Tailored Supplements</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
