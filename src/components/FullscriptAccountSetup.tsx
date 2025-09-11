@@ -11,7 +11,7 @@ interface FullscriptAccountSetupProps {
   onComplete?: (dispensaryUrl: string) => void;
 }
 
-export { FullscriptAccountSetup };
+export function FullscriptAccountSetup({ onComplete }: FullscriptAccountSetupProps) {
   const [accountStatus, setAccountStatus] = useState<'checking' | 'needed' | 'creating' | 'completed' | 'error'>('checking');
   const [dispensaryUrl, setDispensaryUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
