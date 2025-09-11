@@ -254,11 +254,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                   <Upload className="h-8 w-8 text-blue-600" />
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
                 </div>
-                <CardTitle className="text-xl">Upload Labs</CardTitle>
+                <CardTitle className="text-xl">Order or Upload Labs</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Works with Quest, LabCorp, and most clinics.
+                  Order labs directly through our clinical network or upload existing results from Quest, LabCorp, and most clinics.
                 </CardDescription>
               </CardContent>
             </Card>
