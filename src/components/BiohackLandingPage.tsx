@@ -28,17 +28,23 @@ export function BiohackLandingPage() {
     {
       icon: <Brain className="h-6 w-6" />,
       title: "AI Functional Analysis",
-      description: "Advanced GPT-5 analysis using functional medicine ranges, not just conventional lab 'normal' values"
+      description: "Advanced AI analysis using functional medicine ranges, not just conventional lab 'normal' values",
+      clickable: true,
+      link: "/ai-analysis"
     },
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Instant Results",
-      description: "Upload existing labs and get comprehensive analysis in under 60 seconds with actionable protocols"
+      description: "Upload existing labs and get comprehensive analysis in under 60 seconds with actionable protocols",
+      clickable: true,
+      link: "/ai-analysis"
     },
     {
       icon: <Shield className="h-6 w-6" />,
       title: "Practitioner-Grade Supplements",
-      description: "25% off 13,000+ professional supplements through Fullscript with AI-matched recommendations"
+      description: "25% off 13,000+ professional supplements through Fullscript with AI-matched recommendations",
+      clickable: true,
+      link: "/products"
     },
     {
       icon: <TrendingUp className="h-6 w-6" />,
@@ -59,7 +65,7 @@ export function BiohackLandingPage() {
   const comparisonData = [
     {
       feature: "AI Lab Analysis",
-      biohack: "GPT-5 Functional Medicine",
+      biohack: "AI Biohacking and Functional Ranges",
       insider: "Basic ranges only",
       jason: "No analysis",
       docusai: "Limited analysis"
@@ -117,7 +123,7 @@ export function BiohackLandingPage() {
               </Button>
               <Button 
                 variant="outline" 
-                onClick={() => navigate('/auth?type=analysis')}
+                onClick={() => navigate('/auth?tab=signin')}
                 className="border-blue-200 hover:bg-blue-50"
               >
                 Sign In
@@ -149,8 +155,12 @@ export function BiohackLandingPage() {
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Upload your labs for instant GPT-5 functional medicine analysis, or order comprehensive panels. 
+            Upload your labs for instant AI biohacking analysis using functional medicine ranges, or order comprehensive panels. 
             Get personalized supplement protocols with automatic 25% practitioner discounts.
+            <br />
+            <span className="text-sm text-gray-500 mt-2 block">
+              Lab purchases and provider-authorization fees processed by Fullscript • Analysis fees processed by BiohackLabs.ai
+            </span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -166,7 +176,7 @@ export function BiohackLandingPage() {
               size="lg" 
               variant="outline"
               onClick={() => navigate('/lab-marketplace')}
-              className="border-blue-200 hover:bg-blue-50"
+              className="border-blue-200 hover:bg-blue-50 text-blue-600 hover:text-blue-700"
             >
               <Microscope className="mr-2 h-5 w-5" />
               Order Lab Panels
@@ -175,7 +185,7 @@ export function BiohackLandingPage() {
               size="lg" 
               variant="outline"
               onClick={() => navigate('/auth?type=dispensary')}
-              className="border-purple-200 hover:bg-purple-50"
+              className="border-purple-200 hover:bg-purple-50 text-purple-600 hover:text-purple-700"
             >
               <ShoppingCart className="mr-2 h-5 w-5" />
               Shop Supplements
@@ -218,7 +228,11 @@ export function BiohackLandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+              <Card 
+                key={index} 
+                className={`text-center hover:shadow-lg transition-shadow ${feature.clickable ? 'cursor-pointer hover-scale' : ''}`}
+                onClick={() => feature.clickable && navigate(feature.link)}
+              >
                 <CardHeader>
                   <div className="mx-auto w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center text-blue-600 mb-4">
                     {feature.icon}

@@ -18,8 +18,8 @@ import FAQ from "./FAQ";
 import ContactUs from "./ContactUs";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
-import HIPAACompliance from "./HIPAACompliance";
-import MedicalDisclaimer from "./MedicalDisclaimer";
+import AIAnalysisDescription from "./AIAnalysisDescription";
+import ProductsCatalog from "./ProductsCatalog";
 
 /**
  * Routes for the main site (non-tenant specific)
@@ -35,7 +35,6 @@ const MainSite = () => {
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/payment-canceled" element={<PaymentCanceled />} />
       <Route path="/clinic" element={<ClinicLanding />} />
-      <Route path="/pricing" element={<PricingPage />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/sample-reports" element={<SampleReports />} />
       <Route path="/faq" element={<FAQ />} />
@@ -44,6 +43,9 @@ const MainSite = () => {
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/hipaa-compliance" element={<HIPAACompliance />} />
       <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
+      <Route path="/ai-analysis" element={<AIAnalysisDescription />} />
+      <Route path="/products" element={<ProductsCatalog />} />
+      <Route path="/pricing" element={<PricingPage />} />
       <Route path="/clinic-signup" element={<ClinicAuth />} />
       <Route path="/clinic-login" element={<ClinicAuth />} />
       <Route path="/clinic-dashboard" element={

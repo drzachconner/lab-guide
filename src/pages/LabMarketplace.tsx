@@ -336,13 +336,6 @@ export function LabMarketplace() {
                       <div className="text-gray-600">Personalized recommendations with 25% discount</div>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-2">
-                    <Clock className="h-4 w-4 text-blue-600 mt-0.5" />
-                    <div className="text-sm">
-                      <div className="font-medium">3-Day Results</div>
-                      <div className="text-gray-600">Fast turnaround with digital delivery</div>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
 

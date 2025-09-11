@@ -136,11 +136,11 @@ const UnifiedBackground = ({
   // Base gradient configs for different variants
   const gradientConfigs = {
     hero: {
-      base: "bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/70",
-      overlay: "bg-gradient-to-tr from-blue-100/20 via-transparent to-purple-100/20",
+      base: "bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100",
+      overlay: "bg-gradient-to-tr from-blue-200/30 via-transparent to-purple-200/30",
       blobs: {
-        primary: "bg-blue-400/20",
-        secondary: "bg-purple-400/20"
+        primary: "bg-blue-500/30",
+        secondary: "bg-purple-500/30"
       }
     },
     clinical: {
