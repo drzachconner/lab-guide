@@ -459,6 +459,9 @@ export type Database = {
         Row: {
           account_type: string | null
           clinic_id: string | null
+          consent_deidentified_processing: boolean | null
+          consent_timestamp: string | null
+          consent_version: string | null
           created_at: string
           dispensary_access: boolean | null
           dispensary_url: string | null
@@ -470,6 +473,9 @@ export type Database = {
         Insert: {
           account_type?: string | null
           clinic_id?: string | null
+          consent_deidentified_processing?: boolean | null
+          consent_timestamp?: string | null
+          consent_version?: string | null
           created_at?: string
           dispensary_access?: boolean | null
           dispensary_url?: string | null
@@ -481,6 +487,9 @@ export type Database = {
         Update: {
           account_type?: string | null
           clinic_id?: string | null
+          consent_deidentified_processing?: boolean | null
+          consent_timestamp?: string | null
+          consent_version?: string | null
           created_at?: string
           dispensary_access?: boolean | null
           dispensary_url?: string | null

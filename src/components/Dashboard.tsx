@@ -16,6 +16,8 @@ import { supabase } from "@/integrations/supabase/client";
 import FileUpload from "@/components/FileUpload";
 import ReportsTable from "@/components/ReportsTable";
 import { DispensaryAccess } from "@/components/DispensaryAccess";
+import { ConsentDialog } from "@/components/ConsentDialog";
+import { useLabReports } from "@/hooks/useLabReports";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
 import UnifiedBackground from "@/components/UnifiedBackground";
 
@@ -38,6 +40,7 @@ interface DashboardProps {
 const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState<{ full_name?: string } | null>(null);
+  const { showConsentDialog, handleConsentResponse } = useLabReports();
 
   useEffect(() => {
     if (user) {
@@ -211,6 +214,12 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
           </div>
         </div>
       </div>
+      
+      <ConsentDialog 
+        open={showConsentDialog}
+        onConsent={handleConsentResponse}
+        onClose={() => handleConsentResponse(false)}
+      />
     </div>
   );
 };

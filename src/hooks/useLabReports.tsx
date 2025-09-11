@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useConsentStatus } from '@/hooks/useConsentStatus';
 
 export interface LabReport {
   id: string;
@@ -22,8 +23,12 @@ export interface LabReport {
 export function useLabReports() {
   const [reports, setReports] = useState<LabReport[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showConsentDialog, setShowConsentDialog] = useState(false);
+  const [pendingAnalysisId, setPendingAnalysisId] = useState<string | null>(null);
+  
   const { user } = useAuth();
   const { toast } = useToast();
+  const { hasConsented, recordConsent } = useConsentStatus();
 
   const fetchReports = async () => {
     if (!user) return;
@@ -119,9 +124,43 @@ export function useLabReports() {
   const startAnalysis = async (reportId: string) => {
     if (!user) throw new Error('User not authenticated');
 
+    // Check consent before proceeding with analysis
+    if (!hasConsented) {
+      setPendingAnalysisId(reportId);
+      setShowConsentDialog(true);
+      return;
+    }
+
+    await performAnalysis(reportId);
+  };
+
+  const handleConsentResponse = async (consented: boolean) => {
+    setShowConsentDialog(false);
+    
+    if (consented && pendingAnalysisId) {
+      const success = await recordConsent();
+      if (success) {
+        await performAnalysis(pendingAnalysisId);
+      } else {
+        toast({
+          title: "Consent recording failed",
+          description: "Please try again or contact support.",
+          variant: "destructive"
+        });
+      }
+    }
+    
+    setPendingAnalysisId(null);
+  };
+
+  const performAnalysis = async (reportId: string) => {
+    if (!user) throw new Error('User not authenticated');
+
     try {
-      // Mock patient profile and lab results for demo
+      // Mock patient profile and lab results for demo - now HIPAA-safe
       const mockPatientProfile = {
+        name: '[REDACTED]', // Will be stripped by de-identification
+        email: '[REDACTED]', // Will be stripped by de-identification
         age: 35,
         sex: 'female',
         height_cm: 165,
@@ -134,11 +173,16 @@ export function useLabReports() {
       };
 
       const mockLabResults = [
-        { name: 'Ferritin', value: 18, units: 'ng/mL', ref_low: 15, ref_high: 400, collected_at: new Date().toISOString(), lab: 'LabCorp' },
-        { name: 'Vitamin D', value: 22, units: 'ng/mL', ref_low: 20, ref_high: 100, collected_at: new Date().toISOString(), lab: 'LabCorp' },
-        { name: 'Fasting Glucose', value: 88, units: 'mg/dL', ref_low: 70, ref_high: 100, collected_at: new Date().toISOString(), lab: 'LabCorp' },
-        { name: 'HDL Cholesterol', value: 65, units: 'mg/dL', ref_low: 40, ref_high: 200, collected_at: new Date().toISOString(), lab: 'LabCorp' }
+        { test: 'Ferritin', value: 18, unit: 'ng/mL', ref: '15-400' },
+        { test: 'Vitamin D', value: 22, unit: 'ng/mL', ref: '20-100' },
+        { test: 'Fasting Glucose', value: 88, unit: 'mg/dL', ref: '70-100' },
+        { test: 'HDL Cholesterol', value: 65, unit: 'mg/dL', ref: '40-200' }
       ];
+
+      toast({
+        title: "Analysis starting",
+        description: "Processing your de-identified lab data with HIPAA-compliant AI analysis...",
+      });
 
       const { data, error } = await supabase.functions.invoke('analyze-lab-report-ai', {
         body: {
@@ -156,7 +200,7 @@ export function useLabReports() {
 
       toast({
         title: "Analysis completed",
-        description: "Your lab report has been analyzed and recommendations are ready!"
+        description: "Your HIPAA-compliant lab analysis is ready! No personal identifiers were shared with AI."
       });
 
       await fetchReports();
@@ -167,6 +211,12 @@ export function useLabReports() {
         .from('lab_reports')
         .update({ status: 'failed' })
         .eq('id', reportId);
+        
+      toast({
+        title: "Analysis failed",
+        description: error.message,
+        variant: "destructive"
+      });
         
       throw error;
     }
@@ -208,6 +258,8 @@ export function useLabReports() {
     uploadReport,
     deleteReport,
     startAnalysis,
-    refreshReports: fetchReports
+    refreshReports: fetchReports,
+    showConsentDialog,
+    handleConsentResponse
   };
 }

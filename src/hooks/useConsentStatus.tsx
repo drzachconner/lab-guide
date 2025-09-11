@@ -34,9 +34,9 @@ export function useConsentStatus() {
 
       if (error && error.code !== 'PGRST116') throw error;
 
-      // Check if profile has consent fields (we'll add these to the table)
-      const hasConsented = profile?.consent_deidentified_processing === true;
-      const consentedAt = profile?.consent_timestamp;
+      // Check if profile has consent fields
+      const hasConsented = (profile as any)?.consent_deidentified_processing === true;
+      const consentedAt = (profile as any)?.consent_timestamp;
 
       setStatus({
         hasConsented,
