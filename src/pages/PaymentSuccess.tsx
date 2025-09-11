@@ -15,6 +15,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { FullscriptAccountSetup } from "@/components/FullscriptAccountSetup";
 
 interface OrderDetails {
   id: string;
@@ -297,6 +298,19 @@ export function PaymentSuccess() {
               </CardContent>
             </Card>
 
+            <Card className="bg-green-50 border-green-200">
+              <CardContent className="p-4">
+                <h3 className="font-semibold text-green-900 mb-2">🎉 Dispensary Access Unlocked!</h3>
+                <p className="text-sm text-green-800 mb-4">
+                  Your purchase includes lifetime access to professional-grade supplements at 15% practitioner discount.
+                </p>
+                <FullscriptAccountSetup 
+                  onComplete={(dispensaryUrl) => {
+                    console.log('Dispensary account setup complete:', dispensaryUrl);
+                  }}
+                />
+              </CardContent>
+            </Card>
             <Card className="bg-blue-50 border-blue-200">
               <CardContent className="p-4">
                 <h3 className="font-semibold text-blue-900 mb-2">Track Your Order</h3>

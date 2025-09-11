@@ -36,7 +36,10 @@ const LabAnalysisView = ({ reportId, onBack, clinicContext }: LabAnalysisViewPro
   const [report, setReport] = useState<LabReport | null>(null);
   const [loading, setLoading] = useState(true);
   const { reports, startAnalysis } = useLabReports();
-  const { openSupplementLink } = useSupplementRecommendations({ clinicContext });
+  const { openSupplementLink, recommendations, loading: supplementLoading } = useSupplementRecommendations({ 
+    clinicContext,
+    labAnalysis: report?.ai_analysis
+  });
   const { hasDispensaryAccess } = usePaymentStatus();
 
   useEffect(() => {
@@ -247,25 +250,55 @@ const LabAnalysisView = ({ reportId, onBack, clinicContext }: LabAnalysisViewPro
                 </CardContent>
               </Card>
 
-              {/* Sample Supplement Recommendations */}
+              {/* Enhanced Supplement Recommendations */}
               <Card className="card-medical">
                 <CardHeader>
-                  <CardTitle>Recommended Supplements</CardTitle>
+                  <CardTitle>AI-Powered Supplement Recommendations</CardTitle>
                   <CardDescription>
-                    Based on your lab results and functional medicine protocols
+                    Personalized supplement protocol based on your lab analysis
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Iron Bisglycinate", dose: "25mg daily", timing: "with breakfast" },
-                      { name: "Vitamin D3", dose: "4000 IU daily", timing: "with fat-containing meal" },
-                      { name: "B-Complex", dose: "1 capsule daily", timing: "with breakfast" }
-                    ].map((supp, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                        <div>
-                          <div className="font-medium text-sm">{supp.name}</div>
-                          <div className="text-xs text-muted-foreground">{supp.dose} - {supp.timing}</div>
+                  <div className="space-y-4">
+                    {recommendations.map((supp, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="font-medium text-sm">{supp.name}</div>
+                            {supp.brand && (
+                              <Badge variant="outline" className="text-xs">
+                                {supp.brand}
+                              </Badge>
+                            )}
+                            <Badge 
+                              variant={
+                                supp.priority === 'high' ? 'default' :
+                                supp.priority === 'medium' ? 'secondary' : 'outline'
+                              }
+                              className="text-xs"
+                            >
+                              {supp.priority} priority
+                            </Badge>
+                          </div>
+                          {supp.dosage && (
+                            <div className="text-xs text-muted-foreground mb-1">
+                              <strong>Dosage:</strong> {supp.dosage}
+                              {supp.timing && <span> • <strong>Timing:</strong> {supp.timing}</span>}
+                            </div>
+                          )}
+                          {supp.reasoning && (
+                            <div className="text-xs text-muted-foreground italic">
+                              {supp.reasoning}
+                            </div>
+                          )}
+                          {supp.price && (
+                            <div className="text-xs text-primary font-medium mt-1">
+                              ${(supp.price / 100).toFixed(2)}
+                              {supp.clinicCommission && (
+                                <span className="text-muted-foreground"> • Clinic pricing</span>
+                              )}
+                            </div>
+                          )}
                         </div>
                         <Button 
                           variant="outline" 
@@ -291,10 +324,18 @@ const LabAnalysisView = ({ reportId, onBack, clinicContext }: LabAnalysisViewPro
                   </div>
                   
                   {!hasDispensaryAccess && (
-                    <div className="mt-4 p-3 bg-primary/5 border border-primary/20 rounded-lg">
-                      <p className="text-sm text-muted-foreground">
-                        Purchase a lab analysis to unlock supplement dispensary access with 15% practitioner discount.
-                      </p>
+                    <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-sm">Unlock Professional Supplements</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Get 15% practitioner discount and personalized recommendations
+                          </p>
+                        </div>
+                        <Button size="sm" onClick={() => window.location.href = '/lab-marketplace'}>
+                          Unlock Access
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </CardContent>

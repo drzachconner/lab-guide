@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Lock, ShoppingCart, Percent, CheckCircle } from "lucide-react";
+import { Lock, ShoppingCart, Percent, CheckCircle, ExternalLink } from "lucide-react";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
+import { useFullscriptIntegration } from "@/hooks/useFullscriptIntegration";
 
 interface DispensaryAccessProps {
   clinicContext?: {
@@ -14,6 +15,7 @@ interface DispensaryAccessProps {
 
 export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: DispensaryAccessProps) {
   const { hasDispensaryAccess, loading } = usePaymentStatus();
+  const { openDispensary, createFullscriptAccount, creatingAccount } = useFullscriptIntegration();
 
   if (loading) {
     return (
@@ -47,15 +49,12 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
               <span className="text-sm text-green-700">Storewide savings applied automatically</span>
             </div>
             <Button 
-              onClick={() => {
-                const dispensaryUrl = clinicContext?.fullscripts_dispensary_url 
-                  || "https://supplements.labpilot.com";
-                window.open(dispensaryUrl, '_blank', 'noopener,noreferrer');
-              }}
+              onClick={() => openDispensary(clinicContext?.fullscripts_dispensary_url)}
               className="bg-green-600 hover:bg-green-700"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Shop Supplements
+              <ExternalLink className="h-3 w-3 ml-1" />
             </Button>
           </div>
         </CardContent>
