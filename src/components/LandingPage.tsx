@@ -32,6 +32,42 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [topBannerRef, topBannerApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
+  const [topBannerIndex, setTopBannerIndex] = useState(0);
+
+  // Auto-scroll for top banner
+  useEffect(() => {
+    if (topBannerApi) {
+      const autoplay = setInterval(() => {
+        topBannerApi.scrollNext();
+      }, 4000);
+      return () => clearInterval(autoplay);
+    }
+  }, [topBannerApi]);
+
+  // Top announcement messages
+  const announcementMessages = [
+    {
+      text: "🔥 Limited Time: Save 60% on Premium Lab Panels",
+      link: "/labs",
+      cta: "Shop Now"
+    },
+    {
+      text: "💊 25% Off All Practitioner-Grade Supplements via Fullscript",
+      link: "/auth?type=dispensary", 
+      cta: "Access Dispensary"
+    },
+    {
+      text: "🧬 AI Lab Analysis Starting at Just $19 - No Hidden Fees",
+      link: "/auth?type=analysis",
+      cta: "Get Analysis"
+    },
+    {
+      text: "⚡ Free Shipping on Orders $100+ | Same-Day Results Available",
+      link: "/labs",
+      cta: "Order Labs"
+    }
+  ];
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -146,6 +182,27 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Top Announcement Banner */}
+      <div className="bg-blue-600 text-white py-2 overflow-hidden">
+        <div className="overflow-hidden" ref={topBannerRef}>
+          <div className="flex">
+            {announcementMessages.map((message, index) => (
+              <div key={index} className="flex-[0_0_100%] min-w-0">
+                <div className="text-center text-sm font-medium px-4">
+                  <span className="mr-4">{message.text}</span>
+                  <button 
+                    onClick={() => navigate(message.link)}
+                    className="text-blue-200 hover:text-white underline font-semibold ml-2 transition-colors"
+                  >
+                    {message.cta} →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Navigation */}
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
