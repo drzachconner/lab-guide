@@ -70,7 +70,8 @@ export function LabMarketplace() {
     setIsCheckingOut(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('create-lab-order', {
+      // First create the order
+      const { data: orderData, error: orderError } = await supabase.functions.invoke('create-lab-order', {
         body: {
           panelIds: cartItems.map(item => item.id),
           patientInfo: {
@@ -78,7 +79,7 @@ export function LabMarketplace() {
             dateOfBirth: "1990-01-01", // TODO: Get from user profile
             address: {
               street: "123 Main St",
-              city: "Anytown",
+              city: "Anytown", 
               state: "CA",
               zipCode: "12345"
             }
@@ -86,18 +87,37 @@ export function LabMarketplace() {
         }
       });
 
-      if (error) {
-        throw error;
+      if (orderError || !orderData?.success) {
+        throw new Error(orderError?.message || orderData?.error || 'Failed to create order');
       }
 
-      toast({
-        title: "Order created successfully!",
-        description: `Order ${data.order.orderNumber} is ready for payment`
+      console.log('Order created:', orderData.order.orderNumber);
+
+      // Then create payment session
+      const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
+        body: {
+          orderId: orderData.order.id,
+          returnUrl: window.location.origin
+        }
       });
 
-      // Clear cart and navigate to dashboard
+      if (paymentError || !paymentData?.url) {
+        throw new Error(paymentError?.message || paymentData?.error || 'Failed to create payment session');
+      }
+
+      // Clear cart and redirect to Stripe Checkout
       setCartItems([]);
-      navigate('/dashboard');
+      
+      // Open Stripe Checkout in new tab
+      window.open(paymentData.url, '_blank');
+      
+      // Navigate to a waiting page or dashboard
+      navigate('/dashboard?order_pending=true');
+
+      toast({
+        title: "Redirecting to payment",
+        description: `Order ${orderData.order.orderNumber} created. Complete payment in the new tab.`
+      });
 
     } catch (error: any) {
       console.error('Checkout error:', error);

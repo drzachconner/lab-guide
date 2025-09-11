@@ -7,6 +7,8 @@ import ClinicDashboard from "./ClinicDashboard";
 import PricingPage from "./PricingPage";
 import Dashboard from "./Dashboard";
 import LabMarketplace from "./LabMarketplace";
+import PaymentSuccess from "./PaymentSuccess";
+import PaymentCanceled from "./PaymentCanceled";
 import ReportView from "../components/ReportView";
 import NotFound from "./NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -20,7 +22,10 @@ const MainSite = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/auth" element={<Auth />} />
+      <Route path="/lab-marketplace" element={<LabMarketplace />} />
       <Route path="/labs" element={<LabMarketplace />} />
+      <Route path="/payment-success" element={<PaymentSuccess />} />
+      <Route path="/payment-canceled" element={<PaymentCanceled />} />
       <Route path="/clinic" element={<ClinicLanding />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/clinic-signup" element={<ClinicAuth />} />
