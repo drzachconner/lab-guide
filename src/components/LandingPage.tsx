@@ -573,6 +573,129 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
         </div>
       </section>
 
+      {/* Lab Tests Showcase */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              500+ Premium Lab Tests Available
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Access the same advanced panels used by top biohackers and functional medicine practitioners
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* 10x Health Style Panel */}
+            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-8 w-8 text-blue-600" />
+                </div>
+                <CardTitle className="text-xl text-blue-700">Comprehensive Biohacker Panel</CardTitle>
+                <CardDescription>Advanced biomarker analysis for optimization</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Complete Hormone Panel (Testosterone, Thyroid, Cortisol)
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Advanced Lipid & Cardiovascular Markers
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Metabolic & Insulin Function
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Inflammation & Oxidative Stress
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Functional Medicine Panel */}
+            <Card className="border-2 border-green-100 hover:border-green-300 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Brain className="h-8 w-8 text-green-600" />
+                </div>
+                <CardTitle className="text-xl text-green-700">Functional Medicine Essentials</CardTitle>
+                <CardDescription>Root cause analysis for optimal health</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Nutrient Deficiency Assessment
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Heavy Metals & Toxin Screen
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Gut Health & Microbiome
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Food Sensitivities & Allergies
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Performance & Longevity Panel */}
+            <Card className="border-2 border-purple-100 hover:border-purple-300 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="h-8 w-8 text-purple-600" />
+                </div>
+                <CardTitle className="text-xl text-purple-700">Performance & Longevity</CardTitle>
+                <CardDescription>Elite athlete & longevity optimization</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    VO2 Max & Athletic Performance Markers
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Biological Age Assessment
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Recovery & Sleep Quality Markers
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    Cognitive Function & Neuroprotection
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              onClick={handleOrderLabs}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-lg"
+            >
+              Explore All Lab Tests
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <p className="text-sm text-gray-500 mt-4">
+              Custom panels available • Same-day results • Nationwide collection centers
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Dispensary Only Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-green-50">
         <div className="container mx-auto max-w-4xl px-4">
