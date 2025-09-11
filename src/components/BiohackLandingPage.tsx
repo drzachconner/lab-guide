@@ -404,7 +404,7 @@ export function BiohackLandingPage() {
                 <Button 
                   variant="outline" 
                   className="w-full border-purple-200 hover:bg-purple-50"
-                  onClick={() => navigate('/auth?type=dispensary')}
+                  onClick={() => navigate('/products')}
                 >
                   Shop Supplements
                 </Button>

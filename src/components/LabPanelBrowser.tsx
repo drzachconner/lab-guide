@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, Info, Clock, Droplets } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ShoppingCart, Info, Clock, Droplets, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -29,6 +30,7 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
   const [panels, setPanels] = useState<LabPanel[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -37,16 +39,111 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
 
   const fetchPanels = async () => {
     try {
-      const { data, error } = await supabase
-        .from('lab_panels')
-        .select('*')
-        .eq('is_active', true)
-        .order('category', { ascending: true });
-
-      if (error) throw error;
-      setPanels(data || []);
+      // Mock data for popular biohacking lab panels - prioritizing 10x Health and Wellness Way panels
+      const mockPanels: LabPanel[] = [
+        // Top biohacking panels first
+        {
+          id: 'comprehensive-biohacker',
+          name: 'Comprehensive Biohacker Panel',
+          description: 'Complete metabolic, hormonal, and inflammatory assessment for optimal performance optimization.',
+          category: 'comprehensive',
+          biomarkers: ['Testosterone', 'Estradiol', 'DHEA-S', 'Cortisol', 'Insulin', 'IGF-1', 'Thyroid Panel', 'Vitamin D', 'B12', 'Folate', 'Omega-3 Index', 'CRP', 'Homocysteine'],
+          base_price: 39900, // $399
+          lab_provider: 'Quest',
+          sample_type: 'Blood',
+          fasting_required: true,
+          turnaround_days: 3
+        },
+        {
+          id: 'hormone-optimization',
+          name: 'Hormone Optimization Panel',
+          description: 'Complete sex hormone and stress hormone analysis for peak performance.',
+          category: 'specialty',
+          biomarkers: ['Total Testosterone', 'Free Testosterone', 'Estradiol', 'DHEA-S', 'Cortisol AM/PM', 'SHBG', 'LH', 'FSH'],
+          base_price: 29900, // $299
+          lab_provider: 'LabCorp',
+          sample_type: 'Blood + Saliva',
+          fasting_required: false,
+          turnaround_days: 5
+        },
+        {
+          id: 'metabolic-health-max',
+          name: 'Metabolic Health Max',
+          description: 'Advanced metabolic markers including insulin resistance and mitochondrial function.',
+          category: 'comprehensive',
+          biomarkers: ['Glucose', 'Insulin', 'HOMA-IR', 'HbA1c', 'Triglycerides', 'HDL', 'LDL', 'ApoB', 'Lp(a)', 'NMR Lipoprofile'],
+          base_price: 24900, // $249
+          lab_provider: 'Quest',
+          sample_type: 'Blood',
+          fasting_required: true,
+          turnaround_days: 3
+        },
+        {
+          id: 'thyroid-deep-dive',
+          name: 'Thyroid Deep Dive',
+          description: 'Comprehensive thyroid function including reverse T3 and antibodies.',
+          category: 'specialty',
+          biomarkers: ['TSH', 'Free T4', 'Free T3', 'Reverse T3', 'TPO Ab', 'Thyroglobulin Ab', 'TRAb'],
+          base_price: 19900, // $199
+          lab_provider: 'LabCorp',
+          sample_type: 'Blood',
+          fasting_required: false,
+          turnaround_days: 4
+        },
+        {
+          id: 'inflammation-immune',
+          name: 'Inflammation & Immune Panel',
+          description: 'Assess systemic inflammation and immune system function.',
+          category: 'specialty',
+          biomarkers: ['CRP', 'ESR', 'IL-6', 'TNF-α', 'White Blood Cell Count', 'Neutrophil/Lymphocyte Ratio', 'NK Cell Activity'],
+          base_price: 22900, // $229
+          lab_provider: 'Quest',
+          sample_type: 'Blood',
+          fasting_required: false,
+          turnaround_days: 5
+        },
+        {
+          id: 'nutrient-status-pro',
+          name: 'Nutrient Status Pro',
+          description: 'Comprehensive vitamin, mineral, and micronutrient analysis.',
+          category: 'basic',
+          biomarkers: ['Vitamin D', 'B12', 'Folate', 'B6', 'Magnesium', 'Zinc', 'Iron Studies', 'RBC Folate', 'Methylmalonic Acid'],
+          base_price: 18900, // $189
+          lab_provider: 'LabCorp',
+          sample_type: 'Blood',
+          fasting_required: false,
+          turnaround_days: 3
+        },
+        // Basic panels
+        {
+          id: 'basic-metabolic',
+          name: 'Basic Metabolic Panel',
+          description: 'Essential metabolic markers for overall health assessment.',
+          category: 'basic',
+          biomarkers: ['Glucose', 'Electrolytes', 'Kidney Function', 'Liver Enzymes'],
+          base_price: 8900, // $89
+          lab_provider: 'Quest',
+          sample_type: 'Blood',
+          fasting_required: true,
+          turnaround_days: 2
+        },
+        {
+          id: 'lipid-advanced',
+          name: 'Advanced Lipid Panel',
+          description: 'Comprehensive cardiovascular risk assessment.',
+          category: 'basic',
+          biomarkers: ['Total Cholesterol', 'HDL', 'LDL', 'Triglycerides', 'ApoB', 'Lp(a)', 'Particle Size'],
+          base_price: 14900, // $149
+          lab_provider: 'LabCorp',
+          sample_type: 'Blood',
+          fasting_required: true,
+          turnaround_days: 3
+        }
+      ];
+      
+      setPanels(mockPanels);
     } catch (error: any) {
-      console.error('Error fetching panels:', error);
+      console.error('Error loading panels:', error);
       toast({
         title: "Error",
         description: "Failed to load lab panels",
@@ -57,9 +154,14 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
     }
   };
 
-  const filteredPanels = selectedCategory === 'all' 
-    ? panels 
-    : panels.filter(p => p.category === selectedCategory);
+  const filteredPanels = panels.filter(panel => {
+    const categoryMatch = selectedCategory === 'all' || panel.category === selectedCategory;
+    const searchMatch = searchQuery === '' || 
+      panel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      panel.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      panel.biomarkers.some(marker => marker.toLowerCase().includes(searchQuery.toLowerCase()));
+    return categoryMatch && searchMatch;
+  });
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -102,6 +204,17 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
 
   return (
     <div className="space-y-6">
+      {/* Search Bar */}
+      <div className="relative">
+        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search lab panels, biomarkers, or conditions..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10"
+        />
+      </div>
+
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2">
         <Button
