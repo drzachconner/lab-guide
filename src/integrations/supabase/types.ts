@@ -161,6 +161,54 @@ export type Database = {
           },
         ]
       }
+      lab_panels: {
+        Row: {
+          base_price: number
+          biomarkers: string[]
+          category: string
+          created_at: string
+          description: string | null
+          fasting_required: boolean | null
+          id: string
+          is_active: boolean | null
+          lab_provider: string
+          name: string
+          sample_type: string
+          turnaround_days: number | null
+          updated_at: string
+        }
+        Insert: {
+          base_price: number
+          biomarkers: string[]
+          category: string
+          created_at?: string
+          description?: string | null
+          fasting_required?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          lab_provider?: string
+          name: string
+          sample_type?: string
+          turnaround_days?: number | null
+          updated_at?: string
+        }
+        Update: {
+          base_price?: number
+          biomarkers?: string[]
+          category?: string
+          created_at?: string
+          description?: string | null
+          fasting_required?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          lab_provider?: string
+          name?: string
+          sample_type?: string
+          turnaround_days?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       lab_reports: {
         Row: {
           ai_analysis: Json | null
@@ -222,6 +270,112 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          lab_panel_id: string | null
+          lab_report_id: string | null
+          order_id: string
+          quantity: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lab_panel_id?: string | null
+          lab_report_id?: string | null
+          order_id: string
+          quantity?: number
+          unit_price: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lab_panel_id?: string | null
+          lab_report_id?: string | null
+          order_id?: string
+          quantity?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_lab_panel_id_fkey"
+            columns: ["lab_panel_id"]
+            isOneToOne: false
+            referencedRelation: "lab_panels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_lab_report_id_fkey"
+            columns: ["lab_report_id"]
+            isOneToOne: false
+            referencedRelation: "lab_reports"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          authorization_fee: number | null
+          clinic_id: string | null
+          created_at: string
+          draw_fee: number | null
+          fullscript_order_id: string | null
+          id: string
+          lab_fee: number | null
+          order_number: string
+          order_type: string
+          processing_fee: number | null
+          status: string
+          stripe_payment_intent_id: string | null
+          total_amount: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          authorization_fee?: number | null
+          clinic_id?: string | null
+          created_at?: string
+          draw_fee?: number | null
+          fullscript_order_id?: string | null
+          id?: string
+          lab_fee?: number | null
+          order_number: string
+          order_type?: string
+          processing_fee?: number | null
+          status?: string
+          stripe_payment_intent_id?: string | null
+          total_amount: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          authorization_fee?: number | null
+          clinic_id?: string | null
+          created_at?: string
+          draw_fee?: number | null
+          fullscript_order_id?: string | null
+          id?: string
+          lab_fee?: number | null
+          order_number?: string
+          order_type?: string
+          processing_fee?: number | null
+          status?: string
+          stripe_payment_intent_id?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -306,6 +460,60 @@ export type Database = {
           overage_price?: number
           staff_seats?: number | null
           tier?: string
+        }
+        Relationships: []
+      }
+      supplement_products: {
+        Row: {
+          brand: string
+          category: string | null
+          contraindications: string[] | null
+          created_at: string
+          deep_link_url: string | null
+          description: string | null
+          form: string | null
+          fullscript_id: string
+          id: string
+          ingredients: Json | null
+          is_active: boolean | null
+          name: string
+          price_cents: number | null
+          size_info: string | null
+          updated_at: string
+        }
+        Insert: {
+          brand: string
+          category?: string | null
+          contraindications?: string[] | null
+          created_at?: string
+          deep_link_url?: string | null
+          description?: string | null
+          form?: string | null
+          fullscript_id: string
+          id?: string
+          ingredients?: Json | null
+          is_active?: boolean | null
+          name: string
+          price_cents?: number | null
+          size_info?: string | null
+          updated_at?: string
+        }
+        Update: {
+          brand?: string
+          category?: string | null
+          contraindications?: string[] | null
+          created_at?: string
+          deep_link_url?: string | null
+          description?: string | null
+          form?: string | null
+          fullscript_id?: string
+          id?: string
+          ingredients?: Json | null
+          is_active?: boolean | null
+          name?: string
+          price_cents?: number | null
+          size_info?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

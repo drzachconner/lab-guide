@@ -1,7 +1,7 @@
-import LandingPage from "@/components/LandingPage";
+import { BiohackLandingPage } from "@/components/BiohackLandingPage";
 
 const Index = () => {
-  return <LandingPage />;
+  return <BiohackLandingPage />;
 };
 
 export default Index;

@@ -1,0 +1,487 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Brain, 
+  Zap, 
+  Shield, 
+  TrendingUp, 
+  Upload, 
+  ShoppingCart,
+  CheckCircle,
+  Star,
+  ArrowRight,
+  Microscope,
+  Beaker,
+  Activity
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import HeroBackground from "./HeroBackground";
+
+export function BiohackLandingPage() {
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const features = [
+    {
+      icon: <Brain className="h-6 w-6" />,
+      title: "AI Functional Analysis",
+      description: "Advanced GPT-5 analysis using functional medicine ranges, not just conventional lab 'normal' values"
+    },
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Instant Results",
+      description: "Upload existing labs and get comprehensive analysis in under 60 seconds with actionable protocols"
+    },
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: "Practitioner-Grade Supplements",
+      description: "25% off 13,000+ professional supplements through Fullscript with AI-matched recommendations"
+    },
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Optimization Tracking",
+      description: "Retest recommendations and progress tracking to measure improvements over time"
+    }
+  ];
+
+  const benefits = [
+    "💊 25% Off All Practitioner-Grade Supplements via Fullscript",
+    "🧬 Functional Medicine Range Analysis (Not Just 'Normal')",
+    "⚡ Same-Day AI Analysis & Protocol Generation",
+    "🔄 Automated Retest Reminders & Progress Tracking",
+    "🎯 Personalized Supplement Protocols",
+    "📊 Trend Analysis Across Multiple Test Dates"
+  ];
+
+  const comparisonData = [
+    {
+      feature: "AI Lab Analysis",
+      biohack: "GPT-5 Functional Medicine",
+      insider: "Basic ranges only",
+      jason: "No analysis",
+      docusai: "Limited analysis"
+    },
+    {
+      feature: "Supplement Access",
+      biohack: "25% off 13,000+ products",
+      insider: "No supplements",
+      jason: "No supplements", 
+      docusai: "No supplements"
+    },
+    {
+      feature: "Analysis Price",
+      biohack: "$19 flat fee",
+      insider: "$199+ per analysis",
+      jason: "Labs only",
+      docusai: "$40-99 per analysis"
+    },
+    {
+      feature: "Retest Tracking",
+      biohack: "Automated reminders",
+      insider: "Manual tracking",
+      jason: "No tracking",
+      docusai: "No tracking"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                BiohackLabs.ai
+              </span>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Features
+              </a>
+              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Pricing
+              </a>
+              <a href="#comparison" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Compare
+              </a>
+              <Button 
+                variant="outline" 
+                onClick={() => navigate('/auth?type=analysis')}
+                className="border-blue-200 hover:bg-blue-50"
+              >
+                Sign In
+              </Button>
+              <Button 
+                onClick={() => navigate('/auth?type=analysis')}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <HeroBackground />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Badge className="mb-6 bg-blue-100 text-blue-800 border-blue-200">
+            🚀 AI-Powered Functional Medicine Analysis
+          </Badge>
+          
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            AI Functional Analysis +{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Practitioner Supplements
+            </span>
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Upload your labs for instant GPT-5 functional medicine analysis, or order comprehensive panels. 
+            Get personalized supplement protocols with automatic 25% practitioner discounts.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/auth?type=analysis')}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            >
+              <Upload className="mr-2 h-5 w-5" />
+              Upload Labs for $19
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => navigate('/lab-marketplace')}
+              className="border-blue-200 hover:bg-blue-50"
+            >
+              <Microscope className="mr-2 h-5 w-5" />
+              Order Lab Panels
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => navigate('/auth?type=dispensary')}
+              className="border-purple-200 hover:bg-purple-50"
+            >
+              <ShoppingCart className="mr-2 h-5 w-5" />
+              Shop Supplements
+            </Button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="flex flex-col items-center">
+              <Shield className="h-8 w-8 text-blue-600 mb-2" />
+              <span className="text-sm text-gray-600">HIPAA Compliant</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Zap className="h-8 w-8 text-purple-600 mb-2" />
+              <span className="text-sm text-gray-600">Instant Analysis</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Star className="h-8 w-8 text-amber-600 mb-2" />
+              <span className="text-sm text-gray-600">13,000+ Products</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <TrendingUp className="h-8 w-8 text-green-600 mb-2" />
+              <span className="text-sm text-gray-600">25% Practitioner Discount</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why BiohackLabs.ai?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              The only platform combining AI functional medicine analysis with practitioner-grade supplement access
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="mx-auto w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center text-blue-600 mb-4">
+                    {feature.icon}
+                  </div>
+                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section id="comparison" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              How We Compare
+            </h2>
+            <p className="text-xl text-gray-600">
+              See why BiohackLabs.ai offers the most comprehensive solution
+            </p>
+          </div>
+
+          <Card className="overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="text-left p-4 font-medium text-gray-900">Feature</th>
+                    <th className="text-center p-4 font-medium text-blue-600 bg-blue-50">BiohackLabs.ai</th>
+                    <th className="text-center p-4 font-medium text-gray-600">InsideTracker</th>
+                    <th className="text-center p-4 font-medium text-gray-600">Jason Health</th>
+                    <th className="text-center p-4 font-medium text-gray-600">DocusAI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonData.map((row, index) => (
+                    <tr key={index} className="border-t border-gray-200">
+                      <td className="p-4 font-medium text-gray-900">{row.feature}</td>
+                      <td className="p-4 text-center text-blue-600 bg-blue-50 font-medium">
+                        <CheckCircle className="inline h-4 w-4 mr-1" />
+                        {row.biohack}
+                      </td>
+                      <td className="p-4 text-center text-gray-600">{row.insider}</td>
+                      <td className="p-4 text-center text-gray-600">{row.jason}</td>
+                      <td className="p-4 text-center text-gray-600">{row.docusai}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-600">
+              No subscriptions. Pay only for what you need.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="relative">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Upload Analysis</CardTitle>
+                <div className="text-3xl font-bold text-blue-600 mt-4">$19</div>
+                <p className="text-gray-600">Per analysis, any number of labs</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">AI functional medicine analysis</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Supplement protocol generation</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">25% supplement discounts</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Retest recommendations</span>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full"
+                  onClick={() => navigate('/auth?type=analysis')}
+                >
+                  Upload Labs Now
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="relative border-blue-200 shadow-lg">
+              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white">
+                Most Popular
+              </Badge>
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Lab Panels</CardTitle>
+                <div className="text-3xl font-bold text-blue-600 mt-4">$89+</div>
+                <p className="text-gray-600">Comprehensive testing + analysis</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Quest/LabCorp lab testing</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Practitioner authorization included</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">AI analysis included</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">25% supplement discounts</span>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                  onClick={() => navigate('/lab-marketplace')}
+                >
+                  Browse Lab Panels
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="relative">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Supplements Only</CardTitle>
+                <div className="text-3xl font-bold text-purple-600 mt-4">25% Off</div>
+                <p className="text-gray-600">Direct supplement access</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">13,000+ practitioner products</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">25% automatic discount</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Free shipping on $50+</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm">Direct from manufacturers</span>
+                  </div>
+                </div>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-purple-200 hover:bg-purple-50"
+                  onClick={() => navigate('/auth?type=dispensary')}
+                >
+                  Shop Supplements
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Optimize Your Health?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Join thousands using AI-powered functional medicine analysis to unlock their optimal health potential.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              variant="secondary"
+              onClick={() => navigate('/auth?type=analysis')}
+              className="bg-white text-blue-600 hover:bg-gray-100"
+            >
+              <Upload className="mr-2 h-5 w-5" />
+              Start with Existing Labs ($19)
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => navigate('/lab-marketplace')}
+              className="border-white text-white hover:bg-white/10"
+            >
+              <Beaker className="mr-2 h-5 w-5" />
+              Order Comprehensive Testing
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Brain className="h-6 w-6 text-blue-400" />
+                <span className="text-xl font-bold">BiohackLabs.ai</span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                AI-powered functional medicine analysis with practitioner-grade supplement access.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Services</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>Lab Analysis ($19)</li>
+                <li>Lab Panel Testing</li>
+                <li>Supplement Catalog</li>
+                <li>Progress Tracking</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>How It Works</li>
+                <li>Sample Reports</li>
+                <li>FAQ</li>
+                <li>Contact Us</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>Privacy Policy</li>
+                <li>Terms of Service</li>
+                <li>HIPAA Compliance</li>
+                <li>Medical Disclaimer</li>
+              </ul>
+            </div>
+          </div>
+          
+          <Separator className="my-8 bg-gray-700" />
+          
+          <div className="text-center text-sm text-gray-400">
+            <p>&copy; 2024 BiohackLabs.ai. All rights reserved. Not intended to diagnose, treat, cure or prevent any disease.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
