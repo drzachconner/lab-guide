@@ -196,4 +196,77 @@
   .card-feature {
     @apply bg-card shadow-lg hover:shadow-xl border border-border rounded-3xl p-8 transition-smooth hover:-translate-y-1;
   }
+  
+  /* Animation Utilities */
+  .animate-in {
+    @apply animate-fade-in;
+  }
+  
+  .animate-out {
+    @apply animate-fade-out;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-glow;
+  }
+  
+  /* Loading States */
+  .skeleton {
+    @apply bg-muted animate-pulse-soft rounded-md;
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden bg-muted;
+  }
+  
+  .shimmer::before {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shimmer;
+    content: '';
+  }
+  
+  /* Interactive Elements */
+  .interactive-card {
+    @apply card-clean hover-lift cursor-pointer active:scale-98;
+  }
+  
+  .button-bounce {
+    @apply transition-all duration-150 hover:scale-105 active:scale-95;
+  }
+  
+  .success-pulse {
+    @apply animate-pulse-soft text-green-600;
+  }
+  
+  .error-wiggle {
+    @apply animate-wiggle text-destructive;
+  }
+  
+  /* Stagger Animations for Lists */
+  .stagger-children > *:nth-child(1) { @apply animate-stagger-1; }
+  .stagger-children > *:nth-child(2) { @apply animate-stagger-2; }
+  .stagger-children > *:nth-child(3) { @apply animate-stagger-3; }
+  .stagger-children > *:nth-child(4) { @apply animate-stagger-4; }
+  .stagger-children > *:nth-child(n+5) { @apply animate-fade-in; }
+  
+  /* Focus States with Animation */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200;
+  }
+  
+  /* Page Transition Wrapper */
+  .page-enter {
+    @apply animate-slide-up;
+  }
+  
+  .page-exit {
+    @apply animate-fade-out;
+  }
 }

@@ -157,35 +157,35 @@ export function LabMarketplace() {
   const totals = calculateTotal();
 
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="min-h-screen bg-gray-50 relative page-enter">
       <UnifiedBackground variant="minimal" intensity="low" />
       
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b relative z-10">
+      <div className="bg-white/80 backdrop-blur-sm border-b relative z-10 animate-slide-down">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 onClick={() => navigate('/')}
-                className="flex items-center"
+                className="flex items-center button-bounce"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Home
               </Button>
-              <div>
+              <div className="animate-fade-in">
                 <h1 className="text-2xl font-bold text-gray-900">Lab Marketplace</h1>
                 <p className="text-gray-600">Order comprehensive lab testing with AI analysis included</p>
               </div>
             </div>
             
             {cartItems.length > 0 && (
-              <div className="flex items-center space-x-4">
-                <Badge variant="outline" className="text-blue-600 border-blue-200">
+              <div className="flex items-center space-x-4 animate-scale-in">
+                <Badge variant="outline" className="text-blue-600 border-blue-200 hover-scale">
                   <ShoppingCart className="h-3 w-3 mr-1" />
                   {cartItems.length} item{cartItems.length > 1 ? 's' : ''}
                 </Badge>
-                <span className="text-lg font-semibold">
+                <span className="text-lg font-semibold animate-bounce-gentle">
                   Total: {formatPrice(totals.total)}
                 </span>
               </div>
@@ -292,10 +292,17 @@ export function LabMarketplace() {
                       <Button
                         onClick={handleCheckout}
                         disabled={isCheckingOut}
-                        className="w-full"
+                        className="w-full button-bounce hover-glow"
                       >
                         <CreditCard className="h-4 w-4 mr-2" />
-                        {isCheckingOut ? 'Processing...' : 'Proceed to Checkout'}
+                        {isCheckingOut ? (
+                          <span className="flex items-center">
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                            Processing...
+                          </span>
+                        ) : (
+                          'Proceed to Checkout'
+                        )}
                       </Button>
                     </>
                   )}

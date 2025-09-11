@@ -83,21 +83,77 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" }
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" }
         },
+        
+        // Page & Component Transitions
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        },
+        "fade-out": {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(10px)" }
+        },
+        "scale-in": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" }
+        },
+        "scale-out": {
+          "0%": { transform: "scale(1)", opacity: "1" },
+          "100%": { transform: "scale(0.95)", opacity: "0" }
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" }
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" }
+        },
+        "slide-in-right": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" }
+        },
+        "slide-out-right": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" }
+        },
+        
+        // Loading & Progress Animations
+        "shimmer": {
+          "0%": { backgroundPosition: "-200px 0" },
+          "100%": { backgroundPosition: "calc(200px + 100%) 0" }
+        },
+        "pulse-soft": {
+          "0%, 100%": { opacity: "0.6" },
+          "50%": { opacity: "1" }
+        },
+        "bounce-gentle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" }
+        },
+        
+        // Interactive Animations
+        "wiggle": {
+          "0%, 7%, 14%, 21%": { transform: "translateX(0)" },
+          "3.5%, 10.5%, 17.5%": { transform: "translateX(-2px)" },
+          "7%, 14%": { transform: "translateX(2px)" }
+        },
+        "heartbeat": {
+          "0%": { transform: "scale(1)" },
+          "14%": { transform: "scale(1.1)" },
+          "28%": { transform: "scale(1)" },
+          "42%": { transform: "scale(1.1)" },
+          "70%": { transform: "scale(1)" }
+        },
+        
+        // Enhanced existing animations
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
@@ -117,8 +173,38 @@ export default {
         },
       },
       animation: {
+        // Enhanced Accordion
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        
+        // Page & Component Transitions
+        "fade-in": "fade-in 0.3s ease-out",
+        "fade-out": "fade-out 0.3s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
+        "scale-out": "scale-out 0.2s ease-out",
+        "slide-up": "slide-up 0.3s ease-out",
+        "slide-down": "slide-down 0.3s ease-out",
+        "slide-in-right": "slide-in-right 0.3s ease-out",
+        "slide-out-right": "slide-out-right 0.3s ease-out",
+        
+        // Loading & Progress
+        "shimmer": "shimmer 2s ease-in-out infinite",
+        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
+        "bounce-gentle": "bounce-gentle 0.8s ease-in-out infinite",
+        
+        // Interactive
+        "wiggle": "wiggle 0.5s ease-in-out",
+        "heartbeat": "heartbeat 1.5s ease-in-out infinite",
+        
+        // Combined Animations
+        "enter": "fade-in 0.3s ease-out, scale-in 0.2s ease-out",
+        "exit": "fade-out 0.3s ease-out, scale-out 0.2s ease-out",
+        "stagger-1": "fade-in 0.3s ease-out 0.1s both",
+        "stagger-2": "fade-in 0.3s ease-out 0.2s both",
+        "stagger-3": "fade-in 0.3s ease-out 0.3s both",
+        "stagger-4": "fade-in 0.3s ease-out 0.4s both",
+        
+        // Enhanced existing
         "float": "float 6s ease-in-out infinite",
         "orbit": "orbit 20s linear infinite",
         "gradient-x": "gradient-x 15s ease infinite",
