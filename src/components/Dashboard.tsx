@@ -17,6 +17,7 @@ import FileUpload from "@/components/FileUpload";
 import ReportsTable from "@/components/ReportsTable";
 import { DispensaryAccess } from "@/components/DispensaryAccess";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
+import UnifiedBackground from "@/components/UnifiedBackground";
 
 interface Clinic {
   id: string;
@@ -60,9 +61,11 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-clinical">
+    <div className="min-h-screen bg-gradient-clinical relative">
+      <UnifiedBackground variant="clinical" intensity="low" />
+      
       {/* Header */}
-      <header className="border-b border-border/60 bg-card/50 backdrop-blur-sm">
+      <header className="border-b border-border/60 bg-card/50 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -109,7 +112,7 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="grid lg:grid-cols-3 gap-8">
           
           {/* Main Content - Upload and Reports */}

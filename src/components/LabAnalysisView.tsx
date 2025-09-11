@@ -24,6 +24,7 @@ import {
 import { useSupplementRecommendations } from "@/hooks/useSupplementRecommendations";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useLabReports, type LabReport } from "@/hooks/useLabReports";
+import UnifiedBackground from "@/components/UnifiedBackground";
 
 interface LabAnalysisViewProps {
   reportId: string;
@@ -126,9 +127,11 @@ const LabAnalysisView = ({ reportId, onBack, clinicContext }: LabAnalysisViewPro
   const analysisData = report.ai_analysis ? parseAiAnalysis(report.ai_analysis) : null;
 
   return (
-    <div className="min-h-screen bg-gradient-clinical">
+    <div className="min-h-screen bg-gradient-clinical relative">
+      <UnifiedBackground variant="clinical" intensity="medium" />
+      
       {/* Header */}
-      <header className="border-b border-border/60 bg-card/50 backdrop-blur-sm">
+      <header className="border-b border-border/60 bg-card/50 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -165,7 +168,7 @@ const LabAnalysisView = ({ reportId, onBack, clinicContext }: LabAnalysisViewPro
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Processing Status */}
         {report.status === 'processing' && (
           <Card className="card-medical mb-6">

@@ -18,7 +18,7 @@ import {
   Activity
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import HeroBackground from "./HeroBackground";
+import HeroBackground from "./UnifiedBackground";
 
 export function BiohackLandingPage() {
   const navigate = useNavigate();
@@ -132,7 +132,7 @@ export function BiohackLandingPage() {
 
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <HeroBackground />
+        <HeroBackground variant="hero" intensity="high" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Badge className="mb-6 bg-blue-100 text-blue-800 border-blue-200">
             🚀 AI-Powered Functional Medicine Analysis

@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, Upload, Brain, ShoppingCart, Star, TrendingUp,
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import HeroFX from "./HeroFX";
+import HeroFX from "./UnifiedBackground";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
@@ -247,7 +247,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <section className="relative isolate overflow-hidden min-h-[70vh] pt-12 pb-16">
         {/* Backgrounds behind content */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <HeroFX />
+          <HeroFX variant="hero" intensity="medium" />
         </div>
 
         {/* Foreground content */}

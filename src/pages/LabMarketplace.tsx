@@ -17,6 +17,8 @@ import { LabPanelBrowser } from "@/components/LabPanelBrowser";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
+import UnifiedBackground from "@/components/UnifiedBackground";
 
 interface LabPanel {
   id: string;
@@ -155,9 +157,11 @@ export function LabMarketplace() {
   const totals = calculateTotal();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
+      <UnifiedBackground variant="minimal" intensity="low" />
+      
       {/* Header */}
-      <div className="bg-white border-b">
+      <div className="bg-white/80 backdrop-blur-sm border-b relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6">
             <div className="flex items-center space-x-4">
