@@ -161,6 +161,84 @@ export type Database = {
           },
         ]
       }
+      email_reminders: {
+        Row: {
+          body: string
+          created_at: string
+          email_type: string
+          id: string
+          reference_id: string
+          scheduled_for: string
+          sent_at: string | null
+          status: string | null
+          subject: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          email_type: string
+          id?: string
+          reference_id: string
+          scheduled_for: string
+          sent_at?: string | null
+          status?: string | null
+          subject: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          email_type?: string
+          id?: string
+          reference_id?: string
+          scheduled_for?: string
+          sent_at?: string | null
+          status?: string | null
+          subject?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      future_test_recommendations: {
+        Row: {
+          created_at: string
+          id: string
+          lab_panel_id: string
+          last_reminder_sent: string | null
+          reason: string | null
+          recommended_date: string
+          reminder_sent: boolean | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lab_panel_id: string
+          last_reminder_sent?: string | null
+          reason?: string | null
+          recommended_date: string
+          reminder_sent?: boolean | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lab_panel_id?: string
+          last_reminder_sent?: string | null
+          reason?: string | null
+          recommended_date?: string
+          reminder_sent?: boolean | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       lab_panels: {
         Row: {
           base_price: number
@@ -463,6 +541,45 @@ export type Database = {
         }
         Relationships: []
       }
+      supplement_orders: {
+        Row: {
+          created_at: string
+          dosage_per_day: string | null
+          id: string
+          last_reminder_sent: string | null
+          order_date: string
+          status: string | null
+          supplement_name: string
+          supply_days: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dosage_per_day?: string | null
+          id?: string
+          last_reminder_sent?: string | null
+          order_date?: string
+          status?: string | null
+          supplement_name: string
+          supply_days?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dosage_per_day?: string | null
+          id?: string
+          last_reminder_sent?: string | null
+          order_date?: string
+          status?: string | null
+          supplement_name?: string
+          supply_days?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       supplement_products: {
         Row: {
           brand: string
@@ -539,6 +656,28 @@ export type Database = {
       is_clinic_admin: {
         Args: { clinic_id_param: string }
         Returns: boolean
+      }
+      process_email_reminders: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      schedule_future_test_reminder: {
+        Args: {
+          p_lab_panel_id: string
+          p_reason: string
+          p_recommended_date: string
+          p_user_id: string
+        }
+        Returns: string
+      }
+      schedule_supplement_refill_reminder: {
+        Args: {
+          p_supplement_name: string
+          p_supplement_order_id: string
+          p_supply_days: number
+          p_user_id: string
+        }
+        Returns: undefined
       }
     }
     Enums: {
