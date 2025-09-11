@@ -196,7 +196,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               <div className="space-y-6">
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Order labs directly, reviewed by our clinical network</span>
+                  <span className="text-gray-700">Order labs directly through our clinical network</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
