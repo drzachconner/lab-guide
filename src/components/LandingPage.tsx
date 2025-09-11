@@ -459,7 +459,11 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             
             <div className="bg-blue-600 text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-4">Only BiohackLabs.ai Offers Everything</h3>
-              <div className="grid md:grid-cols-3 gap-8 mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-6">
+                <div>
+                  <div className="text-3xl font-bold mb-2">500+</div>
+                  <div className="text-blue-100">Lab Tests</div>
+                </div>
                 <div>
                   <div className="text-3xl font-bold mb-2">$19</div>
                   <div className="text-blue-100">AI Analysis</div>
