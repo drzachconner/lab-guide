@@ -103,15 +103,18 @@ export function BiohackLandingPage() {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">
-                Features
-              </a>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Button variant="ghost" onClick={() => navigate('/how-it-works')} className="text-gray-700 hover:text-blue-600">
+                How It Works
+              </Button>
+              <Button variant="ghost" onClick={() => navigate('/sample-reports')} className="text-gray-700 hover:text-blue-600">
+                Sample Reports
+              </Button>
+              <Button variant="ghost" onClick={() => navigate('/pricing')} className="text-gray-700 hover:text-blue-600">
                 Pricing
-              </a>
-              <a href="#comparison" className="text-gray-700 hover:text-blue-600 transition-colors">
-                Compare
-              </a>
+              </Button>
+              <Button variant="ghost" onClick={() => navigate('/faq')} className="text-gray-700 hover:text-blue-600">
+                FAQ
+              </Button>
               <Button 
                 variant="outline" 
                 onClick={() => navigate('/auth?type=analysis')}

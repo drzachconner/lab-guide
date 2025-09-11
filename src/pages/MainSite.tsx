@@ -12,6 +12,14 @@ import PaymentCanceled from "./PaymentCanceled";
 import ReportView from "../components/ReportView";
 import NotFound from "./NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
+import HowItWorks from "./HowItWorks";
+import SampleReports from "./SampleReports";
+import FAQ from "./FAQ";
+import ContactUs from "./ContactUs";
+import PrivacyPolicy from "./PrivacyPolicy";
+import TermsOfService from "./TermsOfService";
+import HIPAACompliance from "./HIPAACompliance";
+import MedicalDisclaimer from "./MedicalDisclaimer";
 
 /**
  * Routes for the main site (non-tenant specific)
@@ -28,6 +36,14 @@ const MainSite = () => {
       <Route path="/payment-canceled" element={<PaymentCanceled />} />
       <Route path="/clinic" element={<ClinicLanding />} />
       <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/sample-reports" element={<SampleReports />} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/contact" element={<ContactUs />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
+      <Route path="/hipaa-compliance" element={<HIPAACompliance />} />
+      <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
       <Route path="/clinic-signup" element={<ClinicAuth />} />
       <Route path="/clinic-login" element={<ClinicAuth />} />
       <Route path="/clinic-dashboard" element={
