@@ -115,7 +115,7 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
           {/* Main Content - Upload and Reports */}
           <div className="lg:col-span-2 space-y-6">
             <FileUpload />
-            <ReportsTable />
+            <ReportsTable clinicContext={clinicContext} />
           </div>
 
           {/* Sidebar */}

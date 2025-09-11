@@ -1,115 +1,71 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { 
-  FileText, 
-  Download, 
-  Eye, 
-  Clock, 
-  CheckCircle, 
-  AlertCircle,
+  Eye,
+  Download,
   Trash2,
-  Loader2
-} from 'lucide-react';
-import { useLabReports, type LabReport } from '@/hooks/useLabReports';
-import { useNavigate } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+  Calendar,
+  FileText,
+  Brain,
+  Loader2,
+  AlertTriangle
+} from "lucide-react";
+import { useLabReports } from "@/hooks/useLabReports";
+import LabAnalysisView from "@/components/LabAnalysisView";
 
-const ReportsTable = () => {
-  const { reports, loading, deleteReport } = useLabReports();
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-  const navigate = useNavigate();
+const ReportsTable = ({ clinicContext }: { clinicContext?: any } = {}) => {
+  const { reports, loading, deleteReport, startAnalysis } = useLabReports();
+  const [selectedReport, setSelectedReport] = useState<string | null>(null);
 
-  const getStatusIcon = (status: LabReport['status']) => {
-    switch (status) {
-      case 'pending':
-        return <Clock className="h-4 w-4 text-warning" />;
-      case 'processing':
-        return <Loader2 className="h-4 w-4 text-primary animate-spin" />;
-      case 'completed':
-        return <CheckCircle className="h-4 w-4 text-secondary" />;
-      case 'failed':
-        return <AlertCircle className="h-4 w-4 text-destructive" />;
-      default:
-        return <Clock className="h-4 w-4 text-muted-foreground" />;
-    }
-  };
-
-  const getStatusBadge = (status: LabReport['status']) => {
-    const variants = {
-      pending: 'secondary',
-      processing: 'default', 
-      completed: 'secondary',
-      failed: 'destructive'
-    } as const;
-
+  if (selectedReport) {
     return (
-      <Badge variant={variants[status] || 'secondary'} className={`flex items-center gap-1 ${
-        status === 'completed' ? 'bg-secondary text-secondary-foreground' : ''
-      }`}>
-        {getStatusIcon(status)}
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </Badge>
+      <LabAnalysisView 
+        reportId={selectedReport}
+        onBack={() => setSelectedReport(null)}
+        clinicContext={clinicContext}
+      />
     );
-  };
+  }
 
-  const handleView = (reportId: string) => {
-    navigate(`/report/${reportId}`);
-  };
-
-  const handleDownload = (report: LabReport) => {
-    if (report.file_url) {
-      window.open(report.file_url, '_blank');
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'default';
+      case 'processing': return 'secondary';
+      case 'failed': return 'destructive';
+      default: return 'outline';
     }
   };
 
-  const handleDelete = async (reportId: string) => {
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'completed': return <Brain className="h-4 w-4" />;
+      case 'processing': return <Loader2 className="h-4 w-4 animate-spin" />;
+      case 'failed': return <AlertTriangle className="h-4 w-4" />;
+      default: return <FileText className="h-4 w-4" />;
+    }
+  };
+
+  const handleRetryAnalysis = async (reportId: string) => {
     try {
-      setDeletingId(reportId);
-      await deleteReport(reportId);
-    } finally {
-      setDeletingId(null);
+      await startAnalysis(reportId);
+    } catch (error) {
+      console.error('Failed to retry analysis:', error);
     }
   };
 
   if (loading) {
     return (
       <Card className="card-medical">
-        <CardContent className="p-8 text-center">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Loading your reports...</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (reports.length === 0) {
-    return (
-      <Card className="card-medical">
         <CardHeader>
-          <CardTitle>Recent Reports</CardTitle>
-          <CardDescription>
-            Your uploaded lab reports will appear here
-          </CardDescription>
+          <CardTitle>Lab Reports</CardTitle>
+          <CardDescription>Your uploaded lab reports and AI analyses</CardDescription>
         </CardHeader>
-        <CardContent className="p-8 text-center">
-          <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-lg font-semibold mb-2">No reports yet</h3>
-          <p className="text-muted-foreground mb-4">
-            Upload your first lab report to get started with AI analysis
-          </p>
+        <CardContent>
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-6 w-6 animate-spin" />
+          </div>
         </CardContent>
       </Card>
     );
@@ -118,103 +74,108 @@ const ReportsTable = () => {
   return (
     <Card className="card-medical">
       <CardHeader>
-        <CardTitle>Recent Reports</CardTitle>
+        <CardTitle>Lab Reports</CardTitle>
         <CardDescription>
-          View and manage your uploaded lab reports
+          Your uploaded lab reports and AI analyses
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {reports.map((report) => (
-          <div
-            key={report.id}
-            className="flex items-center justify-between p-4 border rounded-lg hover:shadow-card transition-medical"
-          >
-            <div className="flex items-start gap-4 flex-1">
-              <div className="flex items-center justify-center w-10 h-10 bg-primary/10 rounded-lg">
-                <FileText className="h-5 w-5 text-primary" />
-              </div>
-              
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold truncate">{report.title}</h4>
-                <p className="text-sm text-muted-foreground truncate">
-                  {report.description || 'No description provided'}
-                </p>
-                <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                  <span>
-                    {formatDistanceToNow(new Date(report.created_at), { addSuffix: true })}
-                  </span>
-                  {report.file_size && (
-                    <span>
-                      {(report.file_size / 1024 / 1024).toFixed(1)} MB
-                    </span>
-                  )}
+      <CardContent>
+        {reports.length === 0 ? (
+          <div className="text-center py-8">
+            <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-semibold mb-2">No reports yet</h3>
+            <p className="text-muted-foreground">
+              Upload your first lab report to get started with AI analysis
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {reports.map((report) => (
+              <div
+                key={report.id}
+                className="flex items-center justify-between p-4 border border-border/60 rounded-lg hover:bg-muted/50 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                    {getStatusIcon(report.status)}
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{report.title}</h4>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-3 w-3" />
+                      {new Date(report.created_at).toLocaleDateString()}
+                      <Badge 
+                        variant={getStatusColor(report.status)}
+                        className="text-xs"
+                      >
+                        {report.status}
+                      </Badge>
+                    </div>
+                    {report.description && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {report.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-3">
-              {getStatusBadge(report.status)}
-              
-              <div className="flex items-center gap-1">
-                {report.status === 'completed' && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleView(report.id)}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Eye className="h-4 w-4" />
-                  </Button>
-                )}
-                
-                {report.file_url && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleDownload(report)}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Download className="h-4 w-4" />
-                  </Button>
-                )}
-
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
+                <div className="flex items-center gap-2">
+                  {report.status === 'failed' && (
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-muted-foreground hover:text-destructive"
-                      disabled={deletingId === report.id}
+                      onClick={() => handleRetryAnalysis(report.id)}
+                      className="text-xs"
                     >
-                      {deletingId === report.id ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Trash2 className="h-4 w-4" />
-                      )}
+                      <Brain className="h-3 w-3 mr-1" />
+                      Retry
                     </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Delete Report</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Are you sure you want to delete "{report.title}"? This action cannot be undone.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => handleDelete(report.id)}
-                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                      >
-                        Delete
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                  )}
+                  
+                  {report.status === 'pending' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleRetryAnalysis(report.id)}
+                      className="text-xs"
+                    >
+                      <Brain className="h-3 w-3 mr-1" />
+                      Analyze
+                    </Button>
+                  )}
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSelectedReport(report.id)}
+                    disabled={report.status === 'processing'}
+                  >
+                    <Eye className="h-4 w-4" />
+                  </Button>
+                  
+                  {report.file_url && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => window.open(report.file_url, '_blank')}
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                  )}
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => deleteReport(report.id)}
+                    className="text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
       </CardContent>
     </Card>
   );
