@@ -550,7 +550,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             onClick={handleUploadLabs}
             className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-lg rounded-lg"
           >
-            Upload Labs for Analysis - $19 Flat — No Hidden Fees
+            Upload Labs - $19
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
