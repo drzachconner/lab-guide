@@ -548,7 +548,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       <section className="py-20">
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Stop guessing. Start optimizing.
+            Stop guessing.<br />Start optimizing.
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Get the exact supplements your lab work recommends with direct Fullscript dispensary access at 25% off retail.
