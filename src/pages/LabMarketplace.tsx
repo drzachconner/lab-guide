@@ -461,7 +461,8 @@ const LabMarketplace = () => {
               Order Labs for Optimization — Not Just Diagnostics
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Precision Labs for Biohackers. <span className="text-blue-600">$19 AI Interpretation.</span>
+              Precision Labs for Biohackers<br/>
+              <span className="text-blue-600">$19 AI Interpretation</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               Order the right labs for optimization — not just diagnostics. Curated biohacker panels, plus $19 AI interpretation that turns numbers into a plan.
