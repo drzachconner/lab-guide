@@ -673,48 +673,67 @@ const LabMarketplace = () => {
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
-              <thead className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-                <tr>
-                  <th className="px-6 py-4 text-left font-semibold">Features</th>
-                  <th className="px-6 py-4 text-center font-semibold">InsideTracker</th>
-                  <th className="px-6 py-4 text-center font-semibold">Jason Health</th>
-                  <th className="px-6 py-4 text-center font-semibold">Docus AI</th>
-                  <th className="px-6 py-4 text-center font-semibold bg-blue-800">BiohackLabs.ai</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                <tr className="hover:bg-gray-50">
-                  <td className="px-6 py-4 font-medium text-gray-900">AI Interpretation</td>
-                  <td className="px-6 py-4 text-center text-gray-600">$199-$599</td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center text-gray-600">$40-$99</td>
-                  <td className="px-6 py-4 text-center bg-blue-50 font-semibold text-blue-700">$19</td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-6 py-4 font-medium text-gray-900">Supplement Integration</td>
-                  <td className="px-6 py-4 text-center text-orange-600">Limited</td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-6 py-4 font-medium text-gray-900">13,000+ Premium Supplements</td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="hover:bg-gray-50">
-                  <td className="px-6 py-4 font-medium text-gray-900">Advanced Biohacking / Functional Medicine AI</td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
-                  <td className="px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Mobile scroll indicator */}
+          <div className="block md:hidden text-center mb-4">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+              <span>Swipe to compare</span>
+              <div className="flex gap-1">
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="min-w-full">
+                <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden" style={{ minWidth: '800px' }}>
+                  <thead className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                    <tr>
+                      <th className="px-4 md:px-6 py-4 text-left font-semibold sticky left-0 bg-blue-600 z-10 min-w-[180px]">Features</th>
+                      <th className="px-4 md:px-6 py-4 text-center font-semibold min-w-[140px]">InsideTracker</th>
+                      <th className="px-4 md:px-6 py-4 text-center font-semibold min-w-[120px]">Jason Health</th>
+                      <th className="px-4 md:px-6 py-4 text-center font-semibold min-w-[110px]">Docus AI</th>
+                      <th className="px-4 md:px-6 py-4 text-center font-semibold bg-blue-800 min-w-[140px]">BiohackLabs.ai</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-4 md:px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white z-10 shadow-sm">AI Interpretation</td>
+                      <td className="px-4 md:px-6 py-4 text-center text-gray-600 text-sm">$199-$599</td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center text-gray-600 text-sm">$40-$99</td>
+                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50 font-semibold text-blue-700">$19</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-4 md:px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white z-10 shadow-sm">Supplement Integration</td>
+                      <td className="px-4 md:px-6 py-4 text-center text-orange-600 text-sm">Limited</td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-4 md:px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white z-10 shadow-sm">13,000+ Premium Supplements</td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-4 md:px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white z-10 shadow-sm">Advanced Biohacking / Functional Medicine AI</td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50"><CheckCircle className="h-6 w-6 text-green-500 mx-auto" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            {/* Gradient fade indicators for mobile */}
+            <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none md:hidden"></div>
           </div>
 
           <div className="text-center mt-8">
