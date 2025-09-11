@@ -309,21 +309,31 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
           </div>
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
+            {/* Mobile scroll hint */}
+            <div className="block md:hidden bg-blue-50 px-4 py-2 text-center">
+              <p className="text-sm text-blue-600 font-medium">← Swipe to compare all platforms →</p>
+            </div>
+            
+            <div className="overflow-x-auto scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+              {/* Scroll indicators for mobile */}
+              <div className="block md:hidden relative">
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+              </div>
+              
+              <table className="w-full min-w-[800px]">
                 <thead className="bg-gray-50 border-b">
                   <tr>
-                    <th className="text-left p-6 font-semibold text-gray-900">Features</th>
-                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">InsideTracker</th>
-                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Jason Health</th>
-                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Docus AI</th>
-                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Everlywell</th>
-                    <th className="text-center p-6 font-semibold text-white bg-blue-600 min-w-[140px]">BiohackLabs.ai</th>
+                    <th className="text-left p-4 md:p-6 font-semibold text-gray-900 sticky left-0 bg-gray-50 z-20 min-w-[160px]">Features</th>
+                    <th className="text-center p-4 md:p-6 font-semibold text-gray-700 min-w-[120px]">InsideTracker</th>
+                    <th className="text-center p-4 md:p-6 font-semibold text-gray-700 min-w-[120px]">Jason Health</th>
+                    <th className="text-center p-4 md:p-6 font-semibold text-gray-700 min-w-[120px]">Docus AI</th>
+                    <th className="text-center p-4 md:p-6 font-semibold text-gray-700 min-w-[120px]">Everlywell</th>
+                    <th className="text-center p-4 md:p-6 font-semibold text-white bg-blue-600 min-w-[140px]">BiohackLabs.ai</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">Lab Ordering</td>
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">Lab Ordering</td>
                     <td className="text-center p-6">
                       <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
                     </td>
@@ -340,109 +350,108 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
-                  
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">AI Interpretation</td>
-                    <td className="text-center p-6">
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">AI Interpretation</td>
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6 bg-blue-50">
+                    <td className="text-center p-4 md:p-6 bg-blue-50">
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
                   
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">Biohacking AI Analysis</td>
-                    <td className="text-center p-6">
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">Biohacking AI Analysis</td>
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6 bg-blue-50">
+                    <td className="text-center p-4 md:p-6 bg-blue-50">
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
                   
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">Functional Range Analysis</td>
-                    <td className="text-center p-6">
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">Functional Range Analysis</td>
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">~</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6 bg-blue-50">
+                    <td className="text-center p-4 md:p-6 bg-blue-50">
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
                   
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">Premium Supplement Access</td>
-                    <td className="text-center p-6">
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">Premium Supplement Access</td>
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">~</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6 bg-blue-50">
+                    <td className="text-center p-4 md:p-6 bg-blue-50">
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
                   
                   <tr className="border-b hover:bg-gray-50">
-                    <td className="p-6 font-medium text-gray-900">Practitioner-Direct Pricing</td>
-                    <td className="text-center p-6">
+                    <td className="p-4 md:p-6 font-medium text-gray-900 sticky left-0 bg-white z-10">Practitioner-Direct Pricing</td>
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6">
+                    <td className="text-center p-4 md:p-6">
                       <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
                     </td>
-                    <td className="text-center p-6 bg-blue-50">
+                    <td className="text-center p-4 md:p-6 bg-blue-50">
                       <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
                     </td>
                   </tr>
                   
                   <tr className="bg-gray-50 font-semibold">
-                    <td className="p-6 font-bold text-gray-900">Starting Price</td>
-                    <td className="text-center p-6 text-gray-700">$199-$599</td>
-                    <td className="text-center p-6 text-gray-700">$39-$129</td>
-                    <td className="text-center p-6 text-gray-700">$40-$99</td>
-                    <td className="text-center p-6 text-gray-700">$69-$249</td>
-                    <td className="text-center p-6 bg-blue-600 text-white font-bold">$19</td>
+                    <td className="p-4 md:p-6 font-bold text-gray-900 sticky left-0 bg-gray-50 z-10">Starting Price</td>
+                    <td className="text-center p-4 md:p-6 text-gray-700">$199-$599</td>
+                    <td className="text-center p-4 md:p-6 text-gray-700">$39-$129</td>
+                    <td className="text-center p-4 md:p-6 text-gray-700">$40-$99</td>
+                    <td className="text-center p-4 md:p-6 text-gray-700">$69-$249</td>
+                    <td className="text-center p-4 md:p-6 bg-blue-600 text-white font-bold">$19</td>
                   </tr>
                 </tbody>
               </table>
