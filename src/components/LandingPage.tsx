@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle, Upload, Brain, ShoppingCart, Star, TrendingUp, Users, Shield, LogIn, ChevronDown, User } from "lucide-react";
+import { ArrowRight, CheckCircle, Upload, Brain, ShoppingCart, Star, TrendingUp, Users, Shield, LogIn, ChevronDown, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import HeroFX from "./HeroFX";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
 
 interface Clinic {
   id: string;
@@ -27,6 +29,108 @@ interface LandingPageProps {
 const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onInit = useCallback((emblaApi: any) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: any) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
+  // Featured Products & Panels Data
+  const featuredSlides = [
+    {
+      id: 1,
+      type: "lab-panel",
+      title: "Ultimate Biohacker Panel",
+      subtitle: "Complete Hormone & Performance Analysis",
+      description: "Advanced biomarker testing for peak performance optimization",
+      price: "$199",
+      originalPrice: "$499",
+      savings: "60%",
+      image: "/placeholder.svg",
+      features: ["Full Hormone Panel", "Cardiovascular Health", "Metabolic Function", "Inflammation Markers"],
+      cta: "Order Lab Panel",
+      popular: true
+    },
+    {
+      id: 2,
+      type: "supplement",
+      title: "Infiniwell BPC-157",
+      subtitle: "Advanced Tissue Repair & Recovery",
+      description: "Premium peptide supplement for enhanced healing and gut health",
+      price: "$89",
+      originalPrice: "$119", 
+      savings: "25%",
+      image: "/placeholder.svg",
+      features: ["Tissue Repair", "Gut Health", "Anti-Inflammatory", "Recovery Support"],
+      cta: "Shop Now",
+      popular: false
+    },
+    {
+      id: 3,
+      type: "supplement",
+      title: "NAD+ Booster Complex",
+      subtitle: "Cellular Energy & Longevity",
+      description: "Advanced NAD+ precursors for enhanced cellular function and longevity",
+      price: "$79",
+      originalPrice: "$105",
+      savings: "25%", 
+      image: "/placeholder.svg",
+      features: ["Cellular Energy", "DNA Repair", "Anti-Aging", "Cognitive Support"],
+      cta: "Shop Now",
+      popular: false
+    },
+    {
+      id: 4,
+      type: "lab-panel", 
+      title: "Functional Medicine Complete",
+      subtitle: "Comprehensive Health Assessment",
+      description: "Deep dive analysis for root cause identification and optimization",
+      price: "$249",
+      originalPrice: "$460",
+      savings: "45%",
+      image: "/placeholder.svg",
+      features: ["Nutrient Analysis", "Toxin Screen", "Gut Health", "Food Sensitivities"],
+      cta: "Order Labs",
+      popular: false
+    },
+    {
+      id: 5,
+      type: "supplement",
+      title: "Longevity Stack",
+      subtitle: "Comprehensive Anti-Aging Formula",
+      description: "Scientifically-backed compounds for healthy aging and vitality",
+      price: "$129",
+      originalPrice: "$172",
+      savings: "25%",
+      image: "/placeholder.svg", 
+      features: ["Resveratrol", "Quercetin", "Spermidine", "PQQ"],
+      cta: "Shop Now",
+      popular: true
+    }
+  ];
 
   const handleOrderLabs = () => {
     navigate('/labs');
@@ -158,6 +262,110 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             >
               Already have labs? <button onClick={handleUploadLabs} className="text-blue-600 hover:text-blue-700 underline cursor-pointer transition-colors duration-200">Upload them for $19 flat — no hidden fees</button>.
             </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products & Lab Panels Carousel */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Popular Biohacking Products & Lab Panels
+            </h2>
+            <p className="text-xl text-gray-600">
+              Discover top-rated products and testing panels trusted by biohackers worldwide
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {featuredSlides.map((slide) => (
+                  <div key={slide.id} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-3">
+                    <Card className="h-full border-2 hover:border-blue-300 transition-all duration-300 hover:shadow-xl relative overflow-hidden">
+                      {slide.popular && (
+                        <div className="absolute top-4 left-4 z-10">
+                          <Badge className="bg-red-600 text-white border-red-600">Most Popular</Badge>
+                        </div>
+                      )}
+                      <div className="absolute top-4 right-4 z-10">
+                        <Badge className="bg-green-600 text-white border-green-600">Save {slide.savings}</Badge>
+                      </div>
+                      
+                      <CardHeader className="text-center pt-12 pb-4">
+                        <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                          {slide.type === 'lab-panel' ? (
+                            <TrendingUp className="h-10 w-10 text-blue-600" />
+                          ) : (
+                            <ShoppingCart className="h-10 w-10 text-purple-600" />
+                          )}
+                        </div>
+                        <CardTitle className="text-xl text-gray-900 mb-2">{slide.title}</CardTitle>
+                        <CardDescription className="text-blue-600 font-semibold">{slide.subtitle}</CardDescription>
+                        <p className="text-sm text-gray-600 mt-2 px-2">{slide.description}</p>
+                        
+                        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                          <div className="flex items-center justify-center gap-3 mb-2">
+                            <span className="text-lg text-gray-400 line-through">{slide.originalPrice}</span>
+                            <span className="text-3xl font-bold text-green-600">{slide.price}</span>
+                          </div>
+                          <p className="text-xs text-gray-500">25% off practitioner pricing included</p>
+                        </div>
+                      </CardHeader>
+                      
+                      <CardContent className="px-6 pb-6">
+                        <div className="space-y-2 mb-6">
+                          {slide.features.map((feature, idx) => (
+                            <div key={idx} className="flex items-center text-sm text-gray-600">
+                              <CheckCircle className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <Button 
+                          className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                          onClick={() => slide.type === 'lab-panel' ? handleOrderLabs() : navigate('/auth?type=dispensary')}
+                        >
+                          {slide.cta}
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation Arrows */}
+            <button
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 z-10"
+              onClick={scrollPrev}
+            >
+              <ChevronLeft className="h-6 w-6 text-gray-600" />
+            </button>
+            <button
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 z-10"
+              onClick={scrollNext}
+            >
+              <ChevronRight className="h-6 w-6 text-gray-600" />
+            </button>
+          </div>
+
+          {/* Dots Navigation */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  index === selectedIndex 
+                    ? 'bg-blue-600 scale-110' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                onClick={() => emblaApi && emblaApi.scrollTo(index)}
+              />
+            ))}
           </div>
         </div>
       </section>
