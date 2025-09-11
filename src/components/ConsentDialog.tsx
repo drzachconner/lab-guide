@@ -93,15 +93,17 @@ export function ConsentDialog({ open, onConsent, onClose }: ConsentDialogProps) 
                   onCheckedChange={(checked) => setAgreedToProcessing(checked === true)}
                 />
                 <label htmlFor="processing" className="text-sm leading-relaxed">
-                  I consent to the processing of my <strong>de-identified lab results</strong> for AI-powered functional medicine analysis and personalized recommendations.
+                  We de-identify your data before AI analysis. No personally identifiable health information is shared with AI providers.
                 </label>
               </div>
             </div>
 
             <Alert>
               <AlertDescription className="text-xs">
-                <strong>Important:</strong> No personally identifiable health information is shared with third-party AI providers. 
+                <strong>Important:</strong> We de-identify your data before AI analysis. No personally identifiable health information is shared with third-party AI providers. 
                 This consent only applies to de-identified data processing. You can withdraw consent at any time by contacting support.
+                <br /><br />
+                <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a> • <a href="/terms-of-service" className="text-primary hover:underline">Terms of Service</a>
               </AlertDescription>
             </Alert>
           </div>

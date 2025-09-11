@@ -236,7 +236,14 @@ const handler = async (req: Request): Promise<Response> => {
     const deidentificationResult = deidentifyLabPayload(rawLabInput);
     
     if (deidentificationResult.blocked) {
-      console.error('Lab data blocked due to PHI:', deidentificationResult.blocked);
+      // Log without PHI for debugging (Ticket 4)
+      console.error('Lab data blocked due to PHI:', {
+        reason: deidentificationResult.blocked.reason,
+        lab_report_id: labReportId,
+        detected_patterns: deidentificationResult.blocked.details ? Object.keys(deidentificationResult.blocked.details) : [],
+        timestamp: new Date().toISOString()
+      });
+      
       return new Response(
         JSON.stringify({ 
           success: false,
@@ -254,11 +261,15 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const safePayload = deidentificationResult.safe;
+    
+    // Log only de-identified data for analytics (Ticket 4)
     console.log('De-identified payload ready for LLM:', { 
       patient_id: safePayload.patient_id, 
       age_bucket: safePayload.age_bucket, 
       sex: safePayload.sex,
-      lab_count: safePayload.labs.length 
+      lab_count: safePayload.labs.length,
+      lab_report_id: labReportId,
+      timestamp: new Date().toISOString()
     });
 
     // Get supplement catalog from database (sample data for now)
@@ -326,14 +337,35 @@ ${JSON.stringify(analysisRequest, null, 2)}`
     const aiResponse = await response.json();
     const analysis = aiResponse.choices[0].message.content;
 
-    console.log('AI analysis completed, updating database...');
+    console.log('AI analysis completed, storing in new schema...');
 
-    // Update lab report with AI analysis
+    // Store the analysis in the interpretations table (Ticket 2)
+    const { data: interpretation, error: interpretationError } = await supabase
+      .from('interpretations')
+      .insert({
+        user_id: user.id,
+        lab_order_id: labReportId, // Using lab report ID as lab order reference for now
+        analysis: {
+          raw_response: analysis,
+          generated_at: new Date().toISOString(),
+          model_used: 'gpt-5-2025-08-07',
+          deidentified_payload: safePayload // Store the de-identified data that was sent to LLM
+        }
+      })
+      .select()
+      .single();
+
+    if (interpretationError) {
+      console.error('Error storing interpretation:', interpretationError);
+      throw new Error('Failed to store analysis results');
+    }
+
+    // Update lab report with reference to interpretation
     const { error: updateError } = await supabase
       .from('lab_reports')
       .update({
         ai_analysis: { 
-          raw_response: analysis,
+          interpretation_id: interpretation.id,
           generated_at: new Date().toISOString(),
           model_used: 'gpt-5-2025-08-07'
         },
@@ -345,10 +377,10 @@ ${JSON.stringify(analysisRequest, null, 2)}`
 
     if (updateError) {
       console.error('Error updating lab report:', updateError);
-      throw new Error('Failed to save analysis results');
+      throw new Error('Failed to update lab report status');
     }
 
-    console.log('Analysis saved successfully');
+    console.log('Analysis saved successfully to interpretations table');
 
     return new Response(
       JSON.stringify({

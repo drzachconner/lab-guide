@@ -17,6 +17,7 @@ import FileUpload from "@/components/FileUpload";
 import ReportsTable from "@/components/ReportsTable";
 import { DispensaryAccess } from "@/components/DispensaryAccess";
 import { ConsentDialog } from "@/components/ConsentDialog";
+import { PHIBlockedDialog } from "@/components/PHIBlockedDialog";
 import { useLabReports } from "@/hooks/useLabReports";
 import dashboardImage from "@/assets/dashboard-preview.jpg";
 import UnifiedBackground from "@/components/UnifiedBackground";
@@ -40,7 +41,13 @@ interface DashboardProps {
 const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState<{ full_name?: string } | null>(null);
-  const { showConsentDialog, handleConsentResponse } = useLabReports();
+  const { 
+    showConsentDialog, 
+    handleConsentResponse,
+    showPHIBlockedDialog,
+    handlePHIBlockedClose,
+    phiBlockedDetails
+  } = useLabReports();
 
   useEffect(() => {
     if (user) {
@@ -219,6 +226,12 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
         open={showConsentDialog}
         onConsent={handleConsentResponse}
         onClose={() => handleConsentResponse(false)}
+      />
+      
+      <PHIBlockedDialog
+        open={showPHIBlockedDialog}
+        onClose={handlePHIBlockedClose}
+        blockedDetails={phiBlockedDetails}
       />
     </div>
   );

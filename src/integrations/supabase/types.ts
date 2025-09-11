@@ -239,6 +239,63 @@ export type Database = {
         }
         Relationships: []
       }
+      interpretations: {
+        Row: {
+          analysis: Json
+          created_at: string
+          id: string
+          lab_order_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analysis: Json
+          created_at?: string
+          id?: string
+          lab_order_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analysis?: Json
+          created_at?: string
+          id?: string
+          lab_order_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lab_orders: {
+        Row: {
+          created_at: string
+          id: string
+          panel: string
+          raw_result: Json | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          panel: string
+          raw_result?: Json | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          panel?: string
+          raw_result?: Json | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       lab_panels: {
         Row: {
           base_price: number
@@ -458,6 +515,8 @@ export type Database = {
       profiles: {
         Row: {
           account_type: string | null
+          age_bucket: string | null
+          auth_id: string | null
           clinic_id: string | null
           consent_deidentified_processing: boolean | null
           consent_timestamp: string | null
@@ -465,13 +524,17 @@ export type Database = {
           created_at: string
           dispensary_access: boolean | null
           dispensary_url: string | null
+          fs_token: string | null
           full_name: string | null
           fullscript_account_id: string | null
           id: string
+          sex: string | null
           updated_at: string
         }
         Insert: {
           account_type?: string | null
+          age_bucket?: string | null
+          auth_id?: string | null
           clinic_id?: string | null
           consent_deidentified_processing?: boolean | null
           consent_timestamp?: string | null
@@ -479,13 +542,17 @@ export type Database = {
           created_at?: string
           dispensary_access?: boolean | null
           dispensary_url?: string | null
+          fs_token?: string | null
           full_name?: string | null
           fullscript_account_id?: string | null
           id: string
+          sex?: string | null
           updated_at?: string
         }
         Update: {
           account_type?: string | null
+          age_bucket?: string | null
+          auth_id?: string | null
           clinic_id?: string | null
           consent_deidentified_processing?: boolean | null
           consent_timestamp?: string | null
@@ -493,9 +560,11 @@ export type Database = {
           created_at?: string
           dispensary_access?: boolean | null
           dispensary_url?: string | null
+          fs_token?: string | null
           full_name?: string | null
           fullscript_account_id?: string | null
           id?: string
+          sex?: string | null
           updated_at?: string
         }
         Relationships: [

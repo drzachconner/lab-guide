@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { useConsentStatus } from '@/hooks/useConsentStatus';
+import { deidentifyLabPayload, type RawLabResult } from '@/utils/deidentification';
 
 export interface LabReport {
   id: string;
@@ -24,6 +25,8 @@ export function useLabReports() {
   const [reports, setReports] = useState<LabReport[]>([]);
   const [loading, setLoading] = useState(true);
   const [showConsentDialog, setShowConsentDialog] = useState(false);
+  const [showPHIBlockedDialog, setShowPHIBlockedDialog] = useState(false);
+  const [phiBlockedDetails, setPHIBlockedDetails] = useState<any>(null);
   const [pendingAnalysisId, setPendingAnalysisId] = useState<string | null>(null);
   
   const { user } = useAuth();
@@ -159,17 +162,19 @@ export function useLabReports() {
     try {
       // Mock patient profile and lab results for demo - now HIPAA-safe
       const mockPatientProfile = {
-        name: '[REDACTED]', // Will be stripped by de-identification
-        email: '[REDACTED]', // Will be stripped by de-identification
+        name: 'John Doe', // This will be detected and blocked by de-identification
+        email: 'john@example.com', // This will be detected and blocked
+        phone: '555-123-4567', // This will be detected and blocked  
         age: 35,
-        sex: 'female',
+        sex: 'Female' as const,
         height_cm: 165,
         weight_kg: 60,
         conditions: [],
         medications: [],
         allergies: [],
         diet_pattern: 'balanced',
-        goals: ['optimize energy', 'improve sleep', 'enhance performance']
+        goals: ['optimize energy', 'improve sleep', 'enhance performance'],
+        notes: 'Patient John Smith reported feeling tired. Contact at john@email.com or call 555-1234.'
       };
 
       const mockLabResults = [
@@ -178,6 +183,26 @@ export function useLabReports() {
         { test: 'Fasting Glucose', value: 88, unit: 'mg/dL', ref: '70-100' },
         { test: 'HDL Cholesterol', value: 65, unit: 'mg/dL', ref: '40-200' }
       ];
+
+      // Pre-flight de-identification check
+      const rawLabInput: RawLabResult = {
+        patient_name: mockPatientProfile.name,
+        email: mockPatientProfile.email,
+        phone: mockPatientProfile.phone,
+        age: mockPatientProfile.age,
+        sex: mockPatientProfile.sex,
+        notes: mockPatientProfile.notes,
+        labs: mockLabResults
+      };
+
+      const deidentificationResult = deidentifyLabPayload(rawLabInput);
+      
+      if (deidentificationResult.blocked) {
+        console.log('Analysis blocked due to PHI detection:', deidentificationResult.blocked.reason);
+        setPHIBlockedDetails(deidentificationResult.blocked);
+        setShowPHIBlockedDialog(true);
+        return;
+      }
 
       toast({
         title: "Analysis starting",
@@ -252,6 +277,11 @@ export function useLabReports() {
     }
   }, [user]);
 
+  const handlePHIBlockedClose = () => {
+    setShowPHIBlockedDialog(false);
+    setPHIBlockedDetails(null);
+  };
+
   return {
     reports,
     loading,
@@ -260,6 +290,9 @@ export function useLabReports() {
     startAnalysis,
     refreshReports: fetchReports,
     showConsentDialog,
-    handleConsentResponse
+    handleConsentResponse,
+    showPHIBlockedDialog,
+    handlePHIBlockedClose,
+    phiBlockedDetails
   };
 }
