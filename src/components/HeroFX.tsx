@@ -17,7 +17,7 @@ export default function HeroFX() {
 
       {/* Three large animated blobs (transform-based => always visible movement) */}
       <motion.div
-        initial={{ x: "-10vw", y: "-8vh", scale: 1, opacity: 0.35 }}
+        initial={{ x: "-10vw", y: "-8vh", scale: 1, opacity: 0.6 }}
         animate={{ x: ["-10vw", "8vw", "0vw"], y: ["-8vh", "4vh", "0vh"], scale: [1, 1.07, 1] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         style={{
@@ -28,13 +28,13 @@ export default function HeroFX() {
           height: "44rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 30% 30%, rgba(59,130,246,0.45), rgba(59,130,246,0.10) 60%, transparent 70%)",
-          filter: "blur(50px)",
+            "radial-gradient(circle at 30% 30%, rgba(59,130,246,0.6), rgba(59,130,246,0.2) 60%, transparent 70%)",
+          filter: "blur(30px)",
           willChange: "transform, opacity",
         }}
       />
       <motion.div
-        initial={{ x: "6vw", y: "8vh", scale: 1, opacity: 0.32 }}
+        initial={{ x: "6vw", y: "8vh", scale: 1, opacity: 0.55 }}
         animate={{ x: ["6vw", "-6vw", "0vw"], y: ["8vh", "-4vh", "0vh"], scale: [1, 1.05, 1] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         style={{
@@ -45,13 +45,13 @@ export default function HeroFX() {
           height: "40rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 70% 30%, rgba(147,197,253,0.40), rgba(147,197,253,0.10) 60%, transparent 70%)",
-          filter: "blur(50px)",
+            "radial-gradient(circle at 70% 30%, rgba(147,197,253,0.55), rgba(147,197,253,0.2) 60%, transparent 70%)",
+          filter: "blur(30px)",
           willChange: "transform, opacity",
         }}
       />
       <motion.div
-        initial={{ x: "0vw", y: "10vh", scale: 1, opacity: 0.30 }}
+        initial={{ x: "0vw", y: "10vh", scale: 1, opacity: 0.5 }}
         animate={{ x: ["0vw", "-8vw", "0vw"], y: ["10vh", "0vh", "10vh"], scale: [1, 1.06, 1] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         style={{
@@ -62,8 +62,8 @@ export default function HeroFX() {
           height: "46rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.35), rgba(59,130,246,0.10) 60%, transparent 70%)",
-          filter: "blur(50px)",
+            "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.5), rgba(59,130,246,0.2) 60%, transparent 70%)",
+          filter: "blur(30px)",
           willChange: "transform, opacity",
         }}
       />

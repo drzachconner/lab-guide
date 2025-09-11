@@ -131,7 +131,7 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               Get functional medicine analysis trained on cutting-edge biohacking protocols and optimal functional ranges.
-              Plus, access premium practitioner-grade supplements at 25% off retail (via Fullscript).
+              Plus, access premium <strong>practitioner-grade supplements at 25% off retail (via Fullscript)</strong>.
             </motion.p>
             
             <motion.div 
