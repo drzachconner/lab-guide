@@ -161,7 +161,7 @@ export const db = {
       .insert({
         user_id: input.user_id,
         lab_order_id: input.lab_order_id,
-        analysis: input.analysis,
+        analysis: input.analysis as any, // Cast to any to match Json type
       })
       .select('*')
       .single();

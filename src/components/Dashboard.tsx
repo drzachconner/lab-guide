@@ -40,7 +40,7 @@ interface DashboardProps {
 
 const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
   const { user, signOut } = useAuth();
-  const [profile, setProfile] = useState<{ full_name?: string } | null>(null);
+  const [profile, setProfile] = useState<{ id?: string; sex?: string } | null>(null);
   const { 
     showConsentDialog, 
     handleConsentResponse,
@@ -56,7 +56,7 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
         const { data } = await supabase
           .from('profiles')
           .select('*')
-          .eq('id', user.id)
+          .eq('auth_id', user.id)
           .maybeSingle();
         
         setProfile(data);
@@ -99,7 +99,7 @@ const Dashboard = ({ clinicContext }: DashboardProps = {}) => {
               <div className="flex items-center gap-2">
                 <div className="text-right">
                   <div className="text-sm font-medium">
-                    {profile?.full_name || user?.email}
+                    {user?.email}
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Welcome back

@@ -27,8 +27,8 @@ export function FullscriptAccountSetup({ onComplete }: FullscriptAccountSetupPro
       try {
         const { data: profile, error } = await supabase
           .from('profiles')
-          .select('fullscript_account_id, dispensary_url, dispensary_access')
-          .eq('id', user.id)
+          .select('fs_token')
+          .eq('auth_id', user.id)
           .single();
 
         if (error) {
@@ -37,10 +37,12 @@ export function FullscriptAccountSetup({ onComplete }: FullscriptAccountSetupPro
           return;
         }
 
-        if (profile?.fullscript_account_id && profile?.dispensary_url) {
-          setDispensaryUrl(profile.dispensary_url);
+        if (profile?.fs_token) {
+          // For now, assume if they have a token, they have access
+          const mockUrl = 'https://supplements.labpilot.com';
+          setDispensaryUrl(mockUrl);
           setAccountStatus('completed');
-          onComplete?.(profile.dispensary_url);
+          onComplete?.(mockUrl);
         } else {
           setAccountStatus('needed');
         }

@@ -80,7 +80,7 @@ const PatientManagement = ({ clinicId }: PatientManagementProps) => {
       // Fetch profile data for these users
       const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
-        .select('id, full_name, created_at')
+        .select('id, created_at')
         .in('id', userIds);
 
       if (profilesError) throw profilesError;
@@ -100,7 +100,7 @@ const PatientManagement = ({ clinicId }: PatientManagementProps) => {
         } else {
           patientMap.set(patientId, {
             id: patientId,
-            full_name: profile.full_name || 'Unknown',
+            full_name: `Patient ${patientId.slice(0, 8)}`, // Generate display name from ID
             email: '', // We don't have email in profiles
             created_at: profile.created_at,
             reportCount: 1,

@@ -21,7 +21,8 @@ import { useLabReports } from '@/hooks/useLabReports';
 import { usePaymentStatus } from '@/hooks/usePaymentStatus';
 
 interface UserProfile {
-  full_name?: string;
+  id?: string;
+  sex?: string;
   created_at?: string;
 }
 
@@ -42,8 +43,8 @@ const Dashboard = () => {
     const fetchProfile = async () => {
       const { data, error } = await supabase
         .from('profiles')
-        .select('full_name, created_at')
-        .eq('id', user.id)
+        .select('id, sex, created_at')
+        .eq('auth_id', user.id)
         .single();
 
       if (data) {
@@ -89,7 +90,7 @@ const Dashboard = () => {
 
           <div className="flex items-center space-x-4">
             <div className="text-sm text-gray-600">
-              {profile?.full_name || user.email}
+              {user.email}
             </div>
             <Button
               variant="ghost"

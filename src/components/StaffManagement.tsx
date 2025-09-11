@@ -68,7 +68,7 @@ const StaffManagement = ({ clinicId }: StaffManagementProps) => {
       const userIds = clinicUsers?.map(cu => cu.user_id) || [];
       const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
-        .select('id, full_name')
+        .select('id')
         .in('id', userIds);
 
       if (profilesError) throw profilesError;
@@ -77,7 +77,7 @@ const StaffManagement = ({ clinicId }: StaffManagementProps) => {
       const staffData = clinicUsers?.map(cu => ({
         ...cu,
         role: cu.role as 'admin' | 'staff',
-        full_name: profiles?.find(p => p.id === cu.user_id)?.full_name || 'Unknown User'
+        full_name: `User ${cu.user_id.slice(0, 8)}` // Generate display name from ID
       })) || [];
 
       setStaff(staffData);
@@ -322,7 +322,7 @@ const StaffManagement = ({ clinicId }: StaffManagementProps) => {
                         <div className="flex items-center gap-2">
                           {getRoleIcon(member.role)}
                           <span className="font-medium">
-                            {member.full_name || 'Unknown User'}
+                            {member.full_name || `User ${member.user_id.slice(0, 8)}`}
                           </span>
                         </div>
                       </TableCell>
@@ -361,7 +361,7 @@ const StaffManagement = ({ clinicId }: StaffManagementProps) => {
                               <AlertDialogHeader>
                                 <AlertDialogTitle>Remove Staff Member</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Are you sure you want to remove {member.full_name} from your clinic? 
+                                  Are you sure you want to remove {member.full_name || `User ${member.user_id.slice(0, 8)}`} from your clinic? 
                                   They will lose access to all clinic data and patients.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
