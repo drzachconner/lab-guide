@@ -89,6 +89,11 @@ const HighPriceWarning = ({ onProceed, onFindClinic }: HighPriceWarningProps) =>
               <p className="text-sm text-orange-800">
                 <strong>💡 Pro Tip:</strong> Ask your healthcare provider to join LabPilot. They can offer you these savings while earning supplement commissions and providing better patient care.
               </p>
+              <div className="mt-2 pt-2 border-t border-orange-200">
+                <p className="text-xs text-orange-700">
+                  <strong>Payment Processing:</strong> Lab purchases and provider-authorization fees are processed by Fullscript; analysis fee is processed by BiohackLabs.ai.
+                </p>
+              </div>
             </div>
           </div>
 

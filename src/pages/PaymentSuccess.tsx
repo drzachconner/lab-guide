@@ -242,6 +242,15 @@ export function PaymentSuccess() {
                     <span>Total Paid:</span>
                     <span>{formatPrice(orderDetails.totalAmount)}</span>
                   </div>
+                  
+                  {/* Payment Processing Info */}
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
+                    <div className="text-xs text-blue-800">
+                      <div className="font-medium mb-1">Payment Processing:</div>
+                      <div>Lab purchases and provider-authorization fees processed by <span className="font-medium">Fullscript</span></div>
+                      <div>Analysis fee processed by <span className="font-medium">BiohackLabs.ai</span></div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             )}

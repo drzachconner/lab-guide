@@ -279,6 +279,15 @@ export function LabMarketplace() {
                         </div>
                       </div>
 
+                      {/* Payment Processor Info */}
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <div className="text-xs text-blue-800 space-y-1">
+                          <div className="font-medium">Payment Processing:</div>
+                          <div>• Lab purchases & authorization fees: <span className="font-medium">Fullscript</span></div>
+                          <div>• AI analysis fee: <span className="font-medium">BiohackLabs.ai</span></div>
+                        </div>
+                      </div>
+
                       {/* Checkout Button */}
                       <Button
                         onClick={handleCheckout}
