@@ -297,37 +297,176 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
       </section>
 
       {/* Competitor Comparison */}
-      <section className="py-12 bg-blue-50">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose LabPilot?
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Choose BiohackLabs.ai?
             </h2>
-            <p className="text-lg text-gray-600">
-              Compare us to other lab analysis platforms
+            <p className="text-xl text-gray-600">
+              The only platform offering complete lab-to-supplement optimization
             </p>
           </div>
           
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="font-semibold text-gray-900 mb-2">InsideTracker</div>
-              <div className="text-sm text-gray-600 mb-4">$199–$599</div>
-              <div className="text-xs text-gray-500">Limited supplement options</div>
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 border-b">
+                  <tr>
+                    <th className="text-left p-6 font-semibold text-gray-900">Features</th>
+                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">InsideTracker</th>
+                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Jason Health</th>
+                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Docus AI</th>
+                    <th className="text-center p-6 font-semibold text-gray-700 min-w-[140px]">Everlywell</th>
+                    <th className="text-center p-6 font-semibold text-white bg-blue-600 min-w-[140px]">BiohackLabs.ai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">Lab Ordering</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">AI Interpretation</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">Biohacking AI Analysis</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">Functional Range Analysis</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">~</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">Premium Supplement Access</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">~</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="border-b hover:bg-gray-50">
+                    <td className="p-6 font-medium text-gray-900">Practitioner-Direct Pricing</td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6">
+                      <div className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">✗</div>
+                    </td>
+                    <td className="text-center p-6 bg-blue-50">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto">✓</div>
+                    </td>
+                  </tr>
+                  
+                  <tr className="bg-gray-50 font-semibold">
+                    <td className="p-6 font-bold text-gray-900">Starting Price</td>
+                    <td className="text-center p-6 text-gray-700">$199-$599</td>
+                    <td className="text-center p-6 text-gray-700">$39-$129</td>
+                    <td className="text-center p-6 text-gray-700">$40-$99</td>
+                    <td className="text-center p-6 text-gray-700">$69-$249</td>
+                    <td className="text-center p-6 bg-blue-600 text-white font-bold">$19</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="font-semibold text-gray-900 mb-2">Jason Health</div>
-              <div className="text-sm text-gray-600 mb-4">Cheap labs</div>
-              <div className="text-xs text-gray-500">No AI, no supplements</div>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="font-semibold text-gray-900 mb-2">Docus AI</div>
-              <div className="text-sm text-gray-600 mb-4">$40–$99</div>
-              <div className="text-xs text-gray-500">No supplement integration</div>
-            </div>
-            <div className="bg-blue-600 text-white rounded-xl p-6 shadow-lg">
-              <div className="font-semibold mb-2">LabPilot</div>
-              <div className="text-sm mb-4">$19 interpretation</div>
-              <div className="text-xs">+ 25% off supplements</div>
+            
+            <div className="bg-blue-600 text-white p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">Only BiohackLabs.ai Offers Everything</h3>
+              <div className="grid md:grid-cols-3 gap-8 mb-6">
+                <div>
+                  <div className="text-3xl font-bold mb-2">$19</div>
+                  <div className="text-blue-100">AI Analysis</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-2">25%</div>
+                  <div className="text-blue-100">Supplement Savings</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-2">13K+</div>
+                  <div className="text-blue-100">Premium Products</div>
+                </div>
+              </div>
+              <p className="text-blue-100 text-lg">
+                The complete biohacking solution: Lab ordering + AI interpretation + functional analysis + premium supplements at practitioner prices
+              </p>
             </div>
           </div>
         </div>
