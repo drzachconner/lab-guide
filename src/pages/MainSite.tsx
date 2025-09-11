@@ -18,6 +18,8 @@ import FAQ from "./FAQ";
 import ContactUs from "./ContactUs";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
+import HIPAACompliance from "./HIPAACompliance";
+import MedicalDisclaimer from "./MedicalDisclaimer";
 import AIAnalysisDescription from "./AIAnalysisDescription";
 import ProductsCatalog from "./ProductsCatalog";
 
