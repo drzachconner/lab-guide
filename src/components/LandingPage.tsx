@@ -580,20 +580,41 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               500+ Premium Lab Tests Available
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
               Access the same advanced panels used by top biohackers and functional medicine practitioners
             </p>
+            
+            {/* Mission Statement */}
+            <div className="bg-blue-50 rounded-2xl p-6 mb-12 max-w-4xl mx-auto border border-blue-200">
+              <h3 className="text-2xl font-bold text-blue-900 mb-3">Our Mission: Maximum Value, Minimum Cost</h3>
+              <p className="text-lg text-blue-800 leading-relaxed">
+                We're committed to providing the <strong>most affordable lab testing packages available</strong>. 
+                Our popular panels and comprehensive packages beat competitors' pricing by 30-60%, 
+                making advanced biohacking accessible to everyone.
+              </p>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* 10x Health Style Panel */}
-            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors">
-              <CardHeader className="text-center">
+            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-red-600 text-white border-red-600">Save 60%</Badge>
+              </div>
+              <CardHeader className="text-center pt-8">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-blue-600" />
                 </div>
                 <CardTitle className="text-xl text-blue-700">Comprehensive Biohacker Panel</CardTitle>
                 <CardDescription>Advanced biomarker analysis for optimization</CardDescription>
+                
+                {/* Price Comparison */}
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500 mb-1">Competitor Price</div>
+                  <div className="text-lg text-gray-400 line-through">$499 (10x Health style)</div>
+                  <div className="text-sm text-green-600 font-semibold mb-1">Our Price</div>
+                  <div className="text-2xl font-bold text-green-600">$199</div>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm text-gray-600">
@@ -618,13 +639,24 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Card>
 
             {/* Functional Medicine Panel */}
-            <Card className="border-2 border-green-100 hover:border-green-300 transition-colors">
-              <CardHeader className="text-center">
+            <Card className="border-2 border-green-100 hover:border-green-300 transition-colors relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-red-600 text-white border-red-600">Save 45%</Badge>
+              </div>
+              <CardHeader className="text-center pt-8">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Brain className="h-8 w-8 text-green-600" />
                 </div>
                 <CardTitle className="text-xl text-green-700">Functional Medicine Essentials</CardTitle>
                 <CardDescription>Root cause analysis for optimal health</CardDescription>
+                
+                {/* Price Comparison */}
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500 mb-1">Competitor Price</div>
+                  <div className="text-lg text-gray-400 line-through">$460 (Wellness Way)</div>
+                  <div className="text-sm text-green-600 font-semibold mb-1">Our Price</div>
+                  <div className="text-2xl font-bold text-green-600">$249</div>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm text-gray-600">
@@ -649,13 +681,24 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </Card>
 
             {/* Performance & Longevity Panel */}
-            <Card className="border-2 border-purple-100 hover:border-purple-300 transition-colors">
-              <CardHeader className="text-center">
+            <Card className="border-2 border-purple-100 hover:border-purple-300 transition-colors relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-red-600 text-white border-red-600">Save 50%</Badge>
+              </div>
+              <CardHeader className="text-center pt-8">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="h-8 w-8 text-purple-600" />
                 </div>
                 <CardTitle className="text-xl text-purple-700">Performance & Longevity</CardTitle>
                 <CardDescription>Elite athlete & longevity optimization</CardDescription>
+                
+                {/* Price Comparison */}
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="text-sm text-gray-500 mb-1">Competitor Price</div>
+                  <div className="text-lg text-gray-400 line-through">$589 (InsideTracker)</div>
+                  <div className="text-sm text-green-600 font-semibold mb-1">Our Price</div>
+                  <div className="text-2xl font-bold text-green-600">$299</div>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm text-gray-600">
@@ -678,6 +721,33 @@ const LandingPage = ({ clinicContext }: LandingPageProps = {}) => {
                 </div>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Savings Callout */}
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 mb-12 border border-green-200">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Save $300-$800 on Popular Lab Packages
+              </h3>
+              <p className="text-lg text-gray-700 mb-6">
+                Our comprehensive panels deliver the same insights as premium competitors at a fraction of the cost. 
+                Most popular packages save you 40-60% compared to 10x Health, InsideTracker, and The Wellness Way.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                  Same CLIA-certified labs as competitors
+                </div>
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                  Identical biomarker coverage
+                </div>
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
+                  Superior AI analysis included
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="text-center">
