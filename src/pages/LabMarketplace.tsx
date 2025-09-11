@@ -430,10 +430,10 @@ const LabMarketplace = () => {
           <Button 
             variant="ghost" 
             onClick={handleBackToHome}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+            className="flex items-center text-gray-600 hover:text-gray-900"
+            size="sm"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Home
           </Button>
           
           <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
