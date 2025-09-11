@@ -15,55 +15,55 @@ export default function HeroFX() {
         }}
       />
 
-      {/* Three large animated blobs (transform-based => always visible movement) */}
+      {/* Three animated blobs (smaller, less blur, continuous loop) */}
       <motion.div
-        initial={{ x: "-10vw", y: "-8vh", scale: 1, opacity: 0.6 }}
-        animate={{ x: ["-10vw", "8vw", "0vw"], y: ["-8vh", "4vh", "0vh"], scale: [1, 1.07, 1] }}
+        initial={{ x: "-10vw", y: "-8vh", scale: 1, opacity: 0.4 }}
+        animate={{ x: ["-10vw", "6vw", "-2vw", "-10vw"], y: ["-8vh", "2vh", "-4vh", "-8vh"], scale: [1, 1.05, 1.02, 1] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
           left: 0,
           top: 0,
-          width: "44rem",
-          height: "44rem",
+          width: "32rem",
+          height: "32rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 30% 30%, rgba(59,130,246,0.6), rgba(59,130,246,0.2) 60%, transparent 70%)",
-          filter: "blur(30px)",
+            "radial-gradient(circle at 30% 30%, rgba(59,130,246,0.4), rgba(59,130,246,0.15) 60%, transparent 70%)",
+          filter: "blur(20px)",
           willChange: "transform, opacity",
         }}
       />
       <motion.div
-        initial={{ x: "6vw", y: "8vh", scale: 1, opacity: 0.55 }}
-        animate={{ x: ["6vw", "-6vw", "0vw"], y: ["8vh", "-4vh", "0vh"], scale: [1, 1.05, 1] }}
+        initial={{ x: "6vw", y: "8vh", scale: 1, opacity: 0.35 }}
+        animate={{ x: ["6vw", "-4vw", "2vw", "6vw"], y: ["8vh", "-2vh", "4vh", "8vh"], scale: [1, 1.03, 1.01, 1] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
           right: 0,
           top: "10%",
-          width: "40rem",
-          height: "40rem",
+          width: "28rem",
+          height: "28rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 70% 30%, rgba(147,197,253,0.55), rgba(147,197,253,0.2) 60%, transparent 70%)",
-          filter: "blur(30px)",
+            "radial-gradient(circle at 70% 30%, rgba(147,197,253,0.35), rgba(147,197,253,0.15) 60%, transparent 70%)",
+          filter: "blur(20px)",
           willChange: "transform, opacity",
         }}
       />
       <motion.div
-        initial={{ x: "0vw", y: "10vh", scale: 1, opacity: 0.5 }}
-        animate={{ x: ["0vw", "-8vw", "0vw"], y: ["10vh", "0vh", "10vh"], scale: [1, 1.06, 1] }}
+        initial={{ x: "0vw", y: "10vh", scale: 1, opacity: 0.3 }}
+        animate={{ x: ["0vw", "-6vw", "3vw", "0vw"], y: ["10vh", "-2vh", "6vh", "10vh"], scale: [1, 1.04, 1.01, 1] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
           left: "15%",
           bottom: "-15%",
-          width: "46rem",
-          height: "46rem",
+          width: "34rem",
+          height: "34rem",
           borderRadius: "9999px",
           background:
-            "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.5), rgba(59,130,246,0.2) 60%, transparent 70%)",
-          filter: "blur(30px)",
+            "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.3), rgba(59,130,246,0.12) 60%, transparent 70%)",
+          filter: "blur(20px)",
           willChange: "transform, opacity",
         }}
       />
