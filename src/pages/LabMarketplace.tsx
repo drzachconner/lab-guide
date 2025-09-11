@@ -462,10 +462,10 @@ const LabMarketplace = () => {
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Precision Labs for Biohackers<br/>
-              <span className="text-blue-600">$19 AI Interpretation</span>
+              <span className="text-blue-600">AI Analysis Included</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Order the right labs for optimization — not just diagnostics. Curated biohacker panels, plus $19 AI interpretation that turns numbers into a plan.
+              Order the right labs for optimization — not just diagnostics. Curated biohacker panels with AI interpretation included that turns numbers into a plan.
             </p>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-4xl mx-auto">
               <p className="text-sm text-blue-800">
@@ -488,7 +488,7 @@ const LabMarketplace = () => {
                 size="lg"
                 className="border-blue-200 text-blue-700 hover:bg-blue-50 px-8 py-4"
               >
-                Upload Labs ($19)
+                Upload Labs (AI Analysis Included)
               </Button>
             </div>
           </motion.div>
@@ -539,8 +539,8 @@ const LabMarketplace = () => {
                         {panel.priceMin !== panel.priceMax && (
                           <span className="text-lg text-gray-500">- ${panel.priceMax}</span>
                         )}
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                          +$19 AI Analysis
+                        <Badge variant="secondary" className="bg-green-100 text-green-700">
+                          AI Analysis Included
                         </Badge>
                       </div>
 
@@ -630,7 +630,7 @@ const LabMarketplace = () => {
                           className="w-full bg-blue-600 hover:bg-blue-700"
                           onClick={() => handleOrderPanel(panel)}
                         >
-                          Order Panel + AI Analysis (${AI_INTERPRETATION_FEE})
+                          Order Panel (AI Analysis Included)
                         </Button>
                       </div>
                     </CardContent>
@@ -704,7 +704,7 @@ const LabMarketplace = () => {
                       <td className="px-4 md:px-6 py-4 text-center text-gray-600 text-sm">$199-$599</td>
                       <td className="px-4 md:px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
                       <td className="px-4 md:px-6 py-4 text-center text-gray-600 text-sm">$40-$99</td>
-                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50 font-semibold text-blue-700">$19</td>
+                      <td className="px-4 md:px-6 py-4 text-center bg-blue-50 font-semibold text-blue-700">Included</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-4 md:px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white z-10 shadow-sm">Supplement Integration</td>
@@ -740,19 +740,19 @@ const LabMarketplace = () => {
             <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 text-lg">
               Get Started with BiohackLabs.ai
             </Button>
-            <p className="text-gray-500 mt-2 text-sm">25% off supplements + $19 AI analysis</p>
+            <p className="text-gray-500 mt-2 text-sm">25% off supplements + AI analysis included</p>
           </div>
         </div>
       </section>
 
-      {/* AI Analysis Upsell */}
+      {/* AI Analysis Section */}
       <section className="py-12 px-4 bg-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Every Test Includes Optional AI Analysis
+            Every Test Includes AI Analysis
           </h3>
           <p className="text-gray-600 mb-6">
-            Add $19 AI-powered interpretation built on functional medicine and biohacking ranges 
+            AI-powered interpretation built on functional medicine and biohacking ranges 
             to translate your results into actionable supplement and lifestyle recommendations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
