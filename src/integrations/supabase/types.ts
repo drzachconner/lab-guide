@@ -245,7 +245,6 @@ export type Database = {
           created_at: string
           id: string
           lab_order_id: string
-          updated_at: string
           user_id: string
         }
         Insert: {
@@ -253,7 +252,6 @@ export type Database = {
           created_at?: string
           id?: string
           lab_order_id: string
-          updated_at?: string
           user_id: string
         }
         Update: {
@@ -261,40 +259,68 @@ export type Database = {
           created_at?: string
           id?: string
           lab_order_id?: string
-          updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "interpretations_lab_order_id_fkey"
+            columns: ["lab_order_id"]
+            isOneToOne: false
+            referencedRelation: "lab_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "interpretations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lab_orders: {
         Row: {
           created_at: string
+          fs_order_id: string | null
           id: string
           panel: string
           raw_result: Json | null
+          raw_result_enc: string | null
           status: string
           updated_at: string
           user_id: string
         }
         Insert: {
           created_at?: string
+          fs_order_id?: string | null
           id?: string
           panel: string
           raw_result?: Json | null
+          raw_result_enc?: string | null
           status?: string
           updated_at?: string
           user_id: string
         }
         Update: {
           created_at?: string
+          fs_order_id?: string | null
           id?: string
           panel?: string
           raw_result?: Json | null
+          raw_result_enc?: string | null
           status?: string
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "lab_orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lab_panels: {
         Row: {
@@ -514,68 +540,33 @@ export type Database = {
       }
       profiles: {
         Row: {
-          account_type: string | null
           age_bucket: string | null
-          auth_id: string | null
-          clinic_id: string | null
-          consent_deidentified_processing: boolean | null
-          consent_timestamp: string | null
-          consent_version: string | null
+          auth_id: string
           created_at: string
-          dispensary_access: boolean | null
-          dispensary_url: string | null
           fs_token: string | null
-          full_name: string | null
-          fullscript_account_id: string | null
           id: string
           sex: string | null
           updated_at: string
         }
         Insert: {
-          account_type?: string | null
           age_bucket?: string | null
-          auth_id?: string | null
-          clinic_id?: string | null
-          consent_deidentified_processing?: boolean | null
-          consent_timestamp?: string | null
-          consent_version?: string | null
+          auth_id: string
           created_at?: string
-          dispensary_access?: boolean | null
-          dispensary_url?: string | null
           fs_token?: string | null
-          full_name?: string | null
-          fullscript_account_id?: string | null
-          id: string
-          sex?: string | null
-          updated_at?: string
-        }
-        Update: {
-          account_type?: string | null
-          age_bucket?: string | null
-          auth_id?: string | null
-          clinic_id?: string | null
-          consent_deidentified_processing?: boolean | null
-          consent_timestamp?: string | null
-          consent_version?: string | null
-          created_at?: string
-          dispensary_access?: boolean | null
-          dispensary_url?: string | null
-          fs_token?: string | null
-          full_name?: string | null
-          fullscript_account_id?: string | null
           id?: string
           sex?: string | null
           updated_at?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_clinic_id_fkey"
-            columns: ["clinic_id"]
-            isOneToOne: false
-            referencedRelation: "clinics"
-            referencedColumns: ["id"]
-          },
-        ]
+        Update: {
+          age_bucket?: string | null
+          auth_id?: string
+          created_at?: string
+          fs_token?: string | null
+          id?: string
+          sex?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       subscription_plans: {
         Row: {
@@ -731,9 +722,37 @@ export type Database = {
         Args: { user_uuid?: string }
         Returns: string
       }
+      gtrgm_compress: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_decompress: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_in: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_options: {
+        Args: { "": unknown }
+        Returns: undefined
+      }
+      gtrgm_out: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
       is_clinic_admin: {
         Args: { clinic_id_param: string }
         Returns: boolean
+      }
+      lab_orders_get_raw_result: {
+        Args: { _key: string; _order_id: string }
+        Returns: Json
+      }
+      lab_orders_set_raw_result: {
+        Args: { _json: Json; _key: string; _order_id: string }
+        Returns: undefined
       }
       process_email_reminders: {
         Args: Record<PropertyKey, never>
@@ -756,6 +775,18 @@ export type Database = {
           p_user_id: string
         }
         Returns: undefined
+      }
+      set_limit: {
+        Args: { "": number }
+        Returns: number
+      }
+      show_limit: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      show_trgm: {
+        Args: { "": string }
+        Returns: string[]
       }
     }
     Enums: {
