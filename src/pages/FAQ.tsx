@@ -68,6 +68,18 @@ export default function FAQ() {
         {
           q: "What if I need fasting for certain tests?",
           a: "Fasting requirements are clearly marked on each panel and included in your lab requisition. Typically 10-12 hours fasting is required for glucose and lipid panels. We provide detailed preparation instructions with your lab forms."
+        },
+        {
+          q: "Do you accept insurance for lab testing?",
+          a: "Lab orders placed through Fullscript are cash-pay only and not reimbursable by insurance (no superbills available). A $12.50 provider authorization fee per test/panel and a $10 standard draw fee are included at checkout. HSA/FSA eligibility varies by plan—please check with your administrator."
+        },
+        {
+          q: "What if I want to use my insurance for labs?",
+          a: "If you prefer to use insurance, you can get labs ordered through your doctor or clinician, then upload the PDF results to our platform for $19 AI interpretation. This allows you to leverage your insurance coverage while still getting our advanced functional medicine analysis."
+        },
+        {
+          q: "What happens if my lab order isn't approved?",
+          a: "If an authorizing clinician doesn't approve your order for any reason, Fullscript provides a full refund including the $12.50 authorization fee. This ensures you're only charged for approved and completed lab work."
         }
       ]
     },
@@ -138,6 +150,14 @@ export default function FAQ() {
         {
           q: "Why is analysis so much cheaper than competitors?",
           a: "We've automated the analysis process using advanced AI, eliminating expensive human review costs. Our revenue also comes from supplement partnerships, allowing us to offer analysis at near-cost. We believe health optimization should be accessible, not expensive."
+        },
+        {
+          q: "Are lab fees included in the panel price?",
+          a: "The panel price covers the lab testing cost. However, Fullscript adds a $12.50 provider authorization fee per test/panel and a $10 standard draw fee at checkout. These fees are clearly displayed before payment and cover practitioner oversight and sample collection services."
+        },
+        {
+          q: "Can I use HSA/FSA for lab purchases?",
+          a: "HSA/FSA eligibility varies by individual plan and administrator policies. While our lab testing may qualify as a medical expense, you should check with your HSA/FSA administrator for specific eligibility. We recommend keeping receipts for potential reimbursement."
         }
       ]
     },
