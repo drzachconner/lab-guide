@@ -1,8 +1,8 @@
 import catalogData from '@/config/labs-catalog-expanded.json';
-import fullscriptCatalog from '@/config/fullscript-catalog.json';
-import fullscriptCatalogReplacement from '@/config/fullscript-catalog-replacement.json';
 import { computeRetailPrice, type PricingStrategy, type Fees, type PricingDefaults } from './pricing';
-import { parseCatalogTextBasic } from '@/utils/localCatalogParser';
+
+// Types will be strengthened in Chunk 3
+type Panel = any;
 
 export interface LabPanel {
   id: string;
@@ -43,17 +43,54 @@ export interface PricedPanel extends LabPanel {
 }
 
 class CatalogService {
+  private static instance: CatalogService | null = null;
   private config: CatalogConfig;
-  private fullscriptData: any;
+  private fullscriptData: any = null;
   private initialized = false;
+  private version = 'v1'; // bump to refresh caches when needed
 
   constructor() {
+    // Load base catalog config synchronously
     this.config = catalogData as CatalogConfig;
-    // Use the built catalog JSON directly - contains all 1000+ panels
-    this.fullscriptData = (fullscriptCatalog as any)?.panels?.length
-      ? (fullscriptCatalog as any)
-      : {};
-    console.log(`Catalog loaded with ${this.fullscriptData?.panels?.length || 0} Fullscript panels`);
+  }
+
+  static getInstance(): CatalogService {
+    if (!this.instance) {
+      this.instance = new CatalogService();
+    }
+    return this.instance;
+  }
+
+  async init(): Promise<void> {
+    if (this.initialized) return;
+    
+    try {
+      console.log('🚀 Loading build-time catalog...');
+      
+      // ✅ Build-time JSON, lazy-loaded to avoid bloating the initial bundle
+      const { default: fullCatalog } = await import('@/config/fullscript-catalog.json');
+      
+      if (fullCatalog?.panels?.length) {
+        this.fullscriptData = fullCatalog;
+        console.log(`✅ Loaded ${fullCatalog.panels.length} panels from build-time catalog`);
+      } else {
+        console.warn('⚠️ Build-time catalog is empty or invalid, using fallback');
+        this.fullscriptData = { providers: [], panels: [] };
+      }
+      
+    } catch (error) {
+      console.warn('⚠️ Failed to load build-time catalog:', error);
+      this.fullscriptData = { providers: [], panels: [] };
+    } finally {
+      this.initialized = true;
+    }
+  }
+
+  // Ensure initialization before any operations
+  private async ensureInitialized(): Promise<void> {
+    if (!this.initialized) {
+      await this.init();
+    }
   }
 
   // Allow runtime injection/override of Fullscript catalog (e.g., parsed from text)
@@ -61,7 +98,9 @@ class CatalogService {
     this.fullscriptData = data || {};
   }
 
-  getAllPanels(): LabPanel[] {
+  async getAllPanels(): Promise<LabPanel[]> {
+    await this.ensureInitialized();
+    
     // Combine original panels with Fullscript panels
     const originalPanels = this.config.panels;
     const fullscriptPanels = this.convertFullscriptPanels();
@@ -98,28 +137,33 @@ class CatalogService {
     }));
   }
 
-  getPanelById(id: string): LabPanel | null {
+  async getPanelById(id: string): Promise<LabPanel | null> {
+    await this.ensureInitialized();
+    
     // Check original panels first
     const originalPanel = this.config.panels.find(panel => panel.id === id);
     if (originalPanel) return originalPanel;
     
     // Check Fullscript panels
-    const allPanels = this.getAllPanels();
+    const allPanels = await this.getAllPanels();
     return allPanels.find(panel => panel.id === id) || null;
   }
 
-  getPanelsByCategory(category: string): LabPanel[] {
-    return this.getAllPanels().filter(panel => panel.category === category);
+  async getPanelsByCategory(category: string): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => panel.category === category);
   }
 
-  getCategories(): string[] {
-    const categories = new Set(this.getAllPanels().map(panel => panel.category));
+  async getCategories(): Promise<string[]> {
+    const allPanels = await this.getAllPanels();
+    const categories = new Set(allPanels.map(panel => panel.category));
     return Array.from(categories).sort();
   }
 
-  searchPanels(query: string): LabPanel[] {
+  async searchPanels(query: string): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
     const lowerQuery = query.toLowerCase();
-    return this.getAllPanels().filter(panel => {
+    return allPanels.filter(panel => {
       return (
         panel.display_name.toLowerCase().includes(lowerQuery) ||
         panel.aliases.some(alias => alias.toLowerCase().includes(lowerQuery)) ||
@@ -133,8 +177,8 @@ class CatalogService {
     });
   }
 
-  getSubcategories(category?: string): string[] {
-    const allPanels = this.getAllPanels();
+  async getSubcategories(category?: string): Promise<string[]> {
+    const allPanels = await this.getAllPanels();
     let panels = category && category !== 'all' ? 
       allPanels.filter(panel => panel.category === category) : 
       allPanels;
@@ -147,26 +191,31 @@ class CatalogService {
     return Array.from(subcategories).sort();
   }
 
-  getPanelsBySubcategory(subcategory: string): LabPanel[] {
-    return this.getAllPanels().filter(panel => panel.subcategory === subcategory);
+  async getPanelsBySubcategory(subcategory: string): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => panel.subcategory === subcategory);
   }
 
-  getPopularPanels(): LabPanel[] {
-    return this.getAllPanels().filter(panel => panel.popular === true);
+  async getPopularPanels(): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => panel.popular === true);
   }
 
-  getPanelsBySpecimen(specimen: string): LabPanel[] {
-    return this.getAllPanels().filter(panel => 
+  async getPanelsBySpecimen(specimen: string): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => 
       panel.specimen.toLowerCase().includes(specimen.toLowerCase())
     );
   }
 
-  getPanelsByFastingRequirement(fastingRequired: boolean): LabPanel[] {
-    return this.getAllPanels().filter(panel => panel.fasting_required === fastingRequired);
+  async getPanelsByFastingRequirement(fastingRequired: boolean): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => panel.fasting_required === fastingRequired);
   }
 
-  getPanelsByTurnaroundTime(maxDays: number): LabPanel[] {
-    return this.getAllPanels().filter(panel => {
+  async getPanelsByTurnaroundTime(maxDays: number): Promise<LabPanel[]> {
+    const allPanels = await this.getAllPanels();
+    return allPanels.filter(panel => {
       const turnaround = panel.turnaround_days;
       const matches = turnaround.match(/(\d+)/);
       if (matches) {
@@ -177,7 +226,7 @@ class CatalogService {
     });
   }
 
-  sortPanels(panels: LabPanel[], sortBy: 'name' | 'price' | 'category' | 'turnaround' | 'popular'): LabPanel[] {
+  async sortPanels(panels: LabPanel[], sortBy: 'name' | 'price' | 'category' | 'turnaround' | 'popular'): Promise<LabPanel[]> {
     return [...panels].sort((a, b) => {
       switch (sortBy) {
         case 'name':
@@ -221,7 +270,7 @@ class CatalogService {
   }
 
   async computePanelPrice(panelId: string): Promise<PricedPanel | null> {
-    const panel = this.getPanelById(panelId);
+    const panel = await this.getPanelById(panelId);
     if (!panel) return null;
 
     // Handle bundles
@@ -258,7 +307,7 @@ class CatalogService {
     // Get component costs
     let totalComponentCost = 0;
     for (const componentId of bundlePanel.bundle_components) {
-      const component = this.getPanelById(componentId);
+      const component = await this.getPanelById(componentId);
       if (component) {
         const componentCost = await this.getFullscriptBaseCost(component.fs_sku);
         totalComponentCost += componentCost;
@@ -284,20 +333,11 @@ class CatalogService {
     };
   }
 
-  private async ensureLoaded() {
-    // Catalog is now loaded at import time - no need for runtime fetching
-    return;
-  }
-
-  // Public initializer - now a no-op since catalog loads at import
-  async init() {
-    return;
-  }
-
   async computeAllPanelPrices(): Promise<PricedPanel[]> {
+    const allPanels = await this.getAllPanels();
     const pricedPanels: PricedPanel[] = [];
     
-    for (const panel of this.getAllPanels()) {
+    for (const panel of allPanels) {
       const pricedPanel = await this.computePanelPrice(panel.id);
       if (pricedPanel) {
         pricedPanels.push(pricedPanel);
@@ -312,4 +352,4 @@ class CatalogService {
   }
 }
 
-export const catalogService = new CatalogService();
+export const catalogService = CatalogService.getInstance();
