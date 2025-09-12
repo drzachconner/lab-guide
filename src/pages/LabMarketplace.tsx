@@ -20,6 +20,7 @@ import { AdvancedLabPanelBrowser } from "@/components/AdvancedLabPanelBrowser";
 import { PDFUploadProcessor } from "@/components/PDFUploadProcessor";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useCatalog } from "@/hooks/useCatalog";
 import { supabase } from "@/integrations/supabase/client";
 import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
 import UnifiedBackground from "@/components/UnifiedBackground";
@@ -32,6 +33,7 @@ export function LabMarketplace() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+  const { forceRefreshCatalog } = useCatalog();
   const [cartItems, setCartItems] = useState<PricedPanel[]>([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showLivePricing, setShowLivePricing] = useState(false);
@@ -236,7 +238,7 @@ export function LabMarketplace() {
               <PriceDisclaimer className="mb-4" />
               
               {/* Process Catalog Button */}
-              <ProcessCatalogButton />
+              <ProcessCatalogButton onCatalogUpdated={forceRefreshCatalog} />
 
               {/* Toggle between Browse Labs and Upload PDF */}
               <div className="flex gap-2 mb-6">

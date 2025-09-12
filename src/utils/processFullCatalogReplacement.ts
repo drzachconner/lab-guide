@@ -37,6 +37,9 @@ export async function processAndReplaceCatalog(textContent: string) {
       panels: data.panels
     };
 
+    // Write the catalog to file
+    await writeCatalogToFile(newCatalog);
+
     return {
       success: true,
       catalog: newCatalog,
@@ -58,10 +61,27 @@ export async function processAndReplaceCatalog(textContent: string) {
       };
     }
 
+    // Write the locally parsed catalog to file
+    await writeCatalogToFile(parsed);
+
     return {
       success: true,
       catalog: parsed,
       message: `AI quota error detected. Used local parser to extract ${count} panels.`
     };
+  }
+}
+
+async function writeCatalogToFile(catalog: any) {
+  try {
+    // Save to a temporary catalog file that can be loaded by the app
+    const catalogJson = JSON.stringify(catalog, null, 2);
+    
+    // Store in localStorage as fallback mechanism since we can't directly write files
+    localStorage.setItem('parsed_fullscript_catalog', catalogJson);
+    
+    console.log(`Saved catalog with ${catalog.panels.length} panels to local storage`);
+  } catch (error) {
+    console.warn('Could not write catalog to file:', error);
   }
 }

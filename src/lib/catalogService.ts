@@ -47,11 +47,29 @@ class CatalogService {
   constructor() {
     this.config = catalogData as CatalogConfig;
     this.fullscriptData = fullscriptCatalog;
+    // Try to load parsed catalog from localStorage
+    this.loadParsedCatalog();
   }
 
   // Allow runtime injection/override of Fullscript catalog (e.g., parsed from text)
   setFullscriptData(data: any) {
     this.fullscriptData = data || {};
+  }
+
+  // Load parsed catalog from localStorage if available
+  loadParsedCatalog() {
+    try {
+      const stored = localStorage.getItem('parsed_fullscript_catalog');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        console.log(`Loading parsed catalog with ${parsed.panels?.length || 0} panels`);
+        this.fullscriptData = parsed;
+        return true;
+      }
+    } catch (error) {
+      console.warn('Failed to load parsed catalog from storage:', error);
+    }
+    return false;
   }
 
   getAllPanels(): LabPanel[] {
@@ -66,28 +84,28 @@ class CatalogService {
     
     return this.fullscriptData.panels.map((fsPanel: any) => ({
       id: fsPanel.id,
-      display_name: fsPanel.name,
+      display_name: fsPanel.display_name || fsPanel.name,
       fs_sku: fsPanel.id.replace('fs-', 'FS-'),
       category: fsPanel.category || 'Laboratory Tests',
       subcategory: fsPanel.subcategory,
       specimen: fsPanel.specimen || 'Serum',
       fasting_required: fsPanel.fasting_required || false,
-      turnaround_days: `${fsPanel.turnaround_days || 1} business days`,
-      aliases: [fsPanel.name],
-      biomarkers: fsPanel.biomarkers?.map((b: any) => b.name) || [],
-      reference_vendor: fsPanel.providers?.[0]?.name || 'Fullscript',
+      turnaround_days: fsPanel.turnaround_days || '1-3 business days',
+      aliases: fsPanel.aliases || [fsPanel.name || fsPanel.display_name],
+      biomarkers: fsPanel.biomarkers || [],
+      reference_vendor: fsPanel.providers?.[0]?.name || fsPanel.lab_provider || 'Multiple Providers',
       reference_price_usd: fsPanel.providers?.[0]?.price || null,
       pricing: { 
         strategy: 'reference_undercut', 
         undercut_percent: 5, 
         min_margin_usd: 10 
       } as PricingStrategy,
-      notes: `Available from ${fsPanel.providers?.length || 1} provider(s). ${fsPanel.providers?.[0]?.price_notes || ''}`.trim(),
-      clinical_significance: `Lab panel from Fullscript catalog with ${fsPanel.biomarkers?.length || 0} biomarkers.`,
-      popular: ['Basic Metabolic Panel', 'CBC', 'Lipid Panel', 'DUTCH'].some(popular => 
-        fsPanel.name.includes(popular)
+      notes: fsPanel.notes || `Available from ${fsPanel.providers?.length || 1} provider(s).`,
+      clinical_significance: fsPanel.clinical_significance || `Lab panel with multiple biomarkers.`,
+      popular: fsPanel.popular || ['Basic Metabolic Panel', 'CBC', 'Lipid Panel', 'DUTCH', 'Thyroid'].some(popular => 
+        (fsPanel.name || fsPanel.display_name || '').toLowerCase().includes(popular.toLowerCase())
       ),
-      lab_provider: fsPanel.providers?.[0]?.name || 'Multiple Providers',
+      lab_provider: fsPanel.lab_provider || fsPanel.providers?.[0]?.name || 'Multiple Providers',
     }));
   }
 

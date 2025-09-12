@@ -111,6 +111,12 @@ export function useCatalog() {
     await loadPanels();
   };
 
+  const forceRefreshCatalog = async () => {
+    // Force catalog service to reload parsed data
+    catalogService.loadParsedCatalog();
+    await loadPanels();
+  };
+
   return {
     panels,
     loading,
@@ -124,5 +130,6 @@ export function useCatalog() {
     getPopularPanels,
     sortPanels,
     refreshPrices,
+    forceRefreshCatalog,
   };
 }

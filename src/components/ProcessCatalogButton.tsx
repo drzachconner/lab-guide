@@ -2,8 +2,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { processAndReplaceCatalog } from '@/utils/processFullCatalogReplacement';
+import { catalogService } from '@/lib/catalogService';
 
-export const ProcessCatalogButton = () => {
+interface ProcessCatalogButtonProps {
+  onCatalogUpdated?: () => void;
+}
+
+export const ProcessCatalogButton = ({ onCatalogUpdated }: ProcessCatalogButtonProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleProcessCatalog = async () => {
@@ -15,13 +20,25 @@ export const ProcessCatalogButton = () => {
       
       console.log(`Starting to process ${textContent.length} characters of catalog text...`);
       
-      // Process with AI and replace catalog
+      // Process with AI/local parser and replace catalog
       const result = await processAndReplaceCatalog(textContent);
       
-      if (result.success) {
-        toast.success(result.message);
-        // Reload the page to show updated catalog
-        window.location.reload();
+      if (result.success && result.catalog) {
+        // Update the catalog service with new data
+        catalogService.setFullscriptData(result.catalog);
+        
+        toast.success(`${result.message} - Marketplace updated with ${result.catalog.panels.length} tests!`);
+        
+        // Call callback to refresh UI
+        if (onCatalogUpdated) {
+          onCatalogUpdated();
+        } else {
+          // Fallback: reload page
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        }
+        
       } else {
         toast.error(result.error || 'Failed to process catalog');
       }
