@@ -11,6 +11,7 @@ import {
   Shield,
   Clock,
   CheckCircle,
+  ExternalLink,
   Upload,
   Search
 } from "lucide-react";
