@@ -8,16 +8,17 @@ import {
 } from "@/types/zod";
 import { z } from "zod";
 
-// Note: Lovable doesn't support VITE_ env variables, using hardcoded base for now
-const API_BASE = "https://zhdjvfylxgtiphldjtqf.supabase.co/functions/v1";
+// Use Supabase edge functions URLs
+const FUNCTIONS_BASE = "https://zhdjvfylxgtiphldjtqf.supabase.co/functions/v1";
 
-// Generic fetch with auth + Zod validation
-async function req<T>(
+// Generic edge function call with auth + Zod validation
+async function callEdgeFunction<T>(
+  functionName: string,
   path: string,
   init: RequestInit,
   schema: z.ZodType<T>
 ): Promise<T> {
-  // attach Supabase JWT
+  // Attach Supabase JWT
   const { data: { session } } = await supabase.auth.getSession();
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -25,7 +26,8 @@ async function req<T>(
     ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
   };
 
-  const res = await fetch(`${API_BASE}${path}`, { ...init, headers });
+  const url = `${FUNCTIONS_BASE}/${functionName}${path}`;
+  const res = await fetch(url, { ...init, headers });
   const text = await res.text();
 
   // handle non-2xx
@@ -41,7 +43,7 @@ async function req<T>(
   const json = JSON.parse(text);
   const parsed = schema.safeParse(json);
   if (!parsed.success) {
-    console.error("Validation error for", path, parsed.error.format());
+    console.error("Validation error for", url, parsed.error.format());
     throw new Error("ValidationError");
   }
   return parsed.data;
@@ -59,21 +61,27 @@ const AnalyzeOkZ = z.object({
 export const api = {
   // Auth & Profiles
   getMyProfile(): Promise<ProfileT | null> {
-    return req("/me/profile", { method: "GET" }, ProfilesMaybeZ);
+    return callEdgeFunction("profile-api", "/me/profile", { method: "GET" }, ProfilesMaybeZ);
   },
   createMyProfile(payload: CreateProfileInput): Promise<ProfileT> {
-    return req("/me/profile", { method: "POST", body: JSON.stringify(payload) }, ProfileZ);
+    return callEdgeFunction("profile-api", "/me/profile", { 
+      method: "POST", 
+      body: JSON.stringify(payload) 
+    }, ProfileZ);
   },
 
   // Lab Orders
   listOrders(): Promise<LabOrderT[]> {
-    return req("/orders", { method: "GET" }, LabOrdersListZ);
+    return callEdgeFunction("orders-api", "/orders", { method: "GET" }, LabOrdersListZ);
   },
   createOrder(payload: CreateLabOrderInput): Promise<LabOrderT> {
-    return req("/orders", { method: "POST", body: JSON.stringify(payload) }, LabOrderZ);
+    return callEdgeFunction("orders-api", "/orders", { 
+      method: "POST", 
+      body: JSON.stringify(payload) 
+    }, LabOrderZ);
   },
   updateOrderStatus(orderId: string, status: LabOrderT["status"]): Promise<LabOrderT> {
-    return req(`/orders/${orderId}`, {
+    return callEdgeFunction("orders-api", `/orders/${orderId}`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
     }, LabOrderZ);
@@ -81,15 +89,15 @@ export const api = {
 
   // Interpretations
   listInterpretations(): Promise<InterpretationT[]> {
-    return req("/interpretations", { method: "GET" }, InterpretationsListZ);
+    return callEdgeFunction("interpretations-api", "/interpretations", { method: "GET" }, InterpretationsListZ);
   },
   getInterpretation(id: string): Promise<InterpretationT> {
-    return req(`/interpretations/${id}`, { method: "GET" }, InterpretationZ);
+    return callEdgeFunction("interpretations-api", `/interpretations/${id}`, { method: "GET" }, InterpretationZ);
   },
 
   // Ops
   analyzeOrder(lab_order_id: string) {
-    return req("/analyze", {
+    return callEdgeFunction("analyze-order", "/analyze", {
       method: "POST",
       body: JSON.stringify({ lab_order_id }),
     }, AnalyzeOkZ);

@@ -1,5 +1,17 @@
 project_id = "zhdjvfylxgtiphldjtqf"
 
+[functions.profile-api]
+verify_jwt = true
+
+[functions.orders-api]
+verify_jwt = true
+
+[functions.interpretations-api]
+verify_jwt = true
+
+[functions.analyze-order]
+verify_jwt = true
+
 [functions.analyze-lab-report]
 verify_jwt = true
 

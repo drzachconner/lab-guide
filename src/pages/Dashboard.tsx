@@ -16,20 +16,15 @@ import {
   Star,
   ExternalLink
 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { useLabReports } from '@/hooks/useLabReports';
 import { usePaymentStatus } from '@/hooks/usePaymentStatus';
-
-interface UserProfile {
-  id?: string;
-  sex?: string;
-  created_at?: string;
-}
+import { api } from '@/lib/apiClient';
+import type { ProfileT } from '@/types/zod';
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useState<ProfileT | null>(null);
   const { reports, loading: reportsLoading } = useLabReports();
   const { hasPaidAnalysis, hasDispensaryAccess } = usePaymentStatus();
 
@@ -39,16 +34,13 @@ const Dashboard = () => {
       return;
     }
 
-    // Fetch user profile
+    // Fetch user profile using typed API client
     const fetchProfile = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('id, sex, created_at')
-        .eq('auth_id', user.id)
-        .single();
-
-      if (data) {
-        setProfile(data);
+      try {
+        const profileData = await api.getMyProfile();
+        setProfile(profileData);
+      } catch (error) {
+        console.error('Failed to fetch profile:', error);
       }
     };
 
