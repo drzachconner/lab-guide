@@ -15,4 +15,11 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Production hardening
+  build: {
+    sourcemap: false, // don't publish source maps publicly
+  },
+  esbuild: {
+    drop: mode === "production" ? ["console", "debugger"] : [], // strip console/debugger in prod
+  },
 }));

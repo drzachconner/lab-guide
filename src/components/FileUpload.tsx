@@ -211,6 +211,11 @@ const FileUpload = ({ onUploadComplete }: FileUploadProps) => {
             </>
           )}
         </Button>
+        
+        {/* Privacy Notice */}
+        <p className="text-xs text-muted-foreground mt-2 text-center">
+          We de-identify your data before AI analysis and never send names, full dates, or contact info to third-party AI providers.
+        </p>
       </CardContent>
     </Card>
   );
