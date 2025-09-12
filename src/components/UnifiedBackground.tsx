@@ -166,7 +166,7 @@ const UnifiedBackground = ({
   if (!mounted) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
       {/* Base gradient background */}
       <div className={`absolute inset-0 ${config.base}`}>
         {intensity !== 'low' && (
@@ -219,10 +219,10 @@ const UnifiedBackground = ({
         </>
       )}
 
-      {/* Canvas particles */}
+      {/* Canvas particles - reduced opacity for minimal variant */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none opacity-60"
+        className={`absolute inset-0 pointer-events-none ${variant === 'minimal' ? 'opacity-30' : 'opacity-60'}`}
         style={{ 
           mixBlendMode: variant === 'minimal' ? 'normal' : 'screen',
         }}
