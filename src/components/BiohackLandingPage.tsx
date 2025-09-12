@@ -565,9 +565,8 @@ export function BiohackLandingPage() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
               onClick={() => navigate('/lab-marketplace')}
-              className="border-white text-white hover:bg-white/10"
+              className="bg-white text-primary hover:bg-gray-100 border-white"
             >
               <Beaker className="mr-2 h-5 w-5" />
               Order Comprehensive Testing
@@ -593,35 +592,126 @@ export function BiohackLandingPage() {
             <div>
               <h3 className="font-semibold mb-4">Services</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>Lab Analysis ($19)</li>
-                <li>Lab Panel Testing</li>
-                <li>Supplement Catalog</li>
-                <li>Progress Tracking</li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/auth?type=analysis')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Lab Analysis ($19)
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/lab-marketplace')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Lab Panel Testing
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/products-catalog')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Supplement Catalog
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/dashboard')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Progress Tracking
+                  </button>
+                </li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>How It Works</li>
-                <li>Sample Reports</li>
-                <li>FAQ</li>
-                <li>Contact Us</li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/how-it-works')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    How It Works
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/sample-reports')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Sample Reports
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/faq')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    FAQ
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/contact-us')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Contact Us
+                  </button>
+                </li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
-                <li>HIPAA Compliance</li>
-                <li>Medical Disclaimer</li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/privacy-policy')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Privacy Policy
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/terms-of-service')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Terms of Service
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/hipaa-compliance')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    HIPAA Compliance
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => navigate('/medical-disclaimer')} 
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Medical Disclaimer
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
           
           <Separator className="my-8 bg-gray-700" />
+          
+          {/* Lab Availability Notice */}
+          <div className="text-center text-sm text-gray-400 mb-4">
+            <p className="text-amber-400 mb-2">
+              <strong>Lab Availability:</strong> Labs are available for patients located in the US, except NY, NJ, RI and HI
+            </p>
+          </div>
           
           <div className="text-center text-sm text-gray-400">
             <p>&copy; 2024 BiohackLabs.ai. All rights reserved. Not intended to diagnose, treat, cure or prevent any disease.</p>

@@ -297,9 +297,8 @@ export default function FAQ() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
               onClick={() => navigate('/lab-marketplace')}
-              className="border-white text-white hover:bg-white/10"
+              className="bg-white text-primary hover:bg-gray-100 border-white"
             >
               Order Lab Panels
             </Button>

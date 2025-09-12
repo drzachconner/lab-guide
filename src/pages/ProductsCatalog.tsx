@@ -476,9 +476,8 @@ export default function ProductsCatalog() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
               onClick={() => window.open('https://supplements.labpilot.com', '_blank')}
-              className="border-white text-white hover:bg-white/10"
+              className="bg-white text-green-600 hover:bg-gray-100 border-white"
             >
               <ShoppingCart className="mr-2 h-5 w-5" />
               Shop Now (25% Off)

@@ -349,9 +349,8 @@ export default function AIAnalysisDescription() {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
               onClick={() => navigate('/lab-marketplace')}
-              className="border-white text-white hover:bg-white/10"
+              className="bg-white text-primary hover:bg-gray-100 border-white"
             >
               <Microscope className="mr-2 h-5 w-5" />
               Order Lab Panels
