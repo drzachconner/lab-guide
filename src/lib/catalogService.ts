@@ -1,28 +1,12 @@
 import catalogData from '@/config/labs-catalog-expanded.json';
-import { computeRetailPrice, type PricingStrategy, type Fees, type PricingDefaults } from './pricing';
+import { computeRetailPrice, type Fees, type PricingDefaults } from './pricing';
+import type { Panel, Provider, CatalogData, PricedPanel, PricingStrategy } from '@/types/panel';
 
-// Types will be strengthened in Chunk 3
-type Panel = any;
-
-export interface LabPanel {
-  id: string;
-  display_name: string;
-  fs_sku: string;
-  category: string;
-  subcategory?: string;
-  specimen: string;
-  fasting_required: boolean;
-  turnaround_days: string;
-  aliases: string[];
-  biomarkers?: string[];
-  reference_vendor?: string;
-  reference_price_usd?: number | null;
-  pricing: PricingStrategy;
-  notes: string;
-  clinical_significance?: string;
-  popular?: boolean;
-  lab_provider?: string;
-  bundle_components?: string[];
+export interface CatalogConfig {
+  currency: string;
+  default_fees: Fees;
+  pricing_defaults: PricingDefaults;
+  panels: PricedPanel[];
 }
 
 export interface CatalogConfig {
@@ -50,8 +34,21 @@ class CatalogService {
   private version = 'v1'; // bump to refresh caches when needed
 
   constructor() {
-    // Load base catalog config synchronously
-    this.config = catalogData as CatalogConfig;
+    // Load base catalog config synchronously - convert to PricedPanel format
+    const baseConfig = catalogData as any;
+    this.config = {
+      ...baseConfig,
+      panels: baseConfig.panels.map((panel: any): PricedPanel => ({
+        ...panel,
+        fs_sku: panel.fs_sku || panel.id.replace(/^(?!FS-)/, 'FS-'),
+        pricing: panel.pricing || { 
+          strategy: 'reference_undercut', 
+          undercut_percent: 5, 
+          min_margin_usd: 10 
+        },
+        computed_price: null, // Will be computed later
+      }))
+    };
   }
 
   static getInstance(): CatalogService {
@@ -98,7 +95,7 @@ class CatalogService {
     this.fullscriptData = data || {};
   }
 
-  async getAllPanels(): Promise<LabPanel[]> {
+  async getAllPanels(): Promise<PricedPanel[]> {
     await this.ensureInitialized();
     
     // Combine original panels with Fullscript panels
@@ -107,37 +104,41 @@ class CatalogService {
     return [...originalPanels, ...fullscriptPanels];
   }
 
-  private convertFullscriptPanels(): LabPanel[] {
+  private convertFullscriptPanels(): PricedPanel[] {
     if (!this.fullscriptData?.panels) return [];
     
-    return this.fullscriptData.panels.map((fsPanel: any) => ({
+    return this.fullscriptData.panels.map((fsPanel: Panel): PricedPanel => ({
+      // Base panel fields
       id: fsPanel.id,
-      display_name: fsPanel.display_name || fsPanel.name,
-      fs_sku: fsPanel.id.replace('fs-', 'FS-'),
+      display_name: fsPanel.display_name || fsPanel.name || 'Unnamed Test',
       category: fsPanel.category || 'Laboratory Tests',
-      subcategory: fsPanel.subcategory,
       specimen: fsPanel.specimen || 'Serum',
+      subcategory: fsPanel.subcategory,
       fasting_required: fsPanel.fasting_required || false,
       turnaround_days: fsPanel.turnaround_days || '1-3 business days',
-      aliases: fsPanel.aliases || [fsPanel.name || fsPanel.display_name],
+      aliases: fsPanel.aliases || [fsPanel.name || fsPanel.display_name || 'Unnamed Test'],
       biomarkers: fsPanel.biomarkers || [],
-      reference_vendor: fsPanel.providers?.[0]?.name || fsPanel.lab_provider || 'Multiple Providers',
-      reference_price_usd: fsPanel.providers?.[0]?.price || null,
+      clinical_significance: fsPanel.clinical_significance || `Lab panel with multiple biomarkers.`,
+      lab_provider: fsPanel.lab_provider || fsPanel.providers?.[0]?.name || 'Multiple Providers',
+      popular: fsPanel.popular || ['Basic Metabolic Panel', 'CBC', 'Lipid Panel', 'DUTCH', 'Thyroid'].some(popular => 
+        (fsPanel.name || fsPanel.display_name || '').toLowerCase().includes(popular.toLowerCase())
+      ),
+      notes: fsPanel.notes || `Available from ${fsPanel.providers?.length || 1} provider(s).`,
+      
+      // Lab-specific fields
+      fs_sku: fsPanel.id.replace('fs-', 'FS-'),
       pricing: { 
         strategy: 'reference_undercut', 
         undercut_percent: 5, 
         min_margin_usd: 10 
       } as PricingStrategy,
-      notes: fsPanel.notes || `Available from ${fsPanel.providers?.length || 1} provider(s).`,
-      clinical_significance: fsPanel.clinical_significance || `Lab panel with multiple biomarkers.`,
-      popular: fsPanel.popular || ['Basic Metabolic Panel', 'CBC', 'Lipid Panel', 'DUTCH', 'Thyroid'].some(popular => 
-        (fsPanel.name || fsPanel.display_name || '').toLowerCase().includes(popular.toLowerCase())
-      ),
-      lab_provider: fsPanel.lab_provider || fsPanel.providers?.[0]?.name || 'Multiple Providers',
+      
+      // Computed fields (will be set by pricing computation)
+      computed_price: null, // Will be computed later
     }));
   }
 
-  async getPanelById(id: string): Promise<LabPanel | null> {
+  async getPanelById(id: string): Promise<PricedPanel | null> {
     await this.ensureInitialized();
     
     // Check original panels first
@@ -149,7 +150,7 @@ class CatalogService {
     return allPanels.find(panel => panel.id === id) || null;
   }
 
-  async getPanelsByCategory(category: string): Promise<LabPanel[]> {
+  async getPanelsByCategory(category: string): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => panel.category === category);
   }
@@ -160,7 +161,7 @@ class CatalogService {
     return Array.from(categories).sort();
   }
 
-  async searchPanels(query: string): Promise<LabPanel[]> {
+  async searchPanels(query: string): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     const lowerQuery = query.toLowerCase();
     return allPanels.filter(panel => {
@@ -191,29 +192,29 @@ class CatalogService {
     return Array.from(subcategories).sort();
   }
 
-  async getPanelsBySubcategory(subcategory: string): Promise<LabPanel[]> {
+  async getPanelsBySubcategory(subcategory: string): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => panel.subcategory === subcategory);
   }
 
-  async getPopularPanels(): Promise<LabPanel[]> {
+  async getPopularPanels(): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => panel.popular === true);
   }
 
-  async getPanelsBySpecimen(specimen: string): Promise<LabPanel[]> {
+  async getPanelsBySpecimen(specimen: string): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => 
       panel.specimen.toLowerCase().includes(specimen.toLowerCase())
     );
   }
 
-  async getPanelsByFastingRequirement(fastingRequired: boolean): Promise<LabPanel[]> {
+  async getPanelsByFastingRequirement(fastingRequired: boolean): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => panel.fasting_required === fastingRequired);
   }
 
-  async getPanelsByTurnaroundTime(maxDays: number): Promise<LabPanel[]> {
+  async getPanelsByTurnaroundTime(maxDays: number): Promise<PricedPanel[]> {
     const allPanels = await this.getAllPanels();
     return allPanels.filter(panel => {
       const turnaround = panel.turnaround_days;
@@ -226,7 +227,7 @@ class CatalogService {
     });
   }
 
-  async sortPanels(panels: LabPanel[], sortBy: 'name' | 'price' | 'category' | 'turnaround' | 'popular'): Promise<LabPanel[]> {
+  async sortPanels(panels: PricedPanel[], sortBy: 'name' | 'price' | 'category' | 'turnaround' | 'popular'): Promise<PricedPanel[]> {
     return [...panels].sort((a, b) => {
       switch (sortBy) {
         case 'name':
