@@ -29,6 +29,22 @@ const Auth = () => {
   
   const authType = searchParams.get('type') || 'analysis';
 
+  // Age verification function
+  const validateAge = (dateOfBirth: string): boolean => {
+    if (!dateOfBirth) return false;
+    
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    return age >= 18;
+  };
+
   // HIPAA-compliant password validation
   const validatePassword = (password: string): string => {
     if (password.length < 12) {
@@ -154,6 +170,17 @@ const Auth = () => {
 
     try {
       if (isSignUp) {
+        // Validate age requirement (must be 18 or older)
+        if (!validateAge(dateOfBirth)) {
+          toast({
+            title: "Age Verification Required",
+            description: "You must be at least 18 years old to create an account. This service is not intended for users under 18.",
+            variant: "destructive"
+          });
+          setLoading(false);
+          return;
+        }
+        
         // Validate password for signup
         const pwdError = validatePassword(password);
         if (pwdError) {
@@ -319,18 +346,21 @@ const Auth = () => {
                     </div>
                   </div>
                   
-                  <div>
-                    <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
-                      Date of Birth
-                    </label>
-                    <Input
-                      id="dateOfBirth"
-                      type="date"
-                      value={dateOfBirth}
-                      onChange={(e) => setDateOfBirth(e.target.value)}
-                      required
-                    />
-                  </div>
+                   <div>
+                     <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
+                       Date of Birth
+                     </label>
+                     <Input
+                       id="dateOfBirth"
+                       type="date"
+                       value={dateOfBirth}
+                       onChange={(e) => setDateOfBirth(e.target.value)}
+                       required
+                     />
+                     <p className="text-xs text-gray-600 mt-1">
+                       Must be 18 or older to create an account
+                     </p>
+                   </div>
                 </>
               )}
 
