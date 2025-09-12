@@ -4,6 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Lock, ShoppingCart, Percent, CheckCircle, ExternalLink } from "lucide-react";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useFullscriptIntegration } from "@/hooks/useFullscriptIntegration";
+import { useAuth } from "@/hooks/useAuth";
+import { useState, useEffect } from "react";
+import { api } from "@/lib/apiClient";
+import type { ProfileT } from "@/types/zod";
 
 interface DispensaryAccessProps {
   clinicContext?: {
@@ -16,6 +20,58 @@ interface DispensaryAccessProps {
 export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: DispensaryAccessProps) {
   const { hasDispensaryAccess, loading } = usePaymentStatus();
   const { openDispensary, createFullscriptAccount, creatingAccount } = useFullscriptIntegration();
+  const { user } = useAuth();
+  const [profile, setProfile] = useState<ProfileT | null>(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+
+  // Fetch user profile on mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const profileData = await api.getMyProfile();
+        setProfile(profileData);
+      } catch (error) {
+        console.error('Failed to fetch profile:', error);
+      } finally {
+        setProfileLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  const handleDispensaryAccess = async () => {
+    try {
+      // If user has dispensary URL, use it; otherwise prioritize clinic URL
+      const dispensaryUrl = profile?.dispensary_url || clinicContext?.fullscripts_dispensary_url;
+      
+      if (dispensaryUrl) {
+        openDispensary(dispensaryUrl);
+        return;
+      }
+
+      // No dispensary account yet - create one automatically
+      const account = await createFullscriptAccount('dispensary');
+      if (account?.dispensaryUrl) {
+        // Update local profile state
+        setProfile(prev => prev ? { 
+          ...prev, 
+          dispensary_url: account.dispensaryUrl,
+          fullscript_account_id: account.fullscriptAccountId,
+          dispensary_access: true 
+        } : null);
+        
+        // Open the new dispensary
+        openDispensary(account.dispensaryUrl);
+      }
+    } catch (error) {
+      console.error('Error accessing dispensary:', error);
+      // Fallback to generic dispensary
+      openDispensary();
+    }
+  };
 
   if (loading) {
     return (
@@ -49,11 +105,12 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
               <span className="text-sm text-green-700">Storewide savings applied automatically</span>
             </div>
             <Button 
-              onClick={() => openDispensary(clinicContext?.fullscripts_dispensary_url)}
+              onClick={handleDispensaryAccess}
               className="bg-green-600 hover:bg-green-700"
+              disabled={creatingAccount}
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
-              Shop Supplements
+              {creatingAccount ? 'Setting up...' : 'Shop Supplements'}
               <ExternalLink className="h-3 w-3 ml-1" />
             </Button>
           </div>

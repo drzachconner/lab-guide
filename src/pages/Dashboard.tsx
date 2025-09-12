@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useLabReports } from '@/hooks/useLabReports';
 import { usePaymentStatus } from '@/hooks/usePaymentStatus';
+import { useFullscriptIntegration } from '@/hooks/useFullscriptIntegration';
 import { api } from '@/lib/apiClient';
 import type { ProfileT } from '@/types/zod';
 
@@ -27,6 +28,7 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<ProfileT | null>(null);
   const { reports, loading: reportsLoading } = useLabReports();
   const { hasPaidAnalysis, hasDispensaryAccess } = usePaymentStatus();
+  const { createFullscriptAccount, openDispensary } = useFullscriptIntegration();
 
   useEffect(() => {
     if (!user) {
@@ -57,9 +59,34 @@ const Dashboard = () => {
     navigate('/analysis');
   };
 
-  const handleDispensaryAccess = () => {
-    // Open Fullscript dispensary in new tab
-    window.open('https://supplements.labpilot.com', '_blank');
+  const handleDispensaryAccess = async () => {
+    try {
+      // Check if user already has dispensary URL in profile
+      if (profile?.dispensary_url) {
+        // User has existing dispensary account - open it
+        openDispensary(profile.dispensary_url);
+        return;
+      }
+
+      // No dispensary account yet - create one automatically
+      const account = await createFullscriptAccount('dispensary');
+      if (account?.dispensaryUrl) {
+        // Update local profile state
+        setProfile(prev => prev ? { 
+          ...prev, 
+          dispensary_url: account.dispensaryUrl,
+          fullscript_account_id: account.fullscriptAccountId,
+          dispensary_access: true 
+        } : null);
+        
+        // Open the new dispensary
+        openDispensary(account.dispensaryUrl);
+      }
+    } catch (error) {
+      console.error('Error accessing dispensary:', error);
+      // Fallback to generic dispensary
+      openDispensary();
+    }
   };
 
   if (!user) return null;

@@ -10,6 +10,10 @@ export const ProfileZ = z.object({
   sex: z.string().nullable(), // matches actual DB schema
   age_bucket: z.string().nullable(),
   fs_token: z.string().nullable(),
+  fullscript_account_id: z.string().nullable(),
+  dispensary_url: z.string().nullable(),
+  account_type: z.string().nullable(),
+  dispensary_access: z.boolean().nullable(),
   created_at: z.string(),
   updated_at: z.string(),
 });

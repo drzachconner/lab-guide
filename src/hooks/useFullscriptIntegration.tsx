@@ -108,9 +108,45 @@ export function useFullscriptIntegration() {
     }
   };
 
-  const openDispensary = (dispensaryUrl?: string) => {
-    const url = dispensaryUrl || 'https://supplements.labpilot.com';
-    window.open(url, '_blank', 'noopener,noreferrer');
+  const openDispensary = async (dispensaryUrl?: string) => {
+    if (!dispensaryUrl) {
+      const url = 'https://supplements.labpilot.com';
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    try {
+      // Try to get auto-login URL with SSO token
+      const { data, error } = await supabase.functions.invoke('fullscript-auto-login', {
+        body: { dispensaryUrl }
+      });
+
+      if (error) {
+        console.error('Auto-login failed:', error);
+        // Fallback to direct URL
+        window.open(dispensaryUrl, '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      if (data?.success && data?.loginUrl) {
+        // Open the auto-login URL
+        window.open(data.loginUrl, '_blank', 'noopener,noreferrer');
+        
+        if (data.autoLogin) {
+          toast({
+            title: "Dispensary Access",
+            description: "You've been automatically logged into your dispensary account",
+          });
+        }
+      } else {
+        // Fallback to direct URL
+        window.open(dispensaryUrl, '_blank', 'noopener,noreferrer');
+      }
+    } catch (error) {
+      console.error('Auto-login error:', error);
+      // Fallback to direct URL
+      window.open(dispensaryUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return {
