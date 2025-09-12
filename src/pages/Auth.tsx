@@ -87,6 +87,18 @@ const Auth = () => {
   }, [searchParams]);
 
   const getAuthContent = () => {
+    // For sign-in, always show simple welcome message without marketing content
+    if (!isSignUp) {
+      return {
+        title: 'Welcome Back',
+        subtitle: 'Sign in to access your account',
+        icon: <Brain className="h-8 w-8 text-blue-600" />,
+        badge: 'Sign In',
+        benefits: []
+      };
+    }
+    
+    // For sign-up, show marketing content based on authType
     switch (authType) {
       case 'dispensary':
         return {
@@ -116,10 +128,10 @@ const Auth = () => {
         };
       default:
         return {
-          title: 'Welcome Back',
-          subtitle: 'Sign in to access your account',
+          title: 'Create Your Account',
+          subtitle: 'Join BiohackLabs.ai to get started',
           icon: <Brain className="h-8 w-8 text-blue-600" />,
-          badge: 'Sign In',
+          badge: 'Sign Up',
           benefits: []
         };
     }
