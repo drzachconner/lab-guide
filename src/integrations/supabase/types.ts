@@ -884,7 +884,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      revenue_summary: {
+        Row: {
+          avg_service_fee: number | null
+          month: string | null
+          service_fees_earned: number | null
+          total_orders: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       extract_catalog_from_text: {
