@@ -29,37 +29,68 @@ serve(async (req) => {
       });
     }
 
-    const systemPrompt = `You are a precise data extraction engine. Parse a lab catalog PDF's extracted text into strict JSON.
-Only output JSON. No explanations.
+    console.log(`Processing text of length: ${text.length} characters`);
 
-Schema:
+    const systemPrompt = `You are a data extraction engine that converts Fullscript lab catalog text into structured JSON for a lab testing marketplace.
+
+EXTRACT EVERY SINGLE LAB TEST from the provided text into this EXACT JSON schema:
+
 {
-  "source": string, // original filename if available
+  "providers": [
+    "Quest Diagnostics",
+    "Access Labcorp Draw", 
+    "Access Medical Labs",
+    "Precision Analytical (DUTCH)",
+    "Diagnostic Solutions Laboratory",
+    "Mosaic Diagnostics",
+    "Doctor's Data"
+  ],
   "panels": [
     {
-      "id": string | null,               // panel code if present
-      "name": string,                    // panel display name
-      "category": string | null,         // high-level grouping
-      "subcategory": string | null,      // optional finer grouping
-      "specimen": string | null,         // e.g., "Serum", "Plasma", "Urine"
-      "fasting_required": boolean | null,
-      "turnaround_days": number | null,  // integer if stated
-      "biomarkers": [
-        { "name": string, "units": string | null, "reference_range": string | null }
-      ],
-      "pricing": {
-        "base_cost": number | null,      // wholesale or listed price if shown
-        "retail": number | null,         // retail price if shown
-        "strategy": string | null,       // any pricing strategy keywords
-        "fees": string[] | null,         // list any stated fees
-        "notes": string | null           // important caveats
-      },
-      "notes": string | null             // any other helpful notes
+      "id": "unique-panel-id",
+      "name": "Test Panel Name",
+      "display_name": "Test Panel Name",
+      "aliases": [],
+      "category": "Chemistry|Hematology|Endocrinology|Cardiovascular|Specialized|Hormone|Nutritional|Allergy|Infectious Disease|Autoimmune|Cancer|Toxicology|Genetics",
+      "subcategory": "Basic Panels|Advanced Panels|Specialized Testing",
+      "specimen": "Serum|Blood|Saliva|Stool|Urine|24-Hour Urine|Plasma",
+      "fasting_required": false,
+      "turnaround_days": "1-3 business days",
+      "biomarkers": [],
+      "clinical_significance": "",
+      "lab_provider": "Provider Name",
+      "popular": false,
+      "notes": "",
+      "providers": [
+        {
+          "name": "Provider Name",
+          "price": 12.34,
+          "phlebotomy_required": true,
+          "handling_fee": false,
+          "notes": ""
+        }
+      ]
     }
   ]
-}`;
+}
 
-    const userPrompt = `Extract panels from this text. Be conservative: only include panels you can identify with reasonable confidence. If uncertain, set fields to null. Text begins below:\n\n${text.slice(0, 200000)}`; // hard cap to keep tokens reasonable
+EXTRACTION RULES:
+1. Extract EVERY lab test mentioned in the text
+2. Create unique IDs by converting test names to lowercase with dashes (e.g. "Basic Metabolic Panel" → "basic-metabolic-panel")
+3. If same test is offered by multiple providers, combine into ONE panel with multiple providers in the providers array
+4. Parse prices from "$XX.XX" format - remove $ and convert to number
+5. Set handling_fee=true for Access Medical Labs tests that say "handling fee may apply"
+6. Set phlebotomy_required=true if text says "Phlebotomy required"
+7. Categorize tests logically (CBC=Hematology, Metabolic Panel=Chemistry, Thyroid=Endocrinology, etc.)
+8. Set popular=true for common tests: CBC, CMP, BMP, Lipid Panel, TSH, A1C, PSA, Vitamin D
+9. Estimate appropriate biomarkers based on test names
+10. Set fasting_required=true for glucose, lipid, insulin tests
+
+Return ONLY valid JSON with NO explanations or markdown.`;
+
+    const userPrompt = `Extract all laboratory test panels from this Fullscript catalog text:
+
+${text}`;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -74,7 +105,7 @@ Schema:
           { role: "user", content: userPrompt },
         ],
         response_format: { type: "json_object" },
-        max_completion_tokens: 4096,
+        max_completion_tokens: 16384,
       }),
     });
 
@@ -90,14 +121,17 @@ Schema:
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content ?? "{}";
 
+    console.log('Parsing AI response...');
+
     let json: any;
     try {
       json = JSON.parse(content);
-    } catch {
-      json = { source: source ?? null, panels: [], raw: content };
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      json = { providers: [], panels: [], raw: content };
     }
 
-    if (source && !json.source) json.source = source;
+    console.log(`Successfully extracted ${json.panels?.length || 0} panels`);
 
     return new Response(JSON.stringify(json), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
