@@ -2,6 +2,65 @@
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
 import type { Database } from '@/integrations/supabase/types';
+
+// Extended Database type with new tables
+export type ExtendedDatabase = Database & {
+  public: Database['public'] & {
+    Tables: Database['public']['Tables'] & {
+      lab_panels: {
+        Row: {
+          id: string
+          fullscript_lab_id: string | null
+          name: string
+          description: string | null
+          base_price: number
+          suggested_service_fee: number
+          optimization_tags: string[]
+          category: string
+          biomarkers: string[]
+          fasting_required: boolean
+          turnaround_days: number
+          sample_type: string
+          lab_provider: string
+          is_active: boolean
+          created_at: string
+          updated_at: string
+          practitioner_price: number | null
+          retail_price: number | null
+          age_minimum: number | null
+          draw_fee: number | null
+          fullscript_sku: string | null
+          fee_justification: string | null
+          collection_instructions: string | null
+          preparation_instructions: string | null
+          states_available: string[] | null
+        }
+      }
+      functional_ranges: {
+        Row: {
+          id: string
+          biomarker_name: string
+          display_name: string | null
+          category: string | null
+          unit: string
+          standard_min: number | null
+          standard_max: number | null
+          optimal_min: number | null
+          optimal_max: number | null
+          male_optimal_min: number | null
+          male_optimal_max: number | null
+          female_optimal_min: number | null
+          female_optimal_max: number | null
+          performance_target: number | null
+          longevity_target: number | null
+          low_supplement_recs: any | null
+          high_supplement_recs: any | null
+          created_at: string | null
+        }
+      }
+    }
+  }
+}
 import {
   ProfileZ, ProfileT,
   LabOrderZ, LabOrderT,
