@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useCatalog } from "@/hooks/useCatalog";
 import type { PricedPanel } from "@/lib/catalogService";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface AdvancedLabPanelBrowserProps {
   onAddToCart: (panel: PricedPanel) => void;
@@ -121,10 +122,12 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
       });
     }
 
-    // Price range filter
+    // Price range filter - handle null prices
     if (priceRangeFilter.min !== null || priceRangeFilter.max !== null) {
       filteredPanels = filteredPanels.filter(panel => {
         const price = panel.computed_price;
+        // Skip panels without valid prices for price filtering
+        if (typeof price !== 'number' || isNaN(price)) return false;
         if (priceRangeFilter.min !== null && price < priceRangeFilter.min) return false;
         if (priceRangeFilter.max !== null && price > priceRangeFilter.max) return false;
         return true;
@@ -203,26 +206,49 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
 
   if (loading) {
     return (
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="h-8 bg-gray-200 rounded w-48 animate-pulse"></div>
-          <div className="h-8 bg-gray-200 rounded w-32 animate-pulse"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <Card key={i} className="animate-pulse">
-              <CardHeader>
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-              </CardHeader>
-              <CardContent>
-                <div className="h-20 bg-gray-200 rounded mb-4"></div>
-                <div className="h-8 bg-gray-200 rounded"></div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
+      <EmptyState
+        title="Loading lab tests..."
+        description="Please wait while we load the catalog"
+        icon={<div className="h-8 w-8 rounded-full bg-primary/20 animate-pulse" />}
+      />
+    );
+  }
+
+  if (error) {
+    return (
+      <EmptyState
+        title="Unable to load catalog"
+        description={`There was a problem loading the lab tests: ${error}`}
+        icon={<AlertTriangle className="h-8 w-8 text-destructive" />}
+        action={{
+          label: 'Try Again',
+          onClick: () => window.location.reload()
+        }}
+      />
+    );
+  }
+
+  if (filteredAndSortedPanels.length === 0 && panels.length > 0) {
+    return (
+      <EmptyState
+        title="No lab tests match your filters"
+        description="Try adjusting your search criteria or clearing some filters to see more results"
+        icon={<Search className="h-8 w-8 text-muted-foreground" />}
+        action={{
+          label: 'Clear All Filters',
+          onClick: clearAllFilters
+        }}
+      />
+    );
+  }
+
+  if (panels.length === 0) {
+    return (
+      <EmptyState
+        title="No lab tests available"
+        description="The catalog appears to be empty. Please contact support if this persists."
+        icon={<AlertTriangle className="h-8 w-8 text-muted-foreground" />}
+      />
     );
   }
 
@@ -444,7 +470,17 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
         </div>
         {filteredAndSortedPanels.length > 0 && (
           <div className="text-sm text-muted-foreground">
-            Price range: {formatPrice(Math.min(...filteredAndSortedPanels.map(p => p.computed_price)))} - {formatPrice(Math.max(...filteredAndSortedPanels.map(p => p.computed_price)))}
+            {(() => {
+              const validPrices = filteredAndSortedPanels
+                .map(p => p.computed_price)
+                .filter((price): price is number => typeof price === 'number' && !isNaN(price));
+              
+              if (validPrices.length === 0) {
+                return "Prices: Contact for details";
+              }
+              
+              return `Price range: ${formatPrice(Math.min(...validPrices))} - ${formatPrice(Math.max(...validPrices))}`;
+            })()}
           </div>
         )}
       </div>
@@ -481,9 +517,17 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
                   </div>
                   <div className="text-right ml-4">
                     <div className="text-2xl font-bold text-primary">
-                      {formatPrice(panel.computed_price)}
+                      {typeof panel.computed_price === 'number' && !isNaN(panel.computed_price) 
+                        ? formatPrice(panel.computed_price)
+                        : "Contact for Price"
+                      }
                     </div>
-                    <div className="text-xs text-muted-foreground">fees included</div>
+                    <div className="text-xs text-muted-foreground">
+                      {typeof panel.computed_price === 'number' && !isNaN(panel.computed_price) 
+                        ? "fees included" 
+                        : "pricing available on request"
+                      }
+                    </div>
                   </div>
                 </div>
               </CardHeader>
@@ -652,9 +696,17 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <div className="text-2xl font-bold text-primary">
-                        {formatPrice(panel.computed_price)}
+                        {typeof panel.computed_price === 'number' && !isNaN(panel.computed_price) 
+                          ? formatPrice(panel.computed_price)
+                          : "Contact for Price"
+                        }
                       </div>
-                      <div className="text-xs text-muted-foreground">fees included</div>
+                      <div className="text-xs text-muted-foreground">
+                        {typeof panel.computed_price === 'number' && !isNaN(panel.computed_price) 
+                          ? "fees included" 
+                          : "pricing available on request"
+                        }
+                      </div>
                     </div>
 
                     <Button

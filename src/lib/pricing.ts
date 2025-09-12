@@ -29,6 +29,17 @@ export function computeRetailPrice(opts: {
 }) {
   const { fs_base_cost_usd, reference_price_usd, strategy, defaults, fees } = opts;
 
+  // Enhanced price fallback logic - handle multiple candidate prices
+  const candidates = [
+    reference_price_usd,
+    fs_base_cost_usd
+  ].filter((v): v is number => typeof v === 'number' && !Number.isNaN(v) && v > 0);
+  
+  if (candidates.length === 0) {
+    // No valid price found - return null to indicate "Contact for Price"
+    return null;
+  }
+
   // Fees that you choose to absorb inside retail
   const absorbed =
     (defaults.absorb_network_fee ? fees.network_authorization : 0) +

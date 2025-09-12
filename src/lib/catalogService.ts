@@ -288,6 +288,20 @@ class CatalogService {
       fees: this.config.default_fees,
     });
 
+    // Handle null pricing result (no valid price found)
+    if (result === null) {
+      return {
+        ...panel,
+        computed_price: null as any, // Will be handled in UI as "Contact for Price"
+        price_breakdown: {
+          fs_base_cost_usd: fs_base_cost,
+          absorbed_fees_usd: 0,
+          reference_used: panel.reference_price_usd ?? null
+        },
+        is_higher_than_reference: false,
+      };
+    }
+
     const is_higher_than_reference = panel.reference_price_usd ? 
       result.price_usd > panel.reference_price_usd : false;
 
