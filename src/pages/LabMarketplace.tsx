@@ -25,6 +25,7 @@ import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
 import UnifiedBackground from "@/components/UnifiedBackground";
 import { LivePriceCheckout } from "@/components/LivePriceCheckout";
 import { PriceDisclaimer } from "@/components/PriceDisclaimer";
+import { ProcessCatalogButton } from "@/components/ProcessCatalogButton";
 import type { PricedPanel } from "@/lib/catalogService";
 
 export function LabMarketplace() {
@@ -233,6 +234,9 @@ export function LabMarketplace() {
 
               {/* Price Disclaimer */}
               <PriceDisclaimer className="mb-4" />
+              
+              {/* Process Catalog Button */}
+              <ProcessCatalogButton />
 
               {/* Toggle between Browse Labs and Upload PDF */}
               <div className="flex gap-2 mb-6">
