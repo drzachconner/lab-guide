@@ -14,7 +14,9 @@ import {
   TrendingUp,
   Activity,
   Star,
-  ExternalLink
+  ExternalLink,
+  Menu,
+  X
 } from 'lucide-react';
 import { useLabReports } from '@/hooks/useLabReports';
 import { usePaymentStatus } from '@/hooks/usePaymentStatus';
@@ -29,6 +31,7 @@ const Dashboard = () => {
   const { reports, loading: reportsLoading } = useLabReports();
   const { hasPaidAnalysis, hasDispensaryAccess } = usePaymentStatus();
   const { createFullscriptAccount, openDispensary } = useFullscriptIntegration();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -48,6 +51,18 @@ const Dashboard = () => {
 
     fetchProfile();
   }, [user, navigate]);
+
+  // Close mobile menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileMenuOpen]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -99,9 +114,11 @@ const Dashboard = () => {
       {/* Navigation */}
       <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
         <div className="container mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
-          <Badge className="bg-blue-50 text-blue-700 border-blue-200">
-            Dashboard
-          </Badge>
+          <div className="flex items-center">
+            <Badge className="bg-blue-50 text-blue-700 border-blue-200 hidden sm:flex">
+              Home
+            </Badge>
+          </div>
           
           <div 
             className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
@@ -110,7 +127,8 @@ const Dashboard = () => {
             <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-4">
             <div className="text-sm text-gray-600">
               {user.email}
             </div>
@@ -123,7 +141,41 @@ const Dashboard = () => {
               Sign Out
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-white">
+            <div className="px-4 py-3 space-y-3">
+              <div className="text-sm text-gray-600 font-medium">
+                {user.email}
+              </div>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  handleSignOut();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full justify-start text-gray-600 hover:text-gray-900"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
