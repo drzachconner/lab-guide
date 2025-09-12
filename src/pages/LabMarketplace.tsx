@@ -19,33 +19,21 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
 import UnifiedBackground from "@/components/UnifiedBackground";
-
-interface LabPanel {
-  id: string;
-  name: string;
-  description: string;
-  category: string; // Changed from literal union to string
-  biomarkers: string[];
-  base_price: number;
-  lab_provider: string;
-  sample_type: string;
-  fasting_required: boolean;
-  turnaround_days: number;
-}
+import type { PricedPanel } from "@/lib/catalogService";
 
 export function LabMarketplace() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const [cartItems, setCartItems] = useState<LabPanel[]>([]);
+  const [cartItems, setCartItems] = useState<PricedPanel[]>([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  const handleAddToCart = (panel: LabPanel) => {
+  const handleAddToCart = (panel: PricedPanel) => {
     if (!cartItems.some(item => item.id === panel.id)) {
       setCartItems([...cartItems, panel]);
       toast({
         title: "Added to cart",
-        description: `${panel.name} has been added to your cart`
+        description: `${panel.display_name} has been added to your cart`
       });
     }
   };
@@ -133,24 +121,24 @@ export function LabMarketplace() {
     }
   };
 
-  const formatPrice = (cents: number) => {
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(cents / 100);
+    }).format(price);
   };
 
   const calculateTotal = () => {
-    const labTotal = cartItems.reduce((sum, item) => sum + item.base_price, 0);
-    const authFee = cartItems.length > 0 ? 1250 : 0; // $12.50 authorization fee
-    const drawFee = cartItems.length > 0 ? 1000 : 0; // $10.00 draw fee
-    const processingFee = Math.round(labTotal * 0.15); // 15% processing
+    // Since PricedPanel.computed_price already includes absorbed fees, we just sum them up
+    const labTotal = cartItems.reduce((sum, item) => sum + item.computed_price, 0);
+    
+    // No additional fees needed since they're already absorbed in computed_price
     return {
       labTotal,
-      authFee,
-      drawFee,
-      processingFee,
-      total: labTotal + authFee + drawFee + processingFee
+      authFee: 0, // Absorbed in computed_price
+      drawFee: 0, // Absorbed in computed_price
+      processingFee: 0, // Absorbed in computed_price
+      total: labTotal
     };
   };
 
@@ -276,10 +264,10 @@ export function LabMarketplace() {
                           <div key={item.id} className="flex items-start justify-between p-3 bg-gray-50 rounded-lg">
                             <div className="flex-1 min-w-0">
                               <h4 className="text-sm font-medium text-gray-900 truncate">
-                                {item.name}
+                                {item.display_name}
                               </h4>
                               <p className="text-sm text-gray-600">
-                                {formatPrice(item.base_price)}
+                                {formatPrice(item.computed_price)}
                               </p>
                             </div>
                             <Button
@@ -298,20 +286,8 @@ export function LabMarketplace() {
                       <Separator />
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Lab panels:</span>
+                          <span className="text-gray-600">Lab panels (fees included):</span>
                           <span>{formatPrice(totals.labTotal)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Authorization fee:</span>
-                          <span>{formatPrice(totals.authFee)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Draw fee:</span>
-                          <span>{formatPrice(totals.drawFee)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Processing:</span>
-                          <span>{formatPrice(totals.processingFee)}</span>
                         </div>
                         <Separator />
                         <div className="flex justify-between font-semibold">

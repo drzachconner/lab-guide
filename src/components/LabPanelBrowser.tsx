@@ -1,182 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { ShoppingCart, Info, Clock, Droplets, Search } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-
-interface LabPanel {
-  id: string;
-  name: string;
-  description: string;
-  category: string; // Changed from literal union to string
-  biomarkers: string[];
-  base_price: number;
-  lab_provider: string;
-  sample_type: string;
-  fasting_required: boolean;
-  turnaround_days: number;
-}
+import { ShoppingCart, Info, Clock, Droplets, Search, AlertTriangle } from "lucide-react";
+import { useCatalog } from "@/hooks/useCatalog";
+import type { PricedPanel } from "@/lib/catalogService";
 
 interface LabPanelBrowserProps {
-  onAddToCart: (panel: LabPanel) => void;
-  cartItems: LabPanel[];
+  onAddToCart: (panel: PricedPanel) => void;
+  cartItems: PricedPanel[];
 }
 
 export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps) {
-  const [panels, setPanels] = useState<LabPanel[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const { toast } = useToast();
+  
+  const { panels, loading, error, searchPanels, getPanelsByCategory, getCategories } = useCatalog();
 
-  useEffect(() => {
-    fetchPanels();
-  }, []);
+  // Filter panels based on search and category
+  let filteredPanels = panels;
+  
+  if (selectedCategory !== 'all') {
+    filteredPanels = getPanelsByCategory(selectedCategory);
+  }
+  
+  if (searchQuery) {
+    filteredPanels = searchPanels(searchQuery).filter(panel => 
+      selectedCategory === 'all' || panel.category === selectedCategory
+    );
+  }
 
-  const fetchPanels = async () => {
-    try {
-      // Mock data for popular biohacking lab panels - prioritizing 10x Health and Wellness Way panels
-      const mockPanels: LabPanel[] = [
-        // Top biohacking panels first
-        {
-          id: 'comprehensive-biohacker',
-          name: 'Comprehensive Biohacker Panel',
-          description: 'Complete metabolic, hormonal, and inflammatory assessment for optimal performance optimization.',
-          category: 'comprehensive',
-          biomarkers: ['Testosterone', 'Estradiol', 'DHEA-S', 'Cortisol', 'Insulin', 'IGF-1', 'Thyroid Panel', 'Vitamin D', 'B12', 'Folate', 'Omega-3 Index', 'CRP', 'Homocysteine'],
-          base_price: 39900, // $399
-          lab_provider: 'Quest',
-          sample_type: 'Blood',
-          fasting_required: true,
-          turnaround_days: 3
-        },
-        {
-          id: 'hormone-optimization',
-          name: 'Hormone Optimization Panel',
-          description: 'Complete sex hormone and stress hormone analysis for peak performance.',
-          category: 'specialty',
-          biomarkers: ['Total Testosterone', 'Free Testosterone', 'Estradiol', 'DHEA-S', 'Cortisol AM/PM', 'SHBG', 'LH', 'FSH'],
-          base_price: 29900, // $299
-          lab_provider: 'LabCorp',
-          sample_type: 'Blood + Saliva',
-          fasting_required: false,
-          turnaround_days: 5
-        },
-        {
-          id: 'metabolic-health-max',
-          name: 'Metabolic Health Max',
-          description: 'Advanced metabolic markers including insulin resistance and mitochondrial function.',
-          category: 'comprehensive',
-          biomarkers: ['Glucose', 'Insulin', 'HOMA-IR', 'HbA1c', 'Triglycerides', 'HDL', 'LDL', 'ApoB', 'Lp(a)', 'NMR Lipoprofile'],
-          base_price: 24900, // $249
-          lab_provider: 'Quest',
-          sample_type: 'Blood',
-          fasting_required: true,
-          turnaround_days: 3
-        },
-        {
-          id: 'thyroid-deep-dive',
-          name: 'Thyroid Deep Dive',
-          description: 'Comprehensive thyroid function including reverse T3 and antibodies.',
-          category: 'specialty',
-          biomarkers: ['TSH', 'Free T4', 'Free T3', 'Reverse T3', 'TPO Ab', 'Thyroglobulin Ab', 'TRAb'],
-          base_price: 19900, // $199
-          lab_provider: 'LabCorp',
-          sample_type: 'Blood',
-          fasting_required: false,
-          turnaround_days: 4
-        },
-        {
-          id: 'inflammation-immune',
-          name: 'Inflammation & Immune Panel',
-          description: 'Assess systemic inflammation and immune system function.',
-          category: 'specialty',
-          biomarkers: ['CRP', 'ESR', 'IL-6', 'TNF-α', 'White Blood Cell Count', 'Neutrophil/Lymphocyte Ratio', 'NK Cell Activity'],
-          base_price: 22900, // $229
-          lab_provider: 'Quest',
-          sample_type: 'Blood',
-          fasting_required: false,
-          turnaround_days: 5
-        },
-        {
-          id: 'nutrient-status-pro',
-          name: 'Nutrient Status Pro',
-          description: 'Comprehensive vitamin, mineral, and micronutrient analysis.',
-          category: 'basic',
-          biomarkers: ['Vitamin D', 'B12', 'Folate', 'B6', 'Magnesium', 'Zinc', 'Iron Studies', 'RBC Folate', 'Methylmalonic Acid'],
-          base_price: 18900, // $189
-          lab_provider: 'LabCorp',
-          sample_type: 'Blood',
-          fasting_required: false,
-          turnaround_days: 3
-        },
-        // Basic panels
-        {
-          id: 'basic-metabolic',
-          name: 'Basic Metabolic Panel',
-          description: 'Essential metabolic markers for overall health assessment.',
-          category: 'basic',
-          biomarkers: ['Glucose', 'Electrolytes', 'Kidney Function', 'Liver Enzymes'],
-          base_price: 8900, // $89
-          lab_provider: 'Quest',
-          sample_type: 'Blood',
-          fasting_required: true,
-          turnaround_days: 2
-        },
-        {
-          id: 'lipid-advanced',
-          name: 'Advanced Lipid Panel',
-          description: 'Comprehensive cardiovascular risk assessment.',
-          category: 'basic',
-          biomarkers: ['Total Cholesterol', 'HDL', 'LDL', 'Triglycerides', 'ApoB', 'Lp(a)', 'Particle Size'],
-          base_price: 14900, // $149
-          lab_provider: 'LabCorp',
-          sample_type: 'Blood',
-          fasting_required: true,
-          turnaround_days: 3
-        }
-      ];
-      
-      setPanels(mockPanels);
-    } catch (error: any) {
-      console.error('Error loading panels:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load lab panels",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filteredPanels = panels.filter(panel => {
-    const categoryMatch = selectedCategory === 'all' || panel.category === selectedCategory;
-    const searchMatch = searchQuery === '' || 
-      panel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      panel.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      panel.biomarkers.some(marker => marker.toLowerCase().includes(searchQuery.toLowerCase()));
-    return categoryMatch && searchMatch;
-  });
+  const categories = getCategories();
 
   const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'basic': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'comprehensive': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'specialty': return 'bg-amber-100 text-amber-800 border-amber-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+    switch (category.toLowerCase()) {
+      case 'blood': return 'bg-red-100 text-red-800 border-red-200';
+      case 'bundle': return 'bg-purple-100 text-purple-800 border-purple-200';
+      default: return 'bg-blue-100 text-blue-800 border-blue-200';
     }
   };
 
-  const formatPrice = (cents: number) => {
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(cents / 100);
+    }).format(price);
   };
 
   const isInCart = (panelId: string) => {
@@ -217,34 +87,16 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
 
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2">
-        <Button
-          variant={selectedCategory === 'all' ? 'default' : 'outline'}
-          onClick={() => setSelectedCategory('all')}
-          size="sm"
-        >
-          All Panels
-        </Button>
-        <Button
-          variant={selectedCategory === 'basic' ? 'default' : 'outline'}
-          onClick={() => setSelectedCategory('basic')}
-          size="sm"
-        >
-          Basic
-        </Button>
-        <Button
-          variant={selectedCategory === 'comprehensive' ? 'default' : 'outline'}
-          onClick={() => setSelectedCategory('comprehensive')}
-          size="sm"
-        >
-          Comprehensive
-        </Button>
-        <Button
-          variant={selectedCategory === 'specialty' ? 'default' : 'outline'}
-          onClick={() => setSelectedCategory('specialty')}
-          size="sm"
-        >
-          Specialty
-        </Button>
+        {categories.map(category => (
+          <Button
+            key={category}
+            variant={selectedCategory === category ? 'default' : 'outline'}
+            onClick={() => setSelectedCategory(category)}
+            size="sm"
+          >
+            {category === 'all' ? 'All Panels' : category.charAt(0).toUpperCase() + category.slice(1)}
+          </Button>
+        ))}
       </div>
 
       {/* Panels Grid */}
@@ -254,30 +106,38 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
-                  <CardTitle className="text-lg">{panel.name}</CardTitle>
-                  <Badge className={getCategoryColor(panel.category)}>
-                    {panel.category}
-                  </Badge>
+                  <CardTitle className="text-lg">{panel.display_name}</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge className={getCategoryColor(panel.category)}>
+                      {panel.category}
+                    </Badge>
+                    {panel.is_higher_than_reference && (
+                      <Badge variant="outline" className="text-amber-600 border-amber-200">
+                        <AlertTriangle className="h-3 w-3 mr-1" />
+                        Premium
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-primary">
-                    {formatPrice(panel.base_price)}
+                    {formatPrice(panel.computed_price)}
                   </div>
-                  <div className="text-xs text-muted-foreground">+ fees</div>
+                  <div className="text-xs text-muted-foreground">fees included</div>
                 </div>
               </div>
             </CardHeader>
             
             <CardContent className="flex-1 space-y-4">
               <p className="text-sm text-muted-foreground">
-                {panel.description}
+                {panel.notes}
               </p>
 
               {/* Test Details */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Droplets className="h-3 w-3" />
-                  <span>{panel.sample_type}</span>
+                  <span>{panel.specimen}</span>
                   {panel.fasting_required && (
                     <>
                       <Separator orientation="vertical" className="h-3" />
@@ -288,33 +148,45 @@ export function LabPanelBrowser({ onAddToCart, cartItems }: LabPanelBrowserProps
                 
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Clock className="h-3 w-3" />
-                  <span>{panel.turnaround_days} day results</span>
+                  <span>{panel.turnaround_days} results</span>
                   <Separator orientation="vertical" className="h-3" />
-                  <span>{panel.lab_provider}</span>
+                  <span>FS SKU: {panel.fs_sku}</span>
                 </div>
               </div>
 
-              {/* Biomarkers */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-1">
-                  <Info className="h-3 w-3" />
-                  <span className="text-xs font-medium">
-                    {panel.biomarkers.length} Biomarkers
-                  </span>
+              {/* Aliases/Keywords */}
+              {panel.aliases.length > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1">
+                    <Info className="h-3 w-3" />
+                    <span className="text-xs font-medium">
+                      Also known as
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {panel.aliases.slice(0, 3).map((alias, i) => (
+                      <Badge key={i} variant="outline" className="text-xs">
+                        {alias}
+                      </Badge>
+                    ))}
+                    {panel.aliases.length > 3 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{panel.aliases.length - 3} more
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-1">
-                  {panel.biomarkers.slice(0, 3).map((marker, i) => (
-                    <Badge key={i} variant="outline" className="text-xs">
-                      {marker}
-                    </Badge>
-                  ))}
-                  {panel.biomarkers.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{panel.biomarkers.length - 3} more
-                    </Badge>
-                  )}
+              )}
+
+              {/* Pricing Notice for Premium Items */}
+              {panel.is_higher_than_reference && (
+                <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-xs text-amber-800">
+                    <strong>Best-in-class AI interpretation + supplement protocol included.</strong><br/>
+                    Some specialty tests may have premium pricing due to network authorization and processing requirements.
+                  </p>
                 </div>
-              </div>
+              )}
 
               <Button
                 onClick={() => onAddToCart(panel)}
