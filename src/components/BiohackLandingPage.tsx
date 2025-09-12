@@ -15,14 +15,23 @@ import {
   ArrowRight,
   Microscope,
   Beaker,
-  Activity
+  Activity,
+  LogOut,
+  User
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import HeroBackground from "./UnifiedBackground";
 
 export function BiohackLandingPage() {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   const features = [
     {
@@ -121,19 +130,45 @@ export function BiohackLandingPage() {
               <Button variant="ghost" onClick={() => navigate('/faq')} className="text-gray-700 hover:text-blue-600">
                 FAQ
               </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/auth?tab=signin')}
-                className="border-blue-200 hover:bg-blue-50"
-              >
-                Sign In
-              </Button>
-              <Button 
-                onClick={() => navigate('/auth?type=analysis')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              >
-                Get Started
-              </Button>
+              
+              {user ? (
+                // Logged in user buttons
+                <>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => navigate('/dashboard')} 
+                    className="text-gray-700 hover:text-blue-600"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    Dashboard
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={handleSignOut}
+                    className="border-gray-200 hover:bg-gray-50"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                // Non-logged in user buttons
+                <>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => navigate('/auth?tab=signin')}
+                    className="border-blue-200 hover:bg-blue-50"
+                  >
+                    Sign In
+                  </Button>
+                  <Button 
+                    onClick={() => navigate('/auth?type=analysis')}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  >
+                    Get Started
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
