@@ -9,18 +9,9 @@ export function useCatalog() {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Ensure latest parsed catalog is loaded before computing prices
-    (async () => {
-      try {
-        await catalogService.init();
-      } catch {}
-      await loadPanels();
-    })();
+    loadPanels();
 
     const onCatalogUpdated = () => {
-      try {
-        catalogService.loadParsedCatalog();
-      } catch {}
       loadPanels();
     };
 
@@ -129,12 +120,6 @@ export function useCatalog() {
     await loadPanels();
   };
 
-  const forceRefreshCatalog = async () => {
-    // Force catalog service to reload parsed data
-    catalogService.loadParsedCatalog();
-    await loadPanels();
-  };
-
   return {
     panels,
     loading,
@@ -148,6 +133,5 @@ export function useCatalog() {
     getPopularPanels,
     sortPanels,
     refreshPrices,
-    forceRefreshCatalog,
   };
 }

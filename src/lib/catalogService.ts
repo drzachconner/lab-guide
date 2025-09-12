@@ -49,36 +49,16 @@ class CatalogService {
 
   constructor() {
     this.config = catalogData as CatalogConfig;
-    // Prefer replacement catalog if available, otherwise default bundled catalog
-    this.fullscriptData = (fullscriptCatalogReplacement as any)?.panels?.length
-      ? (fullscriptCatalogReplacement as any)
-      : (fullscriptCatalog as any);
-    // Try to load parsed catalog from localStorage on startup
-    const loaded = this.loadParsedCatalog();
-    if (loaded) {
-      console.log('Automatically loaded parsed catalog from storage');
-    }
+    // Use the built catalog JSON directly - contains all 1000+ panels
+    this.fullscriptData = (fullscriptCatalog as any)?.panels?.length
+      ? (fullscriptCatalog as any)
+      : {};
+    console.log(`Catalog loaded with ${this.fullscriptData?.panels?.length || 0} Fullscript panels`);
   }
 
   // Allow runtime injection/override of Fullscript catalog (e.g., parsed from text)
   setFullscriptData(data: any) {
     this.fullscriptData = data || {};
-  }
-
-  // Load parsed catalog from localStorage if available
-  loadParsedCatalog() {
-    try {
-      const stored = localStorage.getItem('parsed_fullscript_catalog');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        console.log(`Loading parsed catalog with ${parsed.panels?.length || 0} panels`);
-        this.fullscriptData = parsed;
-        return true;
-      }
-    } catch (error) {
-      console.warn('Failed to load parsed catalog from storage:', error);
-    }
-    return false;
   }
 
   getAllPanels(): LabPanel[] {
@@ -305,58 +285,16 @@ class CatalogService {
   }
 
   private async ensureLoaded() {
-    if (typeof window === 'undefined') return;
-
-    try {
-      // 1) Prefer the parsed catalog from localStorage if present (largest source of truth)
-      const stored = localStorage.getItem('parsed_fullscript_catalog');
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (parsed?.panels?.length) {
-            if (!this.fullscriptData?.panels || parsed.panels.length > this.fullscriptData.panels.length) {
-              console.log(`ensureLoaded: using parsed catalog from storage with ${parsed.panels.length} panels`);
-              this.fullscriptData = parsed;
-              return;
-            }
-          }
-        } catch {}
-      }
-
-      // 2) If no parsed catalog yet, try to parse the bundled text file automatically
-      if (!stored) {
-        const res = await fetch('/src/temp/fullscript_lab_catalog_text.txt');
-        if (res.ok) {
-          const text = await res.text();
-          const parsed = parseCatalogTextBasic(text);
-          if (parsed?.panels?.length) {
-            localStorage.setItem('parsed_fullscript_catalog', JSON.stringify(parsed));
-            this.fullscriptData = parsed;
-            console.log(`ensureLoaded: auto-parsed text into ${parsed.panels.length} panels`);
-            try { window.dispatchEvent(new CustomEvent('catalog-updated')); } catch {}
-            return;
-          }
-        }
-      }
-
-      // 3) Fallbacks: if replacement JSON exists and is larger than current, use it
-      if ((fullscriptCatalogReplacement as any)?.panels?.length) {
-        if (!this.fullscriptData?.panels || (fullscriptCatalogReplacement as any).panels.length > this.fullscriptData.panels.length) {
-          this.fullscriptData = (fullscriptCatalogReplacement as any);
-        }
-      }
-    } catch (e) {
-      console.warn('ensureLoaded: failed to auto-load catalog', e);
-    }
+    // Catalog is now loaded at import time - no need for runtime fetching
+    return;
   }
 
-  // Public initializer to guarantee data is loaded before first use
+  // Public initializer - now a no-op since catalog loads at import
   async init() {
-    await this.ensureLoaded();
+    return;
   }
 
   async computeAllPanelPrices(): Promise<PricedPanel[]> {
-    await this.ensureLoaded();
     const pricedPanels: PricedPanel[] = [];
     
     for (const panel of this.getAllPanels()) {
