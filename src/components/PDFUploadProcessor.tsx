@@ -3,7 +3,12 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Upload, FileText, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
+import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
+// Configure PDF.js worker
+GlobalWorkerOptions.workerSrc = pdfWorkerSrc as any;
 export const PDFUploadProcessor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -54,37 +59,48 @@ export const PDFUploadProcessor = () => {
 
     setIsProcessing(true);
     try {
-      // Create a FormData object to upload the file
-      const formData = new FormData();
-      formData.append('file', file);
-
-      // For now, we'll simulate processing and show file info
-      // In a real implementation, you'd send this to a backend endpoint
       toast({
         title: "Processing Started",
-        description: "PDF is being processed to extract lab catalog data...",
+        description: "Extracting text from the PDF and parsing catalog...",
       });
 
-      // Simulate processing time
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // 1) Extract text from PDF on the client using PDF.js
+      const arrayBuffer = await file.arrayBuffer();
+      const loadingTask = getDocument({ data: arrayBuffer });
+      const pdf = await loadingTask.promise;
 
-      // Placeholder for parsed content - in real implementation this would come from document parsing
-      setParsedContent(`File uploaded successfully: ${file.name}
-Size: ${(file.size / 1024 / 1024).toFixed(2)} MB
-Type: ${file.type}
+      let fullText = '';
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = (textContent.items as any[])
+          .map((item: any) => item.str || '')
+          .join(' ');
+        fullText += `\n\n--- Page ${i} ---\n` + pageText;
+      }
 
-Ready for AI processing! The file has been uploaded and can now be processed to extract lab catalog information.`);
+      // 2) Send extracted text to Edge Function for AI structuring
+      const { data, error } = await supabase.functions.invoke('catalog-extract-ai', {
+        body: {
+          text: fullText,
+          source: file.name,
+        },
+      });
+
+      if (error) throw error;
+
+      const resultJson = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+      setParsedContent(resultJson);
 
       toast({
-        title: "Upload Complete",
-        description: "PDF uploaded successfully and ready for processing!",
+        title: "Parsing Complete",
+        description: "Catalog extracted successfully.",
       });
-
     } catch (error) {
       console.error('Error processing file:', error);
       toast({
         title: "Processing Error",
-        description: "Failed to process the PDF file.",
+        description: "Failed to parse the PDF. Please try another file or contact support.",
         variant: "destructive",
       });
     } finally {
