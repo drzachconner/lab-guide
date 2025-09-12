@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,24 +9,43 @@ export const PDFUploadProcessor = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [parsedContent, setParsedContent] = useState<string | null>(null);
   const { toast } = useToast();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dragActive, setDragActive] = useState(false);
+
+  const handleSelectedFile = (selectedFile: File) => {
+    const isPdf = selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf');
+    const sizeOk = selectedFile.size <= 20 * 1024 * 1024; // 20MB
+
+    if (!isPdf) {
+      toast({
+        title: "Invalid File Type",
+        description: "Please select a PDF file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!sizeOk) {
+      toast({
+        title: "File Too Large",
+        description: "Maximum allowed size is 20MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setFile(selectedFile);
+    setParsedContent(null);
+    toast({
+      title: "PDF Selected",
+      description: `Selected: ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`,
+    });
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
+    const selectedFile = event.target.files?.[0] || null;
     if (selectedFile) {
-      if (selectedFile.type === 'application/pdf') {
-        setFile(selectedFile);
-        setParsedContent(null);
-        toast({
-          title: "PDF Selected",
-          description: `Selected: ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`,
-        });
-      } else {
-        toast({
-          title: "Invalid File Type",
-          description: "Please select a PDF file.",
-          variant: "destructive",
-        });
-      }
+      handleSelectedFile(selectedFile);
     }
   };
 
@@ -86,21 +105,36 @@ Ready for AI processing! The file has been uploaded and can now be processed to 
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
+          <div
+            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+              dragActive ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-300 dark:border-gray-600'
+            }`}
+            onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); setDragActive(true); }}
+            onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); setDragActive(false); }}
+            onDrop={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setDragActive(false);
+              const droppedFile = e.dataTransfer.files?.[0];
+              if (droppedFile) handleSelectedFile(droppedFile);
+            }}
+            onClick={() => inputRef.current?.click()}
+            role="button"
+            aria-label="Upload PDF"
+          >
             <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
             <div className="space-y-2">
-              <label htmlFor="pdf-upload" className="cursor-pointer">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  Click to upload or drag and drop your PDF file
-                </span>
-                <input
-                  id="pdf-upload"
-                  type="file"
-                  accept=".pdf"
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
-              </label>
+              <span className="text-sm text-gray-600 dark:text-gray-400 block">
+                Click to upload or drag and drop your PDF file
+              </span>
+              <input
+                ref={inputRef}
+                id="pdf-upload"
+                type="file"
+                accept="application/pdf,.pdf"
+                onChange={handleFileChange}
+                className="hidden"
+              />
               <p className="text-xs text-gray-500">Maximum file size: 20MB</p>
             </div>
           </div>
