@@ -17,6 +17,7 @@ const Auth = () => {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   
   const { signUp, signIn, signInWithGoogle, user } = useAuth();
   const navigate = useNavigate();
@@ -24,6 +25,49 @@ const Auth = () => {
   const { toast } = useToast();
   
   const authType = searchParams.get('type') || 'analysis';
+
+  // HIPAA-compliant password validation
+  const validatePassword = (password: string): string => {
+    if (password.length < 12) {
+      return 'Password must be at least 12 characters long';
+    }
+    if (!/(?=.*[a-z])/.test(password)) {
+      return 'Password must contain at least one lowercase letter';
+    }
+    if (!/(?=.*[A-Z])/.test(password)) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!/(?=.*\d)/.test(password)) {
+      return 'Password must contain at least one number';
+    }
+    if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(password)) {
+      return 'Password must contain at least one special character';
+    }
+    if (/(.)\1{2,}/.test(password)) {
+      return 'Password cannot contain 3 or more consecutive identical characters';
+    }
+    
+    // Check for common weak passwords
+    const commonPasswords = [
+      'password', '123456789', 'qwertyuiop', 'administrator', 
+      'healthcare123', 'medical123', 'hospital123'
+    ];
+    if (commonPasswords.some(common => password.toLowerCase().includes(common))) {
+      return 'Password cannot contain common words or patterns';
+    }
+    
+    return '';
+  };
+
+  const handlePasswordChange = (newPassword: string) => {
+    setPassword(newPassword);
+    if (isSignUp && newPassword) {
+      const error = validatePassword(newPassword);
+      setPasswordError(error);
+    } else {
+      setPasswordError('');
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -87,6 +131,18 @@ const Auth = () => {
 
     try {
       if (isSignUp) {
+        // Validate password for signup
+        const pwdError = validatePassword(password);
+        if (pwdError) {
+          toast({
+            title: "Password requirements not met",
+            description: pwdError,
+            variant: "destructive"
+          });
+          setLoading(false);
+          return;
+        }
+        
         const fullNameForSignup = `${firstName} ${lastName}`.trim();
         const { error } = await signUp(email, password, fullNameForSignup);
         if (error) {
@@ -269,10 +325,10 @@ const Auth = () => {
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => handlePasswordChange(e.target.value)}
                     required
-                    placeholder="Enter your password"
-                    className="pr-10"
+                    placeholder={isSignUp ? "Create password" : "Enter your password"}
+                    className={`pr-10 ${passwordError ? 'border-red-500' : ''}`}
                   />
                   <button
                     type="button"
@@ -286,12 +342,26 @@ const Auth = () => {
                     )}
                   </button>
                 </div>
+                {passwordError && (
+                  <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+                )}
+                {isSignUp && (
+                  <div className="mt-2 text-xs text-gray-600">
+                    <p className="font-medium mb-1">HIPAA-compliant password requirements:</p>
+                    <ul className="space-y-0.5 text-gray-500">
+                      <li>• At least 12 characters long</li>
+                      <li>• Contains uppercase and lowercase letters</li>
+                      <li>• Contains at least one number and special character</li>
+                      <li>• No common words or repeated characters</li>
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <Button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700"
-                disabled={loading}
+                disabled={loading || (isSignUp && passwordError !== '')}
               >
                 {loading ? 'Processing...' : isSignUp ? 'Create Account' : 'Sign In'}
               </Button>
