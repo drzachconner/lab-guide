@@ -60,7 +60,7 @@ const generateEmailHTML = (template: string, data: any): string => {
       .button { 
         display: inline-block;
         background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-        color: white;
+        color: white !important;
         text-decoration: none;
         padding: 14px 28px;
         border-radius: 8px;
