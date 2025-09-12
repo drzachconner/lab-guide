@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Upload, FileText, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
+import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 
-// Configure PDF.js worker
-GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.js`;
+// Configure PDF.js worker with dynamic version
+GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`;
 export const PDFUploadProcessor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
