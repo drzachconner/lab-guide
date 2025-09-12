@@ -9,6 +9,7 @@ export function useCatalog() {
   const { toast } = useToast();
 
   useEffect(() => {
+    // Load panels immediately (this will include any stored parsed catalog)
     loadPanels();
 
     const onCatalogUpdated = () => {

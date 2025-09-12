@@ -47,8 +47,11 @@ class CatalogService {
   constructor() {
     this.config = catalogData as CatalogConfig;
     this.fullscriptData = fullscriptCatalog;
-    // Try to load parsed catalog from localStorage
-    this.loadParsedCatalog();
+    // Try to load parsed catalog from localStorage on startup
+    const loaded = this.loadParsedCatalog();
+    if (loaded) {
+      console.log('Automatically loaded parsed catalog from storage');
+    }
   }
 
   // Allow runtime injection/override of Fullscript catalog (e.g., parsed from text)
