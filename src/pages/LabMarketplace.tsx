@@ -10,7 +10,8 @@ import {
   CreditCard,
   Shield,
   Clock,
-  CheckCircle
+  CheckCircle,
+  ExternalLink
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LabPanelBrowser } from "@/components/LabPanelBrowser";
@@ -19,6 +20,8 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
 import UnifiedBackground from "@/components/UnifiedBackground";
+import { LivePriceCheckout } from "@/components/LivePriceCheckout";
+import { PriceDisclaimer } from "@/components/PriceDisclaimer";
 import type { PricedPanel } from "@/lib/catalogService";
 
 export function LabMarketplace() {
@@ -27,6 +30,7 @@ export function LabMarketplace() {
   const { toast } = useToast();
   const [cartItems, setCartItems] = useState<PricedPanel[]>([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [showLivePricing, setShowLivePricing] = useState(false);
 
   const handleAddToCart = (panel: PricedPanel) => {
     if (!cartItems.some(item => item.id === panel.id)) {
@@ -57,68 +61,28 @@ export function LabMarketplace() {
       return;
     }
 
-    setIsCheckingOut(true);
+    // Show live pricing component instead of immediate checkout
+    setShowLivePricing(true);
+  };
 
-    try {
-      // First create the order
-      const { data: orderData, error: orderError } = await supabase.functions.invoke('create-lab-order', {
-        body: {
-          panelIds: cartItems.map(item => item.id),
-          patientInfo: {
-            fullName: user.user_metadata?.full_name || user.email,
-            dateOfBirth: "1990-01-01", // TODO: Get from user profile
-            address: {
-              street: "123 Main St",
-              city: "Anytown", 
-              state: "CA",
-              zipCode: "12345"
-            }
-          }
-        }
-      });
+  const handleConfirmCheckout = (checkoutUrl: string) => {
+    // Clear cart
+    setCartItems([]);
+    
+    // Open external lab provider checkout
+    window.open(checkoutUrl, '_blank');
+    
+    // Navigate to waiting page
+    navigate('/dashboard?order_pending=true');
 
-      if (orderError || !orderData?.success) {
-        throw new Error(orderError?.message || orderData?.error || 'Failed to create order');
-      }
+    toast({
+      title: "Redirected to lab provider",
+      description: "Complete your order on the lab provider's website."
+    });
+  };
 
-      console.log('Order created:', orderData.order.orderNumber);
-
-      // Then create payment session
-      const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
-        body: {
-          orderId: orderData.order.id,
-          returnUrl: window.location.origin
-        }
-      });
-
-      if (paymentError || !paymentData?.url) {
-        throw new Error(paymentError?.message || paymentData?.error || 'Failed to create payment session');
-      }
-
-      // Clear cart and redirect to Stripe Checkout
-      setCartItems([]);
-      
-      // Open Stripe Checkout in new tab
-      window.open(paymentData.url, '_blank');
-      
-      // Navigate to a waiting page or dashboard
-      navigate('/dashboard?order_pending=true');
-
-      toast({
-        title: "Redirecting to payment",
-        description: `Order ${orderData.order.orderNumber} created. Complete payment in the new tab.`
-      });
-
-    } catch (error: any) {
-      console.error('Checkout error:', error);
-      toast({
-        title: "Checkout failed",
-        description: error.message || "Failed to create order",
-        variant: "destructive"
-      });
-    } finally {
-      setIsCheckingOut(false);
-    }
+  const handleCancelLivePricing = () => {
+    setShowLivePricing(false);
   };
 
   const formatPrice = (price: number) => {
@@ -143,6 +107,36 @@ export function LabMarketplace() {
   };
 
   const totals = calculateTotal();
+
+  // Show live pricing checkout if triggered
+  if (showLivePricing) {
+    return (
+      <div className="min-h-screen bg-gray-50 relative page-enter">
+        <UnifiedBackground variant="minimal" intensity="low" />
+        
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+          <div className="mb-6">
+            <Button
+              variant="ghost"
+              onClick={handleCancelLivePricing}
+              className="flex items-center mb-4"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Cart
+            </Button>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Checkout Confirmation</h1>
+            <p className="text-gray-600">Confirming live prices from lab providers...</p>
+          </div>
+          
+          <LivePriceCheckout
+            cartItems={cartItems}
+            onConfirmCheckout={handleConfirmCheckout}
+            onCancel={handleCancelLivePricing}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 relative page-enter">
@@ -232,6 +226,9 @@ export function LabMarketplace() {
                   </div>
                 </div>
               </div>
+
+              {/* Price Disclaimer */}
+              <PriceDisclaimer className="mb-4" />
             </div>
             
             <LabPanelBrowser 
@@ -299,11 +296,12 @@ export function LabMarketplace() {
                       {/* Payment Processor Info */}
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                         <div className="text-xs text-blue-800 space-y-1">
-                          <div className="font-medium">Payment Processing:</div>
-                          <div>• Lab purchases & authorization fees: <span className="font-medium">Fullscript</span></div>
-                          <div>• AI analysis fee: <span className="font-medium">BiohackLabs.ai</span></div>
+                          <div className="font-medium">External Lab Checkout:</div>
+                          <div>• Order directly through lab provider (Quest/LabCorp)</div>
+                          <div>• Live pricing confirmed at checkout</div>
+                          <div>• Authorization & draw fees included</div>
                           <div className="text-xs text-blue-600 mt-2 pt-2 border-t border-blue-200">
-                            <strong>Cash-pay only.</strong> Insurance not accepted. $12.50 authorization fee per panel + $10 draw fee included at checkout.
+                            <strong>Cash-pay pricing.</strong> Final amounts may vary slightly from estimates.
                           </div>
                         </div>
                       </div>
@@ -314,14 +312,14 @@ export function LabMarketplace() {
                         disabled={isCheckingOut}
                         className="w-full button-bounce hover-glow"
                       >
-                        <CreditCard className="h-4 w-4 mr-2" />
+                        <ExternalLink className="h-4 w-4 mr-2" />
                         {isCheckingOut ? (
                           <span className="flex items-center">
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                             Processing...
                           </span>
                         ) : (
-                          'Proceed to Checkout'
+                          'Check Live Prices & Checkout'
                         )}
                       </Button>
                     </>
