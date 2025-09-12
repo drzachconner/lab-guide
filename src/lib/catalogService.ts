@@ -1,4 +1,5 @@
 import catalogData from '@/config/labs-catalog-expanded.json';
+import fullscriptCatalog from '@/config/fullscript-catalog.json';
 import { computeRetailPrice, type PricingStrategy, type Fees, type PricingDefaults } from './pricing';
 
 export interface LabPanel {
@@ -41,31 +42,72 @@ export interface PricedPanel extends LabPanel {
 
 class CatalogService {
   private config: CatalogConfig;
+  private fullscriptData: any;
 
   constructor() {
     this.config = catalogData as CatalogConfig;
+    this.fullscriptData = fullscriptCatalog;
   }
 
   getAllPanels(): LabPanel[] {
-    return this.config.panels;
+    // Combine original panels with Fullscript panels
+    const originalPanels = this.config.panels;
+    const fullscriptPanels = this.convertFullscriptPanels();
+    return [...originalPanels, ...fullscriptPanels];
+  }
+
+  private convertFullscriptPanels(): LabPanel[] {
+    if (!this.fullscriptData?.panels) return [];
+    
+    return this.fullscriptData.panels.map((fsPanel: any) => ({
+      id: fsPanel.id,
+      display_name: fsPanel.name,
+      fs_sku: fsPanel.id.replace('fs-', 'FS-'),
+      category: fsPanel.category || 'Laboratory Tests',
+      subcategory: fsPanel.subcategory,
+      specimen: fsPanel.specimen || 'Serum',
+      fasting_required: fsPanel.fasting_required || false,
+      turnaround_days: `${fsPanel.turnaround_days || 1} business days`,
+      aliases: [fsPanel.name],
+      biomarkers: fsPanel.biomarkers?.map((b: any) => b.name) || [],
+      reference_vendor: fsPanel.providers?.[0]?.name || 'Fullscript',
+      reference_price_usd: fsPanel.providers?.[0]?.price || null,
+      pricing: { 
+        strategy: 'reference_undercut', 
+        undercut_percent: 5, 
+        min_margin_usd: 10 
+      } as PricingStrategy,
+      notes: `Available from ${fsPanel.providers?.length || 1} provider(s). ${fsPanel.providers?.[0]?.price_notes || ''}`.trim(),
+      clinical_significance: `Lab panel from Fullscript catalog with ${fsPanel.biomarkers?.length || 0} biomarkers.`,
+      popular: ['Basic Metabolic Panel', 'CBC', 'Lipid Panel', 'DUTCH'].some(popular => 
+        fsPanel.name.includes(popular)
+      ),
+      lab_provider: fsPanel.providers?.[0]?.name || 'Multiple Providers',
+    }));
   }
 
   getPanelById(id: string): LabPanel | null {
-    return this.config.panels.find(panel => panel.id === id) || null;
+    // Check original panels first
+    const originalPanel = this.config.panels.find(panel => panel.id === id);
+    if (originalPanel) return originalPanel;
+    
+    // Check Fullscript panels
+    const allPanels = this.getAllPanels();
+    return allPanels.find(panel => panel.id === id) || null;
   }
 
   getPanelsByCategory(category: string): LabPanel[] {
-    return this.config.panels.filter(panel => panel.category === category);
+    return this.getAllPanels().filter(panel => panel.category === category);
   }
 
   getCategories(): string[] {
-    const categories = new Set(this.config.panels.map(panel => panel.category));
+    const categories = new Set(this.getAllPanels().map(panel => panel.category));
     return Array.from(categories).sort();
   }
 
   searchPanels(query: string): LabPanel[] {
     const lowerQuery = query.toLowerCase();
-    return this.config.panels.filter(panel => {
+    return this.getAllPanels().filter(panel => {
       return (
         panel.display_name.toLowerCase().includes(lowerQuery) ||
         panel.aliases.some(alias => alias.toLowerCase().includes(lowerQuery)) ||
@@ -80,9 +122,10 @@ class CatalogService {
   }
 
   getSubcategories(category?: string): string[] {
+    const allPanels = this.getAllPanels();
     let panels = category && category !== 'all' ? 
-      this.config.panels.filter(panel => panel.category === category) : 
-      this.config.panels;
+      allPanels.filter(panel => panel.category === category) : 
+      allPanels;
     
     const subcategories = new Set(
       panels
@@ -93,25 +136,25 @@ class CatalogService {
   }
 
   getPanelsBySubcategory(subcategory: string): LabPanel[] {
-    return this.config.panels.filter(panel => panel.subcategory === subcategory);
+    return this.getAllPanels().filter(panel => panel.subcategory === subcategory);
   }
 
   getPopularPanels(): LabPanel[] {
-    return this.config.panels.filter(panel => panel.popular === true);
+    return this.getAllPanels().filter(panel => panel.popular === true);
   }
 
   getPanelsBySpecimen(specimen: string): LabPanel[] {
-    return this.config.panels.filter(panel => 
+    return this.getAllPanels().filter(panel => 
       panel.specimen.toLowerCase().includes(specimen.toLowerCase())
     );
   }
 
   getPanelsByFastingRequirement(fastingRequired: boolean): LabPanel[] {
-    return this.config.panels.filter(panel => panel.fasting_required === fastingRequired);
+    return this.getAllPanels().filter(panel => panel.fasting_required === fastingRequired);
   }
 
   getPanelsByTurnaroundTime(maxDays: number): LabPanel[] {
-    return this.config.panels.filter(panel => {
+    return this.getAllPanels().filter(panel => {
       const turnaround = panel.turnaround_days;
       const matches = turnaround.match(/(\d+)/);
       if (matches) {
@@ -232,7 +275,7 @@ class CatalogService {
   async computeAllPanelPrices(): Promise<PricedPanel[]> {
     const pricedPanels: PricedPanel[] = [];
     
-    for (const panel of this.config.panels) {
+    for (const panel of this.getAllPanels()) {
       const pricedPanel = await this.computePanelPrice(panel.id);
       if (pricedPanel) {
         pricedPanels.push(pricedPanel);

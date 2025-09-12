@@ -1,0 +1,295 @@
+{
+  "source": "Fullscript Lab Catalog",
+  "date_extracted": "2025-09-12",
+  "total_pages": 567,
+  "pages_processed": 50,
+  "providers": [
+    "Quest Diagnostics",
+    "Access Labcorp Draw", 
+    "Access Medical Labs",
+    "Precision Analytical (DUTCH)",
+    "Diagnostic Solutions Laboratory",
+    "3X4 Genetics",
+    "Doctor's Data",
+    "Genova Diagnostics"
+  ],
+  "panels": [
+    {
+      "id": "fs-basic-metabolic-panel",
+      "name": "Basic Metabolic Panel",
+      "category": "Chemistry",
+      "subcategory": "Metabolic Panels",
+      "providers": [
+        {
+          "name": "Quest Diagnostics",
+          "price": 8.63,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Labcorp Draw", 
+          "price": 6.53,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Medical Labs",
+          "price": 2.31,
+          "price_notes": "handling fee may apply",
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Glucose", "units": "mg/dL", "reference_range": "70-100"},
+        {"name": "BUN", "units": "mg/dL", "reference_range": "7-20"},
+        {"name": "Creatinine", "units": "mg/dL", "reference_range": "0.6-1.2"},
+        {"name": "Sodium", "units": "mmol/L", "reference_range": "136-145"},
+        {"name": "Potassium", "units": "mmol/L", "reference_range": "3.5-5.1"},
+        {"name": "Chloride", "units": "mmol/L", "reference_range": "98-107"},
+        {"name": "CO2", "units": "mmol/L", "reference_range": "22-28"}
+      ]
+    },
+    {
+      "id": "fs-comprehensive-metabolic-panel",
+      "name": "Comprehensive Metabolic Panel", 
+      "category": "Chemistry",
+      "subcategory": "Metabolic Panels",
+      "providers": [
+        {
+          "name": "Quest Diagnostics",
+          "price": 8.45,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Labcorp Draw",
+          "price": 8.45, 
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Medical Labs",
+          "price": 3.65,
+          "price_notes": "handling fee may apply",
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Glucose", "units": "mg/dL", "reference_range": "70-100"},
+        {"name": "BUN", "units": "mg/dL", "reference_range": "7-20"},
+        {"name": "Creatinine", "units": "mg/dL", "reference_range": "0.6-1.2"},
+        {"name": "Sodium", "units": "mmol/L", "reference_range": "136-145"},
+        {"name": "Potassium", "units": "mmol/L", "reference_range": "3.5-5.1"},
+        {"name": "Chloride", "units": "mmol/L", "reference_range": "98-107"},
+        {"name": "CO2", "units": "mmol/L", "reference_range": "22-28"},
+        {"name": "Total Protein", "units": "g/dL", "reference_range": "6.0-8.3"},
+        {"name": "Albumin", "units": "g/dL", "reference_range": "3.5-5.0"},
+        {"name": "Total Bilirubin", "units": "mg/dL", "reference_range": "0.3-1.2"},
+        {"name": "AST", "units": "U/L", "reference_range": "10-40"},
+        {"name": "ALT", "units": "U/L", "reference_range": "7-56"},
+        {"name": "Alkaline Phosphatase", "units": "U/L", "reference_range": "44-147"}
+      ]
+    },
+    {
+      "id": "fs-cbc-with-differential",
+      "name": "CBC with Differential and Platelets",
+      "category": "Hematology", 
+      "subcategory": "Complete Blood Count",
+      "providers": [
+        {
+          "name": "Quest Diagnostics",
+          "price": 10.78,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Labcorp Draw",
+          "price": 2.88,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Medical Labs", 
+          "price": 3.53,
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "WBC", "units": "K/uL", "reference_range": "4.0-10.0"},
+        {"name": "RBC", "units": "M/uL", "reference_range": "4.2-5.8"},
+        {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"},
+        {"name": "Hematocrit", "units": "%", "reference_range": "36-48"},
+        {"name": "Platelets", "units": "K/uL", "reference_range": "150-450"},
+        {"name": "Neutrophils", "units": "%", "reference_range": "50-70"},
+        {"name": "Lymphocytes", "units": "%", "reference_range": "20-40"}
+      ]
+    },
+    {
+      "id": "fs-lipid-panel", 
+      "name": "Lipid Panel",
+      "category": "Chemistry",
+      "subcategory": "Cardiovascular",
+      "providers": [
+        {
+          "name": "Quest Diagnostics",
+          "price": 7.72,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Labcorp Draw",
+          "price": 4.28,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Medical Labs",
+          "price": 4.28, 
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Total Cholesterol", "units": "mg/dL", "reference_range": "<200"},
+        {"name": "LDL Cholesterol", "units": "mg/dL", "reference_range": "<100"},
+        {"name": "HDL Cholesterol", "units": "mg/dL", "reference_range": ">40"},
+        {"name": "Triglycerides", "units": "mg/dL", "reference_range": "<150"}
+      ]
+    },
+    {
+      "id": "fs-dutch-complete",
+      "name": "DUTCH Complete", 
+      "category": "Hormone Testing",
+      "subcategory": "Comprehensive Hormone Panels",
+      "providers": [
+        {
+          "name": "Precision Analytical (DUTCH)",
+          "price": 300.00,
+          "phlebotomy_required": false
+        }
+      ],
+      "specimen": "Dried Urine",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "Cortisol", "units": "ug/g Cr", "reference_range": "Varies"},
+        {"name": "Cortisone", "units": "ug/g Cr", "reference_range": "Varies"},
+        {"name": "Estradiol", "units": "ng/g Cr", "reference_range": "Varies"},
+        {"name": "Estrone", "units": "ng/g Cr", "reference_range": "Varies"},
+        {"name": "Testosterone", "units": "ng/g Cr", "reference_range": "Varies"}
+      ]
+    },
+    {
+      "id": "fs-dutch-plus",
+      "name": "DUTCH Plus",
+      "category": "Hormone Testing", 
+      "subcategory": "Comprehensive Hormone Panels",
+      "providers": [
+        {
+          "name": "Precision Analytical (DUTCH)",
+          "price": 400.00,
+          "phlebotomy_required": false
+        }
+      ],
+      "specimen": "Dried Urine + Saliva",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "Cortisol Awakening Response", "units": "Various", "reference_range": "Varies"},
+        {"name": "Melatonin", "units": "ng/g Cr", "reference_range": "Varies"},
+        {"name": "All DUTCH Complete markers", "units": "Various", "reference_range": "Varies"}
+      ]
+    },
+    {
+      "id": "fs-gi-map",
+      "name": "GI-MAP® (GI Microbial Assay Plus)",
+      "category": "Gastrointestinal",
+      "subcategory": "Microbiome Testing",
+      "providers": [
+        {
+          "name": "Diagnostic Solutions Laboratory",
+          "price": 327.18,
+          "phlebotomy_required": false
+        }
+      ],
+      "specimen": "Stool",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "Bacterial Pathogens", "units": "Various", "reference_range": "Not Detected"},
+        {"name": "Parasites", "units": "Various", "reference_range": "Not Detected"},
+        {"name": "Viruses", "units": "Various", "reference_range": "Not Detected"},
+        {"name": "Fungi", "units": "Various", "reference_range": "Not Detected"},
+        {"name": "Normal Flora", "units": "Various", "reference_range": "Varies"}
+      ]
+    },
+    {
+      "id": "fs-mthfr",
+      "name": "MTHFR (Methylenetetrahydrofolate Reductase) DNA Mutation Analysis",
+      "category": "Genetics",
+      "subcategory": "Pharmacogenomics", 
+      "providers": [
+        {
+          "name": "Quest Diagnostics",
+          "price": 190.54,
+          "phlebotomy_required": true
+        },
+        {
+          "name": "Access Labcorp Draw",
+          "price": 111.23,
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "MTHFR C677T", "units": "Genotype", "reference_range": "Normal/Variant"},
+        {"name": "MTHFR A1298C", "units": "Genotype", "reference_range": "Normal/Variant"}
+      ]
+    },
+    {
+      "id": "fs-hemoglobin-a1c",
+      "name": "Hemoglobin A1c",
+      "category": "Chemistry",
+      "subcategory": "Diabetes Monitoring",
+      "providers": [
+        {
+          "name": "Quest Diagnostics", 
+          "price": 6.58,
+          "phlebotomy_required": true
+        }
+      ],
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Hemoglobin A1c", "units": "%", "reference_range": "<5.7"}
+      ]
+    },
+    {
+      "id": "fs-organic-acids-profile",
+      "name": "Organic Acids Profile - Urine", 
+      "category": "Functional Medicine",
+      "subcategory": "Metabolic Testing",
+      "providers": [
+        {
+          "name": "Diagnostic Solutions Laboratory",
+          "price": 187.78,
+          "phlebotomy_required": false
+        }
+      ],
+      "specimen": "Urine",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "Citric Acid Cycle Metabolites", "units": "Various", "reference_range": "Varies"},
+        {"name": "Neurotransmitter Metabolites", "units": "Various", "reference_range": "Varies"},
+        {"name": "Oxidative Stress Markers", "units": "Various", "reference_range": "Varies"}
+      ]
+    }
+  ]
+}
