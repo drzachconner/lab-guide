@@ -224,7 +224,7 @@ export function FullscriptAccountSetup({ onComplete }: FullscriptAccountSetupPro
                 <div>AI recommendations sync to your account</div>
               </div>
               <div>
-                <div className="font-medium">4. Lifetime Benefits</div>
+                <div className="font-medium">4. Ongoing Benefits</div>
                 <div>No recurring fees, permanent access</div>
               </div>
             </div>

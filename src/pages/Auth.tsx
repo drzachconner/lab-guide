@@ -104,14 +104,14 @@ const Auth = () => {
       case 'analysis':
         return {
           title: 'Complete Lab Analysis + Dispensary',
-          subtitle: 'Get AI-powered lab insights plus lifetime dispensary access',
+          subtitle: 'Get AI-powered lab insights plus dispensary access',
           icon: <Brain className="h-8 w-8 text-blue-600" />,
           badge: 'Full Platform Access',
           benefits: [
             '$19 comprehensive lab analysis',
             'AI-powered health insights',
             'Personalized supplement protocols',
-            'Lifetime 25% dispensary discount'
+            '25% dispensary discount'
           ]
         };
       default:

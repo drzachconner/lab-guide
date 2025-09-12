@@ -36,7 +36,7 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
             <CardTitle className="text-green-800">Fullscript Dispensary Access Active</CardTitle>
           </div>
           <CardDescription className="text-green-700">
-            You now have lifetime access to professional-grade supplements at 15% discount
+            You now have access to professional-grade supplements at 15% discount
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -70,7 +70,7 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
           <CardTitle className="text-amber-800">Unlock Fullscript Dispensary Access</CardTitle>
         </div>
         <CardDescription className="text-amber-700">
-          Get lifetime access to professional-grade supplements at 15% discount with your first lab analysis
+          Get access to professional-grade supplements at 15% discount with your first lab analysis
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -96,7 +96,7 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-500" />
-                Lifetime access - no recurring fees
+                Access included - no recurring fees
               </li>
             </ul>
           </div>

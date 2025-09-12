@@ -289,7 +289,7 @@ const AnimatedLandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               >
                 <div className="text-sm font-medium text-secondary-dark mb-1">BONUS INCLUDED</div>
                 <div className="text-base font-semibold text-foreground">
-                  Lifelong 25% Discount on 13,000+ Quality Supplements
+                  25% Discount on 13,000+ Quality Supplements
                 </div>
               </motion.div>
             </motion.div>
@@ -365,8 +365,8 @@ const AnimatedLandingPage = ({ clinicContext }: LandingPageProps = {}) => {
               
               <FeatureCard
                 icon={Zap}
-                title="Lifelong Supplement Access"
-                description="Get lifelong 25% off professional-grade Fullscript supplements tailored to your lab results. Automated retest reminders and suggested follow-up labs keep you optimizing long-term."
+                title="Supplement Access"
+                description="Get 25% off professional-grade Fullscript supplements tailored to your lab results. Automated retest reminders and suggested follow-up labs keep you optimizing long-term."
                 delay={0.2}
               />
               
@@ -522,7 +522,7 @@ const AnimatedLandingPage = ({ clinicContext }: LandingPageProps = {}) => {
             </h2>
             
             <p className="text-xl text-white/85 leading-relaxed">
-              One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + lifelong 25% discount on 13,000+ quality supplement and wellness products.
+              One $19 session unlocks comprehensive analysis using elite biohacking and functional medicine methodologies + personalized protocols + 25% discount on 13,000+ quality supplement and wellness products.
             </p>
             
             <motion.div 

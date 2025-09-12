@@ -180,7 +180,7 @@ const Dashboard = () => {
                       <li>• Upload multiple lab reports</li>
                       <li>• AI-powered biohacking analysis</li>
                       <li>• Personalized supplement protocols</li>
-                      <li>• Lifetime dispensary access included</li>
+                      <li>• Dispensary access included</li>
                     </ul>
                   </div>
                 )}
@@ -236,14 +236,14 @@ const Dashboard = () => {
                       <span className="text-green-800 font-medium">30% Dispensary Discount Active</span>
                     </div>
                     <p className="text-green-700 text-sm mt-1">
-                      Lifetime access to wholesale pricing (25% in Canada)
+                      Access to wholesale pricing (25% in Canada)
                     </p>
                   </div>
                 ) : (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                     <div className="text-yellow-900 font-medium mb-2">Dispensary Access</div>
                     <p className="text-yellow-800 text-sm">
-                      Complete your first lab analysis to unlock lifetime dispensary access
+                      Complete your first lab analysis to unlock dispensary access
                     </p>
                   </div>
                 )}
