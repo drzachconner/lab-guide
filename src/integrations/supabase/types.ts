@@ -720,6 +720,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      extract_catalog_from_text: {
+        Args: { input_text: string }
+        Returns: Json
+      }
       get_clinic_current_usage: {
         Args: { clinic_uuid: string }
         Returns: {
