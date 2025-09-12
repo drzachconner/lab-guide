@@ -14,7 +14,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { LabPanelBrowser } from "@/components/LabPanelBrowser";
+import { AdvancedLabPanelBrowser } from "@/components/AdvancedLabPanelBrowser";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -231,7 +231,7 @@ export function LabMarketplace() {
               <PriceDisclaimer className="mb-4" />
             </div>
             
-            <LabPanelBrowser 
+            <AdvancedLabPanelBrowser 
               onAddToCart={handleAddToCart}
               cartItems={cartItems}
             />

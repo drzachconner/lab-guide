@@ -1,4 +1,4 @@
-import catalogData from '@/config/labs-catalog.json';
+import catalogData from '@/config/labs-catalog-expanded.json';
 import { computeRetailPrice, type PricingStrategy, type Fees, type PricingDefaults } from './pricing';
 
 export interface LabPanel {
@@ -6,14 +6,19 @@ export interface LabPanel {
   display_name: string;
   fs_sku: string;
   category: string;
+  subcategory?: string;
   specimen: string;
   fasting_required: boolean;
   turnaround_days: string;
   aliases: string[];
+  biomarkers?: string[];
   reference_vendor?: string;
   reference_price_usd?: number | null;
   pricing: PricingStrategy;
   notes: string;
+  clinical_significance?: string;
+  popular?: boolean;
+  lab_provider?: string;
   bundle_components?: string[];
 }
 
@@ -64,8 +69,77 @@ class CatalogService {
       return (
         panel.display_name.toLowerCase().includes(lowerQuery) ||
         panel.aliases.some(alias => alias.toLowerCase().includes(lowerQuery)) ||
-        panel.notes.toLowerCase().includes(lowerQuery)
+        panel.notes.toLowerCase().includes(lowerQuery) ||
+        panel.category.toLowerCase().includes(lowerQuery) ||
+        panel.subcategory?.toLowerCase().includes(lowerQuery) ||
+        panel.biomarkers?.some(marker => marker.toLowerCase().includes(lowerQuery)) ||
+        panel.clinical_significance?.toLowerCase().includes(lowerQuery) ||
+        panel.lab_provider?.toLowerCase().includes(lowerQuery)
       );
+    });
+  }
+
+  getSubcategories(category?: string): string[] {
+    let panels = category && category !== 'all' ? 
+      this.config.panels.filter(panel => panel.category === category) : 
+      this.config.panels;
+    
+    const subcategories = new Set(
+      panels
+        .map(panel => panel.subcategory)
+        .filter((sub): sub is string => !!sub)
+    );
+    return Array.from(subcategories).sort();
+  }
+
+  getPanelsBySubcategory(subcategory: string): LabPanel[] {
+    return this.config.panels.filter(panel => panel.subcategory === subcategory);
+  }
+
+  getPopularPanels(): LabPanel[] {
+    return this.config.panels.filter(panel => panel.popular === true);
+  }
+
+  getPanelsBySpecimen(specimen: string): LabPanel[] {
+    return this.config.panels.filter(panel => 
+      panel.specimen.toLowerCase().includes(specimen.toLowerCase())
+    );
+  }
+
+  getPanelsByFastingRequirement(fastingRequired: boolean): LabPanel[] {
+    return this.config.panels.filter(panel => panel.fasting_required === fastingRequired);
+  }
+
+  getPanelsByTurnaroundTime(maxDays: number): LabPanel[] {
+    return this.config.panels.filter(panel => {
+      const turnaround = panel.turnaround_days;
+      const matches = turnaround.match(/(\d+)/);
+      if (matches) {
+        const days = parseInt(matches[1]);
+        return days <= maxDays;
+      }
+      return false;
+    });
+  }
+
+  sortPanels(panels: LabPanel[], sortBy: 'name' | 'price' | 'category' | 'turnaround' | 'popular'): LabPanel[] {
+    return [...panels].sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.display_name.localeCompare(b.display_name);
+        case 'category':
+          return a.category.localeCompare(b.category) || a.display_name.localeCompare(b.display_name);
+        case 'turnaround':
+          const aTurnaround = parseInt(a.turnaround_days.match(/(\d+)/)?.[1] || '0');
+          const bTurnaround = parseInt(b.turnaround_days.match(/(\d+)/)?.[1] || '0');
+          return aTurnaround - bTurnaround;
+        case 'popular':
+          const aPopular = a.popular ? 1 : 0;
+          const bPopular = b.popular ? 1 : 0;
+          return bPopular - aPopular || a.display_name.localeCompare(b.display_name);
+        default:
+          return 0;
+      }
     });
   }
 
