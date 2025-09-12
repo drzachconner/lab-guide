@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_lab_interactions: {
+        Row: {
+          action: string | null
+          created_at: string | null
+          id: string
+          lab_id: string | null
+          session_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action?: string | null
+          created_at?: string | null
+          id?: string
+          lab_id?: string | null
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string | null
+          created_at?: string | null
+          id?: string
+          lab_id?: string | null
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_lab_interactions_lab_id_fkey"
+            columns: ["lab_id"]
+            isOneToOne: false
+            referencedRelation: "lab_panels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clinic_usage: {
         Row: {
           clinic_id: string
@@ -324,47 +359,83 @@ export type Database = {
       }
       lab_panels: {
         Row: {
+          age_minimum: number | null
           base_price: number
           biomarkers: string[]
           category: string
+          collection_instructions: string | null
           created_at: string
           description: string | null
+          draw_fee: number | null
           fasting_required: boolean | null
+          fee_justification: string | null
+          fullscript_lab_id: string | null
+          fullscript_sku: string | null
           id: string
           is_active: boolean | null
           lab_provider: string
           name: string
+          optimization_tags: string[] | null
+          practitioner_price: number | null
+          preparation_instructions: string | null
+          retail_price: number | null
           sample_type: string
+          states_available: string[] | null
+          suggested_service_fee: number | null
           turnaround_days: number | null
           updated_at: string
         }
         Insert: {
+          age_minimum?: number | null
           base_price: number
           biomarkers: string[]
           category: string
+          collection_instructions?: string | null
           created_at?: string
           description?: string | null
+          draw_fee?: number | null
           fasting_required?: boolean | null
+          fee_justification?: string | null
+          fullscript_lab_id?: string | null
+          fullscript_sku?: string | null
           id?: string
           is_active?: boolean | null
           lab_provider?: string
           name: string
+          optimization_tags?: string[] | null
+          practitioner_price?: number | null
+          preparation_instructions?: string | null
+          retail_price?: number | null
           sample_type?: string
+          states_available?: string[] | null
+          suggested_service_fee?: number | null
           turnaround_days?: number | null
           updated_at?: string
         }
         Update: {
+          age_minimum?: number | null
           base_price?: number
           biomarkers?: string[]
           category?: string
+          collection_instructions?: string | null
           created_at?: string
           description?: string | null
+          draw_fee?: number | null
           fasting_required?: boolean | null
+          fee_justification?: string | null
+          fullscript_lab_id?: string | null
+          fullscript_sku?: string | null
           id?: string
           is_active?: boolean | null
           lab_provider?: string
           name?: string
+          optimization_tags?: string[] | null
+          practitioner_price?: number | null
+          preparation_instructions?: string | null
+          retail_price?: number | null
           sample_type?: string
+          states_available?: string[] | null
+          suggested_service_fee?: number | null
           turnaround_days?: number | null
           updated_at?: string
         }
