@@ -49,6 +49,11 @@ class CatalogService {
     this.fullscriptData = fullscriptCatalog;
   }
 
+  // Allow runtime injection/override of Fullscript catalog (e.g., parsed from text)
+  setFullscriptData(data: any) {
+    this.fullscriptData = data || {};
+  }
+
   getAllPanels(): LabPanel[] {
     // Combine original panels with Fullscript panels
     const originalPanels = this.config.panels;
