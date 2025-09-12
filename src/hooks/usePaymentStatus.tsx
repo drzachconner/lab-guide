@@ -35,7 +35,7 @@ export function usePaymentStatus() {
       if (error) throw error;
 
       const hasPaidAnalysis = reports && reports.length > 0;
-      const hasDispensaryAccess = hasPaidAnalysis; // Dispensary access granted after any lab report purchase
+      const hasDispensaryAccess = true; // Dispensary access available to all authenticated users
 
       setStatus({
         hasPaidAnalysis: !!hasPaidAnalysis,

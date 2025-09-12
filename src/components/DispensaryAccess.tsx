@@ -36,7 +36,7 @@ export function DispensaryAccess({ clinicContext, onPurchaseAnalysis }: Dispensa
             <CardTitle className="text-green-800">Fullscript Dispensary Access Active</CardTitle>
           </div>
           <CardDescription className="text-green-700">
-            You now have access to professional-grade supplements at 15% discount
+            Access 13,000+ professional-grade supplements at wholesale pricing
           </CardDescription>
         </CardHeader>
         <CardContent>
