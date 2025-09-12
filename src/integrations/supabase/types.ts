@@ -540,28 +540,40 @@ export type Database = {
       }
       profiles: {
         Row: {
+          account_type: string | null
           age_bucket: string | null
           auth_id: string
           created_at: string
+          dispensary_access: boolean | null
+          dispensary_url: string | null
           fs_token: string | null
+          fullscript_account_id: string | null
           id: string
           sex: string | null
           updated_at: string
         }
         Insert: {
+          account_type?: string | null
           age_bucket?: string | null
           auth_id: string
           created_at?: string
+          dispensary_access?: boolean | null
+          dispensary_url?: string | null
           fs_token?: string | null
+          fullscript_account_id?: string | null
           id?: string
           sex?: string | null
           updated_at?: string
         }
         Update: {
+          account_type?: string | null
           age_bucket?: string | null
           auth_id?: string
           created_at?: string
+          dispensary_access?: boolean | null
+          dispensary_url?: string | null
           fs_token?: string | null
+          fullscript_account_id?: string | null
           id?: string
           sex?: string | null
           updated_at?: string
