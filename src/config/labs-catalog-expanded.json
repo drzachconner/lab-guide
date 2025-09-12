@@ -129,8 +129,6 @@
       "popular": true,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Advanced Cardiovascular
     {
       "id": "lipid_advanced",
       "display_name": "Advanced Lipid Panel with Particle Size",
@@ -188,8 +186,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Complete Thyroid Panel
     {
       "id": "thyroid_comprehensive",
       "display_name": "Comprehensive Thyroid Panel (TSH, Free T4, Free T3, Reverse T3, TPO, Anti-Thyroglobulin)",
@@ -266,8 +262,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Men's Hormones
     {
       "id": "testosterone_total",
       "display_name": "Testosterone, Total",
@@ -344,8 +338,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Women's Hormones
     {
       "id": "estradiol",
       "display_name": "Estradiol (E2)",
@@ -422,8 +414,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Stress & Adrenal
     {
       "id": "cortisol_am",
       "display_name": "Cortisol (Morning)",
@@ -462,8 +452,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Insulin & Diabetes
     {
       "id": "fasting_glucose",
       "display_name": "Glucose (Fasting)",
@@ -521,8 +509,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Vitamins & Minerals
     {
       "id": "vitamin_b12",
       "display_name": "Vitamin B12",
@@ -599,8 +585,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Iron Studies
     {
       "id": "iron_studies",
       "display_name": "Iron Studies (Ferritin, Iron, TIBC, Transferrin Saturation)",
@@ -639,8 +623,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Liver Function
     {
       "id": "liver_function_panel",
       "display_name": "Liver Function Panel (ALT, AST, ALP, Bilirubin, GGT)",
@@ -660,8 +642,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Kidney Function
     {
       "id": "kidney_function_panel",
       "display_name": "Kidney Function Panel (BUN, Creatinine, eGFR, Microalbumin)",
@@ -681,8 +661,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Inflammatory Markers
     {
       "id": "esr",
       "display_name": "ESR (Erythrocyte Sedimentation Rate)",
@@ -702,8 +680,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Autoimmune & Immune Function
     {
       "id": "ana_screen",
       "display_name": "ANA Screen (Antinuclear Antibodies)",
@@ -761,8 +737,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Celiac & Food Allergies
     {
       "id": "celiac_panel",
       "display_name": "Celiac Disease Panel (tTG IgA, Total IgA, Gliadin IgG/IgA)",
@@ -782,8 +756,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Infectious Disease
     {
       "id": "hepatitis_b_panel",
       "display_name": "Hepatitis B Panel (HBsAg, HBsAb, HBcAb)",
@@ -841,8 +813,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // STI Panel
     {
       "id": "sti_comprehensive",
       "display_name": "Comprehensive STI Panel (HIV, Syphilis, Hepatitis B/C, HSV 1/2, Chlamydia, Gonorrhea)",
@@ -862,8 +832,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Specialty & Advanced Tests
     {
       "id": "omega3_index",
       "display_name": "Omega-3 Index (RBC)",
@@ -908,8 +876,6 @@
       "popular": false,
       "lab_provider": "SpecialtyLabs"
     },
-
-    // Food Sensitivity & Allergies
     {
       "id": "food_sensitivity_96",
       "display_name": "Food Sensitivity Panel (96 Foods)",
@@ -951,8 +917,6 @@
       "popular": false,
       "lab_provider": "Quest/LabCorp"
     },
-
-    // Environmental & Toxicology
     {
       "id": "heavy_metals",
       "display_name": "Heavy Metals Panel (Lead, Mercury, Cadmium, Arsenic)",
@@ -975,8 +939,6 @@
       "popular": false,
       "lab_provider": "SpecialtyLabs"
     },
-
-    // Comprehensive Panels & Bundles
     {
       "id": "annual_physical_panel",
       "display_name": "Annual Physical Panel (CBC, CMP, Lipids, TSH, Vitamin D)",
