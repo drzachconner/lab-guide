@@ -98,57 +98,6 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
 
     // Fasting filter
     if (fastingFilter !== 'all') {
-      filteredPanels = filteredPanels.filter(panel => 
-        fastingFilter === 'required' ? panel.fasting_required : !panel.fasting_required
-      );
-    }
-
-    // Specimen filter
-    if (specimenFilter !== 'all') {
-      filteredPanels = filteredPanels.filter(panel => 
-        panel.specimen.toLowerCase().includes(specimenFilter.toLowerCase())
-      );
-    }
-
-    // Turnaround filter
-    if (turnaroundFilter !== null) {
-      filteredPanels = filteredPanels.filter(panel => {
-        const turnaround = panel.turnaround_days;
-        if (typeof turnaround === 'string') {
-          const match = turnaround.match(/(\d+)/);
-          return match && parseInt(match[1]) <= turnaroundFilter;
-        }
-        return false;
-      });
-    }
-
-    // Price range filter
-    if (priceRangeFilter.min !== null || priceRangeFilter.max !== null) {
-      filteredPanels = filteredPanels.filter(panel => {
-        const price = panel.computed_price;
-        if (typeof price !== 'number' || isNaN(price)) return false;
-        if (priceRangeFilter.min !== null && price < priceRangeFilter.min) return false;
-        if (priceRangeFilter.max !== null && price > priceRangeFilter.max) return false;
-        return true;
-      });
-    }
-
-    // Apply sorting
-    return sortPanels(filteredPanels, sortBy);
-  }, [
-    panels,
-    searchQuery,
-    selectedCategory,
-    selectedSubcategory,
-    popularOnly,
-    fastingFilter,
-    specimenFilter,
-    turnaroundFilter,
-    priceRangeFilter,
-    sortBy,
-    searchPanels,
-    sortPanels
-  ]);
       const fastingRequired = fastingFilter === 'required';
       filteredPanels = filteredPanels.filter(panel => panel.fasting_required === fastingRequired);
     }
@@ -185,16 +134,16 @@ export function AdvancedLabPanelBrowser({ onAddToCart, cartItems }: AdvancedLabP
       });
     }
 
-    // Sort
+    // Apply sorting
     return sortPanels(filteredPanels, sortBy);
   }, [
-    panels, 
-    searchQuery, 
-    selectedCategory, 
+    panels,
+    searchQuery,
+    selectedCategory,
     selectedSubcategory,
     popularOnly,
-    fastingFilter, 
-    specimenFilter, 
+    fastingFilter,
+    specimenFilter,
     turnaroundFilter,
     priceRangeFilter,
     sortBy,
