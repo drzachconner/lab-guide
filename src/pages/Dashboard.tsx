@@ -23,6 +23,7 @@ import { usePaymentStatus } from '@/hooks/usePaymentStatus';
 import { useFullscriptIntegration } from '@/hooks/useFullscriptIntegration';
 import { api } from '@/lib/apiClient';
 import { QuickLabTest } from '@/components/QuickLabTest';
+import { SystemCheck } from '@/components/SystemCheck';
 import type { ProfileT } from '@/types/zod';
 
 const Dashboard = () => {
@@ -360,6 +361,7 @@ const Dashboard = () => {
         {/* Additional sections for future features */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <QuickLabTest />
+          <SystemCheck />
 
           <Card>
             <CardHeader>
