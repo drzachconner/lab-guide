@@ -32,3 +32,6 @@ verify_jwt = false
 
 [functions.fullscript-webhook]
 verify_jwt = false
+
+[functions.send-branded-email]
+verify_jwt = false
