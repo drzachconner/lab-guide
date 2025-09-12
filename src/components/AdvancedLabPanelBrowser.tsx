@@ -27,7 +27,7 @@ import {
   Shield
 } from "lucide-react";
 import { useCatalog } from "@/hooks/useCatalog";
-import type { PricedPanel } from "@/lib/catalogService";
+import type { PricedPanel } from "@/types/panel";
 import { EmptyState } from "@/components/ui/empty-state";
 
 interface AdvancedLabPanelBrowserProps {

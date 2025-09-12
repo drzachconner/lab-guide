@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { catalogService, type PricedPanel } from '@/lib/catalogService';
+import { catalogService } from '@/lib/catalogService';
+import type { PricedPanel } from '@/types/panel';
 import { useToast } from '@/hooks/use-toast';
 
 export function useCatalog() {

@@ -13,7 +13,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { livePricingService, type CheckoutPricing } from "@/lib/livePricing";
 import { PriceDisclaimer } from "./PriceDisclaimer";
-import type { PricedPanel } from "@/lib/catalogService";
+import type { PricedPanel } from "@/types/panel";
 
 interface LivePriceCheckoutProps {
   cartItems: PricedPanel[];

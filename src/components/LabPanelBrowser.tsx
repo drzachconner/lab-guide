@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, Info, Clock, Droplets, Search, AlertTriangle } from "lucide-react";
 import { useCatalog } from "@/hooks/useCatalog";
-import type { PricedPanel } from "@/lib/catalogService";
+import type { PricedPanel } from "@/types/panel";
 
 interface LabPanelBrowserProps {
   onAddToCart: (panel: PricedPanel) => void;

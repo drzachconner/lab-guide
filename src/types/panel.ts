@@ -80,11 +80,12 @@ export type PricingStrategy = RefStrategy | FixedStrategy | BundleStrategy;
  * Enhanced Panel type with computed pricing and lab-specific fields
  */
 export interface PricedPanel extends Panel {
-  // Ensure all Panel properties are available
+  // Ensure all Panel properties are explicitly available
   id: string;
   display_name: string;
   category: string;
   specimen: string;
+  subcategory?: string;
   fasting_required?: boolean;
   turnaround_days?: string;
   aliases?: string[];
@@ -98,7 +99,7 @@ export interface PricedPanel extends Panel {
   fs_sku: string;
   pricing: PricingStrategy;
   computed_price: number | null;
-  price_breakdown?: {
+  price_breakdown: {
     fs_base_cost_usd: number;
     absorbed_fees_usd: number;
     reference_used: number | null;

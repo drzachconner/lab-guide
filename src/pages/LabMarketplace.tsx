@@ -26,7 +26,7 @@ import UnifiedBackground from "@/components/UnifiedBackground";
 import { LivePriceCheckout } from "@/components/LivePriceCheckout";
 import { PriceDisclaimer } from "@/components/PriceDisclaimer";
 
-import type { PricedPanel } from "@/lib/catalogService";
+import type { PricedPanel } from "@/types/panel";
 
 export function LabMarketplace() {
   const navigate = useNavigate();
