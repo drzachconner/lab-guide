@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,7 +17,9 @@ import {
   Beaker,
   Activity,
   LogOut,
-  User
+  User,
+  Menu,
+  X
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,6 +34,18 @@ export function BiohackLandingPage() {
     await signOut();
     navigate('/');
   };
+
+  // Close mobile menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMenuOpen]);
 
   const features = [
     {
@@ -117,6 +131,7 @@ export function BiohackLandingPage() {
               </span>
             </div>
             
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Button variant="ghost" onClick={() => navigate('/how-it-works')} className="text-gray-700 hover:text-blue-600">
                 How It Works
@@ -173,7 +188,83 @@ export function BiohackLandingPage() {
                 </>
               )}
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 hover:text-blue-600"
+              >
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            </div>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {isMenuOpen && (
+            <div className="md:hidden border-t bg-white/95 backdrop-blur-md">
+              <div className="px-4 py-3 space-y-3">
+                <Button variant="ghost" onClick={() => { navigate('/how-it-works'); setIsMenuOpen(false); }} className="w-full justify-start text-gray-700 hover:text-blue-600">
+                  How It Works
+                </Button>
+                <Button variant="ghost" onClick={() => { navigate('/sample-reports'); setIsMenuOpen(false); }} className="w-full justify-start text-gray-700 hover:text-blue-600">
+                  Sample Reports
+                </Button>
+                <Button variant="ghost" onClick={() => { navigate('/pricing'); setIsMenuOpen(false); }} className="w-full justify-start text-gray-700 hover:text-blue-600">
+                  Pricing
+                </Button>
+                <Button variant="ghost" onClick={() => { navigate('/faq'); setIsMenuOpen(false); }} className="w-full justify-start text-gray-700 hover:text-blue-600">
+                  FAQ
+                </Button>
+                
+                {user ? (
+                  // Logged in user mobile menu
+                  <>
+                    <div className="pt-3 border-t border-gray-200">
+                      <div className="text-sm text-gray-600 font-medium mb-3">
+                        {user.email}
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        onClick={() => { navigate('/dashboard'); setIsMenuOpen(false); }} 
+                        className="w-full justify-start text-gray-700 hover:text-blue-600"
+                      >
+                        <User className="h-4 w-4 mr-2" />
+                        Dashboard
+                      </Button>
+                      <Button 
+                        variant="ghost"
+                        onClick={() => { handleSignOut(); setIsMenuOpen(false); }}
+                        className="w-full justify-start text-gray-700 hover:text-red-600"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  // Non-logged in user mobile menu
+                  <div className="pt-3 border-t border-gray-200 space-y-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => { navigate('/auth?tab=signin'); setIsMenuOpen(false); }}
+                      className="w-full border-blue-200 hover:bg-blue-50"
+                    >
+                      Sign In
+                    </Button>
+                    <Button 
+                      onClick={() => { navigate('/auth?type=analysis'); setIsMenuOpen(false); }}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
