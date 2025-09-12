@@ -134,6 +134,9 @@ export function BiohackLandingPage() {
               {user ? (
                 // Logged in user buttons
                 <>
+                  <div className="text-sm text-gray-600 mr-4">
+                    {user.email}
+                  </div>
                   <Button 
                     variant="ghost" 
                     onClick={() => navigate('/dashboard')} 

@@ -76,7 +76,10 @@ const Dashboard = () => {
             Dashboard
           </Badge>
           
-          <div className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors">
+          <div 
+            className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
+            onClick={() => navigate('/')}
+          >
             <span className="text-gray-500">Biohack</span><span className="text-blue-600">Labs</span><span className="text-gray-500">.ai</span>
           </div>
 
