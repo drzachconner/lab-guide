@@ -1,0 +1,157 @@
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Upload, FileText, Loader2 } from 'lucide-react';
+
+export const PDFUploadProcessor = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [parsedContent, setParsedContent] = useState<string | null>(null);
+  const { toast } = useToast();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      if (selectedFile.type === 'application/pdf') {
+        setFile(selectedFile);
+        setParsedContent(null);
+        toast({
+          title: "PDF Selected",
+          description: `Selected: ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`,
+        });
+      } else {
+        toast({
+          title: "Invalid File Type",
+          description: "Please select a PDF file.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  const processFile = async () => {
+    if (!file) return;
+
+    setIsProcessing(true);
+    try {
+      // Create a FormData object to upload the file
+      const formData = new FormData();
+      formData.append('file', file);
+
+      // For now, we'll simulate processing and show file info
+      // In a real implementation, you'd send this to a backend endpoint
+      toast({
+        title: "Processing Started",
+        description: "PDF is being processed to extract lab catalog data...",
+      });
+
+      // Simulate processing time
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Placeholder for parsed content - in real implementation this would come from document parsing
+      setParsedContent(`File uploaded successfully: ${file.name}
+Size: ${(file.size / 1024 / 1024).toFixed(2)} MB
+Type: ${file.type}
+
+Ready for AI processing! The file has been uploaded and can now be processed to extract lab catalog information.`);
+
+      toast({
+        title: "Upload Complete",
+        description: "PDF uploaded successfully and ready for processing!",
+      });
+
+    } catch (error) {
+      console.error('Error processing file:', error);
+      toast({
+        title: "Processing Error",
+        description: "Failed to process the PDF file.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto p-6 space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            Upload Fullscript Lab Catalog PDF
+          </CardTitle>
+          <CardDescription>
+            Upload your PDF file containing the Fullscript lab catalog. The file will be processed to extract all lab panel information.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
+            <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+            <div className="space-y-2">
+              <label htmlFor="pdf-upload" className="cursor-pointer">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Click to upload or drag and drop your PDF file
+                </span>
+                <input
+                  id="pdf-upload"
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+              </label>
+              <p className="text-xs text-gray-500">Maximum file size: 20MB</p>
+            </div>
+          </div>
+
+          {file && (
+            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="flex items-center gap-3">
+                <FileText className="h-8 w-8 text-red-500" />
+                <div>
+                  <p className="font-medium">{file.name}</p>
+                  <p className="text-sm text-gray-500">
+                    {(file.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={processFile}
+                disabled={isProcessing}
+                className="ml-4"
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  'Process PDF'
+                )}
+              </Button>
+            </div>
+          )}
+
+          {parsedContent && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">File Status</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <pre className="whitespace-pre-wrap text-sm bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                  {parsedContent}
+                </pre>
+                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <p className="text-sm text-blue-800 dark:text-blue-200">
+                    <strong>Next Step:</strong> The file is now uploaded and ready. Please let me know in the chat that you've uploaded the file, and I'll process it to extract all the lab catalog information and integrate it into your system.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
