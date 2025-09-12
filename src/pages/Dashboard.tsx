@@ -141,7 +141,7 @@ const Dashboard = () => {
                   <Star className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="ml-4">
-                  <div className="text-2xl font-bold text-gray-900">30%</div>
+                  <div className="text-2xl font-bold text-gray-900">25%</div>
                   <div className="text-sm text-gray-600">Dispensary Discount</div>
                 </div>
               </div>
@@ -233,7 +233,7 @@ const Dashboard = () => {
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                     <div className="flex items-center">
                       <Star className="h-5 w-5 text-green-600 mr-2" />
-                      <span className="text-green-800 font-medium">30% Dispensary Discount Active</span>
+                      <span className="text-green-800 font-medium">25% Dispensary Discount Active</span>
                     </div>
                     <p className="text-green-700 text-sm mt-1">
                       Access to wholesale pricing (25% in Canada)
@@ -253,7 +253,7 @@ const Dashboard = () => {
                   <ul className="text-sm text-gray-600 space-y-1">
                     <li>• 13,000+ professional-grade products</li>
                     <li>• Direct from manufacturers</li>
-                    <li>• 30% off retail prices (25% in Canada)</li>
+                    <li>• 25% off retail prices</li>
                     <li>• Fast shipping & easy returns</li>
                     <li>• Practitioner-recommended brands</li>
                   </ul>

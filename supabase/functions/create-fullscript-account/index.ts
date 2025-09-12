@@ -105,7 +105,7 @@ const handler = async (req: Request): Promise<Response> => {
                   dispensary_access: true,
                   updated_at: new Date().toISOString()
                 })
-                .eq('id', userId);
+                .eq('auth_id', userId);
 
               if (updateError) {
                 console.error('Error updating profile:', updateError);
@@ -150,7 +150,7 @@ const handler = async (req: Request): Promise<Response> => {
           dispensary_access: true,
           updated_at: new Date().toISOString()
         })
-        .eq('id', userId);
+        .eq('auth_id', userId);
 
       if (updateError) {
         console.error('Error updating profile:', updateError);
@@ -191,7 +191,7 @@ const handler = async (req: Request): Promise<Response> => {
           dispensary_access: true,
           updated_at: new Date().toISOString()
         })
-        .eq('id', userId);
+        .eq('auth_id', userId);
 
       if (updateError) {
         console.error('Error updating profile:', updateError);

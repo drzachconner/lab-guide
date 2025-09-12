@@ -7,6 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Brain, ShoppingCart, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { ProfileCompletionDialog } from '@/components/ProfileCompletionDialog';
+import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -18,6 +20,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [showProfileCompletion, setShowProfileCompletion] = useState(false);
   
   const { signUp, signIn, signInWithGoogle, user } = useAuth();
   const navigate = useNavigate();
@@ -71,7 +74,15 @@ const Auth = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard');
+      // Check if user signed up with Google and needs profile completion
+      const userMetadata = user.user_metadata;
+      const needsProfileCompletion = !userMetadata?.first_name || !userMetadata?.last_name || !userMetadata?.birth_date;
+      
+      if (needsProfileCompletion && user.app_metadata?.provider === 'google') {
+        setShowProfileCompletion(true);
+      } else {
+        navigate('/dashboard');
+      }
     }
   }, [user, navigate]);
 
@@ -203,6 +214,15 @@ const Auth = () => {
       console.error('Google auth error:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleProfileCompletion = async () => {
+    // After profile completion, refresh user and redirect to dashboard
+    const { data: { user: refreshedUser } } = await supabase.auth.getUser();
+    if (refreshedUser) {
+      setShowProfileCompletion(false);
+      navigate('/dashboard');
     }
   };
 
@@ -432,6 +452,12 @@ const Auth = () => {
         )}
         </div>
       </div>
+
+      <ProfileCompletionDialog
+        open={showProfileCompletion}
+        onOpenChange={setShowProfileCompletion}
+        onComplete={handleProfileCompletion}
+      />
     </div>
   );
 };
