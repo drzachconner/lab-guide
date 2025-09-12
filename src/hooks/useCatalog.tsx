@@ -10,6 +10,18 @@ export function useCatalog() {
 
   useEffect(() => {
     loadPanels();
+
+    const onCatalogUpdated = () => {
+      try {
+        catalogService.loadParsedCatalog();
+      } catch {}
+      loadPanels();
+    };
+
+    window.addEventListener('catalog-updated', onCatalogUpdated);
+    return () => {
+      window.removeEventListener('catalog-updated', onCatalogUpdated);
+    };
   }, []);
 
   const loadPanels = async () => {

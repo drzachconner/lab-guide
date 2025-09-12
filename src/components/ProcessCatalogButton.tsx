@@ -26,19 +26,14 @@ export const ProcessCatalogButton = ({ onCatalogUpdated }: ProcessCatalogButtonP
       if (result.success && result.catalog) {
         // Update the catalog service with new data
         catalogService.setFullscriptData(result.catalog);
+
+        // Broadcast update so consumers refresh
+        window.dispatchEvent(new CustomEvent('catalog-updated'));
         
         toast.success(`${result.message} - Marketplace updated with ${result.catalog.panels.length} tests!`);
         
-        // Call callback to refresh UI
-        if (onCatalogUpdated) {
-          onCatalogUpdated();
-        } else {
-          // Fallback: reload page
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
-        }
-        
+        // Call callback to refresh UI if provided
+        onCatalogUpdated?.();
       } else {
         toast.error(result.error || 'Failed to process catalog');
       }
