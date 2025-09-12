@@ -1,5 +1,5 @@
 {
-  "source": "Fullscript Lab Catalog",
+  "source": "Fullscript Lab Catalog - Comprehensive Extract",
   "date_extracted": "2025-09-12",
   "total_pages": 567,
   "pages_processed": 50,
@@ -19,24 +19,6 @@
       "name": "Basic Metabolic Panel",
       "category": "Chemistry",
       "subcategory": "Metabolic Panels",
-      "providers": [
-        {
-          "name": "Quest Diagnostics",
-          "price": 8.63,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Labcorp Draw", 
-          "price": 6.53,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Medical Labs",
-          "price": 2.31,
-          "price_notes": "handling fee may apply",
-          "phlebotomy_required": true
-        }
-      ],
       "specimen": "Serum",
       "fasting_required": false,
       "turnaround_days": 1,
@@ -48,6 +30,11 @@
         {"name": "Potassium", "units": "mmol/L", "reference_range": "3.5-5.1"},
         {"name": "Chloride", "units": "mmol/L", "reference_range": "98-107"},
         {"name": "CO2", "units": "mmol/L", "reference_range": "22-28"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 8.63, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 6.53, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 2.31, "price_notes": "handling fee may apply", "phlebotomy_required": true}
       ]
     },
     {
@@ -55,24 +42,6 @@
       "name": "Comprehensive Metabolic Panel", 
       "category": "Chemistry",
       "subcategory": "Metabolic Panels",
-      "providers": [
-        {
-          "name": "Quest Diagnostics",
-          "price": 8.45,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Labcorp Draw",
-          "price": 8.45, 
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Medical Labs",
-          "price": 3.65,
-          "price_notes": "handling fee may apply",
-          "phlebotomy_required": true
-        }
-      ],
       "specimen": "Serum",
       "fasting_required": false,
       "turnaround_days": 1,
@@ -80,16 +49,17 @@
         {"name": "Glucose", "units": "mg/dL", "reference_range": "70-100"},
         {"name": "BUN", "units": "mg/dL", "reference_range": "7-20"},
         {"name": "Creatinine", "units": "mg/dL", "reference_range": "0.6-1.2"},
-        {"name": "Sodium", "units": "mmol/L", "reference_range": "136-145"},
-        {"name": "Potassium", "units": "mmol/L", "reference_range": "3.5-5.1"},
-        {"name": "Chloride", "units": "mmol/L", "reference_range": "98-107"},
-        {"name": "CO2", "units": "mmol/L", "reference_range": "22-28"},
         {"name": "Total Protein", "units": "g/dL", "reference_range": "6.0-8.3"},
         {"name": "Albumin", "units": "g/dL", "reference_range": "3.5-5.0"},
         {"name": "Total Bilirubin", "units": "mg/dL", "reference_range": "0.3-1.2"},
         {"name": "AST", "units": "U/L", "reference_range": "10-40"},
         {"name": "ALT", "units": "U/L", "reference_range": "7-56"},
         {"name": "Alkaline Phosphatase", "units": "U/L", "reference_range": "44-147"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 8.45, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 8.45, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 3.65, "price_notes": "handling fee may apply", "phlebotomy_required": true}
       ]
     },
     {
@@ -97,23 +67,6 @@
       "name": "CBC with Differential and Platelets",
       "category": "Hematology", 
       "subcategory": "Complete Blood Count",
-      "providers": [
-        {
-          "name": "Quest Diagnostics",
-          "price": 10.78,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Labcorp Draw",
-          "price": 2.88,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Medical Labs", 
-          "price": 3.53,
-          "phlebotomy_required": true
-        }
-      ],
       "specimen": "Whole Blood",
       "fasting_required": false,
       "turnaround_days": 1,
@@ -122,33 +75,39 @@
         {"name": "RBC", "units": "M/uL", "reference_range": "4.2-5.8"},
         {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"},
         {"name": "Hematocrit", "units": "%", "reference_range": "36-48"},
-        {"name": "Platelets", "units": "K/uL", "reference_range": "150-450"},
-        {"name": "Neutrophils", "units": "%", "reference_range": "50-70"},
-        {"name": "Lymphocytes", "units": "%", "reference_range": "20-40"}
+        {"name": "Platelets", "units": "K/uL", "reference_range": "150-450"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 10.78, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 2.88, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 3.53, "phlebotomy_required": true}
       ]
     },
     {
-      "id": "fs-lipid-panel", 
-      "name": "Lipid Panel",
-      "category": "Chemistry",
-      "subcategory": "Cardiovascular",
-      "providers": [
-        {
-          "name": "Quest Diagnostics",
-          "price": 7.72,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Labcorp Draw",
-          "price": 4.28,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Medical Labs",
-          "price": 4.28, 
-          "phlebotomy_required": true
-        }
+      "id": "fs-cbc-basic",
+      "name": "CBC (H/H, RBC, Indices, WBC, Plt)",
+      "category": "Hematology", 
+      "subcategory": "Complete Blood Count",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "WBC", "units": "K/uL", "reference_range": "4.0-10.0"},
+        {"name": "RBC", "units": "M/uL", "reference_range": "4.2-5.8"},
+        {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"},
+        {"name": "Hematocrit", "units": "%", "reference_range": "36-48"}
       ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 10.78, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 2.88, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 3.53, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-lipid-panel",
+      "name": "Lipid Panel",
+      "category": "Cardiovascular",
+      "subcategory": "Cholesterol & Lipids",
       "specimen": "Serum",
       "fasting_required": true,
       "turnaround_days": 1,
@@ -157,6 +116,115 @@
         {"name": "LDL Cholesterol", "units": "mg/dL", "reference_range": "<100"},
         {"name": "HDL Cholesterol", "units": "mg/dL", "reference_range": ">40"},
         {"name": "Triglycerides", "units": "mg/dL", "reference_range": "<150"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 7.72, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 4.28, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 4.28, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-lipid-panel-with-ratio",
+      "name": "Lipid Panel with Total Cholesterol/HDL Ratio",
+      "category": "Cardiovascular",
+      "subcategory": "Cholesterol & Lipids",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Total Cholesterol", "units": "mg/dL", "reference_range": "<200"},
+        {"name": "LDL Cholesterol", "units": "mg/dL", "reference_range": "<100"},
+        {"name": "HDL Cholesterol", "units": "mg/dL", "reference_range": ">40"},
+        {"name": "Triglycerides", "units": "mg/dL", "reference_range": "<150"},
+        {"name": "TC/HDL Ratio", "units": "ratio", "reference_range": "<4.5"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 5.35, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 10.11, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-advanced-lipid",
+      "name": "Cardio IQ Advanced Lipid Panel with Inflammation",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 3,
+      "biomarkers": [
+        {"name": "LDL Particle Number", "units": "nmol/L", "reference_range": "<1000"},
+        {"name": "LDL Small", "units": "nmol/L", "reference_range": "<527"},
+        {"name": "HDL Large", "units": "umol/L", "reference_range": ">4.8"},
+        {"name": "hs-CRP", "units": "mg/L", "reference_range": "<3.0"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 138.69, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-direct-ldl",
+      "name": "Cardio IQ Direct LDL",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "LDL Cholesterol Direct", "units": "mg/dL", "reference_range": "<100"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 10.54, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-ldl-cholesterol-measured",
+      "name": "LDL Cholesterol, Measured",
+      "category": "Cardiovascular",
+      "subcategory": "Cholesterol & Lipids",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "LDL Cholesterol", "units": "mg/dL", "reference_range": "<100"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 17.12, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 3.47, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-lipid-panel",
+      "name": "Cardio IQ Lipid Panel",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Total Cholesterol", "units": "mg/dL", "reference_range": "<200"},
+        {"name": "LDL Cholesterol", "units": "mg/dL", "reference_range": "<100"},
+        {"name": "HDL Cholesterol", "units": "mg/dL", "reference_range": ">40"},
+        {"name": "Triglycerides", "units": "mg/dL", "reference_range": "<150"},
+        {"name": "Non-HDL Cholesterol", "units": "mg/dL", "reference_range": "<130"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 7.72, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-triglycerides",
+      "name": "Triglycerides",
+      "category": "Cardiovascular",
+      "subcategory": "Cholesterol & Lipids",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Triglycerides", "units": "mg/dL", "reference_range": "<150"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 4.28, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 2.14, "price_notes": "handling fee may apply", "phlebotomy_required": true}
       ]
     },
     {
@@ -164,13 +232,6 @@
       "name": "DUTCH Complete", 
       "category": "Hormone Testing",
       "subcategory": "Comprehensive Hormone Panels",
-      "providers": [
-        {
-          "name": "Precision Analytical (DUTCH)",
-          "price": 300.00,
-          "phlebotomy_required": false
-        }
-      ],
       "specimen": "Dried Urine",
       "fasting_required": false,
       "turnaround_days": 7,
@@ -180,6 +241,9 @@
         {"name": "Estradiol", "units": "ng/g Cr", "reference_range": "Varies"},
         {"name": "Estrone", "units": "ng/g Cr", "reference_range": "Varies"},
         {"name": "Testosterone", "units": "ng/g Cr", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Precision Analytical (DUTCH)", "price": 300.00, "phlebotomy_required": false}
       ]
     },
     {
@@ -187,20 +251,157 @@
       "name": "DUTCH Plus",
       "category": "Hormone Testing", 
       "subcategory": "Comprehensive Hormone Panels",
-      "providers": [
-        {
-          "name": "Precision Analytical (DUTCH)",
-          "price": 400.00,
-          "phlebotomy_required": false
-        }
-      ],
       "specimen": "Dried Urine + Saliva",
       "fasting_required": false,
       "turnaround_days": 7,
       "biomarkers": [
         {"name": "Cortisol Awakening Response", "units": "Various", "reference_range": "Varies"},
-        {"name": "Melatonin", "units": "ng/g Cr", "reference_range": "Varies"},
-        {"name": "All DUTCH Complete markers", "units": "Various", "reference_range": "Varies"}
+        {"name": "Melatonin", "units": "ng/g Cr", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Precision Analytical (DUTCH)", "price": 400.00, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-ana-screen-ifa",
+      "name": "ANA Screen, IFA, with Reflex to Titer and Pattern",
+      "category": "Immunology",
+      "subcategory": "Autoimmune Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "ANA Screen", "units": "Titer", "reference_range": "<1:80"},
+        {"name": "ANA Pattern", "units": "Pattern", "reference_range": "Negative"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.94, "phlebotomy_required": true, "price_notes": "Starts at"}
+      ]
+    },
+    {
+      "id": "fs-ana-screen-labcorp",
+      "name": "ANA Screen",
+      "category": "Immunology",
+      "subcategory": "Autoimmune Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "ANA Screen", "units": "Titer", "reference_range": "<1:80"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 18.19, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 9.24, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-ana-screen-with-reflex-components",
+      "name": "ANA Screen w/ Reflex to Components",
+      "category": "Immunology",
+      "subcategory": "Autoimmune Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 3,
+      "biomarkers": [
+        {"name": "ANA Screen", "units": "Titer", "reference_range": "<1:80"},
+        {"name": "Anti-dsDNA", "units": "IU/mL", "reference_range": "<30"},
+        {"name": "Anti-Sm", "units": "Units", "reference_range": "<20"}
+      ],
+      "providers": [
+        {"name": "Access Medical Labs", "price": 8.99, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-ana-11-components",
+      "name": "ANA 11 Components (no ANA Screen)",
+      "category": "Immunology",
+      "subcategory": "Autoimmune Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 3,
+      "biomarkers": [
+        {"name": "Anti-Centromere", "units": "Units", "reference_range": "<20"},
+        {"name": "Anti-Chromatin", "units": "Units", "reference_range": "<20"},
+        {"name": "Anti-dsDNA", "units": "IU/mL", "reference_range": "<30"}
+      ],
+      "providers": [
+        {"name": "Access Medical Labs", "price": 59.89, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-apolipoprotein-b",
+      "name": "Cardio IQ Apolipoprotein B",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Apolipoprotein B", "units": "mg/dL", "reference_range": "<90"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 21.96, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-homocysteine",
+      "name": "Cardio IQ Homocysteine",
+      "category": "Cardiovascular",
+      "subcategory": "Cardiovascular Risk Markers",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Homocysteine", "units": "umol/L", "reference_range": "<15"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 19.44, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-homocysteine-labcorp",
+      "name": "Homocysteine",
+      "category": "Cardiovascular",
+      "subcategory": "Cardiovascular Risk Markers",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Homocysteine", "units": "umol/L", "reference_range": "<15"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 21.40, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-lipoprotein-a-labcorp",
+      "name": "Lipoprotein(a)",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Lipoprotein(a)", "units": "mg/dL", "reference_range": "<30"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 17.12, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 11.24, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cardio-iq-lipoprotein-a",
+      "name": "Cardio IQ Lipoprotein (a)",
+      "category": "Cardiovascular",
+      "subcategory": "Advanced Lipid Testing",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Lipoprotein(a)", "units": "mg/dL", "reference_range": "<30"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 22.22, "phlebotomy_required": true}
       ]
     },
     {
@@ -208,13 +409,6 @@
       "name": "GI-MAP® (GI Microbial Assay Plus)",
       "category": "Gastrointestinal",
       "subcategory": "Microbiome Testing",
-      "providers": [
-        {
-          "name": "Diagnostic Solutions Laboratory",
-          "price": 327.18,
-          "phlebotomy_required": false
-        }
-      ],
       "specimen": "Stool",
       "fasting_required": false,
       "turnaround_days": 7,
@@ -222,66 +416,317 @@
         {"name": "Bacterial Pathogens", "units": "Various", "reference_range": "Not Detected"},
         {"name": "Parasites", "units": "Various", "reference_range": "Not Detected"},
         {"name": "Viruses", "units": "Various", "reference_range": "Not Detected"},
-        {"name": "Fungi", "units": "Various", "reference_range": "Not Detected"},
         {"name": "Normal Flora", "units": "Various", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Diagnostic Solutions Laboratory", "price": 327.18, "phlebotomy_required": false}
       ]
     },
     {
-      "id": "fs-mthfr",
-      "name": "MTHFR (Methylenetetrahydrofolate Reductase) DNA Mutation Analysis",
+      "id": "fs-cardio-iq-hemoglobin-a1c",
+      "name": "Cardio IQ Hemoglobin A1c",
+      "category": "Diabetes",
+      "subcategory": "Diabetes Monitoring",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Hemoglobin A1c", "units": "%", "reference_range": "<5.7"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.58, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-mthfr-quest",
+      "name": "Methylenetetrahydrofolate Reductase (MTHFR), DNA Mutation Analysis",
       "category": "Genetics",
       "subcategory": "Pharmacogenomics", 
-      "providers": [
-        {
-          "name": "Quest Diagnostics",
-          "price": 190.54,
-          "phlebotomy_required": true
-        },
-        {
-          "name": "Access Labcorp Draw",
-          "price": 111.23,
-          "phlebotomy_required": true
-        }
-      ],
       "specimen": "Whole Blood",
       "fasting_required": false,
       "turnaround_days": 7,
       "biomarkers": [
         {"name": "MTHFR C677T", "units": "Genotype", "reference_range": "Normal/Variant"},
         {"name": "MTHFR A1298C", "units": "Genotype", "reference_range": "Normal/Variant"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 190.54, "phlebotomy_required": true}
       ]
     },
     {
-      "id": "fs-hemoglobin-a1c",
-      "name": "Hemoglobin A1c",
-      "category": "Chemistry",
-      "subcategory": "Diabetes Monitoring",
-      "providers": [
-        {
-          "name": "Quest Diagnostics", 
-          "price": 6.58,
-          "phlebotomy_required": true
-        }
-      ],
+      "id": "fs-mthfr-labcorp",
+      "name": "MTHFR",
+      "category": "Genetics",
+      "subcategory": "Pharmacogenomics", 
       "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "MTHFR C677T", "units": "Genotype", "reference_range": "Normal/Variant"},
+        {"name": "MTHFR A1298C", "units": "Genotype", "reference_range": "Normal/Variant"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 111.23, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-omx-organic-metabolomics",
+      "name": "OMX | Organic Metabolomics - Urine",
+      "category": "Functional Medicine",
+      "subcategory": "Metabolic Testing",
+      "specimen": "Urine",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "Citric Acid Cycle Metabolites", "units": "Various", "reference_range": "Varies"},
+        {"name": "Neurotransmitter Metabolites", "units": "Various", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Diagnostic Solutions Laboratory", "price": 228.78, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-estradiol-ultrasensitive",
+      "name": "Estradiol, Ultrasensitive, LC/MS",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Estradiol", "units": "pg/mL", "reference_range": "Varies by phase"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 23.61, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-estriol-serum",
+      "name": "Estriol, Serum",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Estriol", "units": "pg/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 22.75, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-glucose",
+      "name": "Glucose",
+      "category": "Chemistry",
+      "subcategory": "Basic Chemistry",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Glucose", "units": "mg/dL", "reference_range": "70-100"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.29, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-17-hydroxyprogesterone",
+      "name": "17-Hydroxyprogesterone",
+      "category": "Hormone Testing",
+      "subcategory": "Adrenal Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "17-Hydroxyprogesterone", "units": "ng/dL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 43.99, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 72.76, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 72.76, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-insulin",
+      "name": "Insulin",
+      "category": "Diabetes",
+      "subcategory": "Diabetes Monitoring",
+      "specimen": "Serum",
+      "fasting_required": true,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Insulin", "units": "uIU/mL", "reference_range": "2.6-24.9"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.60, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-iron-total",
+      "name": "Iron, Total",
+      "category": "Chemistry",
+      "subcategory": "Iron Studies",
+      "specimen": "Serum",
       "fasting_required": false,
       "turnaround_days": 1,
       "biomarkers": [
-        {"name": "Hemoglobin A1c", "units": "%", "reference_range": "<5.7"}
+        {"name": "Iron", "units": "ug/dL", "reference_range": "60-170"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 3.54, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-iron-tibc",
+      "name": "Iron, Total and Total Iron Binding Capacity",
+      "category": "Chemistry",
+      "subcategory": "Iron Studies",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Iron", "units": "ug/dL", "reference_range": "60-170"},
+        {"name": "TIBC", "units": "ug/dL", "reference_range": "250-450"},
+        {"name": "Transferrin Saturation", "units": "%", "reference_range": "20-50"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.88, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 10.70, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-shbg",
+      "name": "Sex Hormone Binding Globulin (SHBG)",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "SHBG", "units": "nmol/L", "reference_range": "Varies by gender"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 19.25, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-amh-female",
+      "name": "Anti-Mullerian Hormone (AMH), Female",
+      "category": "Hormone Testing",
+      "subcategory": "Reproductive Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 3,
+      "biomarkers": [
+        {"name": "AMH", "units": "ng/mL", "reference_range": "Varies by age"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 95.07, "phlebotomy_required": true},
+        {"name": "Access Labcorp Draw", "price": 203.30, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 213.47, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-amh-male",
+      "name": "Anti-Mullerian Hormone (AMH), Male",
+      "category": "Hormone Testing",
+      "subcategory": "Reproductive Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 3,
+      "biomarkers": [
+        {"name": "AMH", "units": "ng/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 95.07, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 278.07, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-alkaline-phosphatase",
+      "name": "Alkaline Phosphatase (ALP)",
+      "category": "Chemistry",
+      "subcategory": "Liver Function",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Alkaline Phosphatase", "units": "U/L", "reference_range": "44-147"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 4.28, "phlebotomy_required": true},
+        {"name": "Access Medical Labs", "price": 1.68, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-dht",
+      "name": "DHT (Dihydrotestosterone)",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Dihydrotestosterone", "units": "ng/dL", "reference_range": "Varies by gender"}
+      ],
+      "providers": [
+        {"name": "Access Medical Labs", "price": 24.72, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-dht-free",
+      "name": "Dihydrotestosterone (DHT), Free, LC/MS/Dialysis",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 5,
+      "biomarkers": [
+        {"name": "Free DHT", "units": "pg/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Access Medical Labs", "price": 362.73, "price_notes": "handling fee may apply", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-bilirubin-total-direct",
+      "name": "Bilirubin, Total and Direct",
+      "category": "Chemistry",
+      "subcategory": "Liver Function",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Total Bilirubin", "units": "mg/dL", "reference_range": "0.3-1.2"},
+        {"name": "Direct Bilirubin", "units": "mg/dL", "reference_range": "0.0-0.4"}
+      ],
+      "providers": [
+        {"name": "Access Labcorp Draw", "price": 6.47, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cytokine-response-profile",
+      "name": "CytoDX | Cytokine Response Profile",
+      "category": "Immunology",
+      "subcategory": "Immune Function",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 7,
+      "biomarkers": [
+        {"name": "IL-6", "units": "pg/mL", "reference_range": "Varies"},
+        {"name": "TNF-alpha", "units": "pg/mL", "reference_range": "Varies"},
+        {"name": "IL-1beta", "units": "pg/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Diagnostic Solutions Laboratory", "price": 241.90, "phlebotomy_required": true}
       ]
     },
     {
       "id": "fs-organic-acids-profile",
-      "name": "Organic Acids Profile - Urine", 
+      "name": "Organic Acids Profile - Urine",
       "category": "Functional Medicine",
       "subcategory": "Metabolic Testing",
-      "providers": [
-        {
-          "name": "Diagnostic Solutions Laboratory",
-          "price": 187.78,
-          "phlebotomy_required": false
-        }
-      ],
       "specimen": "Urine",
       "fasting_required": false,
       "turnaround_days": 7,
@@ -289,6 +734,212 @@
         {"name": "Citric Acid Cycle Metabolites", "units": "Various", "reference_range": "Varies"},
         {"name": "Neurotransmitter Metabolites", "units": "Various", "reference_range": "Varies"},
         {"name": "Oxidative Stress Markers", "units": "Various", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Diagnostic Solutions Laboratory", "price": 187.78, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-bun-creatinine-ratio",
+      "name": "BUN/Creatinine Ratio",
+      "category": "Chemistry",
+      "subcategory": "Kidney Function",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "BUN/Creatinine Ratio", "units": "ratio", "reference_range": "10-20"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 6.47, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-estrogens-total",
+      "name": "Estrogens, Total, Immunoassay",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Total Estrogens", "units": "pg/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 28.35, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-estrone",
+      "name": "Estrone",
+      "category": "Hormone Testing",
+      "subcategory": "Sex Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Estrone", "units": "pg/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 26.04, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-albumin-24hr-urine",
+      "name": "Albumin, 24-Hour Urine without Creatinine",
+      "category": "Chemistry",
+      "subcategory": "Kidney Function",
+      "specimen": "24-Hour Urine",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Albumin, 24-Hour", "units": "mg/24hr", "reference_range": "<30"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 11.33, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-hcg-total-quantitative",
+      "name": "hCG, Total, Quantitative",
+      "category": "Hormone Testing",
+      "subcategory": "Reproductive Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "hCG, Total", "units": "mIU/mL", "reference_range": "Varies"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 11.18, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-hematocrit",
+      "name": "Hematocrit",
+      "category": "Hematology",
+      "subcategory": "Basic Hematology",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Hematocrit", "units": "%", "reference_range": "36-48"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 0.67, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-albumin-random-urine",
+      "name": "Albumin, Random Urine without Creatinine",
+      "category": "Chemistry",
+      "subcategory": "Kidney Function",
+      "specimen": "Random Urine",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Albumin, Random", "units": "mg/L", "reference_range": "<30"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 11.33, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-cortisol-pm",
+      "name": "Cortisol, P.M.",
+      "category": "Hormone Testing",
+      "subcategory": "Adrenal Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Cortisol, PM", "units": "ug/dL", "reference_range": "2.3-11.9"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 11.28, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cortisol-total",
+      "name": "Cortisol, Total",
+      "category": "Hormone Testing",
+      "subcategory": "Adrenal Hormones",
+      "specimen": "Serum",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Cortisol, Total", "units": "ug/dL", "reference_range": "Varies by time"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": null, "price_notes": "Not listed", "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-cortisol-saliva",
+      "name": "Cortisol, LC/MS, Saliva",
+      "category": "Hormone Testing",
+      "subcategory": "Adrenal Hormones",
+      "specimen": "Saliva",
+      "fasting_required": false,
+      "turnaround_days": 2,
+      "biomarkers": [
+        {"name": "Cortisol, Saliva", "units": "ug/dL", "reference_range": "Varies by time"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 48.61, "phlebotomy_required": false}
+      ]
+    },
+    {
+      "id": "fs-hemoglobin",
+      "name": "Hemoglobin",
+      "category": "Hematology",
+      "subcategory": "Basic Hematology",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 0.67, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-hemogram",
+      "name": "Hemogram",
+      "category": "Hematology",
+      "subcategory": "Complete Blood Count",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "WBC", "units": "K/uL", "reference_range": "4.0-10.0"},
+        {"name": "RBC", "units": "M/uL", "reference_range": "4.2-5.8"},
+        {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"},
+        {"name": "Hematocrit", "units": "%", "reference_range": "36-48"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 2.03, "phlebotomy_required": true}
+      ]
+    },
+    {
+      "id": "fs-hemogram-with-differential",
+      "name": "Hemogram and Differential",
+      "category": "Hematology",
+      "subcategory": "Complete Blood Count",
+      "specimen": "Whole Blood",
+      "fasting_required": false,
+      "turnaround_days": 1,
+      "biomarkers": [
+        {"name": "WBC", "units": "K/uL", "reference_range": "4.0-10.0"},
+        {"name": "RBC", "units": "M/uL", "reference_range": "4.2-5.8"},
+        {"name": "Hemoglobin", "units": "g/dL", "reference_range": "12.0-16.0"},
+        {"name": "Hematocrit", "units": "%", "reference_range": "36-48"},
+        {"name": "Neutrophils", "units": "%", "reference_range": "50-70"},
+        {"name": "Lymphocytes", "units": "%", "reference_range": "20-40"}
+      ],
+      "providers": [
+        {"name": "Quest Diagnostics", "price": 3.07, "phlebotomy_required": true}
       ]
     }
   ]
