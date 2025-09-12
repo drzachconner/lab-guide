@@ -1,6 +1,8 @@
 import catalogData from '@/config/labs-catalog-expanded.json';
 import fullscriptCatalog from '@/config/fullscript-catalog.json';
+import fullscriptCatalogReplacement from '@/config/fullscript-catalog-replacement.json';
 import { computeRetailPrice, type PricingStrategy, type Fees, type PricingDefaults } from './pricing';
+import { parseCatalogTextBasic } from '@/utils/localCatalogParser';
 
 export interface LabPanel {
   id: string;
@@ -43,10 +45,14 @@ export interface PricedPanel extends LabPanel {
 class CatalogService {
   private config: CatalogConfig;
   private fullscriptData: any;
+  private initialized = false;
 
   constructor() {
     this.config = catalogData as CatalogConfig;
-    this.fullscriptData = fullscriptCatalog;
+    // Prefer replacement catalog if available, otherwise default bundled catalog
+    this.fullscriptData = (fullscriptCatalogReplacement as any)?.panels?.length
+      ? (fullscriptCatalogReplacement as any)
+      : (fullscriptCatalog as any);
     // Try to load parsed catalog from localStorage on startup
     const loaded = this.loadParsedCatalog();
     if (loaded) {
@@ -298,7 +304,36 @@ class CatalogService {
     };
   }
 
+  private async ensureLoaded() {
+    if (typeof window === 'undefined') return;
+    if (this.fullscriptData?.panels?.length) return;
+
+    try {
+      const loaded = this.loadParsedCatalog();
+      if (loaded && this.fullscriptData?.panels?.length) return;
+
+      if ((fullscriptCatalogReplacement as any)?.panels?.length) {
+        this.fullscriptData = (fullscriptCatalogReplacement as any);
+        return;
+      }
+
+      const res = await fetch('/src/temp/fullscript_lab_catalog_text.txt');
+      if (res.ok) {
+        const text = await res.text();
+        const parsed = parseCatalogTextBasic(text);
+        if (parsed?.panels?.length) {
+          localStorage.setItem('parsed_fullscript_catalog', JSON.stringify(parsed));
+          this.fullscriptData = parsed;
+          try { window.dispatchEvent(new CustomEvent('catalog-updated')); } catch {}
+        }
+      }
+    } catch (e) {
+      console.warn('ensureLoaded: failed to auto-load catalog', e);
+    }
+  }
+
   async computeAllPanelPrices(): Promise<PricedPanel[]> {
+    await this.ensureLoaded();
     const pricedPanels: PricedPanel[] = [];
     
     for (const panel of this.getAllPanels()) {

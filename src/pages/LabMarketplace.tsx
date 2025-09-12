@@ -11,33 +11,30 @@ import {
   Shield,
   Clock,
   CheckCircle,
-  ExternalLink,
   Upload,
   Search
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AdvancedLabPanelBrowser } from "@/components/AdvancedLabPanelBrowser";
-import { PDFUploadProcessor } from "@/components/PDFUploadProcessor";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { useCatalog } from "@/hooks/useCatalog";
+
 import { supabase } from "@/integrations/supabase/client";
 import { calculateLabFees, type FeeCalculationParams } from "@/utils/labFees";
 import UnifiedBackground from "@/components/UnifiedBackground";
 import { LivePriceCheckout } from "@/components/LivePriceCheckout";
 import { PriceDisclaimer } from "@/components/PriceDisclaimer";
-import { ProcessCatalogButton } from "@/components/ProcessCatalogButton";
+
 import type { PricedPanel } from "@/lib/catalogService";
 
 export function LabMarketplace() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { forceRefreshCatalog } = useCatalog();
   const [cartItems, setCartItems] = useState<PricedPanel[]>([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showLivePricing, setShowLivePricing] = useState(false);
-  const [showPDFUpload, setShowPDFUpload] = useState(false);
+  
 
   const handleAddToCart = (panel: PricedPanel) => {
     if (!cartItems.some(item => item.id === panel.id)) {
@@ -237,38 +234,13 @@ export function LabMarketplace() {
               {/* Price Disclaimer */}
               <PriceDisclaimer className="mb-4" />
               
-              {/* Process Catalog Button */}
-              <ProcessCatalogButton onCatalogUpdated={forceRefreshCatalog} />
 
-              {/* Toggle between Browse Labs and Upload PDF */}
-              <div className="flex gap-2 mb-6">
-                <Button
-                  variant={showPDFUpload ? "outline" : "default"}
-                  onClick={() => setShowPDFUpload(false)}
-                  className="flex items-center"
-                >
-                  <Search className="h-4 w-4 mr-2" />
-                  Browse Labs
-                </Button>
-                <Button
-                  variant={showPDFUpload ? "default" : "outline"}
-                  onClick={() => setShowPDFUpload(true)}
-                  className="flex items-center"
-                >
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload Catalog PDF
-                </Button>
-              </div>
             </div>
             
-            {showPDFUpload ? (
-              <PDFUploadProcessor />
-            ) : (
               <AdvancedLabPanelBrowser 
                 onAddToCart={handleAddToCart}
                 cartItems={cartItems}
               />
-            )}
           </div>
 
           {/* Cart Sidebar */}
