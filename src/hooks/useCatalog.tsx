@@ -10,8 +10,12 @@ export function useCatalog() {
 
   useEffect(() => {
     // Ensure latest parsed catalog is loaded before computing prices
-    try { catalogService.loadParsedCatalog(); } catch {}
-    loadPanels();
+    (async () => {
+      try {
+        await catalogService.init();
+      } catch {}
+      await loadPanels();
+    })();
 
     const onCatalogUpdated = () => {
       try {

@@ -306,30 +306,53 @@ class CatalogService {
 
   private async ensureLoaded() {
     if (typeof window === 'undefined') return;
-    if (this.fullscriptData?.panels?.length) return;
 
     try {
-      const loaded = this.loadParsedCatalog();
-      if (loaded && this.fullscriptData?.panels?.length) return;
-
-      if ((fullscriptCatalogReplacement as any)?.panels?.length) {
-        this.fullscriptData = (fullscriptCatalogReplacement as any);
-        return;
+      // 1) Prefer the parsed catalog from localStorage if present (largest source of truth)
+      const stored = localStorage.getItem('parsed_fullscript_catalog');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (parsed?.panels?.length) {
+            if (!this.fullscriptData?.panels || parsed.panels.length > this.fullscriptData.panels.length) {
+              console.log(`ensureLoaded: using parsed catalog from storage with ${parsed.panels.length} panels`);
+              this.fullscriptData = parsed;
+              return;
+            }
+          }
+        } catch {}
       }
 
-      const res = await fetch('/src/temp/fullscript_lab_catalog_text.txt');
-      if (res.ok) {
-        const text = await res.text();
-        const parsed = parseCatalogTextBasic(text);
-        if (parsed?.panels?.length) {
-          localStorage.setItem('parsed_fullscript_catalog', JSON.stringify(parsed));
-          this.fullscriptData = parsed;
-          try { window.dispatchEvent(new CustomEvent('catalog-updated')); } catch {}
+      // 2) If no parsed catalog yet, try to parse the bundled text file automatically
+      if (!stored) {
+        const res = await fetch('/src/temp/fullscript_lab_catalog_text.txt');
+        if (res.ok) {
+          const text = await res.text();
+          const parsed = parseCatalogTextBasic(text);
+          if (parsed?.panels?.length) {
+            localStorage.setItem('parsed_fullscript_catalog', JSON.stringify(parsed));
+            this.fullscriptData = parsed;
+            console.log(`ensureLoaded: auto-parsed text into ${parsed.panels.length} panels`);
+            try { window.dispatchEvent(new CustomEvent('catalog-updated')); } catch {}
+            return;
+          }
+        }
+      }
+
+      // 3) Fallbacks: if replacement JSON exists and is larger than current, use it
+      if ((fullscriptCatalogReplacement as any)?.panels?.length) {
+        if (!this.fullscriptData?.panels || (fullscriptCatalogReplacement as any).panels.length > this.fullscriptData.panels.length) {
+          this.fullscriptData = (fullscriptCatalogReplacement as any);
         }
       }
     } catch (e) {
       console.warn('ensureLoaded: failed to auto-load catalog', e);
     }
+  }
+
+  // Public initializer to guarantee data is loaded before first use
+  async init() {
+    await this.ensureLoaded();
   }
 
   async computeAllPanelPrices(): Promise<PricedPanel[]> {
