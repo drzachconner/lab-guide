@@ -49,6 +49,30 @@ export type Database = {
           },
         ]
       }
+      bundleable_labs: {
+        Row: {
+          draw_fee: number | null
+          id: string
+          lab_ids: string[] | null
+          lab_provider: string
+          sample_type: string
+        }
+        Insert: {
+          draw_fee?: number | null
+          id?: string
+          lab_ids?: string[] | null
+          lab_provider: string
+          sample_type: string
+        }
+        Update: {
+          draw_fee?: number | null
+          id?: string
+          lab_ids?: string[] | null
+          lab_provider?: string
+          sample_type?: string
+        }
+        Relationships: []
+      }
       clinic_usage: {
         Row: {
           clinic_id: string
@@ -232,6 +256,69 @@ export type Database = {
           status?: string | null
           subject?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      functional_ranges: {
+        Row: {
+          biomarker_name: string
+          category: string | null
+          created_at: string | null
+          display_name: string | null
+          female_optimal_max: number | null
+          female_optimal_min: number | null
+          high_supplement_recs: Json | null
+          id: string
+          longevity_target: number | null
+          low_supplement_recs: Json | null
+          male_optimal_max: number | null
+          male_optimal_min: number | null
+          optimal_max: number | null
+          optimal_min: number | null
+          performance_target: number | null
+          standard_max: number | null
+          standard_min: number | null
+          unit: string
+        }
+        Insert: {
+          biomarker_name: string
+          category?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          female_optimal_max?: number | null
+          female_optimal_min?: number | null
+          high_supplement_recs?: Json | null
+          id?: string
+          longevity_target?: number | null
+          low_supplement_recs?: Json | null
+          male_optimal_max?: number | null
+          male_optimal_min?: number | null
+          optimal_max?: number | null
+          optimal_min?: number | null
+          performance_target?: number | null
+          standard_max?: number | null
+          standard_min?: number | null
+          unit: string
+        }
+        Update: {
+          biomarker_name?: string
+          category?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          female_optimal_max?: number | null
+          female_optimal_min?: number | null
+          high_supplement_recs?: Json | null
+          id?: string
+          longevity_target?: number | null
+          low_supplement_recs?: Json | null
+          male_optimal_max?: number | null
+          male_optimal_min?: number | null
+          optimal_max?: number | null
+          optimal_min?: number | null
+          performance_target?: number | null
+          standard_max?: number | null
+          standard_min?: number | null
+          unit?: string
         }
         Relationships: []
       }
@@ -615,10 +702,13 @@ export type Database = {
           age_bucket: string | null
           auth_id: string
           created_at: string
+          default_discount: number | null
           dispensary_access: boolean | null
           dispensary_url: string | null
           fs_token: string | null
           fullscript_account_id: string | null
+          fullscript_patient_id: string | null
+          health_goals: Json | null
           id: string
           sex: string | null
           updated_at: string
@@ -628,10 +718,13 @@ export type Database = {
           age_bucket?: string | null
           auth_id: string
           created_at?: string
+          default_discount?: number | null
           dispensary_access?: boolean | null
           dispensary_url?: string | null
           fs_token?: string | null
           fullscript_account_id?: string | null
+          fullscript_patient_id?: string | null
+          health_goals?: Json | null
           id?: string
           sex?: string | null
           updated_at?: string
@@ -641,10 +734,13 @@ export type Database = {
           age_bucket?: string | null
           auth_id?: string
           created_at?: string
+          default_discount?: number | null
           dispensary_access?: boolean | null
           dispensary_url?: string | null
           fs_token?: string | null
           fullscript_account_id?: string | null
+          fullscript_patient_id?: string | null
+          health_goals?: Json | null
           id?: string
           sex?: string | null
           updated_at?: string
