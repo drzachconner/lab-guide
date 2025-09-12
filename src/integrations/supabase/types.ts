@@ -531,6 +531,7 @@ export type Database = {
       lab_reports: {
         Row: {
           ai_analysis: Json | null
+          biohacking_score: number | null
           clinic_id: string | null
           created_at: string
           description: string | null
@@ -539,15 +540,19 @@ export type Database = {
           file_type: string | null
           file_url: string | null
           findings: string | null
+          functional_analysis: Json | null
           id: string
+          optimization_priorities: Json | null
           recommendations: string | null
           status: string
+          supplement_protocol_id: string | null
           title: string
           updated_at: string
           user_id: string
         }
         Insert: {
           ai_analysis?: Json | null
+          biohacking_score?: number | null
           clinic_id?: string | null
           created_at?: string
           description?: string | null
@@ -556,15 +561,19 @@ export type Database = {
           file_type?: string | null
           file_url?: string | null
           findings?: string | null
+          functional_analysis?: Json | null
           id?: string
+          optimization_priorities?: Json | null
           recommendations?: string | null
           status?: string
+          supplement_protocol_id?: string | null
           title: string
           updated_at?: string
           user_id: string
         }
         Update: {
           ai_analysis?: Json | null
+          biohacking_score?: number | null
           clinic_id?: string | null
           created_at?: string
           description?: string | null
@@ -573,9 +582,12 @@ export type Database = {
           file_type?: string | null
           file_url?: string | null
           findings?: string | null
+          functional_analysis?: Json | null
           id?: string
+          optimization_priorities?: Json | null
           recommendations?: string | null
           status?: string
+          supplement_protocol_id?: string | null
           title?: string
           updated_at?: string
           user_id?: string
@@ -586,6 +598,76 @@ export type Database = {
             columns: ["clinic_id"]
             isOneToOne: false
             referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lab_reports_supplement_protocol_id_fkey"
+            columns: ["supplement_protocol_id"]
+            isOneToOne: false
+            referencedRelation: "lab_to_supplement_protocols"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lab_to_supplement_protocols: {
+        Row: {
+          created_at: string | null
+          fullscript_plan_id: string | null
+          fullscript_plan_url: string | null
+          id: string
+          interpretation_id: string | null
+          lab_order_id: string | null
+          patient_purchased: boolean | null
+          patient_viewed_at: string | null
+          protocol_description: string | null
+          protocol_name: string | null
+          purchase_amount: number | null
+          sent_to_patient: boolean | null
+          supplements: Json | null
+        }
+        Insert: {
+          created_at?: string | null
+          fullscript_plan_id?: string | null
+          fullscript_plan_url?: string | null
+          id?: string
+          interpretation_id?: string | null
+          lab_order_id?: string | null
+          patient_purchased?: boolean | null
+          patient_viewed_at?: string | null
+          protocol_description?: string | null
+          protocol_name?: string | null
+          purchase_amount?: number | null
+          sent_to_patient?: boolean | null
+          supplements?: Json | null
+        }
+        Update: {
+          created_at?: string | null
+          fullscript_plan_id?: string | null
+          fullscript_plan_url?: string | null
+          id?: string
+          interpretation_id?: string | null
+          lab_order_id?: string | null
+          patient_purchased?: boolean | null
+          patient_viewed_at?: string | null
+          protocol_description?: string | null
+          protocol_name?: string | null
+          purchase_amount?: number | null
+          sent_to_patient?: boolean | null
+          supplements?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_to_supplement_protocols_interpretation_id_fkey"
+            columns: ["interpretation_id"]
+            isOneToOne: false
+            referencedRelation: "interpretations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lab_to_supplement_protocols_lab_order_id_fkey"
+            columns: ["lab_order_id"]
+            isOneToOne: false
+            referencedRelation: "lab_orders"
             referencedColumns: ["id"]
           },
         ]

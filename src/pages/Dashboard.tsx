@@ -22,6 +22,7 @@ import { useLabReports } from '@/hooks/useLabReports';
 import { usePaymentStatus } from '@/hooks/usePaymentStatus';
 import { useFullscriptIntegration } from '@/hooks/useFullscriptIntegration';
 import { api } from '@/lib/apiClient';
+import { QuickLabTest } from '@/components/QuickLabTest';
 import type { ProfileT } from '@/types/zod';
 
 const Dashboard = () => {
@@ -358,20 +359,7 @@ const Dashboard = () => {
 
         {/* Additional sections for future features */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Coming Soon</CardTitle>
-              <CardDescription>Advanced features in development</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>• Follow-up lab recommendations</li>
-                <li>• Email reminders for retesting</li>
-                <li>• Supplement refill notifications</li>
-                <li>• Progress tracking & trends</li>
-              </ul>
-            </CardContent>
-          </Card>
+          <QuickLabTest />
 
           <Card>
             <CardHeader>
