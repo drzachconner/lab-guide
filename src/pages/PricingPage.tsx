@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Crown } from 'lucide-react';
+import { Check, Crown, ArrowLeft } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { useSubscription } from '@/hooks/useSubscription';
 import { cn } from '@/lib/utils';
