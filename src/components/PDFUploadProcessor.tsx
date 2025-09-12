@@ -5,10 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Upload, FileText, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
-import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
 // Configure PDF.js worker
-GlobalWorkerOptions.workerSrc = pdfWorkerSrc as any;
+GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.js`;
 export const PDFUploadProcessor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
