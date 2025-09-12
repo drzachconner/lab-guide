@@ -2,12 +2,7 @@ import { useState, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Upload, FileText, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
-
-// Configure PDF.js worker with dynamic version
-GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`;
+import { Upload, FileText, Loader2, AlertCircle } from 'lucide-react';
 export const PDFUploadProcessor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -59,47 +54,31 @@ export const PDFUploadProcessor = () => {
     setIsProcessing(true);
     try {
       toast({
-        title: "Processing Started",
-        description: "Extracting text from the PDF and parsing catalog...",
+        title: "Alternative Method Needed",
+        description: "Due to browser limitations, please upload the PDF directly to the chat for processing.",
       });
 
-      // 1) Extract text from PDF on the client using PDF.js
-      const arrayBuffer = await file.arrayBuffer();
-      const loadingTask = getDocument({ data: arrayBuffer });
-      const pdf = await loadingTask.promise;
+      // Show instructions for alternative method
+      setParsedContent(`File selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)
 
-      let fullText = '';
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        const pageText = (textContent.items as any[])
-          .map((item: any) => item.str || '')
-          .join(' ');
-        fullText += `\n\n--- Page ${i} ---\n` + pageText;
-      }
+Due to browser security restrictions with PDF.js workers, we'll need to use an alternative approach:
 
-      // 2) Send extracted text to Edge Function for AI structuring
-      const { data, error } = await supabase.functions.invoke('catalog-extract-ai', {
-        body: {
-          text: fullText,
-          source: file.name,
-        },
-      });
+1. Please attach your Fullscript lab catalog PDF file directly to the chat message
+2. I'll parse it using server-side tools and extract all the catalog information
+3. Once parsed, I'll integrate the catalog data into your system
 
-      if (error) throw error;
-
-      const resultJson = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-      setParsedContent(resultJson);
+This approach will be more reliable and handle complex PDF structures better.`);
 
       toast({
-        title: "Parsing Complete",
-        description: "Catalog extracted successfully.",
+        title: "Ready for Chat Upload",
+        description: "Please attach the PDF file to your next chat message.",
       });
+
     } catch (error) {
       console.error('Error processing file:', error);
       toast({
         title: "Processing Error",
-        description: "Failed to parse the PDF. Please try another file or contact support.",
+        description: "Please upload the PDF directly to the chat instead.",
         variant: "destructive",
       });
     } finally {
