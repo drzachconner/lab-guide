@@ -22,6 +22,7 @@ import HIPAACompliance from "./HIPAACompliance";
 import MedicalDisclaimer from "./MedicalDisclaimer";
 import AIAnalysisDescription from "./AIAnalysisDescription";
 import ProductsCatalog from "./ProductsCatalog";
+import { LabCatalog } from "../components/lab-ordering/LabCatalog";
 
 /**
  * Routes for the main site (non-tenant specific)
@@ -34,6 +35,7 @@ const MainSite = () => {
       <Route path="/auth" element={<Auth />} />
       <Route path="/lab-marketplace" element={<LabMarketplace />} />
       <Route path="/labs" element={<LabMarketplace />} />
+      <Route path="/lab-catalog" element={<LabCatalog />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/payment-canceled" element={<PaymentCanceled />} />
       <Route path="/clinic" element={<ClinicLanding />} />
